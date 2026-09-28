@@ -4,14 +4,16 @@ import React, { useState } from 'react';
 import { Image, Pressable, useWindowDimensions, View } from 'react-native';
 import { ClubCard, EventCard } from '../components/cards';
 import { Badge, Button, Card, Chips, Empty, Eyebrow, Icon, IconName, SectionTitle, T, s } from '../components/ui';
+import { NightCard } from '../components/Nightlife';
+import { nights } from '../data/nightlife';
 import { clubs, events } from '../data/content';
 import { useLocal } from '../lib/state';
 import { colors as c, fonts as f } from '../lib/theme';
 
 export default function Discover() {
   const { width } = useWindowDimensions(); const compact = width < 650; const desktop = width >= 1000;
-  const [filter, setFilter] = useState('For you'); const [adult, setAdult] = useState(false); const { saved } = useLocal();
-  const visible = filter === 'Saved' ? events.filter(e => saved.includes(`event:${e.id}`)) : filter === 'Nightlife' ? events.filter(e => e.category === 'Nightlife') : events.filter(e => e.category !== 'Nightlife').slice(0, 3);
+  const [filter, setFilter] = useState('For you'); const { saved } = useLocal();
+  const visible = filter === 'Saved' ? events.filter(e => saved.includes(`event:${e.id}`)) : events.filter(e => e.category !== 'Nightlife').slice(0, 3);
   const featuredClubs = ['laurier-computing-society-lcs', 'laurier-outdoors-club'].map(id => clubs.find(club => club.id === id)).filter(club => !!club);
   const shortcuts: { label: string; sub: string; icon: IconName; path: '/clubs' | '/map' | '/people' | '/help'; color: string }[] = [
     { label: 'Find your people', sub: `${clubs.length} clubs to explore`, icon: 'users', path: '/clubs', color: c.lavender },
@@ -33,14 +35,19 @@ export default function Discover() {
       {!compact && <View style={{ position: 'absolute', right: 20, bottom: 19, backgroundColor: '#FFFFFFED', paddingHorizontal: 13, paddingVertical: 9, borderRadius: 9, flexDirection: 'row', alignItems: 'center', gap: 7 }}><Icon name="map-pin" size={12} color={c.purple} /><T style={{ fontSize: 10, color: c.purple }}>Schlegel Centre · Waterloo</T></View>}
     </View>
     <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>{shortcuts.map(item => <Pressable key={item.label} accessibilityRole="button" onPress={() => router.push(item.path)} style={({ pressed }) => ({ flexBasis: compact ? '47%' : '22%', flexGrow: 1, borderWidth: 1, borderColor: c.border, borderRadius: 13, padding: compact ? 13 : 16, backgroundColor: pressed ? item.color : c.surface, flexDirection: 'row', gap: 11, alignItems: 'center' })}><View style={{ width: 36, height: 39, borderRadius: 11, backgroundColor: item.color, alignItems: 'center', justifyContent: 'center' }}><Icon name={item.icon} size={18} color={c.purple} /></View><View style={{ flex: 1, gap: 5 }}><T style={{ fontFamily: f.bold, fontSize: compact ? 11 : 12 }}>{item.label}</T><T muted style={{ fontSize: 10, lineHeight: 14 }}>{item.sub}</T></View></Pressable>)}</View>
+    <View style={{ gap: 20, marginTop: 4 }}>
+      <SectionTitle title="When campus clocks out." subtitle="Your after-dark edit. Good music, familiar places, new stories." action="Nightlife" onPress={() => router.push('/nightlife')} />
+      <View style={{ flexDirection: compact ? 'column' : 'row', gap: 20 }}>{nights.slice(0, 2).map(night => <View key={night.id} style={{ flex: 1 }}><NightCard night={night} /></View>)}</View>
+      <Pressable accessibilityRole="button" onPress={() => router.push('/nightlife')} style={({ pressed }) => [s.row, { padding: 22, gap: 17, borderRadius: 17, backgroundColor: c.purpleDark, opacity: pressed ? 0.85 : 1 }]}><Icon name="moon" color={c.gold} size={25} /><View style={{ flex: 1, gap: 6 }}><T style={{ color: c.gold, fontFamily: f.serif, fontSize: 23 }}>Your next good night starts here.</T><T style={{ color: '#DACEDE', fontSize: 12 }}>Find the places. Explore the weekly lineup.</T></View><Icon name="arrow-right" color={c.gold} /></Pressable>
+    </View>
     <View style={{ gap: 19, marginTop: 5 }}>
       <SectionTitle title="Good things are happening." subtitle="A little inspiration for your time between classes." />
-      <View style={{ flexDirection: compact ? 'column' : 'row', justifyContent: 'space-between', gap: 12, alignItems: compact ? 'stretch' : 'center' }}><Chips items={['For you', 'Events', 'Nightlife', 'Saved']} value={filter} onChange={setFilter} /><T muted style={{ fontSize: 10 }}>Sample events · design preview</T></View>
-      {filter === 'Nightlife' && !adult ? <Card><Empty title="A night out, your way." icon="moon" description="The nightlife preview contains 19+ event concepts. Confirm your age to explore." action={<Button label="I’m 19 or older" onPress={() => setAdult(true)} />} /></Card> : visible.length ? <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 18 }}>{visible.map(event => <View key={event.id} style={{ width: compact ? '100%' : undefined, flexBasis: compact ? undefined : '30%', flexGrow: compact ? undefined : 1, maxWidth: compact ? undefined : 420 }}><EventCard event={event} /></View>)}</View> : <Card><Empty title="Keep a good plan close." icon="bookmark" description="Tap a bookmark on a sample event to find it here later." action={<Button label="Explore events" onPress={() => setFilter('Events')} />} /></Card>}
+      <View style={{ flexDirection: compact ? 'column' : 'row', justifyContent: 'space-between', gap: 12, alignItems: compact ? 'stretch' : 'center' }}><Chips items={['For you', 'Events', 'Saved']} value={filter} onChange={setFilter} /></View>
+      {visible.length ? <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 18 }}>{visible.map(event => <View key={event.id} style={{ width: compact ? '100%' : undefined, flexBasis: compact ? undefined : '30%', flexGrow: compact ? undefined : 1, maxWidth: compact ? undefined : 420 }}><EventCard event={event} /></View>)}</View> : <Card><Empty title="Keep a good plan close." icon="bookmark" description="Tap a bookmark on a event to find it here later." action={<Button label="Explore events" onPress={() => setFilter('Events')} />} /></Card>}
     </View>
     <View style={{ flexDirection: desktop ? 'row' : 'column', gap: 24, marginTop: 8 }}>
       <View style={{ flex: 1.5, gap: 17 }}><SectionTitle title="There’s a club for that." action="All clubs" onPress={() => router.push('/clubs')} /><View style={{ flexDirection: compact ? 'column' : 'row', gap: 16 }}>{featuredClubs.map(club => <View key={club.id} style={{ flex: 1 }}><ClubCard club={club} /></View>)}</View></View>
-      <View style={{ flex: 1, borderRadius: 18, backgroundColor: '#EAEFE9', padding: 26, gap: 14, justifyContent: 'center' }}><View style={[s.row, { justifyContent: 'space-between' }]}><Badge label="FIND YOUR WAY" color="#D9E4D7" textColor="#35654F" /><Icon name="navigation" size={25} color={c.green} /></View><T style={{ fontFamily: f.serif, fontSize: 28, lineHeight: 35 }}>New building?\nNo big deal.</T><T style={{ color: '#647160', lineHeight: 22, fontSize: 13 }}>Turn that room code into somewhere you know. Start with LH, BA, or FNCC.</T><Pressable accessibilityRole="button" onPress={() => router.push('/map')} style={[s.row, { gap: 9, minHeight: 44 }]}><T style={{ fontFamily: f.bold, color: c.green, fontSize: 13 }}>Explore your campus</T><Icon name="arrow-right" color={c.green} size={17} /></Pressable></View>
+      <View style={{ flex: 1, borderRadius: 18, backgroundColor: '#EAEFE9', padding: 26, gap: 14, justifyContent: 'center' }}><View style={[s.row, { justifyContent: 'space-between' }]}><Badge label="FIND YOUR WAY" color="#D9E4D7" textColor="#35654F" /><Icon name="navigation" size={25} color={c.green} /></View><T style={{ fontFamily: f.serif, fontSize: 28, lineHeight: 35 }}>New building?{'\n'}No big deal.</T><T style={{ color: '#647160', lineHeight: 22, fontSize: 13 }}>Turn that room code into somewhere you know. Start with LH, BA, or FNCC.</T><Pressable accessibilityRole="button" onPress={() => router.push('/map')} style={[s.row, { gap: 9, minHeight: 44 }]}><T style={{ fontFamily: f.bold, color: c.green, fontSize: 13 }}>Explore your campus</T><Icon name="arrow-right" color={c.green} size={17} /></Pressable></View>
     </View>
   </>;
 }
