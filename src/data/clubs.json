@@ -1,0 +1,1294 @@
+{
+  "source": "https://www.yourstudentsunion.ca/club-listings",
+  "retrieved": "2026-09-24",
+  "clubs": [
+    {
+      "id": "ace-laurier",
+      "name": "ACE Laurier",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/ace.laurier/"
+    },
+    {
+      "id": "allied-health-professionals-society",
+      "name": "Allied Health Professionals Society",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/ahps_wlu/"
+    },
+    {
+      "id": "alumni-mentorship-program-amp",
+      "name": "Alumni Mentorship Program (AMP)",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/amplaurier/"
+    },
+    {
+      "id": "alzheimer-s-society-laurier",
+      "name": "Alzheimer's Society Laurier",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurieralzheimerssociety/"
+    },
+    {
+      "id": "anthropology-students-association",
+      "name": "Anthropology Students' Association",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wlu_ansa/"
+    },
+    {
+      "id": "arts-undergraduate-society-aus",
+      "name": "​Arts Undergraduate Society (AUS)",
+      "group": "Faculty-based",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/auslaurier/"
+    },
+    {
+      "id": "asian-students-in-business-asib",
+      "name": "Asian Students in Business (ASIB)",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/asiblaurier/"
+    },
+    {
+      "id": "association-of-political-science-students-apss",
+      "name": "Association of Political Science Students (APSS)",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/wluapss/"
+    },
+    {
+      "id": "bioethics-initiative",
+      "name": "Bioethics Initiative",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/wlu.bioethics/"
+    },
+    {
+      "id": "black-students-of-lazaridis-bsol",
+      "name": "Black Students of Lazaridis (BSOL)",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/bsolazaridis/"
+    },
+    {
+      "id": "communications-student-association-csa",
+      "name": "Communications Student Association (CSA)",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wlucsa/"
+    },
+    {
+      "id": "education-student-society-wedsoc",
+      "name": "Education Student Society (WEDSOC)",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": null
+    },
+    {
+      "id": "english-student-association-esa",
+      "name": "English Student Association (ESA)",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/esalaurier/"
+    },
+    {
+      "id": "faculty-of-music-students-association-fomsa",
+      "name": "Faculty of Music Students' Association (FOMSA)",
+      "group": "Faculty-based",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/wlufomsa/"
+    },
+    {
+      "id": "faculty-of-science-students-association-fossa",
+      "name": "Faculty of Science Students' Association - FOSSA",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/wlu_fossa/"
+    },
+    {
+      "id": "filmmakers-of-laurier",
+      "name": "Filmmakers of Laurier",
+      "group": "Faculty-based",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/filmmakersoflaurier/"
+    },
+    {
+      "id": "geography-and-environmental-studies-students-association-gessa",
+      "name": "Geography and Environmental Studies Students' Association (GESSA)",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/lauriergessa/"
+    },
+    {
+      "id": "global-studies-student-association-gssa",
+      "name": "Global Studies Student Association (GSSA)",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wlu_gssa/"
+    },
+    {
+      "id": "health-sciences-students-association-hssa",
+      "name": "Health Sciences Students' Association (HSSA)",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/wiu_hsgsa/"
+    },
+    {
+      "id": "history-students-association-hsa",
+      "name": "History Students' Association (HSA)",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wluhsa/"
+    },
+    {
+      "id": "hosa-laurier",
+      "name": "HOSA Laurier",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wluhosa/"
+    },
+    {
+      "id": "human-resources-laurier-hrl",
+      "name": "Human Resources Laurier (HRL)",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/hrlaurier/"
+    },
+    {
+      "id": "international-education-studies-students-association-iessa",
+      "name": "International Education Studies Students Association (IESSA)",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/ieslaurier/"
+    },
+    {
+      "id": "laurier-acapella-association-laa",
+      "name": "Laurier Acapella Association (LAA)",
+      "group": "Faculty-based",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/noteworthywlu_/"
+    },
+    {
+      "id": "laurier-accounting-association-laa",
+      "name": "Laurier Accounting Association (LAA)",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/wluaccounting/"
+    },
+    {
+      "id": "laurier-autism-awareness-society",
+      "name": "Laurier Autism Awareness Society",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wluautismsociety/"
+    },
+    {
+      "id": "laurier-biology-association",
+      "name": "Laurier Biology Association",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/laurierbiologyassociation/"
+    },
+    {
+      "id": "laurier-biotechnology-organization",
+      "name": "Laurier Biotechnology Organization",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/biotechwlu/"
+    },
+    {
+      "id": "laurier-brass-ensemble",
+      "name": "Laurier Brass Ensemble",
+      "group": "Faculty-based",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/laurierbrassensemble/"
+    },
+    {
+      "id": "laurier-business-economics-review",
+      "name": "Laurier Business & Economics Review",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/laurierbusinessreview/"
+    },
+    {
+      "id": "laurier-case-team-lct-jdcc",
+      "name": "Laurier Case Team (LCT) (JDCC)",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/lauriercaseteam/"
+    },
+    {
+      "id": "laurier-chemistry-association",
+      "name": "Laurier Chemistry Association",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/lca_wlu/"
+    },
+    {
+      "id": "laurier-computing-society-lcs",
+      "name": "Laurier Computing Society (LCS)",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/laurier.cs/"
+    },
+    {
+      "id": "laurier-consulting-club-lcc",
+      "name": "Laurier Consulting Club (LCC)",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/laurierconsultingclub/"
+    },
+    {
+      "id": "laurier-economics-club-lec",
+      "name": "Laurier Economics Club (LEC)",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/lauriereconclub/"
+    },
+    {
+      "id": "laurier-innovation-society",
+      "name": "Laurier Innovation Society",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurierinnovationsociety/"
+    },
+    {
+      "id": "laurier-insurance-and-risk-association-lira",
+      "name": "Laurier Insurance and Risk Association (LIRA)",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/laurierinsurance/"
+    },
+    {
+      "id": "laurier-investment-and-finance-association-lifa",
+      "name": "Laurier Investment and Finance Association (LIFA)",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/lifawlu/"
+    },
+    {
+      "id": "laurier-marketing-association-lma",
+      "name": "Laurier Marketing Association (LMA)",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/lauriermarketing/"
+    },
+    {
+      "id": "laurier-moot-court",
+      "name": "Laurier Moot Court",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/lauriermoot/"
+    },
+    {
+      "id": "laurier-natural-health-society-lnhs",
+      "name": "Laurier Natural Health Society (LNHS)",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/wlunaturalhealth/"
+    },
+    {
+      "id": "laurier-philosophy-club",
+      "name": "Laurier Philosophy Club",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wluphilosophyclub/"
+    },
+    {
+      "id": "laurier-pre-law-society",
+      "name": "Laurier Pre-Law Society",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurierprelawsociety/"
+    },
+    {
+      "id": "laurier-private-capital-club-lpc",
+      "name": "Laurier Private Capital Club (LPC)",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/laurierprivatecapital/"
+    },
+    {
+      "id": "laurier-psychology-society",
+      "name": "Laurier Psychology Society",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurierpsychologysociety/"
+    },
+    {
+      "id": "laurier-sales-association-lsa",
+      "name": "Laurier Sales Association (LSA)",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/lauriersales/"
+    },
+    {
+      "id": "laurier-space-society",
+      "name": "Laurier Space Society",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/laurier_spacesociety/"
+    },
+    {
+      "id": "laurier-stem-publishing-society",
+      "name": "Laurier STEM Publishing Society",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/laurierstempublishingsociety/"
+    },
+    {
+      "id": "laurier-supply-chain-association-lsca",
+      "name": "Laurier Supply Chain Association (LSCA)",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/lauriersupplychain/"
+    },
+    {
+      "id": "laurier-women-in-computer-science-lwics",
+      "name": "Laurier Women in Computer Science (LWiCS)",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/laurierwics/"
+    },
+    {
+      "id": "laurier-women-investment-society-lwis",
+      "name": "Laurier Women Investment Society (LWIS)",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/lwis_wlu/"
+    },
+    {
+      "id": "lazaridis-students-society-lazsoc",
+      "name": "Lazaridis Students' Society (LazSoc)",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/lazsoc/"
+    },
+    {
+      "id": "medieval-students-society",
+      "name": "Medieval Students' Society",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wlumedievalstudentssociety/"
+    },
+    {
+      "id": "mock-trial-laurier",
+      "name": "Mock Trial Laurier",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/mocktriallaurier/"
+    },
+    {
+      "id": "orchestral-winds-laurier-owl",
+      "name": "Orchestral Winds Laurier (OWL)",
+      "group": "Faculty-based",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/o.w.laurier/"
+    },
+    {
+      "id": "pre-dental-society",
+      "name": "Pre-Dental Society",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/predentalsociety.laurier/"
+    },
+    {
+      "id": "real-estate-laurier-rel",
+      "name": "Real Estate Laurier (REL)",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/realestatewlu/"
+    },
+    {
+      "id": "religion-culture-society",
+      "name": "Religion & Culture Society",
+      "group": "Faculty-based",
+      "theme": "Arts & culture",
+      "instagram": null
+    },
+    {
+      "id": "society-for-undergraduate-research-and-outreach-suro",
+      "name": "Society for Undergraduate Research and Outreach (SURO)",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/surolaurier/"
+    },
+    {
+      "id": "sports-management-laurier-sml",
+      "name": "Sports Management Laurier (SML)",
+      "group": "Faculty-based",
+      "theme": "Sports & outdoors",
+      "instagram": "https://www.instagram.com/smlaurier/"
+    },
+    {
+      "id": "startup-laurier",
+      "name": "Startup Laurier",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/startuplaurier/"
+    },
+    {
+      "id": "students-association-of-music-educators-same",
+      "name": "Students' Association of Music Educators (SAME)",
+      "group": "Faculty-based",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/same_wlu/"
+    },
+    {
+      "id": "sussex-association-at-laurier",
+      "name": "Sussex Association at Laurier",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/sussex_laurier/"
+    },
+    {
+      "id": "sustainability-in-business-laurier-sib",
+      "name": "Sustainability in Business Laurier (SIB)",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/siblaurier/"
+    },
+    {
+      "id": "the-advertising-project-tap",
+      "name": "The Advertising Project (TAP)",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/taplaurier/"
+    },
+    {
+      "id": "we-heart-hawks",
+      "name": "We Heart Hawks",
+      "group": "Faculty-based",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/wehearthawks/"
+    },
+    {
+      "id": "wlu-archaeology-society",
+      "name": "WLU Archaeology Society",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wluarchaeologysociety/"
+    },
+    {
+      "id": "wlu-derma",
+      "name": "WLU Derma",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/wluderma/"
+    },
+    {
+      "id": "wlu-film-society",
+      "name": "WLU Film Society",
+      "group": "Faculty-based",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/wlufilmsociety/"
+    },
+    {
+      "id": "wlu-piano-forum",
+      "name": "WLU Piano Forum",
+      "group": "Faculty-based",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/wlupianoforum/"
+    },
+    {
+      "id": "wlu-pre-medical-society",
+      "name": "WLU Pre-Medical Society",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/wlupremedsociety/"
+    },
+    {
+      "id": "wlu-pre-optometry-society",
+      "name": "WLU Pre-Optometry Society",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/wlupreoptometry/"
+    },
+    {
+      "id": "wlu-pre-pharmacy-club",
+      "name": "WLU Pre-Pharmacy Club",
+      "group": "Faculty-based",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/wluprepharmacy/"
+    },
+    {
+      "id": "women-in-law-laurier",
+      "name": "Women in Law Laurier",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/womeninlawlaurier/"
+    },
+    {
+      "id": "women-in-leadership-laurier-will",
+      "name": "Women in Leadership Laurier (WILL)",
+      "group": "Faculty-based",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/willaurier/"
+    },
+    {
+      "id": "xlerate-lazaridis",
+      "name": "Xlerate Lazaridis",
+      "group": "Faculty-based",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/xleratelazaridis/"
+    },
+    {
+      "id": "anatolia-laurier",
+      "name": "Anatolia Laurier",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/anatolia.wlu/?hl=en"
+    },
+    {
+      "id": "armenian-student-association",
+      "name": "Armenian Student Association",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurier_asa/"
+    },
+    {
+      "id": "association-of-indian-students-ais",
+      "name": "Association of Indian Students (AIS)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/aislaurier/"
+    },
+    {
+      "id": "bangladeshi-students-association",
+      "name": "Bangladeshi Students Association",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurier.bsa/"
+    },
+    {
+      "id": "best-buddies-laurier",
+      "name": "Best Buddies Laurier",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/bestbuddieslaurier_/"
+    },
+    {
+      "id": "beyond-belief",
+      "name": "Beyond Belief",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wlu_beyondbelief/"
+    },
+    {
+      "id": "bhakti-yoga-and-mindfulness-club",
+      "name": "Bhakti Yoga and Mindfulness Club",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wlu_byc/"
+    },
+    {
+      "id": "black-students-in-science-bsis",
+      "name": "Black Students in Science (BSIS)",
+      "group": "Students’ Union",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/wlu_bsis/"
+    },
+    {
+      "id": "bollyfusion",
+      "name": "BollyFusion",
+      "group": "Students’ Union",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/bollyfusion_wlu/"
+    },
+    {
+      "id": "business-design-laurier-bdl",
+      "name": "Business Design Laurier (BDL)",
+      "group": "Students’ Union",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/businessdesignlaurier/?hl=en"
+    },
+    {
+      "id": "business-entertainment-laurier",
+      "name": "Business Entertainment Laurier",
+      "group": "Students’ Union",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/belaurier/"
+    },
+    {
+      "id": "casehacks",
+      "name": "CaseHacks",
+      "group": "Students’ Union",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/casehacks/"
+    },
+    {
+      "id": "chinese-student-association-wlucsa",
+      "name": "Chinese Student Association (WLUCSA)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wlu.csa/"
+    },
+    {
+      "id": "culturexchange",
+      "name": "CultureXchange",
+      "group": "Students’ Union",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/culturexchangewlu/"
+    },
+    {
+      "id": "e-commerce-laurier",
+      "name": "E-commerce Laurier",
+      "group": "Students’ Union",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/ecommercelaurier/?hl=en"
+    },
+    {
+      "id": "esg-laurier",
+      "name": "ESG Laurier",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/esglaurier/?hl=en"
+    },
+    {
+      "id": "eye-care-laurier",
+      "name": "Eye Care Laurier",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/eyecarelaurier/"
+    },
+    {
+      "id": "for-the-girls",
+      "name": "For The Girls",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurier_ftg/"
+    },
+    {
+      "id": "get-swabbed-at-laurier",
+      "name": "Get Swabbed At Laurier",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/getswabbedwlu/"
+    },
+    {
+      "id": "glamourgals-laurier",
+      "name": "GlamourGals Laurier",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/glamourgalslaurier/"
+    },
+    {
+      "id": "golden-cross-laurier",
+      "name": "Golden Cross Laurier",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/goldencrosslaurier/"
+    },
+    {
+      "id": "golden-hawk-gaming-multi-campus",
+      "name": "Golden Hawk Gaming (Multi Campus)",
+      "group": "Students’ Union",
+      "theme": "Sports & outdoors",
+      "instagram": "https://www.instagram.com/goldenhawkgaming/?hl=en"
+    },
+    {
+      "id": "golden-minds",
+      "name": "Golden Minds",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/goldenmindswlu/"
+    },
+    {
+      "id": "golden-nesr",
+      "name": "Golden Nesr",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wlu_goldennesr/"
+    },
+    {
+      "id": "gujarati-goldenhawks",
+      "name": "Gujarati GoldenHawks",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wlu.ggh/?hl=en"
+    },
+    {
+      "id": "healthy-hawks",
+      "name": "Healthy Hawks",
+      "group": "Students’ Union",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/healthyhawkslaurier/?hl=en"
+    },
+    {
+      "id": "hellenic-students-association",
+      "name": "Hellenic Students' Association",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurier_hsa/"
+    },
+    {
+      "id": "hopespring-laurier",
+      "name": "HopeSpring Laurier",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/hopespringlaurier/?hl=en"
+    },
+    {
+      "id": "indigenous-students-association-isa",
+      "name": "Indigenous Students' Association (ISA)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurierisa/"
+    },
+    {
+      "id": "international-students-overcoming-war-isow",
+      "name": "International Students Overcoming War (ISOW)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/isowlaurier/"
+    },
+    {
+      "id": "iranian-students-association-laurier",
+      "name": "Iranian Students Association Laurier",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/isa.wlu/"
+    },
+    {
+      "id": "kitchener-waterloo-pet-aid",
+      "name": "Kitchener-Waterloo Pet Aid",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/kwpetaidclub/"
+    },
+    {
+      "id": "laadliyan",
+      "name": "Laadliyan",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurierlaadliyan/"
+    },
+    {
+      "id": "laurier-against-childhood-cancer",
+      "name": "Laurier Against Childhood Cancer",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/lacc_wlu/"
+    },
+    {
+      "id": "laurier-analytics-society-las",
+      "name": "Laurier Analytics Society (LAS)",
+      "group": "Students’ Union",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/laurier_analytics/"
+    },
+    {
+      "id": "laurier-animal-rescue",
+      "name": "Laurier Animal Rescue",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurieranimalrescue/?hl=en"
+    },
+    {
+      "id": "laurier-asset-management-association",
+      "name": "Laurier Asset Management Association",
+      "group": "Students’ Union",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/lama.wlu/"
+    },
+    {
+      "id": "laurier-s-association-of-caribbean-students-the-islands",
+      "name": "Laurier's Association of Caribbean Students (The Islands)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/theislandslacs/"
+    },
+    {
+      "id": "laurier-automotive-society",
+      "name": "Laurier Automotive Society",
+      "group": "Students’ Union",
+      "theme": "Sports & outdoors",
+      "instagram": "https://www.instagram.com/laurier.auto/"
+    },
+    {
+      "id": "laurier-book-club",
+      "name": "Laurier Book Club",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": null
+    },
+    {
+      "id": "laurier-consulting-for-change",
+      "name": "Laurier Consulting for Change",
+      "group": "Students’ Union",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/laurier_cfc/"
+    },
+    {
+      "id": "laurier-croatian-student-association",
+      "name": "Laurier Croatian Student Association",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wlucroatiaaclub/"
+    },
+    {
+      "id": "laurier-debate-society",
+      "name": "Laurier Debate Society",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurierdebatesociety/"
+    },
+    {
+      "id": "laurier-drink-delight",
+      "name": "Laurier Drink Delight",
+      "group": "Students’ Union",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/laurierdrinkdelight/"
+    },
+    {
+      "id": "laurier-fashion-society",
+      "name": "Laurier Fashion Society",
+      "group": "Students’ Union",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/laurierfashionsociety/"
+    },
+    {
+      "id": "laurier-filipino-students-association-lfsa",
+      "name": "Laurier Filipino Students' Association (LFSA)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurierfsa/"
+    },
+    {
+      "id": "laurier-football-club",
+      "name": "Laurier Football Club",
+      "group": "Students’ Union",
+      "theme": "Sports & outdoors",
+      "instagram": "https://www.instagram.com/laurier_football_club/"
+    },
+    {
+      "id": "laurier-genetic-awareness-society",
+      "name": "Laurier Genetic Awareness Society",
+      "group": "Students’ Union",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/laurier.genetics/"
+    },
+    {
+      "id": "laurier-google-developers",
+      "name": "Laurier Google Developers",
+      "group": "Students’ Union",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/laurier_gdg/"
+    },
+    {
+      "id": "laurier-homeless-care-initiative-lhci",
+      "name": "Laurier Homeless Care Initiative (LHCI)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurierhci/?hl=en"
+    },
+    {
+      "id": "laurier-italian-club",
+      "name": "Laurier Italian Club",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wluitalianclub/"
+    },
+    {
+      "id": "laurier-latinos",
+      "name": "Laurier Latinos",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurierlatinos/"
+    },
+    {
+      "id": "laurier-mauritian-society",
+      "name": "Laurier Mauritian Society",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/lauriermauritiansoc/"
+    },
+    {
+      "id": "laurier-musical-theatre-lmt",
+      "name": "Laurier Musical Theatre (LMT)",
+      "group": "Students’ Union",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/lauriermusicaltheatre/"
+    },
+    {
+      "id": "laurier-origami-club",
+      "name": "Laurier Origami Club",
+      "group": "Students’ Union",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/wluorigamiclub/?hl=en"
+    },
+    {
+      "id": "laurier-outdoors-club",
+      "name": "Laurier Outdoors Club",
+      "group": "Students’ Union",
+      "theme": "Sports & outdoors",
+      "instagram": "https://www.instagram.com/laurierfishing/"
+    },
+    {
+      "id": "laurier-poker-club",
+      "name": "Laurier Poker Club",
+      "group": "Students’ Union",
+      "theme": "Sports & outdoors",
+      "instagram": "https://www.instagram.com/laurierpoker/"
+    },
+    {
+      "id": "laurier-pride-society-lps",
+      "name": "Laurier Pride Society (LPS)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurierpride/?hl=en"
+    },
+    {
+      "id": "laurier-professional-development-club-lpdc",
+      "name": "Laurier Professional Development Club (LPDC)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/lpdc.wlu/?hl=en"
+    },
+    {
+      "id": "laurier-sikh-advocacy-association",
+      "name": "Laurier Sikh Advocacy Association",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/lauriersikhadvocacy/"
+    },
+    {
+      "id": "laurier-social-justice-club",
+      "name": "Laurier Social Justice Club",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/lauriersjc/"
+    },
+    {
+      "id": "laurier-spanish-club",
+      "name": "Laurier Spanish Club",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurierspanishclub/"
+    },
+    {
+      "id": "laurier-students-for-learning-lsfl",
+      "name": "Laurier Students For Learning (LSFL)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/lsfl.waterloo/"
+    },
+    {
+      "id": "laurier-supporting-sickkids",
+      "name": "Laurier Supporting SickKids",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/lauriersupportingsickkids/"
+    },
+    {
+      "id": "laurier-university-tamil-student-association-lutsa",
+      "name": "Laurier University Tamil Student Association (LUTSA)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/lutsagram/"
+    },
+    {
+      "id": "laurier-vietnamese-students-association-lvsa",
+      "name": "Laurier Vietnamese Students Association (LVSA)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurier.vsa/?hl=en"
+    },
+    {
+      "id": "laurier-wealth-management-association-lwma",
+      "name": "Laurier Wealth Management Association (LWMA)",
+      "group": "Students’ Union",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/lwma_laurier/"
+    },
+    {
+      "id": "laurier-women-s-health-advocacy-association-lwhaa",
+      "name": "Laurier Women's Health Advocacy Association (LWHAA)",
+      "group": "Students’ Union",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/laurier.whaa/"
+    },
+    {
+      "id": "laurier-women-in-mathematics",
+      "name": "Laurier Women in Mathematics",
+      "group": "Students’ Union",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/laurierwim/"
+    },
+    {
+      "id": "laurier-youth-wellness-collective",
+      "name": "Laurier Youth Wellness Collective",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wluyouthwellness/"
+    },
+    {
+      "id": "leaders-of-laurier",
+      "name": "Leaders of Laurier",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/leadersoflaurier/"
+    },
+    {
+      "id": "medlife-laurier",
+      "name": "Medlife Laurier",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/medlife_laurier/"
+    },
+    {
+      "id": "medsci-undergraduate-research-association-mura",
+      "name": "MedSci Undergraduate Research Association (MURA)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/muralaurier/?hl=en"
+    },
+    {
+      "id": "middle-eastern-students-association-mesa",
+      "name": "Middle Eastern Students' Association (MESA)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/mesa.wlu/"
+    },
+    {
+      "id": "minds-matter-laurier",
+      "name": "Minds Matter Laurier",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/mindsmatterlaurier/"
+    },
+    {
+      "id": "model-united-nations",
+      "name": "Model United Nations",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wlu_modelun/"
+    },
+    {
+      "id": "nigerian-students-association",
+      "name": "Nigerian Students Association",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/nsa.wlu/"
+    },
+    {
+      "id": "physics-students-initiative",
+      "name": "Physics Students' Initiative",
+      "group": "Students’ Union",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/psi.laurier/"
+    },
+    {
+      "id": "polish-students-association",
+      "name": "Polish Students' Association",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/polishstudentsassociation.wlu/"
+    },
+    {
+      "id": "power-to-change-laurier-p2c",
+      "name": "Power to Change - Laurier (P2C)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/p2claurier/"
+    },
+    {
+      "id": "project-sunshine-canada",
+      "name": "Project Sunshine Canada",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/pslaurierchapter/?hl=en"
+    },
+    {
+      "id": "purpose",
+      "name": "Purpose",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/purpose.wlu/?hl=en"
+    },
+    {
+      "id": "relay-for-life-laurier",
+      "name": "Relay for Life Laurier",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wlurelayforlife/"
+    },
+    {
+      "id": "sakura-anime-club",
+      "name": "Sakura Anime Club",
+      "group": "Students’ Union",
+      "theme": "Arts & culture",
+      "instagram": null
+    },
+    {
+      "id": "save-the-mothers-wlu-chapter",
+      "name": "Save the Mothers: WLU Chapter",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/savethemothers_wlu/"
+    },
+    {
+      "id": "serenity-space",
+      "name": "Serenity Space",
+      "group": "Students’ Union",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/serenityspacewlu/"
+    },
+    {
+      "id": "service-business-laurier",
+      "name": "Service Business Laurier",
+      "group": "Students’ Union",
+      "theme": "Business",
+      "instagram": "https://www.instagram.com/servicebusinesslaurier/"
+    },
+    {
+      "id": "sew-laurier",
+      "name": "Sew Laurier",
+      "group": "Students’ Union",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/sew_laurier_waterloo/"
+    },
+    {
+      "id": "sir-wilfrid-laurier-french-club",
+      "name": "Sir Wilfrid Laurier French Club",
+      "group": "Students’ Union",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/wlufrclub/"
+    },
+    {
+      "id": "strong-spine-society",
+      "name": "Strong Spine Society",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/strongspinesociety_wlu/"
+    },
+    {
+      "id": "taiwanese-association-laurier",
+      "name": "Taiwanese Association Laurier",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/talwlu/"
+    },
+    {
+      "id": "tamid-consulting",
+      "name": "Tamid Consulting",
+      "group": "Students’ Union",
+      "theme": "Business",
+      "instagram": null
+    },
+    {
+      "id": "the-citizens-foundation-laurier-chapter-tcf",
+      "name": "The Citizens Foundation - Laurier Chapter (TCF)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": null
+    },
+    {
+      "id": "the-hidden-opponent",
+      "name": "The Hidden Opponent",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/tho_wlu/"
+    },
+    {
+      "id": "the-ink-collective",
+      "name": "The Ink Collective",
+      "group": "Students’ Union",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/theinkcollectivewlu/"
+    },
+    {
+      "id": "unicef-laurier",
+      "name": "UNICEF Laurier",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/laurier4unicef/"
+    },
+    {
+      "id": "ux-laurier",
+      "name": "UX Laurier",
+      "group": "Students’ Union",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/uxlaurier/?hl=en"
+    },
+    {
+      "id": "wilfrid-laurier-palestinan-justice-club",
+      "name": "Wilfrid Laurier Palestinan Justice Club",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wlupjc/"
+    },
+    {
+      "id": "wilfrid-laurier-speech-language-pathology-club",
+      "name": "Wilfrid Laurier Speech Language Pathology Club",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wluslp/"
+    },
+    {
+      "id": "wilfrid-laurier-s-taste-of-asia-toa",
+      "name": "Wilfrid Laurier's Taste of Asia (TOA)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wlutoa/"
+    },
+    {
+      "id": "wlu-art-showcase",
+      "name": "WLU Art Showcase",
+      "group": "Students’ Union",
+      "theme": "Arts & culture",
+      "instagram": "https://www.instagram.com/laurierartshowcase/"
+    },
+    {
+      "id": "wlu-chess-club",
+      "name": "WLU Chess Club",
+      "group": "Students’ Union",
+      "theme": "Sports & outdoors",
+      "instagram": "https://www.instagram.com/wluchess/"
+    },
+    {
+      "id": "wlu-formula-one-club",
+      "name": "WLU Formula One Club",
+      "group": "Students’ Union",
+      "theme": "Tech & science",
+      "instagram": "https://www.instagram.com/wlu_formula1/"
+    },
+    {
+      "id": "wlu-global-brigades",
+      "name": "WLU Global Brigades",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wluglobalbrigades/"
+    },
+    {
+      "id": "wlu-historical-medicine",
+      "name": "WLU Historical Medicine",
+      "group": "Students’ Union",
+      "theme": "Tech & science",
+      "instagram": null
+    },
+    {
+      "id": "wlu-rotaract",
+      "name": "WLU Rotaract",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wlu_rotaract/"
+    },
+    {
+      "id": "women-leading-politics-association-wlpa",
+      "name": "Women Leading Politics Association (WLPA)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wlpa.laurier/?hl=en"
+    },
+    {
+      "id": "world-university-service-of-canada-wusc",
+      "name": "World University Service of Canada (WUSC)",
+      "group": "Students’ Union",
+      "theme": "Community",
+      "instagram": "https://www.instagram.com/wusc_wlu/"
+    }
+  ]
+}

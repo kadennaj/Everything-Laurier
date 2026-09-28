@@ -1,0 +1,20 @@
+import React, { useState } from 'react';
+import { Pressable, useWindowDimensions, View } from 'react-native';
+import { CampusMap } from '../components/CampusMap';
+import { Badge, Card, Chips, Empty, ExternalButton, Icon, PageHeading, Search, T, s } from '../components/ui';
+import { Building, buildings, findBuilding } from '../data/content';
+import { colors as c, fonts as f } from '../lib/theme';
+
+export default function MapPage() {
+  const [query, setQuery] = useState(''); const [kind, setKind] = useState('All places'); const [selected, setSelected] = useState<Building>(buildings[0]); const { width } = useWindowDimensions();
+  const matched = findBuilding(query);
+  const filtered = buildings.filter(b => (kind === 'All places' || b.kind === kind) && (!query || (matched ? matched.id === b.id : b.name.toLowerCase().includes(query.toLowerCase()))));
+  const search = (value: string) => { setQuery(value); const found = findBuilding(value); if (found) { setSelected(found); setKind('All places'); } };
+  return <><PageHeading eyebrow="A LITTLE LESS LOST" title="Know your way around." subtitle="A new room code shouldn’t feel like a riddle. Find your building, get your bearings, and head to your next thing." />
+    <Search value={query} onChange={search} placeholder="Find a building or room code, like LH1001…" />
+    {query && matched && <View style={[s.row, { gap: 9 }]}><Icon name="check-circle" color={c.green} size={17} /><T style={{ color: c.green, fontSize: 13 }}>Building found: {matched.name}. Room location is not verified.</T></View>}
+    <Chips items={['All places', 'Academic', 'Student life', 'Athletics']} value={kind} onChange={setKind} />
+    <View style={{ flexDirection: width >= 1150 ? 'row' : 'column', gap: 22 }}><View style={{ flex: 1.65, gap: 12 }}><CampusMap selected={selected} onSelect={setSelected} /><T muted style={{ fontSize: 11, lineHeight: 19 }}>An illustrated overview for this preview. Use official maps for routes, entrances, and accessibility information.</T></View><Card style={{ flex: 1, padding: 25, gap: 20, justifyContent: 'center' }}><View style={{ width: 55, height: 55, borderRadius: 17, backgroundColor: c.lavender, alignItems: 'center', justifyContent: 'center' }}><Icon name="map-pin" color={c.purple} size={26} /></View><Badge label={selected.kind} /><T accessibilityRole="header" style={{ fontFamily: f.serif, fontSize: 29, lineHeight: 38 }}>{selected.name}</T><T muted style={{ lineHeight: 22 }}>{selected.address}</T><View style={[s.row, { gap: 8 }]}><T muted style={{ fontSize: 12 }}>Building code</T><T style={{ fontFamily: f.bold, color: c.purple }}>{selected.id}</T></View><ExternalButton label="Find in Apple Maps" secondary={false} url={`https://maps.apple.com/?q=${encodeURIComponent(`${selected.name}, Wilfrid Laurier University, Waterloo, Ontario`)}`} /><ExternalButton label="Official campus maps" url="https://www.wlu.ca/about/campuses-and-locations/" /></Card></View>
+    <View style={{ gap: 12 }}><T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: 20 }}>Places to know</T>{filtered.map(building => <Pressable key={building.id} onPress={() => setSelected(building)} accessibilityRole="button" accessibilityState={{ selected: selected.id === building.id }} style={({ pressed }) => [s.row, { gap: 14, backgroundColor: pressed || selected.id === building.id ? c.lavender : c.surface, padding: 17, borderRadius: 12, borderWidth: 1, borderColor: selected.id === building.id ? '#D6C8E2' : c.border }]}><View style={{ width: 44, alignItems: 'center' }}><T style={{ fontFamily: f.bold, color: c.purple }}>{building.id}</T></View><View style={{ flex: 1, gap: 4 }}><T style={{ fontFamily: f.medium }}>{building.name}</T><T muted style={{ fontSize: 11 }}>{building.kind}</T></View><Icon name="arrow-up-right" color={c.purple} size={17} /></Pressable>)}{!filtered.length && <Empty title="That place isn’t in this preview." description="Try LH, BA, FNCC, P, SB, AC, or N. For other rooms, check Laurier’s official campus map." />}</View>
+  </>;
+}

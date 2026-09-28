@@ -1,0 +1,5 @@
+import { ScrollViewStyleReset } from 'expo-router/html';
+import React from 'react';
+export default function Root({ children }: { children: React.ReactNode }) {
+  return <html lang="en"><head><meta charSet="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" /><meta name="theme-color" content="#543473" /><title>Everything Laurier — Your campus, connected</title><meta name="description" content="A local UI preview for campus events, clubs, connections, and support at Laurier Waterloo." /><ScrollViewStyleReset /><style dangerouslySetInnerHTML={{ __html: 'body{background:#F8F7F4}button,input,a,[role="button"]{-webkit-tap-highlight-color:transparent}:focus-visible{outline:2px solid #8863a5;outline-offset:3px}input{outline-offset:-2px}::selection{background:#e4d6f0}::-webkit-scrollbar{width:6px;height:3px}::-webkit-scrollbar-thumb{background:#d8cfe1;border-radius:8px}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}' }} /></head><body>{children}</body></html>;
+}
