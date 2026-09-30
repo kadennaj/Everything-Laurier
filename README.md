@@ -47,7 +47,7 @@ npm run export:web
 - `src/lib/`: design tokens and local bookmark state.
 - `assets/`: bundled images and app assets.
 
-Public browsing works without environment variables. To enable email sign-in and live profiles, configure the public Supabase values in `.env.example` as described in [email login setup](docs/email-login.md). The profile database schema and access policies are in [student_profiles.sql](supabase/schema/student_profiles.sql).
+Email sign-in and live profiles work after a fresh clone because the app includes the project's public Supabase URL and publishable key. No `.env` is needed for this project. To use a different Supabase project or temporarily disable sign-in, see [email login setup](docs/email-login.md). The profile database schema and access policies are in [student_profiles.sql](supabase/schema/student_profiles.sql).
 
 ## Sources and credits
 

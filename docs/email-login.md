@@ -4,12 +4,12 @@ The app uses Supabase Auth email OTP: an email address requests a code, and only
 
 ## Connect the project
 
-1. Open the existing Supabase project and copy its Project URL and **publishable** key from the Connect dialog.
-2. Copy `.env.example` to `.env` and fill in `EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. These two values are public client configuration. Never add a secret/service-role key, database password, or SMTP password to an Expo public variable.
+1. The app already includes the Everything Laurier project's URL and **publishable** key in `src/lib/public-supabase-config.ts`. A fresh clone needs no `.env` to sign in. Supabase allows publishable keys in web and mobile clients; the Row Level Security policies protect profile data.
+2. To point a local copy at a different project, copy `.env.example` to `.env` and fill in `EXPO_PUBLIC_SUPABASE_URL` and `EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY` from that project's Connect dialog. These values are public client configuration. Never add a secret/service-role key, database password, or SMTP password to an Expo public variable.
 3. In Authentication → Sign In / Providers, enable Email and allow new users to sign up. Keep email confirmation enabled. Keep code length at 8 (the app accepts 6–8 digits), a 600-second code expiry, and at least a 60-second send interval. The server must enforce limits; the UI countdown is only a convenience.
 4. Under Authentication → Email Templates, use `supabase/templates/email-code.html` for **Magic Link**, with subject `Your Everything Laurier sign-in code`. Ensure any signup confirmation email used by the project also includes `{{ .Token }}`. A stock magic-link-only template won't work with the code entry screen.
 5. Configure custom SMTP for emails to arbitrary users. The project dashboard currently requires custom SMTP (or a paid plan) to customize templates. Supabase's default sender is restricted to project team addresses and has low testing limits. Configure the SMTP provider's verified sender/domain in Supabase; SMTP credentials stay there. Do not send real test messages until a recipient is authorized.
-6. Once the OTP email template and sender are ready, set `EXPO_PUBLIC_EMAIL_LOGIN_ENABLED=true`. Until then the login button stays disabled so users cannot accidentally receive a magic link on the code-entry flow. Restart Expo after changing `.env`. Rebuild deployed web/native artifacts when public configuration changes. The new SecureStore native dependency also requires rebuilding any existing custom development client.
+6. This project's OTP template and sender are ready, so sign-in is enabled by default. For a different project, set `EXPO_PUBLIC_EMAIL_LOGIN_ENABLED=false` until its OTP email template and sender are ready, then change it to `true`. Restart Expo after changing `.env`. Rebuild deployed web/native artifacts when public configuration changes. The new SecureStore native dependency also requires rebuilding any existing custom development client.
 
 Supabase manages `auth.users` and sessions. The student questionnaire stores profile details in `public.student_profiles`, which has Row Level Security: students can edit only their own row, and other signed-in students can read only discoverable rows. A contact email is stored and shown only when the student explicitly opts in; it must match the verified account email. Bookmarks remain on the device and are not synced to accounts.
 
@@ -36,7 +36,7 @@ The password is entered directly in Supabase by the project owner and must never
 - Resend has a 60-second countdown for the address that requested a code. The pending address and timer survive navigation and an app reload for the code's ten-minute lifetime. Switching to a different address lets that address request its own code.
 - Session persistence uses Expo SecureStore on iOS/Android and Supabase browser storage on web. Native refresh runs while the app is active. Session tokens are never placed in a URL or logged.
 - Sign-out uses local scope (this device/browser). Existing local bookmarks remain on the device and are shared by guests/accounts on that device.
-- With missing Supabase configuration, the app still opens and browsing works; login shows an unavailable message and does not claim to send email.
+- With the included public project configuration, sign-in works after a fresh clone; setting `EXPO_PUBLIC_EMAIL_LOGIN_ENABLED=false` disables it locally without affecting public browsing.
 
 ## Connected project status
 

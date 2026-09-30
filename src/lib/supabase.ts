@@ -2,11 +2,12 @@ import 'react-native-url-polyfill/auto';
 import { createClient, processLock } from '@supabase/supabase-js';
 import * as SecureStore from 'expo-secure-store';
 import { Platform } from 'react-native';
+import { publicSupabasePublishableKey, publicSupabaseUrl } from './public-supabase-config';
 
-const url = process.env.EXPO_PUBLIC_SUPABASE_URL?.trim();
-const key = process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim();
-// Enable only after the project sends OTP emails, rather than its default magic link.
-export const emailLoginEnabled = process.env.EXPO_PUBLIC_EMAIL_LOGIN_ENABLED === 'true';
+const url = process.env.EXPO_PUBLIC_SUPABASE_URL?.trim() || publicSupabaseUrl;
+const key = process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY?.trim() || publicSupabasePublishableKey;
+// The connected project sends OTP codes. An explicit false can disable sign-in locally.
+export const emailLoginEnabled = process.env.EXPO_PUBLIC_EMAIL_LOGIN_ENABLED !== 'false';
 
 const nativeStorage = {
   getItem: (name: string) => SecureStore.getItemAsync(name),
