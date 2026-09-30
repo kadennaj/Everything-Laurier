@@ -1,5 +1,6 @@
--- Run only after APIFY_TOKEN and FEED_SYNC_SECRET are set on the Edge Function,
--- and the same FEED_SYNC_SECRET is saved in Vault as instagram_feed_sync_secret.
+-- Run after the Apify token is saved as APIFY_TOKEN (or APIFY API) in Edge Function
+-- secrets and a random 32-byte sync token is saved in Vault as
+-- instagram_feed_sync_secret. The Edge Function contains only its SHA-256 hash.
 select cron.schedule(
   'sync-instagram-feed-every-3-hours',
   '0 */3 * * *',

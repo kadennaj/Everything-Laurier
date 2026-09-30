@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import test from 'node:test';
 
+const testSyncToken = 'a'.repeat(64);
 const values = new Map([
-  ['FEED_SYNC_SECRET', 'test-sync-secret'],
-  ['APIFY_TOKEN', 'test-apify-token'],
+  ['FEED_SYNC_TOKEN_HASH', createHash('sha256').update(testSyncToken).digest('hex')],
+  ['APIFY API', 'test-apify-token'],
   ['SUPABASE_URL', 'https://example.supabase.co'],
   ['SUPABASE_SERVICE_ROLE_KEY', 'test-server-key'],
 ]);
@@ -35,7 +37,7 @@ test('a successful run fetches four accounts and saves only valid posts', async 
     return new Response(null, { status: 204 });
   };
   try {
-    const response = await handler(request('test-sync-secret'));
+    const response = await handler(request(testSyncToken));
     assert.equal(response.status, 200);
     assert.equal((await response.json()).saved, 1);
     assert.match(calls[0].url, /apify~instagram-scraper\/run-sync-get-dataset-items/);

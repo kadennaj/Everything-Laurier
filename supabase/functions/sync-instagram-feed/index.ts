@@ -1,21 +1,28 @@
 import { INSTAGRAM_ACCOUNTS, normalizePost } from './normalize.ts';
 
 const jsonHeaders = { 'Content-Type': 'application/json' };
+// SHA-256 of the 32-byte random sync token stored only in Supabase Vault.
+const syncTokenHash = Deno.env.get('FEED_SYNC_TOKEN_HASH') ??
+  '69bad17854952652aa91bd52191ab46dcb5dcfe1e40160d18c97694f039b42d0';
 const reply = (status: number, body: Record<string, unknown>) =>
   new Response(JSON.stringify(body), { status, headers: jsonHeaders });
 
 Deno.serve(async request => {
   if (request.method !== 'POST') return reply(405, { error: 'Method not allowed' });
 
-  const syncSecret = Deno.env.get('FEED_SYNC_SECRET');
-  const apifyToken = Deno.env.get('APIFY_TOKEN');
+  const bearer = request.headers.get('Authorization')?.match(/^Bearer ([a-f0-9]{64})$/)?.[1];
+  if (!bearer) return reply(401, { error: 'Unauthorized' });
+  const digest = new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(bearer)));
+  const expected = Uint8Array.from(syncTokenHash.match(/../g)!, byte => Number.parseInt(byte, 16));
+  let difference = 0;
+  for (let index = 0; index < expected.length; index++) difference |= digest[index] ^ expected[index];
+  if (difference !== 0) return reply(401, { error: 'Unauthorized' });
+
+  const apifyToken = Deno.env.get('APIFY_TOKEN') ?? Deno.env.get('APIFY API');
   const supabaseUrl = Deno.env.get('SUPABASE_URL');
   const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
-  if (!syncSecret || !apifyToken || !supabaseUrl || !serviceKey) {
+  if (!apifyToken || !supabaseUrl || !serviceKey) {
     return reply(503, { error: 'Feed sync is not configured' });
-  }
-  if (request.headers.get('Authorization') !== `Bearer ${syncSecret}`) {
-    return reply(401, { error: 'Unauthorized' });
   }
 
   try {
