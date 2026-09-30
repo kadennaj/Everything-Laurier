@@ -4,6 +4,7 @@ import { Platform, Pressable, ScrollView, StyleSheet, useWindowDimensions, View 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors as c, fonts as f } from '../lib/theme';
 import { useLocal } from '../lib/state';
+import { useAuth } from '../lib/auth';
 import { Icon, IconButton, IconName, Search, T, s } from './ui';
 
 const navigation: { label: string; path: Href; icon: IconName }[] = [
@@ -12,8 +13,9 @@ const navigation: { label: string; path: Href; icon: IconName }[] = [
 ];
 export function Shell({ children }: { children: React.ReactNode }) {
   const { width } = useWindowDimensions(); const desktop = width >= 1000; const pathname = usePathname();
+  const { session, ready: authReady } = useAuth();
   const insets = useSafeAreaInsets(); const { saved, toast } = useLocal(); const [query, setQuery] = useState('');
-  const current = navigation.find(item => item.path === pathname)?.label ?? (pathname.startsWith('/night/') || pathname.startsWith('/venue/') ? 'Nightlife' : ['/people', '/help', '/saved', '/profile'].includes(pathname) ? 'More' : pathname.startsWith('/club/') ? 'Clubs' : pathname.startsWith('/event/') ? 'Discover' : pathname.slice(1).replace(/^./, c => c.toUpperCase()));
+  const current = navigation.find(item => item.path === pathname)?.label ?? (pathname.startsWith('/night/') || pathname.startsWith('/venue/') ? 'Nightlife' : ['/people', '/help', '/saved', '/profile', '/login', '/account-setup', '/edit-profile'].includes(pathname) || pathname.startsWith('/student/') ? 'More' : pathname.startsWith('/club/') ? 'Clubs' : pathname.startsWith('/event/') ? 'Discover' : pathname.slice(1).replace(/^./, c => c.toUpperCase()));
   const goSearch = () => { router.push({ pathname: '/search', params: { q: query } }); setQuery(''); };
   return <View style={[styles.root, { paddingTop: insets.top }]}>
     {desktop && <View style={styles.sidebar}>
@@ -29,7 +31,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
     <View style={{ flex: 1, minWidth: 0 }}>
       <View style={[styles.topbar, { paddingHorizontal: desktop ? 36 : 20 }]}>
         {desktop ? <View style={[s.row, { gap: 11 }]}><T muted style={{ fontSize: 12 }}>Campus life</T><T muted>/</T><T style={{ fontSize: 12, fontFamily: f.medium }}>{current || 'Discover'}</T></View> : <Pressable accessibilityRole="button" accessibilityLabel="Everything Laurier home" onPress={() => router.navigate('/')} style={[s.row, { gap: 9, minHeight: 44 }]}><View style={[styles.logo, { width: 30, height: 33, borderRadius: 10 }]}><Icon name="feather" color={c.gold} size={19} /></View><T style={{ fontFamily: f.serif, color: c.purple, fontSize: width < 400 ? 17 : 21 }}>Everything Laurier.</T></Pressable>}
-        <View style={[s.row, { gap: desktop ? 18 : 4 }]}>{desktop && <Search value={query} onChange={setQuery} onSubmit={goSearch} placeholder="Find your next thing…" style={{ width: width >= 1280 ? 270 : 215, minHeight: 44, backgroundColor: c.background }} />}{desktop && <Pressable onPress={() => router.navigate('/map')} accessibilityRole="button" accessibilityLabel="Waterloo campus map" style={[s.row, { gap: 6, minHeight: 44 }]}><Icon name="map-pin" size={15} color={c.purple} /><T style={{ fontFamily: f.medium, fontSize: 12 }}>Waterloo</T></Pressable>}{!desktop && <IconButton name="search" label="Search Everything Laurier" onPress={() => router.push('/search')} />}<IconButton name="user" label="Your space" onPress={() => router.push('/profile')} style={{ backgroundColor: c.lavender }} /></View>
+        <View style={[s.row, { gap: desktop ? 18 : 4 }]}>{desktop && <Search value={query} onChange={setQuery} onSubmit={goSearch} placeholder="Find your next thing…" style={{ width: width >= 1280 ? 270 : 215, minHeight: 44, backgroundColor: c.background }} />}{desktop && <Pressable onPress={() => router.navigate('/map')} accessibilityRole="button" accessibilityLabel="Waterloo campus map" style={[s.row, { gap: 6, minHeight: 44 }]}><Icon name="map-pin" size={15} color={c.purple} /><T style={{ fontFamily: f.medium, fontSize: 12 }}>Waterloo</T></Pressable>}{!desktop && <IconButton name="search" label="Search Everything Laurier" onPress={() => router.push('/search')} />}<IconButton name={session ? "user-check" : "user"} label={session ? "Your account" : "Sign in"} onPress={() => router.push(session || !authReady ? '/profile' : '/login')} style={{ backgroundColor: c.lavender }} /></View>
       </View>
       <ScrollView key={pathname} style={{ flex: 1 }} contentContainerStyle={{ padding: desktop ? 36 : 20, paddingBottom: 40, alignItems: 'center' }} keyboardShouldPersistTaps="handled">
         <View style={{ width: '100%', maxWidth: 1280, gap: 28 }}>{children}<View style={[s.row, { paddingTop: 24, borderTopWidth: 1, borderTopColor: c.border, flexWrap: 'wrap', gap: 7, marginTop: 12 }]}><Icon name="feather" size={14} color={c.purple} /><T muted style={{ fontSize: 11 }}>A little closer to your campus.</T><View style={{ flex: 1 }} /><Pressable accessibilityRole="button" onPress={() => router.push('/profile')} style={{ paddingVertical: 14 }}><T muted style={{ fontSize: 11 }}>About Everything Laurier</T></Pressable></View></View>

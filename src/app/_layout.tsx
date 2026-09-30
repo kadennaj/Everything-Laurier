@@ -9,9 +9,10 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Shell } from '../components/Shell';
 import { LocalState } from '../lib/state';
 import { colors } from '../lib/theme';
+import { AuthProvider } from '../lib/auth';
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({ DM: DMSans_400Regular, 'DM-Medium': DMSans_500Medium, 'DM-Bold': DMSans_700Bold, Lora: Lora_400Regular, 'Lora-Italic': Lora_400Regular_Italic, ...Feather.font });
   if (!loaded && !error) return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 18, backgroundColor: colors.background }}><ActivityIndicator color={colors.purple} /><Text style={{ color: colors.purple }}>Your campus, a little closer.</Text></View>;
-  return <SafeAreaProvider><LocalState><StatusBar style="dark" /><Shell><Slot /></Shell></LocalState></SafeAreaProvider>;
+  return <SafeAreaProvider><LocalState><AuthProvider><StatusBar style="dark" /><Shell><Slot /></Shell></AuthProvider></LocalState></SafeAreaProvider>;
 }

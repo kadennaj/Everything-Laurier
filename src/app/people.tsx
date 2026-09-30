@@ -1,17 +1,88 @@
 import { router } from 'expo-router';
-import React, { useState } from 'react';
-import { Pressable, useWindowDimensions, View } from 'react-native';
-import { Badge, Card, Chips, Empty, Icon, PageHeading, Search, T, s } from '../components/ui';
-import { people } from '../data/content';
+import React, { useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, Pressable, useWindowDimensions, View } from 'react-native';
+import { Badge, Button, Card, Empty, Icon, PageHeading, Search, T, s } from '../components/ui';
+import { useAuth } from '../lib/auth';
+import { DirectoryProfile, findStudentProfiles } from '../lib/student-profiles';
 import { colors as c, fonts as f } from '../lib/theme';
 
 export default function People() {
-  const [interest, setInterest] = useState('Everyone'); const [query, setQuery] = useState(''); const { width } = useWindowDimensions();
-  const filtered = people.filter(p => (interest === 'Everyone' || p.interests.includes(interest)) && `${p.name} ${p.program} ${p.year}`.toLowerCase().includes(query.toLowerCase()));
-  return <><PageHeading eyebrow="BEYOND YOUR USUAL CIRCLE" title="Good people. Great possibilities." subtitle="Find a study buddy, a future collaborator, or just someone who gets your very specific interests." />
-    <View style={{ backgroundColor: '#ECE6F1', borderRadius: 18, padding: 26, flexDirection: width < 650 ? 'column' : 'row', alignItems: width < 650 ? 'flex-start' : 'center', gap: 24 }}><View style={[s.row, { paddingLeft: 0 }]}>{people.map((p, i) => <View key={p.id} style={{ width: 62, height: 62, borderRadius: 31, borderWidth: 4, borderColor: '#ECE6F1', marginLeft: i ? -14 : 0, backgroundColor: p.color, alignItems: 'center', justifyContent: 'center' }}><T style={{ fontFamily: f.serif, color: c.purple, fontSize: 20 }}>{p.initials}</T></View>)}</View><View style={{ flex: 1, gap: 7 }}><T style={{ fontFamily: f.bold, fontSize: 16 }}>A campus full of connections.</T><T muted style={{ fontSize: 13, lineHeight: 22 }}>Explore the profile design below. These are fictional examples; real student profiles aren’t connected yet.</T></View><Icon name="users" color="#987AAC" size={28} /></View>
-    <Search value={query} onChange={setQuery} placeholder="Search sample profiles by name, program, or year…" /><Chips items={['Everyone', 'Tech', 'Business', 'Arts', 'Coffee', 'Outdoors']} value={interest} onChange={setInterest} />
-    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 18 }}>{filtered.map(person => <Card key={person.id} style={{ width: width < 650 ? '100%' : undefined, flexBasis: width < 650 ? undefined : '30%', flexGrow: 1, maxWidth: width < 650 ? undefined : 460 }}><View style={{ height: 85, backgroundColor: person.color }} /><View style={{ padding: 23, gap: 14 }}><View style={[s.row, { justifyContent: 'space-between', marginTop: -55 }]}><View style={{ width: 76, height: 76, borderRadius: 26, borderWidth: 5, borderColor: c.surface, backgroundColor: person.color, alignItems: 'center', justifyContent: 'center' }}><T style={{ fontFamily: f.serif, fontSize: 26, color: c.purple }}>{person.initials}</T></View><View style={{ marginTop: 28 }}><Badge label="SAMPLE PROFILE" color={c.background} textColor={c.muted} /></View></View><View style={{ gap: 5 }}><T style={{ fontFamily: f.bold, fontSize: 20 }}>{person.name}</T><T muted style={{ fontSize: 12 }}>{person.program} · {person.year}</T></View><T muted style={{ lineHeight: 22 }}>{person.looking}</T><View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>{person.interests.map(tag => <Badge key={tag} label={tag} color={person.color} textColor="#60566B" />)}</View><Pressable accessibilityRole="button" accessibilityLabel={`View sample profile ${person.name}`} onPress={() => router.push(`/person/${person.id}`)} style={[s.row, { minHeight: 46, borderTopWidth: 1, borderTopColor: c.border, marginTop: 7, paddingTop: 10, justifyContent: 'space-between' }]}><T style={{ color: c.purple, fontFamily: f.bold, fontSize: 13 }}>Meet {person.name.split(' ')[0]}</T><Icon name="arrow-up-right" color={c.purple} size={18} /></Pressable></View></Card>)}</View>
-    {!filtered.length && <Empty title="No sample profiles match just yet." description="Try a different program or interest to explore the preview." />}
+  const { session, ready } = useAuth();
+  const userId = session?.user.id;
+  const { width } = useWindowDimensions();
+  const [search, setSearch] = useState('');
+  const currentSearch = useRef('');
+  const [results, setResults] = useState<DirectoryProfile[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(false);
+  const [error, setError] = useState('');
+  const [retry, setRetry] = useState(0);
+
+  useEffect(() => {
+    if (!userId) return;
+    let active = true;
+    const timer = setTimeout(() => {
+      void findStudentProfiles(search).then(rows => {
+        if (!active) return;
+        setResults(rows);
+        setHasMore(rows.length === 24);
+        setError('');
+      }).catch(problem => {
+        if (active) setError(problem instanceof Error ? problem.message : 'Please try again.');
+      }).finally(() => { if (active) setLoading(false); });
+    }, search ? 250 : 0);
+    return () => { active = false; clearTimeout(timer); };
+  }, [search, userId, retry]);
+
+  async function loadMore() {
+    if (loadingMore || !hasMore) return;
+    const requestedSearch = search;
+    setLoadingMore(true);
+    try {
+      const next = await findStudentProfiles(requestedSearch, Math.floor(results.length / 24));
+      if (requestedSearch !== currentSearch.current) return;
+      setResults(current => [...current, ...next]);
+      setHasMore(next.length === 24);
+      setError('');
+    } catch (problem) { setError(problem instanceof Error ? problem.message : 'Please try again.'); }
+    finally { setLoadingMore(false); }
+  }
+
+  if (!ready) return <ActivityIndicator color={c.purple} />;
+  if (!session) return <><PageHeading eyebrow="STUDENT CONNECTIONS" title="Find your people." subtitle="Meet students in your program and make your next campus connection." />
+    <Empty title="Sign in to meet students." description="Student profiles are available to people who have verified their email."
+      icon="users" action={<Button label="Sign in with email" icon="mail" onPress={() => router.push('/login')} />} /></>;
+
+  return <>
+    <PageHeading eyebrow="STUDENT CONNECTIONS" title="Find your people." subtitle="Search real student profiles by program. Students decide whether to appear here and share a contact email."
+      action={<Button secondary label="Your profile" icon="user" onPress={() => router.push('/profile')} />} />
+    <Card style={{ padding: 20, gap: 12, backgroundColor: c.lavender }}>
+      <View style={[s.row, { gap: 12 }]}><Icon name="search" color={c.purple} /><T style={{ fontFamily: f.bold, fontSize: 16 }}>Who’s in your program?</T></View>
+      <T muted style={{ lineHeight: 22 }}>Try a program name such as Computer Science, BBA, or Psychology.</T>
+      <Search value={search} onChange={value => { currentSearch.current = value; setSearch(value); setLoading(true); setResults([]); setHasMore(false); }} placeholder="Search by program…" />
+    </Card>
+    {loading ? <View style={{ padding: 32, alignItems: 'center', gap: 12 }}><ActivityIndicator color={c.purple} /><T muted>Finding students…</T></View> : <>
+      {!!error && <Card style={{ padding: 20, gap: 12 }}><T accessibilityRole="alert" style={{ color: '#8E3434' }}>{error}</T><Button secondary label="Try again" onPress={() => { setLoading(true); setRetry(value => value + 1); }} /></Card>}
+      {!error && results.length === 0 && <Empty title="No profiles here yet." description={search ? 'Try another program name, or check back as more students join.' : 'Be among the first students to share a profile.'} icon="users" />}
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 18 }}>{results.map(person => <Card key={person.id} style={{ width: width < 650 ? '100%' : undefined, flexBasis: width < 650 ? undefined : '30%', flexGrow: 1, maxWidth: width < 650 ? undefined : 460 }}>
+        <View style={{ height: 72, backgroundColor: c.lavender }} />
+        <View style={{ padding: 22, gap: 13 }}>
+          <View style={[s.row, { justifyContent: 'space-between', marginTop: -52 }]}>
+            <View style={{ width: 68, height: 68, borderRadius: 23, borderWidth: 4, borderColor: c.surface, backgroundColor: c.peach, alignItems: 'center', justifyContent: 'center' }}>
+              <T style={{ fontFamily: f.serif, fontSize: 25, color: c.purple }}>{person.display_name.slice(0, 1).toUpperCase()}</T>
+            </View>
+            <View style={{ marginTop: 27 }}><Badge label="STUDENT PROFILE" color={c.background} textColor={c.muted} /></View>
+          </View>
+          <View style={{ gap: 5 }}><T style={{ fontFamily: f.bold, fontSize: 20 }}>{person.display_name}</T><T muted>{person.program}{person.year_label ? ` · ${person.year_label}` : ''}</T></View>
+          {!!person.bio && <T muted numberOfLines={3} style={{ lineHeight: 22 }}>{person.bio}</T>}
+          <Pressable accessibilityRole="button" accessibilityLabel={`View ${person.display_name}'s profile`} onPress={() => router.push(`/student/${person.id}`)}
+            style={[s.row, { justifyContent: 'space-between', minHeight: 46, borderTopWidth: 1, borderTopColor: c.border, paddingTop: 12 }]}>
+            <T style={{ fontFamily: f.bold, color: c.purple }}>View profile</T><Icon name="arrow-up-right" color={c.purple} size={18} />
+          </Pressable>
+        </View>
+      </Card>)}</View>
+      {hasMore && <View style={{ alignItems: 'center' }}><Button secondary label={loadingMore ? 'Loading…' : 'Show more students'} disabled={loadingMore} onPress={() => { void loadMore(); }} /></View>}
+    </>}
   </>;
 }

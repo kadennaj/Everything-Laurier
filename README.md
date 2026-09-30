@@ -1,6 +1,6 @@
 # Everything Laurier
 
-A UI prototype for student life around Laurier Waterloo, built with React Native, Expo, TypeScript, and Expo Router.
+An app for student life around Laurier Waterloo, built with React Native, Expo, TypeScript, Expo Router, and Supabase.
 
 ## Current scope
 
@@ -8,13 +8,15 @@ A UI prototype for student life around Laurier Waterloo, built with React Native
 - Searchable local snapshot of 184 club listings, with club detail pages and available official links.
 - A researched nightlife edit with four venues, six weekly programmes, and a past one-off event spotlight.
 - Venue and night detail pages, day/music filters, global search, and local bookmarks.
-- Illustrative campus event cards and fictional networking profiles.
-- Local bookmarks that persist on the device.
+- Illustrative campus event cards.
+- Email verification sign-in, session persistence, and sign-out.
+- A first-sign-in student questionnaire, editable Supabase profiles, and program search for students who opt into discovery.
+- Local bookmarks that persist on the device (not synced to accounts).
 - An illustrated campus guide with building search and external directions.
 - Official academic support links and a tutor placeholder.
 - Responsive layouts for mobile and desktop browser previews.
 
-This is a frontend prototype. There is no backend, authentication, Instagram scraper, live event feed, messaging, tutor verification, or location tracking. Campus events and people are sample content. Nightlife is an editorial snapshot of linked sources, not a live event feed. The map is an illustration, not a verified navigation map. Students’ Union approval is pending; no endorsement is claimed.
+This is a student-life prototype with Supabase email verification sign-in and saved student profiles. Email delivery requires a connected Supabase project and configured email sender; see [email login setup](docs/email-login.md). Students can publish their verified email on an opt-in profile; browsing the live directory requires sign-in. There is no Instagram scraper, live event feed, in-app messaging, tutor verification, or location tracking. Campus events are sample content. Nightlife is an editorial snapshot of linked sources, not a live event feed. The map is an illustration, not a verified navigation map. Students’ Union approval is pending; no endorsement is claimed.
 
 ## Run locally
 
@@ -30,6 +32,8 @@ Open http://localhost:8081 for the browser preview. For Expo's device workflow, 
 ## Checks
 
 ```sh
+npm run test:auth
+node --experimental-strip-types --test tests/profile-fields.test.mjs
 npm run typecheck
 npm run lint
 npm run export:web
@@ -43,7 +47,7 @@ npm run export:web
 - `src/lib/`: design tokens and local bookmark state.
 - `assets/`: bundled images and app assets.
 
-No credentials or environment variables are required for the current UI.
+Public browsing works without environment variables. To enable email sign-in and live profiles, configure the public Supabase values in `.env.example` as described in [email login setup](docs/email-login.md). The profile database schema and access policies are in [student_profiles.sql](supabase/schema/student_profiles.sql).
 
 ## Sources and credits
 
