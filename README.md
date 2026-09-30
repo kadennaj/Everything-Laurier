@@ -7,6 +7,7 @@ An app for student life around Laurier Waterloo, built with React Native, Expo, 
 - Five main tabs: Discover, Nightlife, Clubs, Map, and More. People and Help remain available through More.
 - Searchable local snapshot of 184 club listings, with club detail pages and available official links.
 - A researched nightlife edit with four venues, six weekly programmes, and a past one-off event spotlight.
+- A recent-post feed for four Waterloo nightlife Instagram accounts, ready for a server-side Apify connection.
 - Venue and night detail pages, day/music filters, global search, and local bookmarks.
 - Illustrative campus event cards.
 - Email verification sign-in, session persistence, and sign-out.
@@ -16,7 +17,7 @@ An app for student life around Laurier Waterloo, built with React Native, Expo, 
 - Official academic support links and a tutor placeholder.
 - Responsive layouts for mobile and desktop browser previews.
 
-This is a student-life prototype with Supabase email verification sign-in and saved student profiles. Email delivery requires a connected Supabase project and configured email sender; see [email login setup](docs/email-login.md). Students can publish their verified email on an opt-in profile; browsing the live directory requires sign-in. There is no Instagram scraper, live event feed, in-app messaging, tutor verification, or location tracking. Campus events are sample content. Nightlife is an editorial snapshot of linked sources, not a live event feed. The map is an illustration, not a verified navigation map. Students’ Union approval is pending; no endorsement is claimed.
+This is a student-life prototype with Supabase email verification sign-in and saved student profiles. Email delivery requires a connected Supabase project and configured email sender; see [email login setup](docs/email-login.md). Students can publish their verified email on an opt-in profile; browsing the live directory requires sign-in. The Nightlife screen can show recent Instagram posts once [the Apify feed is connected](docs/instagram-feed.md); posts are currently empty until a provider token is supplied. The weekly nightlife lineup is an editorial snapshot, not a live event feed. There is no in-app messaging, tutor verification, or location tracking. Campus events are sample content. The map is an illustration, not a verified navigation map. Students’ Union approval is pending; no endorsement is claimed.
 
 ## Run locally
 
@@ -34,6 +35,7 @@ Open http://localhost:8081 for the browser preview. For Expo's device workflow, 
 ```sh
 npm run test:auth
 node --experimental-strip-types --test tests/profile-fields.test.mjs
+node --experimental-strip-types --test tests/instagram-feed.test.mjs
 npm run typecheck
 npm run lint
 npm run export:web

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Pressable, useWindowDimensions, View } from 'react-native';
 import { router } from 'expo-router';
 import { NightArt, NightCard, VenueCard } from '../components/Nightlife';
+import { InstagramFeed } from '../components/InstagramFeed';
 import { Button, Card, Chips, Empty, Eyebrow, Icon, Search, SectionTitle, T, s } from '../components/ui';
 import { allNights, nights, venues } from '../data/nightlife';
 import { colors as c, fonts as f } from '../lib/theme';
@@ -24,6 +25,7 @@ export default function Nightlife() {
     <View style={{ flexDirection: compact ? 'column' : 'row', gap: compact ? 16 : 30, paddingVertical: 6 }}>
       {[{ n: '01', title: 'Pick the mood', sub: 'Dance floor or a familiar table.' }, { n: '02', title: 'Find your regular', sub: 'Real places, a little closer.' }, { n: '03', title: 'Keep the good plans', sub: 'Save a night. Bring your people.' }].map(item => <View key={item.n} style={[s.row, { flex: 1, gap: 13 }]}><T style={{ color: '#A58DAD', fontFamily: f.serif, fontSize: 27 }}>{item.n}</T><View style={{ flex: 1, gap: 4 }}><T style={{ fontFamily: f.bold, fontSize: 13 }}>{item.title}</T><T muted style={{ fontSize: 12 }}>{item.sub}</T></View></View>)}
     </View>
+    <InstagramFeed />
     <View style={{ gap: 20 }}>
       <View style={[s.row, { borderBottomWidth: 1, borderBottomColor: c.border, gap: compact ? 24 : 34 }]}>{['The lineup', 'The places', 'Saved'].map(item => <Pressable key={item} accessibilityRole="button" accessibilityState={{ selected: item === tab }} onPress={() => setTab(item)} style={{ paddingVertical: 15, minHeight: 48, borderBottomWidth: 2, borderBottomColor: item === tab ? c.purple : 'transparent' }}><T style={{ fontFamily: item === tab ? f.bold : f.medium, fontSize: 15, color: item === tab ? c.purple : c.muted }}>{item}</T></Pressable>)}</View>
       <Search value={query} onChange={setQuery} placeholder="Search nights, venues, or music…" />
