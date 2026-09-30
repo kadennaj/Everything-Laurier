@@ -20,16 +20,16 @@ Deno.serve(async request => {
 
   try {
     const scrape = await fetch(
-      'https://api.apify.com/v2/acts/apify~instagram-post-scraper/run-sync-get-dataset-items?maxTotalChargeUsd=0.10',
+      'https://api.apify.com/v2/acts/apify~instagram-scraper/run-sync-get-dataset-items?maxTotalChargeUsd=0.10',
       {
         method: 'POST',
         headers: { ...jsonHeaders, Authorization: `Bearer ${apifyToken}` },
         body: JSON.stringify({
-          username: [...INSTAGRAM_ACCOUNTS],
+          resultsType: 'posts',
+          directUrls: INSTAGRAM_ACCOUNTS.map(username => `https://www.instagram.com/${username}/`),
           resultsLimit: 5,
           onlyPostsNewerThan: '7 days',
-          skipPinnedPosts: true,
-          dataDetailLevel: 'basicData',
+          addParentData: false,
         }),
         signal: AbortSignal.timeout(100_000),
       },

@@ -38,10 +38,12 @@ test('a successful run fetches four accounts and saves only valid posts', async 
     const response = await handler(request('test-sync-secret'));
     assert.equal(response.status, 200);
     assert.equal((await response.json()).saved, 1);
-    assert.match(calls[0].url, /apify~instagram-post-scraper\/run-sync-get-dataset-items/);
+    assert.match(calls[0].url, /apify~instagram-scraper\/run-sync-get-dataset-items/);
     assert.equal(calls[0].options.headers.Authorization, 'Bearer test-apify-token');
-    assert.deepEqual(JSON.parse(calls[0].options.body).username,
-      ['rarenightclub', 'prohibitionwarehouse', 'thepubonking', 'kentuckywaterloo']);
+    assert.deepEqual(JSON.parse(calls[0].options.body).directUrls,
+      ['rarenightclub', 'prohibitionwarehouse', 'thepubonking', 'kentuckywaterloo']
+        .map(username => `https://www.instagram.com/${username}/`));
+    assert.equal(JSON.parse(calls[0].options.body).resultsType, 'posts');
     assert.equal(calls[1].options.headers.Authorization, 'Bearer test-server-key');
     assert.deepEqual(JSON.parse(calls[1].options.body).map(post => post.id), ['CODE1']);
   } finally { globalThis.fetch = originalFetch; }
