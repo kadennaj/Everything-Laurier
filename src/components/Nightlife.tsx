@@ -16,7 +16,7 @@ export const nightColors = {
 export function NightArt({ palette, title, subtitle, height = 220, hero = false }: { palette: NightPalette; title: string; subtitle: string; height?: number; hero?: boolean }) {
   const compact = useWindowDimensions().width < 600;
   const p = nightColors[palette];
-  return <View style={{ minHeight: height, overflow: 'hidden', backgroundColor: p.bg, padding: hero ? (compact ? 25 : 32) : 23, justifyContent: 'space-between' }}>
+  return <View style={{ minHeight: height, overflow: 'hidden', backgroundColor: p.bg, padding: hero ? (compact ? 20 : 28) : 23, justifyContent: 'space-between' }}>
     <Svg aria-hidden={true} width="100%" height="100%" viewBox="0 0 600 360" preserveAspectRatio="xMaxYMid slice" style={{ position: 'absolute', inset: 0, opacity: hero ? 0.8 : 0.62 }}>
       <G stroke={p.accent} fill="none" strokeWidth="1">
         {palette === 'retro' ? <><Line x1="458" y1="0" x2="458" y2="70" /><Circle cx="458" cy="154" r="83" /><Ellipse cx="458" cy="154" rx="56" ry="83" /><Ellipse cx="458" cy="154" rx="27" ry="83" />{[100, 126, 154, 182, 207].map(y => <Line key={y} x1={y === 154 ? 375 : 391} x2={y === 154 ? 541 : 525} y1={y} y2={y} />)}<Path d="M350 60v32m-16-16h32M555 239v40m-20-20h40M374 274v18m-9-9h18" /></> : palette === 'crown' ? <>{[0, 1, 2, 3, 4].map(n => <Path key={n} d={`M${335 + n * 19} 380 V${153 + n * 15} C${335 + n * 19} ${12 + n * 15} 605 ${12 + n * 15} 605 ${153 + n * 15} V380`} strokeWidth="2" />)}</> : palette === 'pub' ? <>{[70, 125, 180, 235, 290].map(y => <Path key={y} d={`M320 ${y} Q400 ${y - 100} 490 ${y} T680 ${y}`} strokeWidth="2" />)}</> : <>{[350, 415, 480, 545].map(x => <G key={x}><Circle cx={x} cy="75" r="20" /><Path d={`M${x - 20} 145h40v40h-40zM${x} 238l25 40h-50z`} /></G>)}</>}
@@ -24,7 +24,7 @@ export function NightArt({ palette, title, subtitle, height = 220, hero = false 
       <Circle cx="590" cy="350" r="120" fill={p.accent} opacity="0.08" />
     </Svg>
     <T style={{ color: p.ink, fontSize: 10, letterSpacing: 2.4, fontFamily: f.bold }}>{subtitle.toUpperCase()}</T>
-    <T style={{ color: p.ink, fontFamily: f.serif, fontSize: hero ? (compact ? 38 : 50) : 33, lineHeight: hero ? (compact ? 45 : 56) : 38, letterSpacing: -1.2, maxWidth: hero ? 530 : 300, marginVertical: 25 }}>{title}</T>
+    <T style={{ color: p.ink, fontFamily: f.serif, fontSize: hero ? (compact ? 36 : 47) : 33, lineHeight: hero ? (compact ? 42 : 53) : 38, letterSpacing: -1.2, maxWidth: hero ? 530 : 300, marginVertical: hero ? 12 : 25 }}>{title}</T>
     <View style={[s.row, { gap: 8 }]}><View style={{ height: 1, width: 28, backgroundColor: p.accent }} /><T style={{ color: p.ink, fontSize: 10, letterSpacing: 1.5 }}>WATERLOO AFTER DARK</T></View>
   </View>;
 }

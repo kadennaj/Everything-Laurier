@@ -93,13 +93,13 @@ export default function Login() {
 }
 
 const styles = StyleSheet.create({
-  container: { width: '100%', maxWidth: 480, alignSelf: 'center', gap: 22, paddingVertical: 12 },
-  intro: { alignItems: 'center', gap: 16 },
-  mark: { width: 64, height: 68, borderRadius: 22, backgroundColor: c.purple, alignItems: 'center', justifyContent: 'center', marginBottom: 4 },
-  heading: { fontFamily: f.serif, fontSize: 36, lineHeight: 43, letterSpacing: -1, textAlign: 'center' },
-  form: { padding: 24, gap: 20 },
+  container: { width: '100%', maxWidth: 480, alignSelf: 'center', gap: 18, paddingVertical: 8 },
+  intro: { alignItems: 'center', gap: 12 },
+  mark: { width: 56, height: 56, borderRadius: 18, backgroundColor: c.purple, alignItems: 'center', justifyContent: 'center', marginBottom: 3 },
+  heading: { fontFamily: f.serif, fontSize: 31, lineHeight: 38, letterSpacing: -0.8, textAlign: 'center' },
+  form: { padding: 21, gap: 17 },
   label: { fontFamily: f.bold, fontSize: 13 },
-  input: { minHeight: 54, borderWidth: 1, borderColor: c.border, borderRadius: 10, paddingHorizontal: 14, paddingVertical: 12, color: c.ink, fontFamily: f.regular, fontSize: 16, backgroundColor: c.background },
+  input: { minHeight: 54, borderWidth: 1, borderColor: c.border, borderRadius: 13, paddingHorizontal: 14, paddingVertical: 12, color: c.ink, fontFamily: f.regular, fontSize: 16, backgroundColor: c.background },
   code: { fontFamily: f.medium, letterSpacing: 3, fontSize: 20 },
   error: { padding: 12, backgroundColor: '#FAEEEE', borderRadius: 10 },
   privacy: { flexDirection: 'row', gap: 9, paddingTop: 16, borderTopWidth: 1, borderTopColor: c.border },

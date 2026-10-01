@@ -4,7 +4,8 @@ create schema if not exists private;
 
 create table private.venue_line_reports (
   user_id uuid not null references auth.users (id) on delete cascade,
-  venue_id text not null check (venue_id in ('phils', 'crown', 'pub', 'wilfs')),
+  -- Legacy IDs remain valid here only until their private reports age out.
+  venue_id text not null check (venue_id in ('phils', 'crown', 'wilfs', 'pub', 'prohibition', 'rare', 'kentucky')),
   night_date date not null,
   wait_minutes smallint not null check (wait_minutes in (0, 5, 15, 30, 45)),
   reported_at timestamptz not null default now(),
@@ -22,7 +23,7 @@ create policy "Raw line reports are never client readable"
   using (false) with check (false);
 
 create table public.venue_line_status (
-  venue_id text primary key check (venue_id in ('phils', 'crown', 'pub', 'wilfs')),
+  venue_id text primary key check (venue_id in ('pub', 'prohibition', 'rare', 'kentucky')),
   night_date date not null,
   wait_minutes smallint check (wait_minutes in (0, 5, 15, 30, 45)),
   report_count integer not null default 0 check (report_count >= 0),
@@ -58,7 +59,7 @@ declare
   v_last timestamptz;
   v_wait smallint;
 begin
-  if p_venue_id not in ('phils', 'crown', 'pub', 'wilfs') then
+  if p_venue_id not in ('pub', 'prohibition', 'rare', 'kentucky') then
     raise exception 'Unknown venue';
   end if;
 
@@ -102,7 +103,7 @@ returns void language plpgsql security definer set search_path = ''
 as $$
 declare v_venue_id text;
 begin
-  foreach v_venue_id in array array['phils', 'crown', 'pub', 'wilfs'] loop
+  foreach v_venue_id in array array['pub', 'prohibition', 'rare', 'kentucky'] loop
     perform private.refresh_venue_line_status(v_venue_id);
   end loop;
   delete from private.venue_line_reports
@@ -120,7 +121,7 @@ begin
   if v_user_id is null then
     raise exception 'Sign in to report the line';
   end if;
-  if p_venue_id is null or p_venue_id not in ('phils', 'crown', 'pub', 'wilfs') then
+  if p_venue_id is null or p_venue_id not in ('pub', 'prohibition', 'rare', 'kentucky') then
     raise exception 'Unknown venue';
   end if;
   if p_wait_minutes is null or p_wait_minutes not in (0, 5, 15, 30, 45) then

@@ -1,69 +1,12 @@
+import { router } from 'expo-router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, useWindowDimensions, View } from 'react-native';
-import { router } from 'expo-router';
-import { venues } from '../data/nightlife';
+import { lineVenues } from '../data/line-venues';
 import { useAuth } from '../lib/auth';
 import { currentLineStatus, isLineReportingOpen, lineOptions, lineTimeAgo, lineWaitLabel, type LineStatus } from '../lib/line-reporting';
 import { supabase } from '../lib/supabase';
 import { colors as c, fonts as f } from '../lib/theme';
-import { Button, Eyebrow, Icon, T } from './ui';
-
-const ink = '#F9F4EB';
-const soft = '#C9BED0';
-
-function LineCard({ venue, status, now, signedIn, reportingOpen, onUpdated }: {
-  venue: typeof venues[number]; status?: LineStatus; now: Date; signedIn: boolean;
-  reportingOpen: boolean; onUpdated: () => Promise<void>;
-}) {
-  const current = currentLineStatus(status, now);
-  const [editing, setEditing] = useState(false);
-  const [selected, setSelected] = useState<number | null>(null);
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState(false);
-
-  async function submit() {
-    if (!supabase || selected === null || submitting) return;
-    setSubmitting(true);
-    setError('');
-    setSuccess(false);
-    const { error: submitError } = await supabase.rpc('submit_venue_line_report', {
-      p_venue_id: venue.id, p_wait_minutes: selected,
-    });
-    if (submitError) {
-      setError(submitError.message.includes('open at 6 PM') ? 'Reports open at 6 PM Waterloo time.' : 'We could not save your report. Please try again.');
-    } else {
-      await onUpdated();
-      setEditing(false);
-      setSelected(null);
-      setSuccess(true);
-    }
-    setSubmitting(false);
-  }
-
-  return <View style={{ flexBasis: '46%', flexGrow: 1, minWidth: 280, backgroundColor: '#34253F', borderRadius: 19, padding: 22, gap: 16, borderWidth: 1, borderColor: '#5B4667' }}>
-    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
-      <View style={{ flex: 1, gap: 5 }}><T style={{ color: ink, fontFamily: f.bold, fontSize: 18 }}>{venue.shortName}</T><T style={{ color: soft, fontSize: 12 }}>{venue.area}</T></View>
-      <View style={{ backgroundColor: current ? '#42694F' : '#5A4A62', borderRadius: 20, paddingHorizontal: 10, paddingVertical: 6 }}><T style={{ color: ink, fontSize: 11, fontFamily: f.bold }}>{current ? 'LIVE REPORTS' : 'AWAITING REPORTS'}</T></View>
-    </View>
-    <View style={{ gap: 5 }}>
-      <T accessibilityLabel={`${venue.shortName} line estimate: ${lineWaitLabel(current?.wait_minutes ?? null)}`} style={{ color: c.gold, fontFamily: f.serif, fontSize: 30, lineHeight: 38 }}>{lineWaitLabel(current?.wait_minutes ?? null)}</T>
-      <T style={{ color: soft, fontSize: 12 }}>
-        {current?.last_reported_at ? `${current.report_count} ${current.report_count === 1 ? 'report' : 'reports'} · Last update ${lineTimeAgo(current.last_reported_at, now)}` : 'Be the first to report tonight'}
-      </T>
-    </View>
-    <View accessibilityLabel="Estimated line length scale" style={{ flexDirection: 'row', gap: 5 }}>{lineOptions.map((option, index) => <View key={option.minutes} style={{ height: 5, flex: 1, borderRadius: 4, backgroundColor: current && lineOptions.findIndex(item => item.minutes === current.wait_minutes) >= index ? c.gold : '#6B5973' }} />)}</View>
-    {success && <T accessibilityRole="alert" style={{ color: '#BFE7C2', fontSize: 12 }}>Thanks — your report is live.</T>}
-    {error && <T accessibilityRole="alert" style={{ color: '#FFD2C7', fontSize: 12 }}>{error}</T>}
-    {editing ? <View style={{ gap: 13 }}>
-      <T style={{ color: ink, fontFamily: f.bold, fontSize: 13 }}>How long is the line right now?</T>
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{lineOptions.map(option => <Pressable key={option.minutes} accessibilityRole="button" accessibilityState={{ selected: selected === option.minutes }} onPress={() => setSelected(option.minutes)} style={({ pressed }) => ({ minHeight: 44, justifyContent: 'center', borderRadius: 9, paddingHorizontal: 12, backgroundColor: selected === option.minutes ? c.gold : '#554360', opacity: pressed ? 0.75 : 1 })}><T style={{ color: selected === option.minutes ? c.purpleDark : ink, fontFamily: f.bold, fontSize: 12 }}>{option.label}</T></Pressable>)}</View>
-      <View style={{ flexDirection: 'row', gap: 9 }}><Pressable accessibilityRole="button" accessibilityState={{ disabled: submitting || selected === null }} disabled={submitting || selected === null} onPress={() => { void submit(); }} style={({ pressed }) => ({ flex: 1, minHeight: 46, borderRadius: 10, backgroundColor: c.gold, alignItems: 'center', justifyContent: 'center', opacity: submitting || selected === null ? 0.5 : pressed ? 0.75 : 1 })}><T style={{ color: c.purpleDark, fontFamily: f.bold, fontSize: 13 }}>{submitting ? 'Saving…' : 'Share update'}</T></Pressable><Button label="Cancel" secondary onPress={() => { setEditing(false); setError(''); }} style={{ flex: 1 }} /></View>
-    </View> : <Pressable accessibilityRole="button" accessibilityState={{ disabled: signedIn && !reportingOpen }} disabled={signedIn && !reportingOpen} onPress={() => { setSuccess(false); if (!signedIn) router.push('/login'); else setEditing(true); }} style={({ pressed }) => ({ minHeight: 46, paddingHorizontal: 14, borderRadius: 10, backgroundColor: '#614A70', opacity: signedIn && !reportingOpen ? 0.65 : pressed ? 0.75 : 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' })}>
-      <T style={{ color: ink, fontFamily: f.bold, fontSize: 13 }}>{!signedIn ? 'Sign in to report' : reportingOpen ? 'Report the line' : 'Reports open at 6 PM'}</T><Icon name={reportingOpen || !signedIn ? 'arrow-right' : 'clock'} color={ink} size={16} />
-    </Pressable>}
-  </View>;
-}
+import { Icon, T } from './ui';
 
 export function LineCheckIns() {
   const { width } = useWindowDimensions();
@@ -71,31 +14,66 @@ export function LineCheckIns() {
   const [statuses, setStatuses] = useState<Record<string, LineStatus>>({});
   const [now, setNow] = useState(new Date());
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [loadError, setLoadError] = useState(false);
+  const [editing, setEditing] = useState<string | null>(null);
+  const [selected, setSelected] = useState<number | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [savedVenue, setSavedVenue] = useState<string | null>(null);
+  const open = isLineReportingOpen(now);
 
   const refresh = useCallback(async () => {
-    if (!supabase) { setError('Line updates are unavailable right now.'); setLoading(false); return; }
-    const { data, error: fetchError } = await supabase.from('venue_line_status').select('venue_id,night_date,wait_minutes,report_count,last_reported_at');
-    if (fetchError) { setStatuses({}); setError('Line updates could not load. Try again in a moment.'); }
-    else { setStatuses(Object.fromEntries(((data ?? []) as LineStatus[]).map(item => [item.venue_id, item]))); setError(''); }
+    if (!supabase) { setLoadError(true); setLoading(false); return; }
+    const { data, error } = await supabase.from('venue_line_status').select('venue_id,night_date,wait_minutes,report_count,last_reported_at');
+    if (error) { setStatuses({}); setLoadError(true); }
+    else { setStatuses(Object.fromEntries(((data ?? []) as LineStatus[]).map(item => [item.venue_id, item]))); setLoadError(false); }
     setNow(new Date());
     setLoading(false);
   }, []);
 
   useEffect(() => {
-    const initialLoad = setTimeout(() => { void refresh(); }, 0);
-    const ticker = setInterval(() => { setNow(new Date()); void refresh(); }, 60_000);
+    const initial = setTimeout(() => { void refresh(); }, 0);
+    const interval = setInterval(() => { void refresh(); }, 60_000);
     const channel = supabase?.channel('venue-line-status').on('postgres_changes', { event: '*', schema: 'public', table: 'venue_line_status' }, () => { void refresh(); }).subscribe();
-    return () => { clearTimeout(initialLoad); clearInterval(ticker); if (channel && supabase) void supabase.removeChannel(channel); };
+    return () => { clearTimeout(initial); clearInterval(interval); if (channel && supabase) void supabase.removeChannel(channel); };
   }, [refresh]);
 
-  return <View style={{ gap: 20, backgroundColor: '#251B2F', borderRadius: 24, padding: width < 700 ? 20 : 30 }}>
-    <View style={{ gap: 8 }}><Eyebrow color={c.gold}>THE LINE, RIGHT NOW</Eyebrow><T accessibilityRole="header" style={{ color: ink, fontFamily: f.serif, fontSize: width < 700 ? 28 : 34 }}>Know before you go.</T><T style={{ color: soft, fontSize: 13, lineHeight: 20 }}>Student-reported waits from the past 90 minutes. Estimates can change quickly.</T></View>
-    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 14 }}>
-      {venues.map(venue => <LineCard key={venue.id} venue={venue} status={statuses[venue.id]} now={now} signedIn={!!session} reportingOpen={isLineReportingOpen(now)} onUpdated={refresh} />)}
+  async function submit() {
+    if (!supabase || !editing || selected === null || submitting) return;
+    setSubmitting(true);
+    setSubmitError('');
+    const venueId = editing;
+    const { error } = await supabase.rpc('submit_venue_line_report', { p_venue_id: venueId, p_wait_minutes: selected });
+    if (error) setSubmitError(error.message.includes('open at 6 PM') ? 'Reports open at 6 PM Waterloo time.' : 'Could not save your report. Try again.');
+    else { await refresh(); setEditing(null); setSelected(null); setSavedVenue(venueId); }
+    setSubmitting(false);
+  }
+
+  return <View style={{ backgroundColor: c.night, borderRadius: 21, padding: width < 700 ? 16 : 20, gap: 13 }}>
+    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
+      <View style={{ flex: 1, gap: 3 }}><T accessibilityRole="header" style={{ color: c.surface, fontFamily: f.bold, fontSize: 18 }}>Tonight’s lines</T><T style={{ color: c.nightMuted, fontSize: 12 }}>Tap + to report · updates from the past 90 min</T></View>
+      {loading ? <ActivityIndicator color={c.gold} size="small" /> : <Icon name="activity" size={19} color={c.gold} />}
     </View>
-    {loading && <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}><ActivityIndicator color={c.gold} size="small" /><T style={{ color: soft, fontSize: 12 }}>Checking tonight’s lines…</T></View>}
-    {error && <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}><T accessibilityRole="alert" style={{ color: '#FFD2C7', fontSize: 12, flex: 1 }}>{error}</T><Button label="Retry" secondary onPress={() => { void refresh(); }} /></View>}
-    <T style={{ color: soft, fontSize: 11, lineHeight: 18 }}>Reports are anonymous to other students. One current report per person, per place. Please report only what you can see.</T>
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{lineVenues.map(venue => {
+      const status = currentLineStatus(statuses[venue.id], now);
+      const expanded = editing === venue.id;
+      const actionLabel = !open ? `Reports at ${venue.name} open at 6 PM` : !session ? `Sign in to report the line at ${venue.name}` : `Report the line at ${venue.name}`;
+      return <View key={venue.id} style={{ width: width < 760 ? '100%' : '48%', flexGrow: 1, backgroundColor: c.nightRaised, borderRadius: 13, overflow: 'hidden', borderWidth: 1, borderColor: expanded ? c.gold : c.nightBorder }}>
+        <View style={{ minHeight: 61, paddingLeft: 14, paddingRight: 6, flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+          <View style={{ flex: 1, minWidth: 0 }}><T numberOfLines={1} style={{ color: c.surface, fontFamily: f.bold, fontSize: 14 }}>{venue.shortName}</T><T numberOfLines={1} style={{ color: c.nightMuted, fontSize: 11, marginTop: 2 }}>{status?.last_reported_at ? `${status.report_count} ${status.report_count === 1 ? 'report' : 'reports'} · ${lineTimeAgo(status.last_reported_at, now)}` : 'No recent reports'}</T></View>
+          <T accessibilityLabel={`${venue.name}: ${lineWaitLabel(status?.wait_minutes ?? null)}`} numberOfLines={1} style={{ color: status ? c.gold : c.nightMuted, fontFamily: f.bold, fontSize: 13, maxWidth: 112 }}>{status ? lineWaitLabel(status.wait_minutes) : 'No estimate'}</T>
+          <Pressable accessibilityRole="button" accessibilityLabel={actionLabel} accessibilityState={{ expanded, disabled: !open }} disabled={!open} onPress={() => { if (!session) router.push('/login'); else { setEditing(expanded ? null : venue.id); setSelected(null); setSubmitError(''); setSavedVenue(null); } }} style={({ pressed }) => ({ width: 44, height: 44, borderRadius: 11, alignItems: 'center', justifyContent: 'center', opacity: !open ? 0.4 : pressed ? 0.65 : 1 })}><Icon name={expanded ? 'x' : 'plus'} color={c.gold} size={20} /></Pressable>
+        </View>
+        {expanded && <View style={{ paddingHorizontal: 12, paddingBottom: 12, gap: 10 }}>
+          <T style={{ color: c.nightMuted, fontSize: 12 }}>How long is the line right now?</T>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 7 }}>{lineOptions.map(option => <Pressable key={option.minutes} accessibilityRole="button" accessibilityState={{ selected: selected === option.minutes }} onPress={() => setSelected(option.minutes)} style={({ pressed }) => ({ minHeight: 44, paddingHorizontal: 10, borderRadius: 9, justifyContent: 'center', backgroundColor: selected === option.minutes ? c.gold : c.nightOption, opacity: pressed ? 0.7 : 1 })}><T style={{ color: selected === option.minutes ? c.night : c.surface, fontFamily: f.bold, fontSize: 12 }}>{option.label}</T></Pressable>)}</View>
+          {!!submitError && <T accessibilityRole="alert" style={{ color: c.nightError, fontSize: 12 }}>{submitError}</T>}
+          <Pressable accessibilityRole="button" accessibilityState={{ disabled: submitting || selected === null }} disabled={submitting || selected === null} onPress={() => { void submit(); }} style={({ pressed }) => ({ minHeight: 44, borderRadius: 10, backgroundColor: c.gold, alignItems: 'center', justifyContent: 'center', opacity: submitting || selected === null ? 0.48 : pressed ? 0.78 : 1 })}><T style={{ color: c.night, fontFamily: f.bold, fontSize: 13 }}>{submitting ? 'Saving…' : 'Share line update'}</T></Pressable>
+        </View>}
+        {savedVenue === venue.id && <T accessibilityRole="alert" style={{ color: c.nightSuccess, fontSize: 11, paddingHorizontal: 14, paddingBottom: 8 }}>Thanks — your report is live.</T>}
+      </View>;
+    })}</View>
+    {loadError && <Pressable accessibilityRole="button" onPress={() => { void refresh(); }} style={{ minHeight: 44, flexDirection: 'row', alignItems: 'center', gap: 8 }}><Icon name="refresh-cw" size={15} color={c.gold} /><T style={{ color: c.surface, fontSize: 12 }}>Line updates unavailable. Tap to retry.</T></Pressable>}
+    {!open && <T style={{ color: c.nightMuted, fontSize: 11 }}>Reports open at 6 PM Waterloo time.</T>}
   </View>;
 }

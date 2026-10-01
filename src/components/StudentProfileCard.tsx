@@ -24,15 +24,15 @@ export function StudentProfileCard() {
   }, [userId, retry]);
 
   if (!session) return null;
-  return <Card style={{ padding: 26, gap: 17 }}>
+  return <Card style={{ padding: 21, gap: 15 }}>
     <Badge label="YOUR STUDENT PROFILE" />
     {loading ? <ActivityIndicator color={c.purple} /> : error ? <><T accessibilityRole="alert" style={{ color: '#8E3434' }}>{error}</T>
       <View style={{ alignItems: 'flex-start' }}><Button secondary label="Try again" onPress={() => { setLoading(true); setRetry(value => value + 1); }} /></View></>
-      : !profile ? <><T style={{ fontFamily: f.serif, fontSize: 27 }}>Tell campus about you.</T>
+      : !profile ? <><T style={{ fontFamily: f.serif, fontSize: 24 }}>Tell campus about you.</T>
         <T style={body}>Add your name and program, then choose whether other students can find and email you.</T>
         <View style={{ alignItems: 'flex-start' }}><Button label="Complete your profile" icon="user-plus" onPress={() => router.push('/account-setup')} /></View></>
       : <>
-        <T style={{ fontFamily: f.serif, fontSize: 28 }}>{profile.display_name}</T>
+        <T style={{ fontFamily: f.serif, fontSize: 25 }}>{profile.display_name}</T>
         <T muted>{profile.program}{profile.year_label ? ` · ${profile.year_label}` : ''}</T>
         {!!profile.bio && <T style={body}>{profile.bio}</T>}
         <Badge label={profile.is_discoverable ? 'VISIBLE TO SIGNED-IN STUDENTS' : 'PRIVATE PROFILE'}
