@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { router } from 'expo-router';
 import { ActivityIndicator, Image, Linking, Pressable, ScrollView, useWindowDimensions, View } from 'react-native';
 import { Button, Card, Icon, Pill, SectionTitle, T } from './ui';
 import { getInstagramPosts, instagramAccounts, InstagramPost } from '../lib/instagram-feed';
@@ -30,7 +31,7 @@ function PostCard({ post }: { post: InstagramPost }) {
   </Pressable>;
 }
 
-export function InstagramFeed() {
+export function InstagramFeed({ preview = false }: { preview?: boolean }) {
   const { width } = useWindowDimensions();
   const [posts, setPosts] = useState<InstagramPost[]>([]);
   const [selected, setSelected] = useState('all');
@@ -54,16 +55,17 @@ export function InstagramFeed() {
     return () => { active = false; clearInterval(interval); };
   }, []);
 
-  const visible = (selected === 'all' ? posts : posts.filter(post => post.source_username === selected)).slice(0, 12);
+  const visible = (preview || selected === 'all' ? posts : posts.filter(post => post.source_username === selected)).slice(0, preview ? 2 : 12);
   const lastSync = posts.reduce((latest, post) => post.synced_at > latest ? post.synced_at : latest, '');
   const updated = lastSync ? new Date(lastSync).toLocaleString('en-CA', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : '';
 
   return <View style={{ gap: 17 }}>
-    <SectionTitle title="Fresh from the venues." subtitle="Recent Instagram posts from four Waterloo nightlife accounts. Posts are checked periodically; always confirm event details with the venue." />
-    <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 9, paddingRight: 14 }}>
+    <SectionTitle title="Fresh from the venues." subtitle="Real posts from Waterloo nightlife. Check the venue for current details."
+      action={preview ? 'Nightlife' : undefined} onPress={preview ? () => router.push('/nightlife') : undefined} />
+    {!preview && <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 9, paddingRight: 14 }}>
       <Pill label="All four" active={selected === 'all'} onPress={() => setSelected('all')} />
       {instagramAccounts.map(account => <Pill key={account.username} label={account.name} active={selected === account.username} onPress={() => setSelected(account.username)} />)}
-    </ScrollView>
+    </ScrollView>}
     {loading ? <View style={{ padding: 28, alignItems: 'center', gap: 10 }}><ActivityIndicator color={c.purple} /><T muted>Checking recent posts…</T></View> : null}
     {!loading && !!visible.length ? <>
       <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
@@ -76,7 +78,7 @@ export function InstagramFeed() {
     </> : null}
     {!loading && !visible.length ? <Card style={{ gap: 13 }}>
       <T style={{ fontFamily: f.bold, fontSize: 17 }}>{error ? 'Recent posts could not load.' : 'No recent posts to show yet.'}</T>
-      <T muted style={{ lineHeight: 22 }}>You can still check each venue directly on Instagram. Posts will appear here when the feed is connected and new posts are available.</T>
+      <T muted style={{ lineHeight: 22 }}>Recent posts will appear here as venues publish them. You can check each venue directly on Instagram.</T>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 9 }}>
         {instagramAccounts.filter(account => selected === 'all' || selected === account.username).map(account =>
           <Button key={account.username} secondary label={account.name} icon="instagram" onPress={() => openInstagram(`https://www.instagram.com/${account.username}/`)} />)}

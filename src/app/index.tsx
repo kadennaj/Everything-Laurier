@@ -3,9 +3,8 @@ import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { Image, Pressable, useWindowDimensions, View } from 'react-native';
 import { ClubCard, EventCard } from '../components/cards';
+import { InstagramFeed } from '../components/InstagramFeed';
 import { Badge, Button, Card, Chips, Empty, Eyebrow, Icon, IconName, SectionTitle, T, s } from '../components/ui';
-import { NightCard } from '../components/Nightlife';
-import { nights } from '../data/nightlife';
 import { clubs, events } from '../data/content';
 import { useLocal } from '../lib/state';
 import { colors as c, fonts as f } from '../lib/theme';
@@ -35,11 +34,7 @@ export default function Discover() {
       {!compact && <View style={{ position: 'absolute', right: 20, bottom: 19, backgroundColor: '#FFFFFFED', paddingHorizontal: 13, paddingVertical: 9, borderRadius: 9, flexDirection: 'row', alignItems: 'center', gap: 7 }}><Icon name="map-pin" size={12} color={c.purple} /><T style={{ fontSize: 10, color: c.purple }}>Schlegel Centre · Waterloo</T></View>}
     </View>
     <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>{shortcuts.map(item => <Pressable key={item.label} accessibilityRole="button" onPress={() => router.push(item.path)} style={({ pressed }) => ({ flexBasis: compact ? '47%' : '22%', flexGrow: 1, borderWidth: 1, borderColor: c.border, borderRadius: 13, padding: compact ? 13 : 16, backgroundColor: pressed ? item.color : c.surface, flexDirection: 'row', gap: 11, alignItems: 'center' })}><View style={{ width: 36, height: 39, borderRadius: 11, backgroundColor: item.color, alignItems: 'center', justifyContent: 'center' }}><Icon name={item.icon} size={18} color={c.purple} /></View><View style={{ flex: 1, gap: 5 }}><T style={{ fontFamily: f.bold, fontSize: compact ? 11 : 12 }}>{item.label}</T><T muted style={{ fontSize: 10, lineHeight: 14 }}>{item.sub}</T></View></Pressable>)}</View>
-    <View style={{ gap: 20, marginTop: 4 }}>
-      <SectionTitle title="When campus clocks out." subtitle="Your after-dark edit. Good music, familiar places, new stories." action="Nightlife" onPress={() => router.push('/nightlife')} />
-      <View style={{ flexDirection: compact ? 'column' : 'row', gap: 20 }}>{nights.slice(0, 2).map(night => <View key={night.id} style={{ flex: 1 }}><NightCard night={night} /></View>)}</View>
-      <Pressable accessibilityRole="button" onPress={() => router.push('/nightlife')} style={({ pressed }) => [s.row, { padding: 22, gap: 17, borderRadius: 17, backgroundColor: c.purpleDark, opacity: pressed ? 0.85 : 1 }]}><Icon name="moon" color={c.gold} size={25} /><View style={{ flex: 1, gap: 6 }}><T style={{ color: c.gold, fontFamily: f.serif, fontSize: 23 }}>Your next good night starts here.</T><T style={{ color: '#DACEDE', fontSize: 12 }}>Find the places. Explore the weekly lineup.</T></View><Icon name="arrow-right" color={c.gold} /></Pressable>
-    </View>
+    <View style={{ marginTop: 4 }}><InstagramFeed preview /></View>
     <View style={{ gap: 19, marginTop: 5 }}>
       <SectionTitle title="Good things are happening." subtitle="A little inspiration for your time between classes." />
       <View style={{ flexDirection: compact ? 'column' : 'row', justifyContent: 'space-between', gap: 12, alignItems: compact ? 'stretch' : 'center' }}><Chips items={['For you', 'Events', 'Saved']} value={filter} onChange={setFilter} /></View>
