@@ -4,15 +4,19 @@ import React, { useState } from 'react';
 import { Image, Pressable, useWindowDimensions, View } from 'react-native';
 import { ClubCard, EventCard } from '../components/cards';
 import { InstagramFeed } from '../components/InstagramFeed';
-import { Card, Chips, Empty, ExternalButton, Icon, IconName, SectionTitle, T, s } from '../components/ui';
-import { clubs, events } from '../data/content';
+import { Button, Card, Chips, Empty, Icon, IconName, SectionTitle, T, s } from '../components/ui';
+import { CalendarStatus } from '../components/CalendarStatus';
+import { clubs } from '../data/content';
+import { useOfficialEvents } from '../lib/official-events';
 import { useLocal } from '../lib/state';
 import { colors as c, fonts as f, radii } from '../lib/theme';
 
 export default function Discover() {
   const { width } = useWindowDimensions(); const compact = width < 650; const desktop = width >= 1000;
   const [filter, setFilter] = useState('For you'); const { saved } = useLocal();
-  const visible = filter === 'Saved' ? events.filter(e => saved.includes(`event:${e.id}`)) : events.filter(e => e.category !== 'Nightlife').slice(0, 3);
+  const { events, loading, error, now } = useOfficialEvents(); const [limit, setLimit] = useState(12);
+  const candidates = filter === 'Saved' ? events.filter(e => saved.includes(`event:${e.id}`)) : events.filter(e => Date.parse(e.endsAt) >= now);
+  const visible = candidates.slice(0, filter === 'For you' ? 3 : limit);
   const featuredClubs = ['laurier-computing-society-lcs', 'laurier-outdoors-club'].map(id => clubs.find(club => club.id === id)).filter(club => !!club);
   const shortcuts: { label: string; sub: string; icon: IconName; path: '/clubs' | '/map' | '/people' | '/help' }[] = [
     { label: 'Clubs', sub: 'Find your community', icon: 'users', path: '/clubs' },
@@ -37,9 +41,11 @@ export default function Discover() {
     </Pressable>)}</View>
     <InstagramFeed preview />
     <View style={{ gap: 18 }}>
-      <SectionTitle title="Around campus" subtitle="Ideas for your time between classes." />
-      <Chips items={['For you', 'Events', 'Saved']} value={filter} onChange={setFilter} />
-      {visible.length ? <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 18 }}>{visible.map(event => <View key={event.id} style={{ width: compact ? '100%' : undefined, flexBasis: compact ? undefined : '30%', flexGrow: compact ? undefined : 1, maxWidth: compact ? undefined : 420 }}><EventCard event={event} /></View>)}</View> : <Card><Empty title={filter === 'Saved' ? 'No saved campus events.' : 'Campus events'} icon="calendar" description="Check Laurier’s official calendar for current events. Verified listings will appear here when available." action={<ExternalButton label="Official event calendar" url="https://events.wlu.ca/" />} /></Card>}
+      <SectionTitle title="Around campus" subtitle="Waterloo and online events. Times shown in Waterloo time." />
+      <Chips items={['For you', 'Events', 'Saved']} value={filter} onChange={value => { setFilter(value); setLimit(12); }} />
+      <CalendarStatus />
+      {visible.length ? <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 18 }}>{visible.map(event => <View key={event.id} style={{ width: compact ? '100%' : undefined, flexBasis: compact ? undefined : '30%', flexGrow: compact ? undefined : 1, maxWidth: compact ? undefined : 420 }}><EventCard event={event} /></View>)}</View> : !loading && !error && <Card><Empty title={filter === 'Saved' ? 'No saved campus events.' : 'No upcoming campus events.'} icon="calendar" description={filter === 'Saved' ? 'Save an event to keep it here.' : 'New listings appear as Laurier publishes them.'} /></Card>}
+      {filter !== 'For you' && candidates.length > limit && <Button secondary label="Show more events" onPress={() => setLimit(value => value + 12)} />}
     </View>
     <View style={{ flexDirection: desktop ? 'row' : 'column', gap: 24 }}>
       <View style={{ flex: 1.5, gap: 18 }}><SectionTitle title="Find your community" action="All clubs" onPress={() => router.push('/clubs')} /><View style={{ flexDirection: compact ? 'column' : 'row', gap: 16 }}>{featuredClubs.map(club => <View key={club.id} style={{ flex: 1 }}><ClubCard club={club} /></View>)}</View></View>

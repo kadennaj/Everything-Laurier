@@ -3,3 +3,7 @@
 # to support the project's publishable key and signing-key based user JWTs.
 [functions.delete-account]
 verify_jwt = false
+
+# Custom constant-time SHA-256 verification of the server-only Vault sync token.
+[functions.sync-official-events]
+verify_jwt = false

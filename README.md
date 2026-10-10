@@ -9,7 +9,7 @@ An app for student life around Laurier Waterloo, built with React Native, Expo, 
 - A researched nightlife edit with four venues, six weekly programmes, and a past one-off event spotlight.
 - A recent-post feed for four Waterloo nightlife Instagram accounts, ready for a server-side Apify connection.
 - Venue and night detail pages, day/music filters, global search, and local bookmarks.
-- Illustrative campus event cards.
+- Official Laurier Waterloo and online events, refreshed every eight hours from a shared cache.
 - Email verification sign-in, session persistence, and sign-out.
 - A first-sign-in student questionnaire, editable Supabase profiles, and program search for students who opt into discovery.
 - Local bookmarks that persist on the device (not synced to accounts).
@@ -17,7 +17,7 @@ An app for student life around Laurier Waterloo, built with React Native, Expo, 
 - Official academic support links and a tutor placeholder.
 - Responsive layouts for mobile and desktop browser previews.
 
-This is a student-life prototype with Supabase email verification sign-in and saved student profiles. Email delivery requires a connected Supabase project and configured email sender; see [email login setup](docs/email-login.md). Students can publish their verified email on an opt-in profile; browsing the live directory requires sign-in. The Nightlife screen can show recent Instagram posts once [the Apify feed is connected](docs/instagram-feed.md); posts are currently empty until a provider token is supplied. The weekly nightlife lineup is an editorial snapshot, not a live event feed. There is no in-app messaging, tutor verification, or location tracking. Campus events are sample content. The map is an illustration, not a verified navigation map. Students’ Union approval is pending; no endorsement is claimed.
+This is a student-life prototype with Supabase email verification sign-in and saved student profiles. Email delivery requires a connected Supabase project and configured email sender; see [email login setup](docs/email-login.md). Students can publish their verified email on an opt-in profile; browsing the live directory requires sign-in. The Nightlife screen can show recent Instagram posts once [the Apify feed is connected](docs/instagram-feed.md); selected venue posts now populate automatically from the shared backend feed. The weekly nightlife lineup is an editorial snapshot, not a live event feed. There is no in-app messaging, tutor verification, or location tracking. Campus events come from Laurier’s published calendar; see [calendar setup and verification](docs/official-event-calendar.md). The map is an illustration, not a verified navigation map. The operator reports school approval; retain evidence of its scope for release and do not imply unverified endorsement.
 
 ## Run locally
 

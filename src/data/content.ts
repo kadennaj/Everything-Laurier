@@ -7,8 +7,7 @@ export const directoryDate = directory.retrieved;
 export const themes = ['All clubs', 'Business', 'Tech & science', 'Arts & culture', 'Sports & outdoors', 'Community'];
 
 // Add only verified event listings with an actual date and source before publication.
-export type CampusEvent = { id: string; title: string; shortTitle: string; category: string; day: string; month: string; weekday: string; time: string; place: string; cost: string; art: string; color: string; description: string; host: string; note: string };
-export const events: CampusEvent[] = [];
+export type CampusEvent = { id: string; title: string; shortTitle: string; category: string; day: string; month: string; weekday: string; time: string; place: string; cost: string; art: string; color: string; description: string; host: string; note: string; dateLabel: string; schedule: string; sourceUrl: string; startsAt: string; endsAt: string };
 export const buildings = [
   { id: 'LH', name: 'Lazaridis Hall', aliases: ['LH'], kind: 'Academic', address: '64 University Avenue West', x: 26, y: 22 },
   { id: 'BA', name: 'Bricker Academic', aliases: ['BAB', 'BA'], kind: 'Academic', address: 'Laurier Waterloo campus', x: 61, y: 35 },
