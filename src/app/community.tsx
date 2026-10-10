@@ -16,7 +16,7 @@ export default function Community() {
     </Card>
     <Card style={{ padding: 22, gap: 15 }}>
       <T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: 21 }}>Report, block & get help</T>
-      <T style={body}>Use Report profile or Report post to flag a concern. Block profile hides directory profiles in both directions; manage blocks in Your space. Hide post removes one post and Hide venue removes that venue’s feed from this device. Blocking cannot recall email addresses already received or prevent contact outside the app.</T>
+      <T style={body}>Open a post’s three-dot menu to report it, hide that post, or hide the venue’s feed on this device. Use Report profile or Block profile on a student profile; blocking hides directory profiles in both directions. Manage profile blocks in Your space. Blocking cannot recall email addresses already received or prevent contact outside the app.</T>
       <T selectable style={body}>Support and privacy: everythinglaurier@gmail.com</T>
       <View style={{ alignItems: 'flex-start' }}><ExternalButton label="Support page" url="https://everythinglaurier.ca/support/" /></View>
       <T muted style={{ lineHeight: 21 }}>The app is not an emergency service. Contact emergency services if there is immediate danger.</T>

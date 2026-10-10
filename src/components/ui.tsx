@@ -74,7 +74,7 @@ export function ExternalButton({ url, label, secondary = true }: { url: string; 
   if (!url?.trim()) return null;
   return <Button label={label} secondary={secondary} icon="arrow-up-right" onPress={() => Linking.openURL(url).catch(() => notify('The link could not open. Please try again.'))} />;
 }
-export function Card({ children, style }: { children: React.ReactNode; style?: StyleProp<ViewStyle> }) { return <View style={[s.card, style]}>{children}</View>; }
+export function Card({ children, style, ...props }: React.ComponentProps<typeof View>) { return <View {...props} style={[s.card, style]}>{children}</View>; }
 export function FeedSkeleton({ compact = false }: { compact?: boolean }) {
   return <View accessibilityLabel="Loading recent posts" accessibilityState={{ busy: true }} style={{ flexDirection: 'row', gap: 16 }}>
     {[0, 1].map(item => <Card key={item} style={{ flex: 1 }}><View style={{ height: compact ? 132 : 180, backgroundColor: c.skeleton }} /><View style={{ padding: 20, gap: 12 }}><View style={{ height: 14, width: '65%', borderRadius: 5, backgroundColor: c.skeleton }} /><View style={{ height: 10, width: '90%', borderRadius: 5, backgroundColor: c.skeleton }} /><View style={{ height: 10, width: '45%', borderRadius: 5, backgroundColor: c.skeleton }} /></View></Card>)}

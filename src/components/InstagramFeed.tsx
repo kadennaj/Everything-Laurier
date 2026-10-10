@@ -16,24 +16,25 @@ function PostCard({ post, compact = false }: { post: InstagramPost; compact?: bo
   const [imageFailed, setImageFailed] = useState(false);
   const account = instagramAccounts.find(item => item.username === post.source_username);
   const posted = new Date(post.posted_at).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' });
-  return <View style={{ flex: 1, gap: 10 }}><Pressable accessibilityRole="link" accessibilityLabel={`Open ${account?.name ?? post.source_username}'s Instagram post from ${posted}`}
-    onPress={() => openInstagram(post.post_url)} style={({ pressed }) => ({ opacity: pressed ? 0.75 : 1, flex: 1 })}>
-    <Card style={{ padding: 0, overflow: 'hidden', flex: 1 }}>
-      {post.image_url && !imageFailed ? <Image source={{ uri: post.image_url }} accessibilityLabel="Instagram post preview"
-        onError={() => setImageFailed(true)} style={{ width: '100%', aspectRatio: compact ? 1.7 : 1.8, backgroundColor: c.lavender }} resizeMode="cover" /> : null}
+  const name = account?.name ?? post.source_username;
+  const linkLabel = `Open ${name}'s Instagram post from ${posted}`;
+  return <Card style={{ padding: 0, overflow: 'hidden', flex: 1 }}>
+      {post.image_url && !imageFailed ? <Pressable accessibilityRole="link" accessibilityLabel={linkLabel} onPress={() => openInstagram(post.post_url)} style={({ pressed }) => ({ opacity: pressed ? 0.75 : 1 })}><Image source={{ uri: post.image_url }} accessibilityLabel="Instagram post preview"
+        onError={() => setImageFailed(true)} style={{ width: '100%', aspectRatio: compact ? 1.7 : 1.8, backgroundColor: c.lavender }} resizeMode="cover" /></Pressable> : null}
       <View style={{ padding: compact ? 18 : 22, gap: 12 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
-          <View style={{ flex: 1, gap: 3 }}>
-            <T style={{ fontFamily: f.bold, fontSize: 16, lineHeight: 23 }}>{account?.name ?? post.source_username}</T>
+          <Pressable accessibilityRole="link" accessibilityLabel={linkLabel} onPress={() => openInstagram(post.post_url)} style={({ pressed }) => ({ flex: 1, gap: 3, opacity: pressed ? 0.75 : 1 })}>
+            <T style={{ fontFamily: f.bold, fontSize: 16, lineHeight: 23 }}>{name}</T>
             <T muted style={{ fontSize: 12 }}>@{post.source_username} · {posted}</T>
-          </View>
-          <Icon name="instagram" size={19} color={c.purple} />
+          </Pressable>
+          <ReportContent kind="post" target={post.id} postActions={{ venueName: name, hidePost: () => hidePost(post.id), hideVenue: () => hideSource(post.source_username), disabled: !ready }} />
         </View>
+        <Pressable accessibilityRole="link" accessibilityLabel={linkLabel} onPress={() => openInstagram(post.post_url)} style={({ pressed }) => ({ gap: 12, opacity: pressed ? 0.75 : 1 })}>
         {!!post.caption?.trim() && <T muted numberOfLines={compact ? 2 : 4} style={{ fontSize: 14, lineHeight: 22 }}>{post.caption.trim()}</T>}
         <T style={{ fontFamily: f.medium, color: c.purple, fontSize: 12 }}>Open on Instagram ↗</T>
+        </Pressable>
       </View>
-    </Card>
-  </Pressable><View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}><Button secondary label="Hide post" icon="eye-off" disabled={!ready} onPress={() => hidePost(post.id)} /><Button secondary label="Hide venue" icon="slash" disabled={!ready} onPress={() => hideSource(post.source_username)} /><ReportContent kind="post" target={post.id} /></View></View>;
+    </Card>;
 }
 
 export function InstagramFeed({ preview = false }: { preview?: boolean }) {
