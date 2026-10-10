@@ -1,7 +1,7 @@
 import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Pressable, useWindowDimensions, View } from 'react-native';
-import { Badge, Button, Card, Empty, Icon, PageHeading, Search, T, s } from '../components/ui';
+import { Button, Card, Empty, Icon, PageHeading, Search, T, s } from '../components/ui';
 import { useAuth } from '../lib/auth';
 import { DirectoryProfile, findStudentProfiles } from '../lib/student-profiles';
 import { colors as c, fonts as f } from '../lib/theme';
@@ -55,9 +55,9 @@ export default function People() {
       icon="users" action={<Button label="Sign in with email" icon="mail" onPress={() => router.push('/login')} />} /></>;
 
   return <>
-    <PageHeading eyebrow="STUDENT CONNECTIONS" title="Find your people." subtitle="Search real student profiles by program. Students decide whether to appear here and share a contact email."
+    <PageHeading eyebrow="STUDENT CONNECTIONS" title="Find your people." subtitle="Meet students in your program. Each person chooses what they share."
       action={<Button secondary label="Your profile" icon="user" onPress={() => router.push('/profile')} />} />
-    <Card style={{ padding: 20, gap: 12, backgroundColor: c.lavender }}>
+    <Card style={{ padding: 22, gap: 12 }}>
       <View style={[s.row, { gap: 12 }]}><Icon name="search" color={c.purple} /><T style={{ fontFamily: f.bold, fontSize: 16 }}>Who’s in your program?</T></View>
       <T muted style={{ lineHeight: 22 }}>Try a program name such as Computer Science, BBA, or Psychology.</T>
       <Search value={search} onChange={value => { currentSearch.current = value; setSearch(value); setLoading(true); setResults([]); setHasMore(false); }} placeholder="Search by program…" />
@@ -66,19 +66,19 @@ export default function People() {
       {!!error && <Card style={{ padding: 20, gap: 12 }}><T accessibilityRole="alert" style={{ color: '#8E3434' }}>{error}</T><Button secondary label="Try again" onPress={() => { setLoading(true); setRetry(value => value + 1); }} /></Card>}
       {!error && results.length === 0 && <Empty title="No profiles here yet." description={search ? 'Try another program name, or check back as more students join.' : 'Be among the first students to share a profile.'} icon="users" />}
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 18 }}>{results.map(person => <Card key={person.id} style={{ width: width < 650 ? '100%' : undefined, flexBasis: width < 650 ? undefined : '30%', flexGrow: 1, maxWidth: width < 650 ? undefined : 460 }}>
-        <View style={{ height: 72, backgroundColor: c.lavender }} />
+        <View style={{ height: 48, backgroundColor: c.background }} />
         <View style={{ padding: 22, gap: 13 }}>
-          <View style={[s.row, { justifyContent: 'space-between', marginTop: -52 }]}>
+          <View style={[s.row, { justifyContent: 'space-between', marginTop: -44 }]}>
             <View style={{ width: 68, height: 68, borderRadius: 23, borderWidth: 4, borderColor: c.surface, backgroundColor: c.peach, alignItems: 'center', justifyContent: 'center' }}>
-              <T style={{ fontFamily: f.serif, fontSize: 25, color: c.purple }}>{person.display_name.slice(0, 1).toUpperCase()}</T>
+              <T style={{ fontFamily: f.bold, fontSize: 25, color: c.purple }}>{person.display_name.slice(0, 1).toUpperCase()}</T>
             </View>
-            <View style={{ marginTop: 27 }}><Badge label="STUDENT PROFILE" color={c.background} textColor={c.muted} /></View>
+
           </View>
           <View style={{ gap: 5 }}><T style={{ fontFamily: f.bold, fontSize: 20 }}>{person.display_name}</T><T muted>{person.program}{person.year_label ? ` · ${person.year_label}` : ''}</T></View>
           {!!person.bio && <T muted numberOfLines={3} style={{ lineHeight: 22 }}>{person.bio}</T>}
           <Pressable accessibilityRole="button" accessibilityLabel={`View ${person.display_name}'s profile`} onPress={() => router.push(`/student/${person.id}`)}
             style={[s.row, { justifyContent: 'space-between', minHeight: 46, borderTopWidth: 1, borderTopColor: c.border, paddingTop: 12 }]}>
-            <T style={{ fontFamily: f.bold, color: c.purple }}>View profile</T><Icon name="arrow-up-right" color={c.purple} size={18} />
+            <T style={{ fontFamily: f.bold, color: c.purple }}>View profile</T><Icon name="arrow-right" color={c.purple} size={18} />
           </Pressable>
         </View>
       </Card>)}</View>

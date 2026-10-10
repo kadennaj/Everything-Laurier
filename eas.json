@@ -1,0 +1,7 @@
+{
+  "cli": { "appVersionSource": "local" },
+  "build": {
+    "simulator": { "distribution": "internal", "ios": { "simulator": true, "buildConfiguration": "Release" }, "env": { "EXPO_PUBLIC_PRIVACY_POLICY_URL": "https://everythinglaurier.ca/privacy/" } },
+    "production": { "distribution": "store", "environment": "production", "ios": { "buildConfiguration": "Release" }, "env": { "EXPO_PUBLIC_PRIVACY_POLICY_URL": "https://everythinglaurier.ca/privacy/" } }
+  }
+}

@@ -4,45 +4,46 @@ import React, { useState } from 'react';
 import { Image, Pressable, useWindowDimensions, View } from 'react-native';
 import { ClubCard, EventCard } from '../components/cards';
 import { InstagramFeed } from '../components/InstagramFeed';
-import { Badge, Button, Card, Chips, Empty, Eyebrow, Icon, IconName, SectionTitle, T, s } from '../components/ui';
+import { Card, Chips, Empty, ExternalButton, Icon, IconName, SectionTitle, T, s } from '../components/ui';
 import { clubs, events } from '../data/content';
 import { useLocal } from '../lib/state';
-import { colors as c, fonts as f } from '../lib/theme';
+import { colors as c, fonts as f, radii } from '../lib/theme';
 
 export default function Discover() {
   const { width } = useWindowDimensions(); const compact = width < 650; const desktop = width >= 1000;
   const [filter, setFilter] = useState('For you'); const { saved } = useLocal();
   const visible = filter === 'Saved' ? events.filter(e => saved.includes(`event:${e.id}`)) : events.filter(e => e.category !== 'Nightlife').slice(0, 3);
   const featuredClubs = ['laurier-computing-society-lcs', 'laurier-outdoors-club'].map(id => clubs.find(club => club.id === id)).filter(club => !!club);
-  const shortcuts: { label: string; sub: string; icon: IconName; path: '/clubs' | '/map' | '/people' | '/help'; color: string }[] = [
-    { label: 'Find your people', sub: `${clubs.length} clubs to explore`, icon: 'users', path: '/clubs', color: c.lavender },
-    { label: 'Know your way', sub: 'Your campus, mapped', icon: 'map', path: '/map', color: c.sage },
-    { label: 'Make a connection', sub: 'Beyond your program', icon: 'coffee', path: '/people', color: c.peach },
-    { label: 'Find a little support', sub: 'You’ve got this', icon: 'book-open', path: '/help', color: '#F6EFD9' },
+  const shortcuts: { label: string; sub: string; icon: IconName; path: '/clubs' | '/map' | '/people' | '/help' }[] = [
+    { label: 'Clubs', sub: 'Find your community', icon: 'users', path: '/clubs' },
+    { label: 'Campus map', sub: 'Find your way', icon: 'map', path: '/map' },
+    { label: 'People', sub: 'Make a connection', icon: 'coffee', path: '/people' },
+    { label: 'Academic help', sub: 'A little support', icon: 'book-open', path: '/help' },
   ];
   return <>
-    <View style={[s.row, { justifyContent: 'space-between', marginBottom: -7 }]}><Eyebrow>THE WATERLOO EDIT</Eyebrow><View style={[s.row, { gap: 6 }]}><View style={{ width: 5, height: 5, borderRadius: 3, backgroundColor: c.green }} /><T muted style={{ fontSize: 11 }}>Made for Laurier life</T></View></View>
-    <View style={{ minHeight: compact ? 304 : 304, borderRadius: 22, overflow: 'hidden', backgroundColor: c.purpleDark }}>
-      <Image source={require('../../assets/images/campus.jpg')} accessibilityLabel="Schlegel Centre at Laurier Waterloo, photographed by LeonV" style={{ position: 'absolute', right: 0, width: compact ? '100%' : '65%', height: '100%', opacity: compact ? 0.35 : 0.85 }} resizeMode="cover" />
-      <LinearGradient colors={compact ? ['#432959E8', '#432959B0'] : ['#432959', '#432959F5', '#43295910']} locations={compact ? [0, 1] : [0, 0.38, 1]} start={{ x: 0, y: 0.5 }} end={{ x: 1, y: 0.5 }} style={{ position: 'absolute', inset: 0 }} />
-      <View style={{ padding: compact ? 24 : 34, gap: 15, alignItems: 'flex-start', maxWidth: compact ? undefined : 600 }}>
-        <View style={[s.row, { gap: 7 }]}><Icon name="sun" size={15} color={c.gold} /><T style={{ fontSize: 11, letterSpacing: 1.3, color: '#E8DDF0', fontFamily: f.bold }}>LESS FOMO. MORE LAURIER.</T></View>
-        <T accessibilityRole="header" style={{ fontFamily: f.serif, color: '#FFF', fontSize: compact ? 33 : 46, lineHeight: compact ? 41 : 52, letterSpacing: -1 }}>Your campus.{'\n'}<T style={{ fontFamily: f.italic, fontSize: compact ? 33 : 46, color: c.gold }}>Your kind of plans.</T></T>
-        <T style={{ color: '#E6DDEA', fontSize: 15, lineHeight: 23, maxWidth: 355 }}>Good people, better plans, and a campus that feels like yours.</T>
-        <Pressable accessibilityRole="button" onPress={() => router.push('/clubs')} style={({ pressed }) => [s.row, { backgroundColor: c.gold, borderRadius: 9, paddingVertical: 13, paddingHorizontal: 19, gap: 16, minHeight: 46, marginTop: 3, opacity: pressed ? 0.8 : 1 }]}><T style={{ fontFamily: f.bold, fontSize: 13, color: c.purpleDark }}>Find your community</T><Icon name="arrow-right" size={17} color={c.purpleDark} /></Pressable>
+    <View style={{ gap: 6 }}><T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: compact ? 29 : 36, lineHeight: compact ? 38 : 44, letterSpacing: -0.4 }}>Make campus yours.</T><T muted style={{ fontSize: 15 }}>Your guide to life at Laurier.</T></View>
+    <View style={{ minHeight: compact ? 244 : 288, borderRadius: radii.hero, overflow: 'hidden', backgroundColor: c.purpleDark }}>
+      <Image source={require('../../assets/images/campus.jpg')} accessibilityLabel="Schlegel Centre at Laurier Waterloo, photographed by LeonV" style={{ position: 'absolute', right: 0, width: compact ? '100%' : '70%', height: '100%' }} resizeMode="cover" />
+      <LinearGradient colors={compact ? ['#292136DD', '#29213688'] : ['#292136', '#292136E6', '#29213610']} locations={compact ? [0, 1] : [0, 0.38, 1]} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} style={{ position: 'absolute', inset: 0 }} />
+      <View style={{ padding: compact ? 24 : 36, gap: 18, alignItems: 'flex-start', maxWidth: compact ? undefined : 560 }}>
+        <T style={{ fontSize: 12, fontFamily: f.medium, color: c.gold }}>Discover your community</T>
+        <T accessibilityRole="header" style={{ fontFamily: f.bold, color: c.surface, fontSize: compact ? 30 : 41, lineHeight: compact ? 39 : 50, letterSpacing: -0.4 }}>Good people.{'\n'}Great possibilities.</T>
+        <T style={{ color: '#F1EAF5', fontSize: 14, lineHeight: 22 }}>Explore {clubs.length} clubs. Find your people.</T>
+        <Pressable accessibilityRole="button" onPress={() => router.push('/clubs')} style={({ pressed }) => [s.row, { backgroundColor: c.surface, borderRadius: radii.control, paddingVertical: 13, paddingHorizontal: 18, gap: 16, minHeight: 48, opacity: pressed ? 0.8 : 1 }]}><T style={{ fontFamily: f.medium, fontSize: 14, color: c.purpleDark }}>Explore clubs</T><Icon name="arrow-right" size={17} color={c.purpleDark} /></Pressable>
       </View>
-      {!compact && <View style={{ position: 'absolute', right: 20, bottom: 19, backgroundColor: '#FFFFFFED', paddingHorizontal: 13, paddingVertical: 9, borderRadius: 9, flexDirection: 'row', alignItems: 'center', gap: 7 }}><Icon name="map-pin" size={12} color={c.purple} /><T style={{ fontSize: 10, color: c.purple }}>Schlegel Centre · Waterloo</T></View>}
     </View>
-    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10 }}>{shortcuts.map(item => <Pressable key={item.label} accessibilityRole="button" onPress={() => router.push(item.path)} style={({ pressed }) => ({ flexBasis: compact ? '47%' : '22%', flexGrow: 1, minHeight: 82, borderWidth: 1, borderColor: c.border, borderRadius: 16, padding: compact ? 12 : 15, backgroundColor: pressed ? item.color : c.surface, flexDirection: 'row', gap: 10, alignItems: 'center' })}><View style={{ width: 42, height: 42, borderRadius: 13, backgroundColor: item.color, alignItems: 'center', justifyContent: 'center' }}><Icon name={item.icon} size={19} color={c.purple} /></View><View style={{ flex: 1, gap: 4 }}><T style={{ fontFamily: f.bold, fontSize: compact ? 12 : 14, lineHeight: 17 }}>{item.label}</T><T muted style={{ fontSize: 11, lineHeight: 15 }}>{item.sub}</T></View></Pressable>)}</View>
-    <View style={{ marginTop: 4 }}><InstagramFeed preview /></View>
-    <View style={{ gap: 19, marginTop: 5 }}>
-      <SectionTitle title="Good things are happening." subtitle="A little inspiration for your time between classes." />
-      <View style={{ flexDirection: compact ? 'column' : 'row', justifyContent: 'space-between', gap: 12, alignItems: compact ? 'stretch' : 'center' }}><Chips items={['For you', 'Events', 'Saved']} value={filter} onChange={setFilter} /></View>
-      {visible.length ? <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 18 }}>{visible.map(event => <View key={event.id} style={{ width: compact ? '100%' : undefined, flexBasis: compact ? undefined : '30%', flexGrow: compact ? undefined : 1, maxWidth: compact ? undefined : 420 }}><EventCard event={event} /></View>)}</View> : <Card><Empty title="Keep a good plan close." icon="bookmark" description="Tap a bookmark on a event to find it here later." action={<Button label="Explore events" onPress={() => setFilter('Events')} />} /></Card>}
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>{shortcuts.map(item => <Pressable key={item.label} accessibilityRole="button" accessibilityLabel={item.label} onPress={() => router.push(item.path)} style={({ pressed }) => ({ flexBasis: compact ? '46%' : '22%', flexGrow: 1, minHeight: 112, borderWidth: 1, borderColor: c.border, borderRadius: 18, padding: 16, backgroundColor: pressed ? c.pressed : c.surface, gap: 12 })}>
+      <Icon name={item.icon} size={22} color={c.purple} /><View style={{ gap: 3 }}><T style={{ fontFamily: f.medium, fontSize: 14 }}>{item.label}</T><T muted style={{ fontSize: 12, lineHeight: 18 }}>{item.sub}</T></View>
+    </Pressable>)}</View>
+    <InstagramFeed preview />
+    <View style={{ gap: 18 }}>
+      <SectionTitle title="Around campus" subtitle="Ideas for your time between classes." />
+      <Chips items={['For you', 'Events', 'Saved']} value={filter} onChange={setFilter} />
+      {visible.length ? <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 18 }}>{visible.map(event => <View key={event.id} style={{ width: compact ? '100%' : undefined, flexBasis: compact ? undefined : '30%', flexGrow: compact ? undefined : 1, maxWidth: compact ? undefined : 420 }}><EventCard event={event} /></View>)}</View> : <Card><Empty title={filter === 'Saved' ? 'No saved campus events.' : 'Campus events'} icon="calendar" description="Check Laurier’s official calendar for current events. Verified listings will appear here when available." action={<ExternalButton label="Official event calendar" url="https://events.wlu.ca/" />} /></Card>}
     </View>
-    <View style={{ flexDirection: desktop ? 'row' : 'column', gap: 24, marginTop: 8 }}>
-      <View style={{ flex: 1.5, gap: 17 }}><SectionTitle title="There’s a club for that." action="All clubs" onPress={() => router.push('/clubs')} /><View style={{ flexDirection: compact ? 'column' : 'row', gap: 16 }}>{featuredClubs.map(club => <View key={club.id} style={{ flex: 1 }}><ClubCard club={club} /></View>)}</View></View>
-      <View style={{ flex: 1, borderRadius: 18, backgroundColor: '#EAEFE9', padding: 26, gap: 14, justifyContent: 'center' }}><View style={[s.row, { justifyContent: 'space-between' }]}><Badge label="FIND YOUR WAY" color="#D9E4D7" textColor="#35654F" /><Icon name="navigation" size={25} color={c.green} /></View><T style={{ fontFamily: f.serif, fontSize: 28, lineHeight: 35 }}>New building?{'\n'}No big deal.</T><T style={{ color: '#647160', lineHeight: 22, fontSize: 13 }}>Turn that room code into somewhere you know. Start with LH, BA, or FNCC.</T><Pressable accessibilityRole="button" onPress={() => router.push('/map')} style={[s.row, { gap: 9, minHeight: 44 }]}><T style={{ fontFamily: f.bold, color: c.green, fontSize: 13 }}>Explore your campus</T><Icon name="arrow-right" color={c.green} size={17} /></Pressable></View>
+    <View style={{ flexDirection: desktop ? 'row' : 'column', gap: 24 }}>
+      <View style={{ flex: 1.5, gap: 18 }}><SectionTitle title="Find your community" action="All clubs" onPress={() => router.push('/clubs')} /><View style={{ flexDirection: compact ? 'column' : 'row', gap: 16 }}>{featuredClubs.map(club => <View key={club.id} style={{ flex: 1 }}><ClubCard club={club} /></View>)}</View></View>
+      <View style={{ flex: 1, borderRadius: radii.card, backgroundColor: c.sage, padding: 28, gap: 16, justifyContent: 'center' }}><Icon name="navigation" size={25} color={c.green} /><T style={{ fontFamily: f.bold, fontSize: 25, lineHeight: 33, letterSpacing: -0.4 }}>Your next class,{'\n'}a little closer.</T><T style={{ color: c.green, lineHeight: 23, fontSize: 14 }}>Search a building or room code to find your way around campus.</T><Pressable accessibilityRole="button" onPress={() => router.push('/map')} style={({ pressed }) => [s.row, { gap: 9, minHeight: 44, opacity: pressed ? 0.65 : 1 }]}><T style={{ fontFamily: f.medium, color: c.green, fontSize: 14 }}>Open campus map</T><Icon name="arrow-right" color={c.green} size={17} /></Pressable></View>
     </View>
   </>;
 }

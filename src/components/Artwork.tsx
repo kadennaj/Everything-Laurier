@@ -15,7 +15,7 @@ export function Artwork({ kind, height = 180 }: { kind: string; height?: number 
     </Svg>
     <View style={{ position: 'absolute', left: 23, top: 27, gap: 8 }}>
       <T style={{ color: dark ? '#DECDEF' : '#6E537D', fontFamily: f.bold, fontSize: 9, letterSpacing: 2 }}>{kind === 'flower' ? 'MAKE SOMETHING' : kind === 'coffee' ? 'TAKE A MOMENT' : kind === 'vinyl' ? 'TURN IT UP' : 'FIND YOUR FOCUS'}</T>
-      <T style={{ color: dark ? '#FAF5FF' : '#3A3340', fontFamily: f.serif, fontSize: 30, lineHeight: 34 }}>{kind === 'flower' ? 'The creative\nsocial.' : kind === 'coffee' ? 'Coffee &\nconnections.' : kind === 'vinyl' ? 'After\nhours.' : 'Study,\ntogether.'}</T>
+      <T style={{ color: dark ? '#FAF5FF' : '#3A3340', fontFamily: f.bold, fontSize: 30, lineHeight: 34 }}>{kind === 'flower' ? 'The creative\nsocial.' : kind === 'coffee' ? 'Coffee &\nconnections.' : kind === 'vinyl' ? 'After\nhours.' : 'Study,\ntogether.'}</T>
     </View>
   </View>;
 }

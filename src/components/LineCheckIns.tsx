@@ -49,31 +49,31 @@ export function LineCheckIns() {
     setSubmitting(false);
   }
 
-  return <View style={{ backgroundColor: c.night, borderRadius: 21, padding: width < 700 ? 16 : 20, gap: 13 }}>
+  return <View style={{ backgroundColor: c.surface, borderWidth: 1, borderColor: c.border, borderRadius: 22, padding: width < 700 ? 20 : 24, gap: 18 }}>
     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
-      <View style={{ flex: 1, gap: 3 }}><T accessibilityRole="header" style={{ color: c.surface, fontFamily: f.bold, fontSize: 18 }}>Tonight’s lines</T><T style={{ color: c.nightMuted, fontSize: 12 }}>Tap + to report · updates from the past 90 min</T></View>
-      {loading ? <ActivityIndicator color={c.gold} size="small" /> : <Icon name="activity" size={19} color={c.gold} />}
+      <View style={{ flex: 1, gap: 3 }}><T accessibilityRole="header" style={{ color: c.ink, fontFamily: f.bold, fontSize: 21, lineHeight: 28, letterSpacing: -0.4 }}>Tonight’s lines</T><T style={{ color: c.muted, fontSize: 12 }}>Student updates from the past 90 minutes</T></View>
+      {loading ? <ActivityIndicator color={c.purple} size="small" /> : <Icon name="activity" size={19} color={c.purple} />}
     </View>
     <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{lineVenues.map(venue => {
       const status = currentLineStatus(statuses[venue.id], now);
       const expanded = editing === venue.id;
       const actionLabel = !open ? `Reports at ${venue.name} open at 6 PM` : !session ? `Sign in to report the line at ${venue.name}` : `Report the line at ${venue.name}`;
-      return <View key={venue.id} style={{ width: width < 760 ? '100%' : '48%', flexGrow: 1, backgroundColor: c.nightRaised, borderRadius: 13, overflow: 'hidden', borderWidth: 1, borderColor: expanded ? c.gold : c.nightBorder }}>
-        <View style={{ minHeight: 61, paddingLeft: 14, paddingRight: 6, flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-          <View style={{ flex: 1, minWidth: 0 }}><T numberOfLines={1} style={{ color: c.surface, fontFamily: f.bold, fontSize: 14 }}>{venue.shortName}</T><T numberOfLines={1} style={{ color: c.nightMuted, fontSize: 11, marginTop: 2 }}>{status?.last_reported_at ? `${status.report_count} ${status.report_count === 1 ? 'report' : 'reports'} · ${lineTimeAgo(status.last_reported_at, now)}` : 'No recent reports'}</T></View>
-          <T accessibilityLabel={`${venue.name}: ${lineWaitLabel(status?.wait_minutes ?? null)}`} numberOfLines={1} style={{ color: status ? c.gold : c.nightMuted, fontFamily: f.bold, fontSize: 13, maxWidth: 112 }}>{status ? lineWaitLabel(status.wait_minutes) : 'No estimate'}</T>
-          <Pressable accessibilityRole="button" accessibilityLabel={actionLabel} accessibilityState={{ expanded, disabled: !open }} disabled={!open} onPress={() => { if (!session) router.push('/login'); else { setEditing(expanded ? null : venue.id); setSelected(null); setSubmitError(''); setSavedVenue(null); } }} style={({ pressed }) => ({ width: 44, height: 44, borderRadius: 11, alignItems: 'center', justifyContent: 'center', opacity: !open ? 0.4 : pressed ? 0.65 : 1 })}><Icon name={expanded ? 'x' : 'plus'} color={c.gold} size={20} /></Pressable>
+      return <View key={venue.id} style={{ width: width < 760 ? '100%' : '48%', flexGrow: 1, backgroundColor: c.background, borderRadius: 16, overflow: 'hidden', borderWidth: 1, borderColor: expanded ? c.purple : c.border }}>
+        <View style={{ minHeight: 76, paddingLeft: 16, paddingRight: 8, flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+          <View style={{ flex: 1, minWidth: 0 }}><T style={{ color: c.ink, fontFamily: f.medium, fontSize: 15 }}>{venue.shortName}</T>{status?.last_reported_at && <T style={{ color: c.muted, fontSize: 12, marginTop: 3 }}>{`${status.report_count} ${status.report_count === 1 ? 'report' : 'reports'} · ${lineTimeAgo(status.last_reported_at, now)}`}</T>}</View>
+          <T accessibilityLabel={`${venue.name}: ${lineWaitLabel(status?.wait_minutes ?? null)}`} style={{ color: status ? c.purple : c.muted, fontFamily: f.medium, fontSize: 13, maxWidth: 112 }}>{status ? lineWaitLabel(status.wait_minutes) : 'No estimate'}</T>
+          <Pressable accessibilityRole="button" accessibilityLabel={actionLabel} accessibilityState={{ expanded, disabled: !open }} disabled={!open} onPress={() => { if (!session) router.push('/login'); else { setEditing(expanded ? null : venue.id); setSelected(null); setSubmitError(''); setSavedVenue(null); } }} style={({ pressed }) => ({ width: 44, height: 44, borderRadius: 11, alignItems: 'center', justifyContent: 'center', opacity: !open ? 0.4 : pressed ? 0.65 : 1 })}><Icon name={expanded ? 'x' : 'plus'} color={c.purple} size={20} /></Pressable>
         </View>
-        {expanded && <View style={{ paddingHorizontal: 12, paddingBottom: 12, gap: 10 }}>
-          <T style={{ color: c.nightMuted, fontSize: 12 }}>How long is the line right now?</T>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 7 }}>{lineOptions.map(option => <Pressable key={option.minutes} accessibilityRole="button" accessibilityState={{ selected: selected === option.minutes }} onPress={() => setSelected(option.minutes)} style={({ pressed }) => ({ minHeight: 44, paddingHorizontal: 10, borderRadius: 9, justifyContent: 'center', backgroundColor: selected === option.minutes ? c.gold : c.nightOption, opacity: pressed ? 0.7 : 1 })}><T style={{ color: selected === option.minutes ? c.night : c.surface, fontFamily: f.bold, fontSize: 12 }}>{option.label}</T></Pressable>)}</View>
-          {!!submitError && <T accessibilityRole="alert" style={{ color: c.nightError, fontSize: 12 }}>{submitError}</T>}
-          <Pressable accessibilityRole="button" accessibilityState={{ disabled: submitting || selected === null }} disabled={submitting || selected === null} onPress={() => { void submit(); }} style={({ pressed }) => ({ minHeight: 44, borderRadius: 10, backgroundColor: c.gold, alignItems: 'center', justifyContent: 'center', opacity: submitting || selected === null ? 0.48 : pressed ? 0.78 : 1 })}><T style={{ color: c.night, fontFamily: f.bold, fontSize: 13 }}>{submitting ? 'Saving…' : 'Share line update'}</T></Pressable>
+        {expanded && <View style={{ paddingHorizontal: 16, paddingBottom: 16, gap: 14 }}>
+          <T style={{ color: c.muted, fontSize: 12 }}>How long is the line right now?</T>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 7 }}>{lineOptions.map(option => <Pressable key={option.minutes} accessibilityRole="button" accessibilityState={{ selected: selected === option.minutes }} onPress={() => setSelected(option.minutes)} style={({ pressed }) => ({ minHeight: 44, paddingHorizontal: 10, borderRadius: 9, justifyContent: 'center', backgroundColor: selected === option.minutes ? c.purple : c.lavender, opacity: pressed ? 0.7 : 1 })}><T style={{ color: selected === option.minutes ? c.surface : c.purple, fontFamily: f.bold, fontSize: 12 }}>{option.label}</T></Pressable>)}</View>
+          {!!submitError && <T accessibilityRole="alert" style={{ color: c.error, fontSize: 12 }}>{submitError}</T>}
+          <Pressable accessibilityRole="button" accessibilityState={{ disabled: submitting || selected === null }} disabled={submitting || selected === null} onPress={() => { void submit(); }} style={({ pressed }) => ({ minHeight: 44, borderRadius: 10, backgroundColor: c.purple, alignItems: 'center', justifyContent: 'center', opacity: submitting || selected === null ? 0.48 : pressed ? 0.78 : 1 })}><T style={{ color: c.surface, fontFamily: f.medium, fontSize: 13 }}>{submitting ? 'Saving…' : 'Share line update'}</T></Pressable>
         </View>}
-        {savedVenue === venue.id && <T accessibilityRole="alert" style={{ color: c.nightSuccess, fontSize: 11, paddingHorizontal: 14, paddingBottom: 8 }}>Thanks — your report is live.</T>}
+        {savedVenue === venue.id && <T accessibilityRole="alert" style={{ color: c.green, fontSize: 11, paddingHorizontal: 14, paddingBottom: 8 }}>Thanks — your report is live.</T>}
       </View>;
     })}</View>
-    {loadError && <Pressable accessibilityRole="button" onPress={() => { void refresh(); }} style={{ minHeight: 44, flexDirection: 'row', alignItems: 'center', gap: 8 }}><Icon name="refresh-cw" size={15} color={c.gold} /><T style={{ color: c.surface, fontSize: 12 }}>Line updates unavailable. Tap to retry.</T></Pressable>}
-    {!open && <T style={{ color: c.nightMuted, fontSize: 11 }}>Reports open at 6 PM Waterloo time.</T>}
+    {loadError && <Pressable accessibilityRole="button" onPress={() => { void refresh(); }} style={{ minHeight: 44, flexDirection: 'row', alignItems: 'center', gap: 8 }}><Icon name="refresh-cw" size={15} color={c.purple} /><T style={{ color: c.ink, fontSize: 13 }}>Line updates unavailable. Tap to retry.</T></Pressable>}
+    {!open && <T style={{ color: c.muted, fontSize: 12 }}>Reports open at 6 PM Waterloo time.</T>}
   </View>;
 }

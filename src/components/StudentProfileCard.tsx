@@ -25,19 +25,19 @@ export function StudentProfileCard() {
 
   if (!session) return null;
   return <Card style={{ padding: 21, gap: 15 }}>
-    <Badge label="YOUR STUDENT PROFILE" />
-    {loading ? <ActivityIndicator color={c.purple} /> : error ? <><T accessibilityRole="alert" style={{ color: '#8E3434' }}>{error}</T>
+    <Badge label="Student profile" />
+    {loading ? <ActivityIndicator color={c.purple} /> : error ? <><T accessibilityRole="alert" style={{ color: c.error }}>{error}</T>
       <View style={{ alignItems: 'flex-start' }}><Button secondary label="Try again" onPress={() => { setLoading(true); setRetry(value => value + 1); }} /></View></>
-      : !profile ? <><T style={{ fontFamily: f.serif, fontSize: 24 }}>Tell campus about you.</T>
+      : !profile ? <><T style={{ fontFamily: f.bold, fontSize: 24 }}>Tell campus about you.</T>
         <T style={body}>Add your name and program, then choose whether other students can find and email you.</T>
         <View style={{ alignItems: 'flex-start' }}><Button label="Complete your profile" icon="user-plus" onPress={() => router.push('/account-setup')} /></View></>
       : <>
-        <T style={{ fontFamily: f.serif, fontSize: 25 }}>{profile.display_name}</T>
+        <T style={{ fontFamily: f.bold, fontSize: 25 }}>{profile.display_name}</T>
         <T muted>{profile.program}{profile.year_label ? ` · ${profile.year_label}` : ''}</T>
         {!!profile.bio && <T style={body}>{profile.bio}</T>}
-        <Badge label={profile.is_discoverable ? 'VISIBLE TO SIGNED-IN STUDENTS' : 'PRIVATE PROFILE'}
+        <Badge label={profile.is_discoverable ? (profile.moderation_status === 'approved' ? 'Visible to students' : profile.moderation_status === 'pending' ? 'Awaiting review' : 'Not published') : 'Private profile'}
           color={profile.is_discoverable ? c.sage : c.background} textColor={profile.is_discoverable ? c.green : c.muted} />
-        {profile.is_discoverable && <T muted style={{ fontSize: 12, lineHeight: 20 }}>Your verified email is shown on your student profile so others can contact you.</T>}
+        {profile.is_discoverable && <T muted style={{ fontSize: 12, lineHeight: 20 }}>Once approved, your profile and verified email are visible to signed-in students. New or edited shared profiles are reviewed before publication.</T>}
         <View style={{ alignItems: 'flex-start' }}><Button secondary label="Edit your profile" icon="edit-2" onPress={() => router.push('/edit-profile')} /></View>
       </>}
   </Card>;

@@ -1,5 +1,4 @@
-import { useFonts, DMSans_400Regular, DMSans_500Medium, DMSans_700Bold } from '@expo-google-fonts/dm-sans';
-import { Lora_400Regular, Lora_400Regular_Italic } from '@expo-google-fonts/lora';
+import { useFonts, DMSans_400Regular, DMSans_500Medium, DMSans_600SemiBold } from '@expo-google-fonts/dm-sans';
 import { Feather } from '@expo/vector-icons';
 import { Slot } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -9,10 +8,16 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Shell } from '../components/Shell';
 import { LocalState } from '../lib/state';
 import { colors } from '../lib/theme';
-import { AuthProvider } from '../lib/auth';
+import { AuthProvider, useAuth } from '../lib/auth';
+
+function AccountRoutes() {
+  const { session } = useAuth();
+  // Drop route-local profile data when accounts change or are deleted.
+  return <Slot key={session?.user.id ?? 'guest'} />;
+}
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({ DM: DMSans_400Regular, 'DM-Medium': DMSans_500Medium, 'DM-Bold': DMSans_700Bold, Lora: Lora_400Regular, 'Lora-Italic': Lora_400Regular_Italic, ...Feather.font });
+  const [loaded, error] = useFonts({ DM: DMSans_400Regular, 'DM-Medium': DMSans_500Medium, 'DM-Semibold': DMSans_600SemiBold, ...Feather.font });
   if (!loaded && !error) return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 18, backgroundColor: colors.background }}><ActivityIndicator color={colors.purple} /><Text style={{ color: colors.purple }}>Your campus, a little closer.</Text></View>;
-  return <SafeAreaProvider><LocalState><AuthProvider><StatusBar style="dark" /><Shell><Slot /></Shell></AuthProvider></LocalState></SafeAreaProvider>;
+  return <SafeAreaProvider><LocalState><AuthProvider><StatusBar style="dark" /><Shell><AccountRoutes /></Shell></AuthProvider></LocalState></SafeAreaProvider>;
 }

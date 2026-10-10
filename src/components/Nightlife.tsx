@@ -13,7 +13,7 @@ export const nightColors = {
   trivia: { bg: '#EBDDAD', ink: '#493B51', accent: '#AA875C' },
 };
 
-export function NightArt({ palette, title, subtitle, height = 220, hero = false }: { palette: NightPalette; title: string; subtitle: string; height?: number; hero?: boolean }) {
+export function NightArt({ palette, title, subtitle, height = 200, hero = false }: { palette: NightPalette; title: string; subtitle: string; height?: number; hero?: boolean }) {
   const compact = useWindowDimensions().width < 600;
   const p = nightColors[palette];
   return <View style={{ minHeight: height, overflow: 'hidden', backgroundColor: p.bg, padding: hero ? (compact ? 20 : 28) : 23, justifyContent: 'space-between' }}>
@@ -23,24 +23,24 @@ export function NightArt({ palette, title, subtitle, height = 220, hero = false 
       </G>
       <Circle cx="590" cy="350" r="120" fill={p.accent} opacity="0.08" />
     </Svg>
-    <T style={{ color: p.ink, fontSize: 10, letterSpacing: 2.4, fontFamily: f.bold }}>{subtitle.toUpperCase()}</T>
-    <T style={{ color: p.ink, fontFamily: f.serif, fontSize: hero ? (compact ? 36 : 47) : 33, lineHeight: hero ? (compact ? 42 : 53) : 38, letterSpacing: -1.2, maxWidth: hero ? 530 : 300, marginVertical: hero ? 12 : 25 }}>{title}</T>
-    <View style={[s.row, { gap: 8 }]}><View style={{ height: 1, width: 28, backgroundColor: p.accent }} /><T style={{ color: p.ink, fontSize: 10, letterSpacing: 1.5 }}>WATERLOO AFTER DARK</T></View>
+    <T style={{ color: p.ink, fontSize: 12, letterSpacing: 0.8, fontFamily: f.bold }}>{subtitle.toUpperCase()}</T>
+    <T style={{ color: p.ink, fontFamily: f.bold, fontSize: hero ? (compact ? 34 : 43) : 30, lineHeight: hero ? (compact ? 44 : 53) : 40, letterSpacing: -0.4, maxWidth: hero ? 530 : 300, marginVertical: hero ? 12 : 25 }}>{title}</T>
+    <View style={{ height: 1, width: 32, backgroundColor: p.accent }} />
   </View>;
 }
 
 export function NightCard({ night }: { night: Night }) {
   const venue = getVenue(night.venueId)!;
   return <Card style={{ height: '100%' }}><View><Pressable accessibilityRole="button" accessibilityLabel={`Explore ${night.title}`} onPress={() => router.push(`/night/${night.id}`)} style={({ pressed }) => ({ opacity: pressed ? 0.88 : 1 })}><NightArt palette={night.palette} title={night.artTitle} subtitle={venue.shortName} /></Pressable><SaveButton id={`night:${night.id}`} title={night.title} style={{ position: 'absolute', right: 14, top: 13 }} /></View>
-    <Pressable accessibilityRole="button" accessibilityLabel={`Details for ${night.title}`} onPress={() => router.push(`/night/${night.id}`)} style={({ pressed }) => ({ padding: 21, gap: 12, opacity: pressed ? 0.7 : 1 })}>
-      <View style={[s.row, { justifyContent: 'space-between', gap: 8 }]}><T style={{ color: c.purple, fontFamily: f.bold, fontSize: 11, letterSpacing: 0.6 }}>{night.schedule.toUpperCase()}</T><Badge label={night.genre} color={c.background} textColor={c.muted} /></View>
-      <T style={{ fontFamily: f.serif, fontSize: 23 }}>{night.title}</T><T muted style={{ fontSize: 13 }}>{venue.shortName} · {venue.area}</T>
-      <View style={[s.row, { borderTopWidth: 1, borderTopColor: c.border, paddingTop: 14, gap: 8 }]}><Icon name="clock" size={14} color={c.muted} /><T muted style={{ fontSize: 12, flex: 1 }}>{night.time}</T><Icon name="arrow-up-right" size={18} color={c.purple} /></View>
+    <Pressable accessibilityRole="button" accessibilityLabel={`Details for ${night.title}`} onPress={() => router.push(`/night/${night.id}`)} style={({ pressed }) => ({ padding: 22, gap: 14, opacity: pressed ? 0.7 : 1 })}>
+      <View style={[s.row, { justifyContent: 'space-between', gap: 8 }]}><T style={{ color: c.purple, fontFamily: f.bold, fontSize: 12, letterSpacing: 0.3 }}>{night.schedule.toUpperCase()}</T><Badge label={night.genre} color={c.background} textColor={c.muted} /></View>
+      <T style={{ fontFamily: f.bold, fontSize: 21, lineHeight: 28, letterSpacing: -0.4 }}>{night.title}</T><T muted style={{ fontSize: 13 }}>{venue.shortName} · {venue.area}</T>
+      <View style={[s.row, { borderTopWidth: 1, borderTopColor: c.border, paddingTop: 14, gap: 8 }]}><Icon name="clock" size={14} color={c.muted} /><T muted style={{ fontSize: 13, flex: 1 }}>{night.time}</T><Icon name="arrow-right" size={18} color={c.purple} /></View>
     </Pressable>
   </Card>;
 }
 
 export function VenueCard({ venue }: { venue: Venue }) {
   const p = nightColors[venue.palette];
-  return <Card><View style={{ padding: 21, gap: 17 }}><View style={[s.row, { gap: 14 }]}><View style={{ width: 54, height: 59, borderRadius: 16, backgroundColor: p.bg, alignItems: 'center', justifyContent: 'center' }}><T style={{ color: p.ink, fontFamily: f.serif, fontSize: 25 }}>{venue.monogram}</T></View><View style={{ flex: 1, gap: 5 }}><T style={{ fontFamily: f.bold, fontSize: 17 }}>{venue.shortName}</T><T muted style={{ fontSize: 12 }}>{venue.area}</T></View><SaveButton id={`venue:${venue.id}`} title={venue.shortName} /></View><Pressable accessibilityRole="button" accessibilityLabel={`Explore ${venue.name}`} onPress={() => router.push(`/venue/${venue.id}`)} style={({ pressed }) => ({ gap: 17, opacity: pressed ? 0.7 : 1 })}><T muted style={{ lineHeight: 23, minHeight: 46 }}>{venue.summary}</T><View style={[s.row, { justifyContent: 'space-between' }]}><Badge label={venue.kind} color={c.background} textColor={c.muted} /><Icon name="arrow-up-right" color={c.purple} size={19} /></View></Pressable></View></Card>;
+  return <Card><View style={{ padding: 21, gap: 17 }}><View style={[s.row, { gap: 14 }]}><View style={{ width: 54, height: 59, borderRadius: 16, backgroundColor: p.bg, alignItems: 'center', justifyContent: 'center' }}><T style={{ color: p.ink, fontFamily: f.bold, fontSize: 25 }}>{venue.monogram}</T></View><View style={{ flex: 1, gap: 5 }}><T style={{ fontFamily: f.bold, fontSize: 17 }}>{venue.shortName}</T><T muted style={{ fontSize: 12 }}>{venue.area}</T></View><SaveButton id={`venue:${venue.id}`} title={venue.shortName} /></View><Pressable accessibilityRole="button" accessibilityLabel={`Explore ${venue.name}`} onPress={() => router.push(`/venue/${venue.id}`)} style={({ pressed }) => ({ gap: 17, opacity: pressed ? 0.7 : 1 })}><T muted style={{ lineHeight: 23, minHeight: 46 }}>{venue.summary}</T><View style={[s.row, { justifyContent: 'space-between' }]}><Badge label={venue.kind} color={c.background} textColor={c.muted} /><Icon name="arrow-right" color={c.purple} size={19} /></View></Pressable></View></Card>;
 }

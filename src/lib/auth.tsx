@@ -3,7 +3,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { AppState, Platform } from 'react-native';
 import { AUTH_UNAVAILABLE, authErrorMessage, normalizeEmail, requestEmailCode, RESEND_DELAY_MS, restorePendingEmailDraft, verifyEmailCode } from './auth-flow';
-import { emailLoginEnabled, supabase } from './supabase';
+import { emailLoginEnabled, removeStoredSession, supabase } from './supabase';
+import { useLocal } from './state';
 
 const PENDING_EMAIL_KEY = 'everything-laurier-pending-email-v1';
 const clearPendingEmail = () => { void AsyncStorage.removeItem(PENDING_EMAIL_KEY).catch(() => {}); };
@@ -21,11 +22,13 @@ type AuthState = {
   verifyCode: (code: string) => Promise<void>;
   changeEmail: () => void;
   signOut: () => Promise<void>;
+  deleteAccount: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthState | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const { purgeSaved, notify } = useLocal();
   const [session, setSession] = useState<Session | null>(null);
   const [ready, setReady] = useState(!supabase);
   const [recoveryError, setRecoveryError] = useState('');
@@ -89,7 +92,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   async function perform(action: () => Promise<void>) {
-    if (inFlight.current) return;
+    if (inFlight.current) throw new Error('Please wait for the current account action to finish.');
     inFlight.current = true;
     setBusy(true);
     try { await action(); }
@@ -130,8 +133,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (error) { throw new Error(authErrorMessage(error, 'signout')); }
   });
 
+  const deleteAccount = () => perform(async () => {
+    if (!supabase || !session) throw new Error('Sign in before deleting your account.');
+    const { data, error } = await supabase.functions.invoke('delete-account', { body: { confirm: true } });
+    if (error || data?.deleted !== true) {
+      let message = 'Your account deletion could not be confirmed. Sign in again and retry.';
+      if (error && 'context' in error && error.context instanceof Response) {
+        const details = await error.context.json().catch(() => null);
+        if (typeof details?.error === 'string') message = details.error;
+      }
+      throw new Error(message);
+    }
+    // The account is already gone: local cleanup errors must never imply that
+    // the backend account still exists or offer a second destructive request.
+    await supabase.auth.signOut({ scope: 'local' }).catch(() => {});
+    setSession(null);
+    setPendingEmail('');
+    setCooldownEmail('');
+    setResendAvailableAt(0);
+    const cleanup = await Promise.allSettled([removeStoredSession(), AsyncStorage.removeItem(PENDING_EMAIL_KEY), purgeSaved()]);
+    notify(cleanup.some(result => result.status === 'rejected')
+      ? 'Account deleted. Device storage could not be fully cleared; clear the app’s storage.'
+      : 'Your account and personal records have been deleted.');
+  });
+
   return <AuthContext.Provider value={{ session, ready, configured: !!supabase && emailLoginEnabled, recoveryError, pendingEmail,
-    cooldownEmail, resendAvailableAt, busy, sendCode, verifyCode, signOut,
+    cooldownEmail, resendAvailableAt, busy, sendCode, verifyCode, signOut, deleteAccount,
     changeEmail: () => {
       if (!inFlight.current) {
         setPendingEmail('');

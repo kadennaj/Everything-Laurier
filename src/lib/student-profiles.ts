@@ -10,12 +10,13 @@ export type StudentProfile = {
   year_label: string;
   bio: string;
   is_discoverable: boolean;
+  moderation_status: 'pending' | 'approved' | 'rejected' | 'suspended';
   contact_email: string | null;
   created_at: string;
   updated_at: string;
 };
 
-const PROFILE_COLUMNS = 'id,display_name,program,year_label,bio,is_discoverable,contact_email,created_at,updated_at';
+const PROFILE_COLUMNS = 'id,display_name,program,year_label,bio,is_discoverable,contact_email,moderation_status,created_at,updated_at';
 const DIRECTORY_COLUMNS = 'id,display_name,program,year_label,bio,contact_email';
 
 export async function getMyProfile(userId: string): Promise<StudentProfile | null> {

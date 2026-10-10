@@ -1,0 +1,5 @@
+# This endpoint verifies the bearer with Supabase Auth and checks auth.sessions
+# before any privileged operation. Gateway legacy-JWT verification is disabled
+# to support the project's publishable key and signing-key based user JWTs.
+[functions.delete-account]
+verify_jwt = false

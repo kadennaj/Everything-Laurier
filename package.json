@@ -41,7 +41,9 @@
     "lint": "expo lint",
     "export:web": "expo export --platform web",
     "dev": "expo start --web --port 8081",
-    "test:auth": "node --experimental-strip-types --test tests/auth-flow.test.mjs"
+    "test:auth": "node --experimental-strip-types --test tests/auth-flow.test.mjs",
+    "check:release-privacy": "node scripts/check-release-privacy.mjs",
+    "eas-build-post-install": "node scripts/check-eas-release.mjs"
   },
   "private": true
 }
