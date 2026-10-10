@@ -4,9 +4,10 @@ Published URLs: https://everythinglaurier.ca/ and https://www.everythinglaurier.
 
 Public contact: everythinglaurier@gmail.com. No paid Porkbun hosting, hosting trial, purchase or nameserver change was needed. The existing Sites connection hosts the pages. Website source is the separate `everything-laurier-website` directory, not synced `sources/`.
 
-Published source commit: a7e9465346369732d5a474c70eeab0046afafc76.
+Latest published source commit (October 10, version 4): bd472c82ffe4d15e079467770b2a19176a6bf2bd.
 Sites project: appgprj_6ac97fe38ea88191914df8b0e70ef9dc.
-Successful deployment: appgdep_6ac984ddb34c8191b654d1f55e253751.
+Latest successful deployment: appgdep_6aca821efe788191973cde8b8d1420d8.
+Version 4 updates privacy, support and community pages for automatic verified-email student-profile publication.
 Hosted origin: https://everything-laurier.sharpthyme4.chatgpt.site/.
 
 ## Porkbun configuration

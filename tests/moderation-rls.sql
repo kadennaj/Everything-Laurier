@@ -1,15 +1,16 @@
 begin;
 create function pg_temp.assert_true(p boolean,p_label text) returns void language plpgsql as $$ begin if p is distinct from true then raise exception 'FAILED: %',p_label; end if; end; $$;
 -- Synthetic users exist only within this transaction. No emails, accounts or reports persist.
-insert into auth.users(id,email) values
-('00000000-0000-4000-a000-000000000001','audit-a@example.invalid'),
-('00000000-0000-4000-a000-000000000002','audit-b@example.invalid');
+insert into auth.users(id,email,email_confirmed_at) values
+('00000000-0000-4000-a000-000000000001','audit-a@example.invalid',now()),
+('00000000-0000-4000-a000-000000000002','audit-b@example.invalid',now());
 insert into auth.sessions(id,user_id) values
 ('00000000-0000-4000-b000-000000000001','00000000-0000-4000-a000-000000000001'),
 ('00000000-0000-4000-b000-000000000002','00000000-0000-4000-a000-000000000002');
 insert into public.student_profiles(id,display_name,program,is_discoverable,contact_email) values
 ('00000000-0000-4000-a000-000000000001','Audit A','Test Program',true,'audit-a@example.invalid'),
 ('00000000-0000-4000-a000-000000000002','Audit B','Test Program',true,'audit-b@example.invalid');
+update public.student_profiles set moderation_status='pending' where id='00000000-0000-4000-a000-000000000002';
 insert into public.instagram_feed_posts(id,source_username,post_url,caption,posted_at)
 values('audit-only-post','rarenightclub','https://www.instagram.com/p/audit-only-post/','Test caption',now());
 update public.instagram_feed_posts set moderation_status='pending' where id='audit-only-post';
@@ -55,7 +56,7 @@ set local role authenticated;
 select public.change_profile_block('00000000-0000-4000-a000-000000000002',false);
 select pg_temp.assert_true((select count(*)=1 from public.student_profiles where id='00000000-0000-4000-a000-000000000002'),'unblock restores peer');
 update public.student_profiles set bio='Changed content' where id='00000000-0000-4000-a000-000000000001';
-select pg_temp.assert_true((select moderation_status='pending' from public.student_profiles where id='00000000-0000-4000-a000-000000000001'),'edit returns profile to review');
+select pg_temp.assert_true((select moderation_status='approved' from public.student_profiles where id='00000000-0000-4000-a000-000000000001'),'edit publishes automatically');
 reset role;
 select set_config('request.jwt.claims','{}',true);
 select private.review_profile('00000000-0000-4000-a000-000000000001','suspended');

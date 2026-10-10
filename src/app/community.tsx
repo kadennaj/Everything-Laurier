@@ -11,7 +11,7 @@ export default function Community() {
     <Card style={{ padding: 22, gap: 15 }}>
       <T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: 21 }}>Share respectfully</T>
       <T style={body}>No harassment, threats, hate, explicit sexual content, dangerous activity, impersonation, spam, or other people’s private information. Share your own profile and truthful line reports. Follow venue age requirements and local laws.</T>
-      <T style={body}>New or edited shared profiles are reviewed before publication. Posts from our selected venues appear automatically. Reports go to the operator for review. Content can be removed and profiles restricted for violations.</T>
+      <T style={body}>Shared profiles publish automatically when your email is verified. Posts from our selected venues appear automatically. Reports go to the operator for review. Content can be removed and profiles restricted for violations.</T>
       <View style={{ alignItems: 'flex-start' }}><ExternalButton label="Full community rules" url="https://everythinglaurier.ca/community/" /></View>
     </Card>
     <Card style={{ padding: 22, gap: 15 }}>

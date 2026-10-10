@@ -10,7 +10,7 @@ Everything Laurier operates a student app for life around Laurier Waterloo and t
 
 You can browse public campus information without an account. When you sign in, we use your email address to send a verification code and maintain your account. Our authentication provider stores an account identifier, session information, and ordinary connection information such as IP address and user agent to provide and secure sign-in.
 
-Student profiles store the name and program you enter, plus your optional year of study and introduction. Profiles are private by default. If you turn on discovery, your profile is reviewed before publication. Once approved, signed-in students can see your name, program, optional year and introduction, and verified email address. You can turn discovery off in Your space → Edit your profile. Previously received or copied information may remain with its recipients.
+Student profiles store the name and program you enter, plus your optional year of study and introduction. Profiles are private by default. If you turn on discovery with a verified account email, your profile publishes automatically. Signed-in students can see your name, program, optional year and introduction, and verified email address. Profile edits also publish automatically, unless the operator has restricted the profile. You can turn discovery off in Your space → Edit your profile. Previously received or copied information may remain with its recipients.
 
 Searching the student directory sends your program search to our database service so it can return relevant results. Search requests can appear in operational logs; we do not maintain a separate personal search-history feature.
 
