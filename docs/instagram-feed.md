@@ -2,7 +2,7 @@
 
 The Nightlife screen shows recent posts from `@rarenightclub`, `@prohibitionwarehouse`, `@thepubonking`, and `@kentuckywaterloo`. The app reads a public, read-only Supabase table. A Supabase Edge Function fetches posts through [Apify's Instagram Scraper](https://apify.com/apify/instagram-scraper) and saves the source URL, caption, post date, and an optional preview image. The function's Apify token never enters the app or Git. Posts are source-linked venue announcements, not verified event listings; users should confirm dates, entry terms, and availability with the venue.
 
-The feed deliberately has no invented posts. Until Apify is connected or when no posts were published in the past week, the screen links directly to all four Instagram accounts. Instagram can change access or remove posts, and preview image URLs can expire; the card still links to the original post.
+The feed deliberately has no invented posts. Until Apify is connected or when no visible posts were published in the past 14 days, the screen links directly to all four Instagram accounts. Instagram can change access or remove posts, and preview image URLs can expire; the card still links to the original post.
 
 ## Turn on updates
 
@@ -21,3 +21,11 @@ The function calls Apify only when invoked by the schedule, never when a student
 - `node --experimental-strip-types --test tests/instagram-feed.test.mjs` checks post normalization and rejects unrelated authors or unsafe links.
 
 Apify uses scraping to obtain public posts. Check the provider's reliability and your right to use the content before relying on this in production; Meta's [official API](https://developers.facebook.com/docs/instagram-platform/) is the better option if you later gain the required account access.
+
+## Automatic publication and personal controls — October 10, 2026
+
+Run `supabase/schema/automatic_venue_posts.sql` after `content_moderation.sql`. Valid imports from the four selected venues publish automatically; no human preapproval, AI call or new API fee is used. Source and URL validation is not content classification and does not establish guideline 1.2 compliance. Removed posts remain rejected across scraper upserts, including edits. Profiles keep their separate operator review.
+
+Readers fetch the past 14 days from the shared table; the scraper requests at most four posts per venue from the past seven days every eight hours. Client refreshes only read cached database rows. Users can Hide post, Hide venue, report posts, and restore personal feed choices from Community. Hides persist locally across refresh/relaunch and are cleared on account deletion on that device. Operators use `private.review_post(id, 'rejected')` to remove a post for everyone.
+
+Verification: `tests/automatic-venue-posts.sql` and `tests/moderation-rls.sql` use synthetic rolled-back records to check automatic publication, invalid URL holds, persistent operator removals, RLS, reports, blocks and deletion. `tests/feed-visibility.test.mjs` checks personal filters before display limits.

@@ -11,8 +11,9 @@ insert into public.student_profiles(id,display_name,program,is_discoverable,cont
 ('00000000-0000-4000-a000-000000000001','Audit A','Test Program',true,'audit-a@example.invalid'),
 ('00000000-0000-4000-a000-000000000002','Audit B','Test Program',true,'audit-b@example.invalid');
 insert into public.instagram_feed_posts(id,source_username,post_url,caption,posted_at)
-values('audit-only-post','rarenightclub','https://www.instagram.com/p/audit/','Test caption',now());
-select pg_temp.assert_true((select moderation_status='pending' from public.instagram_feed_posts where id='audit-only-post'),'post defaults pending');
+values('audit-only-post','rarenightclub','https://www.instagram.com/p/audit-only-post/','Test caption',now());
+update public.instagram_feed_posts set moderation_status='pending' where id='audit-only-post';
+select pg_temp.assert_true((select moderation_status='pending' from public.instagram_feed_posts where id='audit-only-post'),'operator can hold a post');
 select set_config('request.jwt.claims','{"sub":"00000000-0000-4000-a000-000000000001","role":"authenticated","email":"audit-a@example.invalid","session_id":"00000000-0000-4000-b000-000000000001"}',true);
 set local role authenticated;
 select pg_temp.assert_true((select count(*)=1 from public.student_profiles where id in('00000000-0000-4000-a000-000000000001','00000000-0000-4000-a000-000000000002')),'pending peers hidden, own visible');
@@ -67,11 +68,11 @@ reset role;
 select set_config('request.jwt.claims','{"role":"service_role"}',true);
 set local role service_role;
 insert into public.instagram_feed_posts(id,source_username,post_url,caption,posted_at,synced_at)
-values('audit-only-post','rarenightclub','https://www.instagram.com/p/audit/','Test caption',now(),now())
+values('audit-only-post','rarenightclub','https://www.instagram.com/p/audit-only-post/','Test caption',now(),now())
 on conflict(id) do update set source_username=excluded.source_username,post_url=excluded.post_url,caption=excluded.caption,synced_at=excluded.synced_at,moderation_status=excluded.moderation_status;
 select pg_temp.assert_true((select moderation_status='approved' from public.instagram_feed_posts where id='audit-only-post'),'unchanged scraper upsert preserves approval even if defaults sent');
 update public.instagram_feed_posts set image_url='https://example.invalid/changed.jpg' where id='audit-only-post';
-select pg_temp.assert_true((select moderation_status='pending' from public.instagram_feed_posts where id='audit-only-post'),'changed feed image requires new review');
+select pg_temp.assert_true((select moderation_status='pending' from public.instagram_feed_posts where id='audit-only-post'),'invalid feed image is held');
 reset role;
 select set_config('request.jwt.claims','{"sub":"00000000-0000-4000-a000-000000000001","role":"authenticated","email":"audit-a@example.invalid","session_id":"00000000-0000-4000-b000-000000000001"}',true);
 delete from auth.sessions where id='00000000-0000-4000-b000-000000000001';

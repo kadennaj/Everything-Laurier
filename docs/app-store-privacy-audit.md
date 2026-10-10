@@ -32,7 +32,7 @@ Scope: app source, Expo configuration, generated iOS configuration, installed de
 
 Supabase's security advisor reports the same two pre-existing warnings before and after this change: [pg_net in the public schema](https://supabase.com/docs/guides/database/database-linter?lint=0014_extension_in_public) and [leaked-password protection disabled](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection). The app uses passwordless email OTP. No new advisor findings were introduced; extension relocation should be evaluated separately against the existing scheduled scraper.
 
-The full submission matrix is in `app-store-full-audit.md`. Pending review, private reports, bilateral profile blocks, source hiding, restricted operator review functions and deletion cascades have been deployed and tested. The owner committed to monitoring the inbox and review queue; actual timely moderation and native flows remain release checks.
+The full submission matrix is in `app-store-full-audit.md`. Profile review, private reports, bilateral profile blocks, individual post/venue hiding, restricted operator removal functions and deletion cascades have been deployed and tested. Selected venue posts publish automatically after source/link checks at the owner’s October 10 request. They have no AI or manual caption/image screening; objectionable-content filtering remains a guideline 1.2 release gap. The owner committed to monitoring the inbox and review queue; actual timely moderation and native flows remain release checks.
 
 ## Sources and deployment
 

@@ -4,6 +4,7 @@ import { Image, Linking, Pressable, ScrollView, useWindowDimensions, View } from
 import { Button, Card, FeedSkeleton, Icon, Pill, SectionTitle, T } from './ui';
 import { getInstagramPosts, instagramAccounts, InstagramPost } from '../lib/instagram-feed';
 import { useLocal } from '../lib/state';
+import { visibleFeedPosts } from '../lib/feed-visibility';
 import { NightlifeAgeGate } from './NightlifeAgeGate';
 import { ReportContent } from './ReportContent';
 import { colors as c, fonts as f } from '../lib/theme';
@@ -11,7 +12,7 @@ import { colors as c, fonts as f } from '../lib/theme';
 const openInstagram = (url: string) => { void Linking.openURL(url); };
 
 function PostCard({ post, compact = false }: { post: InstagramPost; compact?: boolean }) {
-  const { hideSource, ready } = useLocal();
+  const { hideSource, hidePost, ready } = useLocal();
   const [imageFailed, setImageFailed] = useState(false);
   const account = instagramAccounts.find(item => item.username === post.source_username);
   const posted = new Date(post.posted_at).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -32,17 +33,17 @@ function PostCard({ post, compact = false }: { post: InstagramPost; compact?: bo
         <T style={{ fontFamily: f.medium, color: c.purple, fontSize: 12 }}>Open on Instagram ↗</T>
       </View>
     </Card>
-  </Pressable><View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}><ReportContent kind="post" target={post.id} /><Button secondary label="Hide this source" icon="eye-off" disabled={!ready} onPress={() => hideSource(post.source_username)} /></View></View>;
+  </Pressable><View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}><Button secondary label="Hide post" icon="eye-off" disabled={!ready} onPress={() => hidePost(post.id)} /><Button secondary label="Hide venue" icon="slash" disabled={!ready} onPress={() => hideSource(post.source_username)} /><ReportContent kind="post" target={post.id} /></View></View>;
 }
 
 export function InstagramFeed({ preview = false }: { preview?: boolean }) {
   const { nightlifeAgeConfirmed } = useLocal();
-  return nightlifeAgeConfirmed ? <ReviewedInstagramFeed preview={preview} /> : <NightlifeAgeGate />;
+  return nightlifeAgeConfirmed ? <VenueInstagramFeed preview={preview} /> : <NightlifeAgeGate />;
 }
 
-function ReviewedInstagramFeed({ preview = false }: { preview?: boolean }) {
+function VenueInstagramFeed({ preview = false }: { preview?: boolean }) {
   const { width } = useWindowDimensions();
-  const { hiddenSources } = useLocal();
+  const { hiddenSources, hiddenPosts } = useLocal();
   const [posts, setPosts] = useState<InstagramPost[]>([]);
   const [selected, setSelected] = useState('all');
   const [loading, setLoading] = useState(true);
@@ -66,7 +67,9 @@ function ReviewedInstagramFeed({ preview = false }: { preview?: boolean }) {
   }, []);
 
   const previewCardWidth = width >= 1000 ? Math.min(360, (Math.min(width - 312, 1120) - 32) / 3) : Math.min(280, width - 64);
-  const visible = (preview || selected === 'all' ? posts : posts.filter(post => post.source_username === selected)).filter(post => !hiddenSources.includes(post.source_username)).slice(0, preview ? 3 : 12);
+  const visible = visibleFeedPosts(posts, preview ? 'all' : selected, hiddenSources, hiddenPosts, preview ? 3 : 12);
+  const personallyHidden = posts.some(post => (preview || selected === 'all' || post.source_username === selected)
+    && (hiddenSources.includes(post.source_username) || hiddenPosts.includes(post.id)));
   const lastSync = posts.reduce((latest, post) => post.synced_at > latest ? post.synced_at : latest, '');
   const updated = lastSync ? new Date(lastSync).toLocaleString('en-CA', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : '';
 
@@ -89,14 +92,14 @@ function ReviewedInstagramFeed({ preview = false }: { preview?: boolean }) {
     </>}
     {!loading && !visible.length ? <Card style={{ padding: 22, gap: 16 }}>
       <View style={{ flexDirection: 'row', gap: 12, alignItems: 'flex-start' }}><Icon name={error ? 'wifi-off' : 'instagram'} color={c.purple} /><View style={{ flex: 1, gap: 6 }}>
-        <T accessibilityRole={error ? 'alert' : 'header'} style={{ fontFamily: f.bold, fontSize: 17 }}>{error ? 'Posts couldn’t load' : 'No recent posts'}</T>
-        <T muted style={{ fontSize: 14, lineHeight: 22 }}>{error ? 'Try again or visit a venue on Instagram.' : 'New posts appear after review. You can also check the venues on Instagram.'}</T>
+        <T accessibilityRole={error ? 'alert' : 'header'} style={{ fontFamily: f.bold, fontSize: 17 }}>{error ? 'Posts couldn’t load' : personallyHidden ? 'Posts are hidden' : 'No recent posts'}</T>
+        <T muted style={{ fontSize: 14, lineHeight: 22 }}>{error ? 'Try again or visit a venue on Instagram.' : personallyHidden ? 'Manage hidden posts and venues in Community to see them again.' : 'Posts from these venues appear automatically when the feed updates. You can also visit them on Instagram.'}</T>
       </View></View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
         {instagramAccounts.filter(account => selected === 'all' || selected === account.username).map(account =>
           <Button key={account.username} secondary label={account.name} icon="instagram" onPress={() => openInstagram(`https://www.instagram.com/${account.username}/`)} />)}
       </View>
-      <View style={{ alignItems: 'flex-start' }}><Button secondary label={error ? 'Try again' : 'Refresh'} icon="refresh-cw" onPress={() => { void refresh(); }} /></View>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{personallyHidden && <Button secondary label="Manage hidden posts" onPress={() => router.push('/community')} />}<Button secondary label={error ? 'Try again' : 'Refresh'} icon="refresh-cw" onPress={() => { void refresh(); }} /></View>
     </Card> : null}
   </View>;
 }

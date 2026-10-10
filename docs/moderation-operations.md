@@ -2,7 +2,9 @@
 
 Owner confirmed October 9, 2026 that they will monitor everythinglaurier@gmail.com and regularly review content. Check the private queue at least daily; prioritize threats, exploitation and exposed private information immediately when seen. This is an operating procedure, not evidence that a response has already occurred. Keep the contact functioning and test it before submission.
 
-New and changed profiles and imported posts are held pending. Existing content was also placed pending when the safeguard was introduced. Do not bulk-approve unseen content. Inspect every profile field and each post caption, image/video content, source, URL and rights before approval. If media cannot be inspected or publication rights are uncertain, leave it pending or reject it. Images may change at the source: revoke approval if the content no longer matches the reviewed material.
+New and changed shared student profiles remain pending for operator review. On October 10, the owner requested automatic publication from the four selected venue accounts without AI screening or manual approval. `automatic_venue_posts.sql` publishes structurally valid selected-venue imports, including the earlier pending imports. The database value `approved` now means published for venue posts; it is not evidence of individual content review. Invalid source/media links remain pending. Posts rejected by the operator remain rejected across unchanged imports and content changes. No new AI provider, API key or moderation fee is introduced.
+
+Inspect profile fields before approval. Check reports and the published venue feed regularly; remove inappropriate posts with the operator rejection function below. Personal Hide post and Hide venue choices only affect that device. They do not resolve reports or remove content for everyone. Verification badges and source/link checks do not detect objectionable captions or images or prove media rights. Guideline 1.2 content filtering therefore remains a release gap; this configuration must not be described as fully App Store compliant.
 
 Use your already-authorized Supabase dashboard → SQL Editor, as the database administrator. These operations are deliberately unavailable to app users. Never copy a service-role key into the app or publish private reports. The app can still delete an account that has a suspended profile.
 
@@ -31,4 +33,4 @@ Investigate reports, apply the appropriate content decision, and resolve or dism
 
 Account deletion cascades to all associated moderation reports and profile blocks, including blocks targeting the deleted account. Do not restore deleted users during a backup restore. Verify deletion handling before making any recovery public.
 
-Release requires proof the queue/contact are operated, venue/media permission and review of the initially pending content, plus native account/report/block/deletion tests.
+Release requires proof the queue/contact are operated, venue/media permission, profile review and resolution of the venue objectionable-content filtering gap, plus native account/report/block/hide/deletion tests.

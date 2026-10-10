@@ -2,7 +2,7 @@ Your information
 
 # Privacy policy.
 
-Effective October 9, 2026
+Effective October 10, 2026
 
 Everything Laurier operates a student app for life around Laurier Waterloo and this information website. For privacy questions, contact everythinglaurier@gmail.com.
 
@@ -18,7 +18,7 @@ Venue line reports privately store your account identifier, chosen venue, select
 
 Content reports store your account identifier, the reported profile or post, a selected reason, time, and review status so we can investigate abuse. Profile blocks store the account identifiers involved and the blocked profile’s name at the time of blocking, so blocked profiles can be excluded and managed. Operators with database administration access can review reported content and restrict abusive accounts.
 
-Bookmarks, hidden feed sources and your 19-or-older nightlife choice stay in device storage. We do not collect your date of birth. A pending sign-in request stores your email and resend timer locally. Native sign-in credentials use secure device credential storage; the web version uses browser storage for its session. We do not upload local bookmarks or hidden-source preferences to our account database.
+Bookmarks, hidden posts, hidden feed sources and your 19-or-older nightlife choice stay in device storage. We do not collect your date of birth. A pending sign-in request stores your email and resend timer locally. Native sign-in credentials use secure device credential storage; the web version uses browser storage for its session. We do not upload local bookmarks, hidden posts or hidden-source preferences to our account database.
 
 ## Services that process information
 
@@ -26,7 +26,7 @@ Supabase provides authentication, the database and server functions. The current
 
 Resend delivers sign-in emails and processes the recipient address, verification-email content and delivery information. We use these emails for account access, not marketing.
 
-Apify retrieves selected venues’ public Instagram posts for a shared feed. We do not send your account, profile or line reports to Apify. Imported content is reviewed before being shown in the app.
+Apify retrieves selected venues’ public Instagram posts for a shared feed. We do not send your account, profile or line reports to Apify. Posts from our selected venue accounts are imported and displayed automatically after source and link validation. We do not use AI screening or require operator approval of each imported post. Users can hide posts or venues and report concerns; the operator can remove posts.
 
 Displaying Instagram-hosted media makes a network request to its hosting service, which receives your IP address and normal connection details. Opening Instagram, venue websites, maps or campus resources takes you to another service with its own privacy terms. See Meta’s privacy policy.
 
@@ -48,11 +48,11 @@ Service providers may retain limited operational/security logs and backup copies
 
 ## Delete your account and exercise your choices
 
-Open Your space → Delete account in the app and confirm. Successful deletion immediately removes the live authentication account, student profile, private line reports, linked moderation reports and profile blocks, updates line estimates, revokes sign-in sessions, and clears local bookmarks, hidden-source preferences and the nightlife age choice on that device. Account deletion is permanent and cannot be undone.
+Open Your space → Delete account in the app and confirm. Successful deletion immediately removes the live authentication account, student profile, private line reports, linked moderation reports and profile blocks, updates line estimates, revokes sign-in sessions, and clears local bookmarks, hidden posts, hidden-source preferences and the nightlife age choice on that device. Account deletion is permanent and cannot be undone.
 
 Bookmarks and preferences on other devices are independent; clear them on those devices. Information already copied by others cannot be recalled. If you cannot access the app, contact everythinglaurier@gmail.com for help. We may need to verify account ownership before acting on a request.
 
-You can browse as a guest, edit your profile, turn discovery off, block profiles or hide sources, and report content. Contact us to request access, correction or deletion of personal information, or to raise a privacy concern.
+You can browse as a guest, edit your profile, turn discovery off, block profiles, hide individual posts or venues, and report content. Contact us to request access, correction or deletion of personal information, or to raise a privacy concern.
 
 ## Age-appropriate use and changes
 

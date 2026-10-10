@@ -16,13 +16,13 @@ Status: preparation only. No Apple Developer membership, App Store Connect app r
 
 Suggested description (review after final device checks):
 
-> Make campus yours with Everything Laurier, a student guide to Laurier Waterloo. Explore student clubs and official academic resources, find campus buildings, and save your favourites on your device. Sign in with an email code to create a private student profile, or choose discovery to connect with students in your program after profile review. Nightlife information and reviewed venue updates are available after a 19-or-older declaration. Check each venue for current schedules and admission rules. You can report content, block profiles, manage your privacy choices and permanently delete your account in the app.
+> Make campus yours with Everything Laurier, a student guide to Laurier Waterloo. Explore student clubs and official academic resources, find campus buildings, and save your favourites on your device. Sign in with an email code to create a private student profile, or choose discovery to connect with students in your program after profile review. Nightlife information and selected venue updates are available after a 19-or-older declaration. Check each venue for current schedules and admission rules. You can report content, block profiles, manage your privacy choices and permanently delete your account in the app.
 
 Do not claim Laurier sponsorship, live attendance, guaranteed wait times or verified age. Preserve school approval evidence and its actual conditions. Actual venue/media/service rights remain unverified. No review credentials, registered seller name, copyright holder, age rating or DSA trader status has been invented.
 
 ## Privacy-label preparation
 
-No tracking or advertising ID. Data used for app functionality and security; linked to account where relevant. Select actual App Store Connect categories after reviewing the final archive and provider settings. Current manifest declares name, email, user ID, other user content (profile/line reports/content reports), product interaction, search history, other diagnostics and other data (program/year/session connection details). Local bookmarks, hidden sources and age declaration are not uploaded by the app. Server logs can record requests. Do not claim that no information is collected because guest mode exists. Confirm how each integrated SDK/provider processes data; the native combined privacy report is required.
+No tracking or advertising ID. Data used for app functionality and security; linked to account where relevant. Select actual App Store Connect categories after reviewing the final archive and provider settings. Current manifest declares name, email, user ID, other user content (profile/line reports/content reports), product interaction, search history, other diagnostics and other data (program/year/session connection details). Local bookmarks, hidden posts, hidden sources and age declaration are not uploaded by the app. Server logs can record requests. Do not claim that no information is collected because guest mode exists. Confirm how each integrated SDK/provider processes data; the native combined privacy report is required.
 
 ## Age-rating preparation
 
@@ -30,7 +30,7 @@ Answer the real questionnaire for UGC, social/student-directory capability and a
 
 ## Reviewer notes to finish
 
-Provide a dedicated review account and an inbox/code-delivery arrangement the reviewer can actually access. Do not use a universal OTP, private credentials, hidden sign-in bypass or inaccessible test mailbox. Document steps: More → Your space → Sign in; complete profile; discovery requires operator review; report/block from student detail; manage blocks in Your space; view community/support; delete account with permanent confirmation. Nightlife acknowledgement precedes venue content; line reporting opens 6 PM–5AM Waterloo time. Explain pending content and how the reviewer can inspect representative already-reviewed content. Backend must remain available throughout review.
+Provide a dedicated review account and an inbox/code-delivery arrangement the reviewer can actually access. Do not use a universal OTP, private credentials, hidden sign-in bypass or inaccessible test mailbox. Document steps: More → Your space → Sign in; complete profile; discovery requires operator review; report/block from student detail; manage blocks in Your space; view community/support; delete account with permanent confirmation. Nightlife acknowledgement precedes venue content; line reporting opens 6 PM–5AM Waterloo time. Explain profile review, automatic selected-venue imports, personal hiding and operator removal. Venue imports are not individually reviewed or screened; resolve the guideline 1.2 filtering gap before submission. Backend must remain available throughout review.
 
 Reviewer contact name, phone, email and account access are still owner/store inputs. The public support email does not automatically establish reviewer contact or a disposable review mailbox.
 
@@ -46,4 +46,4 @@ Capture screenshots from the final native app at Apple's current accepted iPhone
 
 ## Remaining verification
 
-Real-device and TestFlight auth, OTP delivery, report/block/edit review, deletion, network-loss and IPv6-only checks; VoiceOver/large-text/rotation/iPad behavior; initially pending content moderation; functioning support inbox; final registered seller/publisher identity and rights scope. These items require evidence beyond source lint and synthetic database tests. Do not mark them complete merely because a simulator build succeeds.
+Real-device and TestFlight auth, OTP delivery, report/block/edit review, deletion, network-loss and IPv6-only checks; VoiceOver/large-text/rotation/iPad behavior; profile moderation and the venue content-filtering gap; functioning support inbox; final registered seller/publisher identity and rights scope. These items require evidence beyond source lint and synthetic database tests. Do not mark them complete merely because a simulator build succeeds.
