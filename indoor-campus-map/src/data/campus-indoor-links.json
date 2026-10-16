@@ -1,0 +1,64 @@
+{
+  "geometry": "Building-level overview only. Indoor lines connect OSM footprint centres, not surveyed corridors or door locations.",
+  "sources": [
+    "User walking description: Schlegel \u2192 Peters \u2192 Arts \u2192 Concourse \u2192 music building; exit under the bridgeway toward the parking lots.",
+    "User confirmation: the indoor connecting passage links Music, Dining Hall and Concourse through the Solarium.",
+    "src/data/indoor-connections.json",
+    "https://wlu.ca/campus-status/building-hours.html",
+    "https://www.wlu.ca/campus-status/notices/2023/may/main-floor-hallway-closure-at-john-aird-building-monday-may-15-to-august-31-2023.html"
+  ],
+  "links": [
+    {
+      "from": "SC",
+      "to": "P",
+      "status": "supported"
+    },
+    {
+      "from": "P",
+      "to": "ARTS-C",
+      "status": "supported"
+    },
+    {
+      "from": "ARTS-A",
+      "to": "ARTS-C",
+      "status": "supported"
+    },
+    {
+      "from": "ARTS-C",
+      "to": "ARTS-E",
+      "status": "supported",
+      "artsLevelChange": true
+    },
+    {
+      "from": "ARTS-E",
+      "to": "JAC",
+      "status": "supported",
+      "via": "the Solarium connecting passage"
+    },
+    {
+      "from": "SCI",
+      "to": "BA",
+      "status": "supported"
+    },
+    {
+      "to": "DH",
+      "status": "supported",
+      "via": "the Solarium connecting passage",
+      "from": "ARTS-E"
+    },
+    {
+      "to": "JAC",
+      "status": "supported",
+      "via": "the Solarium connecting passage",
+      "from": "DH"
+    }
+  ],
+  "exits": {
+    "JAC": {
+      "nodeId": "5035209106",
+      "label": "Exit the music building under the bridgeway toward the parking lots.",
+      "enterLabel": "Enter the music building under the bridgeway from the parking-lot side.",
+      "note": "Approximate match to the mapped west-side entrance. The user describes the bridgeway exit; Laurier's historical notice identifies a west underpass entrance. This does not establish current door access or a surveyed exit position."
+    }
+  }
+}

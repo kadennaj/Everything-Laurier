@@ -30,7 +30,19 @@ npm run dev
 
 Open http://localhost:8081 for the browser preview. For Expo's device workflow, use `npm start`. This prototype has not yet been validated on a physical iPhone.
 
-## Checks
+## Standalone indoor campus map
+
+The separate browser map prototype lives in [`indoor-campus-map/`](indoor-campus-map/README.md). It includes the campus and indoor floor maps, room and campus directions, GPS/heading controls, source plans, and map-specific tests. It runs independently on port 5174 and is not integrated into the Expo app.
+
+```sh
+cd indoor-campus-map
+npm ci
+npm run dev
+```
+
+Run its checks inside that folder with `npm run check`, `npm test`, and `npm run build`. The root app's TypeScript and ESLint checks exclude this independent package.
+
+## App checks
 
 ```sh
 npm run test:auth
