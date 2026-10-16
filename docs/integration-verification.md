@@ -1,6 +1,6 @@
 # Map, tutoring, owner review, and privacy verification
 
-October 16, 2026. Integration branch: `feature/map-tutoring-owner-dashboard`; base main commit `9783e70`. Map source extracted from `origin/feature/indoor-campus-map` at `a9afe74`. This branch changes the Expo app; it has not been merged into main or submitted to an app store.
+October 16, 2026. Implementation commit `5b67481` was prepared on `feature/map-tutoring-owner-dashboard` from base main commit `9783e70` and merged into `main` at the owner's request. Map source was extracted from `origin/feature/indoor-campus-map` at `a9afe74`. The integrated app has not been submitted to an app store.
 
 ## Implemented
 
