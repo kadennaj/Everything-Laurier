@@ -44,6 +44,17 @@ export function deletionHandler(deps: Dependencies) {
       // operations also check auth.sessions, so old access JWTs cannot be reused.
       const revoked = await call('/auth/v1/logout?scope=global', 'POST', token);
       if (!revoked.ok) return reply(503, 'Could not secure your account for deletion. Please try again.');
+      // Storage objects must be removed through the Storage API before deleting
+      // their owner. Deleting database rows alone leaves private files behind.
+      for (let batch=0;batch<10;batch++) {
+        const candidates=await call('/rest/v1/rpc/tutor_storage_cleanup','POST',deps.serviceKey,{p_user_id:user.id});
+        if(!candidates.ok)return reply(503,'Document cleanup did not finish. Sign in again and retry deletion.');
+        const paths=await candidates.json();
+        if(!Array.isArray(paths)||paths.some(path=>typeof path!=='string'||!path.startsWith(`${user.id}/`)||!/^[-a-f0-9]{36}\/[-a-f0-9]{36}\/transcript\.jpg$/.test(path)))return reply(503,'Document cleanup could not be verified. Sign in again and retry.');
+        if(!paths.length)break;
+        const removal=await call('/storage/v1/object/tutor-transcripts','DELETE',deps.serviceKey,{prefixes:paths});
+        if(!removal.ok||batch===9)return reply(503,'Document cleanup did not finish. Sign in again and retry deletion.');
+      }
       const deleted = await call(`/auth/v1/admin/users/${user.id}`, 'DELETE', deps.serviceKey, { should_soft_delete: false });
       if (!deleted.ok) return reply(503, 'Deletion did not finish. Sign in again and retry.');
       // Foreign keys remove profiles and raw reports in the same transaction.

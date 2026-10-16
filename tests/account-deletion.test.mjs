@@ -11,6 +11,7 @@ function fixture(failurePath, failureStatus = 500, active = true) {
     if (url.includes(failurePath ?? 'NEVER')) return Response.json({ message: 'internal details' }, { status: failureStatus });
     if (url.endsWith('/user')) return Response.json({ id: userId });
     if (url.endsWith('/account_session_active')) return Response.json(active);
+    if (url.includes('tutor_storage_cleanup')) return Response.json([]);
     if (url.includes('/logout')) return new Response(null, { status: 204 });
     return Response.json({ id: userId });
   } });
@@ -43,17 +44,17 @@ test('verified owner is globally signed out before hard deletion; no secret retu
   const response = await send();
   assert.equal(response.status, 200);
   assert.deepEqual(await response.json(), { deleted: true });
-  assert.equal(requests.length, 4);
+  assert.equal(requests.length, 5);
   assert.match(requests[2].url, /logout\?scope=global$/);
   assert.equal(requests[2].headers.Authorization, 'Bearer user-token');
-  assert.equal(requests[3].url, `https://test.supabase.co/auth/v1/admin/users/${userId}`);
-  assert.equal(requests[3].method, 'DELETE');
-  assert.equal(requests[3].headers.Authorization, 'Bearer server-secret');
-  assert.deepEqual(JSON.parse(requests[3].body), { should_soft_delete: false });
+  assert.equal(requests[4].url, `https://test.supabase.co/auth/v1/admin/users/${userId}`);
+  assert.equal(requests[4].method, 'DELETE');
+  assert.equal(requests[4].headers.Authorization, 'Bearer server-secret');
+  assert.deepEqual(JSON.parse(requests[4].body), { should_soft_delete: false });
 });
 
 test('failed verification/revocation/deletion never reports success or leaks server errors', async () => {
-  for (const [path, calls] of [['account_session_active', 2], ['logout', 3], ['admin/users', 4]]) {
+  for (const [path, calls] of [['account_session_active', 2], ['logout', 3], ['tutor_storage_cleanup', 4], ['admin/users', 5]]) {
     const { requests, send } = fixture(path);
     const response = await send();
     assert.equal(response.status, 503);

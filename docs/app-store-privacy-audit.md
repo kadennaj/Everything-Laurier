@@ -42,3 +42,7 @@ The full submission matrix is in `app-store-full-audit.md`. Profile review, priv
 - [Supabase hard deletion](https://supabase.com/docs/reference/javascript/auth-admin-deleteuser)
 
 Backend project: `ekptnmermhvtrdqpjwwa` (Everything-Laurier). Applied migration: `account_deletion_privacy_guards`; local source: `supabase/schema/account_deletion.sql`. The new `delete-account` function is active. Its gateway `verify_jwt=false` is intentional: the body validates the user's bearer through Supabase Auth and checks `auth.sessions` before using admin credentials, supporting publishable keys and current JWT signing keys. Never remove these checks. Server secrets are provided by the Edge Function runtime only.
+
+## October 16 map/tutoring update
+
+The earlier no-photo/no-location statement above describes the pre-integration app. The current app optionally uses foreground location and selected transcript images. The current policy, permissions, private tutor storage, owner authorization, deletion/retention behavior and verification limits are documented in [integration-verification.md](integration-verification.md). In-app and public policies were updated to version 2026-10-16. Review the actual native archive and final App Store privacy labels before submission.

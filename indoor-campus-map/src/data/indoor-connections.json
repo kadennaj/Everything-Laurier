@@ -1,0 +1,52 @@
+[
+  {
+    "id": "arts-peters",
+    "fromBuilding": "ARTS",
+    "fromRoom": "ARTS2-peters-link",
+    "toBuilding": "P",
+    "toRoom": "P1-arts-link",
+    "status": "source-shown",
+    "source": "/blueprints/new-floorplans/IMG_1458.webp",
+    "note": "Arts Floor 2 to Peters Floor 1: the Arts sign labels the Peters Floor 1 link; your description places the Peters arrival beside its elevator, south stair and P107 Service Laurier. Exact door registration is approximate."
+  },
+  {
+    "id": "peters-schlegel-1",
+    "fromBuilding": "P",
+    "fromRoom": "P1-schlegel-link",
+    "toBuilding": "SC",
+    "toRoom": "SC1-peters-link",
+    "status": "source-shown",
+    "source": "/blueprints/new-floorplans/IMG_1461.webp",
+    "note": "Peters and Schlegel are connected wings, confirmed by you. The wide hallway is on the bottom-left/elevator-core side of IMG_1460, matched to IMG_1461 and confirmed by your walking description; exact door placement and current door access and step-free continuity are unverified."
+  },
+  {
+    "id": "peters-schlegel-2",
+    "fromBuilding": "P",
+    "fromRoom": "P2-schlegel-link",
+    "toBuilding": "SC",
+    "toRoom": "SC2-peters-link",
+    "status": "source-shown",
+    "source": "/blueprints/new-floorplans/IMG_1462.webp",
+    "note": "Peters and Schlegel are connected wings, confirmed by you. The wide hallway is on the bottom-left/elevator-core side of IMG_1460, matched to IMG_1461 and confirmed by your walking description; exact door placement and current door access and step-free continuity are unverified."
+  },
+  {
+    "id": "peters-schlegel-3",
+    "fromBuilding": "P",
+    "fromRoom": "P3-schlegel-link",
+    "toBuilding": "SC",
+    "toRoom": "SC3-peters-link",
+    "status": "source-shown",
+    "source": "/blueprints/new-floorplans/IMG_1463.webp",
+    "note": "Peters and Schlegel are connected wings, confirmed by you. The wide hallway is on the bottom-left/elevator-core side of IMG_1460, matched to IMG_1461 and confirmed by your walking description; exact door placement and current door access and step-free continuity are unverified."
+  },
+  {
+    "id": "science-bricker",
+    "fromBuilding": "SCI",
+    "fromRoom": "SCI1-bricker-connection",
+    "toBuilding": "BA",
+    "toRoom": "BA-science",
+    "status": "source-shown",
+    "source": "/blueprints/science/floor-1.webp",
+    "note": "Science Floor 1 to Bricker Floor 1 through the connection portal shown on the supplied plans and confirmed by you. Connecting passage geometry is approximate; current access is unverified."
+  }
+]

@@ -7,3 +7,7 @@ verify_jwt = false
 # Custom constant-time SHA-256 verification of the server-only Vault sync token.
 [functions.sync-official-events]
 verify_jwt = false
+
+# The scheduled transcript job validates its server-only token with SHA-256.
+[functions.tutor-storage-cleanup]
+verify_jwt = false

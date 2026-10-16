@@ -21,3 +21,7 @@ Do not replace nameservers or email records to update website content. For futur
 ## App configuration
 
 The app privacy fallback and example environment use https://everythinglaurier.ca/privacy/. The EAS production profile and post-install guard validate the privacy/support/community destinations plus HTTPS backend, publishable key and enabled email sign-in. The App Store Connect privacy/support/marketing fields remain owner setup after enrollment.
+
+## October 16 update
+
+Sites version 6 publishes policy version 2026-10-16 plus tutoring/map support and community instructions. Source commit `686b3560309fd6d6bcf5457592a7d5b5a53324f4`; deployment `appgdep_6ad28edec4688191820cffc32ccae38f` succeeded. Public audience and existing domain/DNS configuration are unchanged. The native app's private owner dashboard is not part of this public information website.

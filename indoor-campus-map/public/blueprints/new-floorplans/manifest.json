@@ -1,0 +1,31 @@
+{
+  "assignments": {
+    "IMG_1451": "Arts / Concourse Floor 1 (overlapping views)",
+    "IMG_1452": "Arts / Concourse Floor 1 (overlapping views)",
+    "IMG_1453": "Arts / Concourse Floor 1 (overlapping views)",
+    "IMG_1454": "Arts / Concourse Floor 1 (overlapping views)",
+    "IMG_1455": "Arts / Concourse Floor 1 (overlapping views)",
+    "IMG_1456": "Arts / Concourse Floor 1 (overlapping views)",
+    "IMG_1457": "Arts / Concourse Floor 1 (overlapping views)",
+    "IMG_1458": "Arts Floor 2 / Peters Floor 1 link",
+    "IMG_1459": "Arts Floor 3",
+    "IMG_1460": "Peters Floor 1",
+    "IMG_1461": "Schlegel Floor 1",
+    "IMG_1462": "Schlegel Floor 2",
+    "IMG_1463": "Schlegel Floor 3",
+    "IMG_1464": "Peters Floor 2 (overlapping views)",
+    "IMG_1465": "Peters Floor 2 (overlapping views)",
+    "IMG_1466": "Peters Floor 2 (overlapping views)",
+    "IMG_1467": "Peters Floor 3",
+    "IMG_1468": "Dr. Alvin Woods Floor 1",
+    "IMG_1469": "Dr. Alvin Woods Floor 2",
+    "IMG_1470": "Dr. Alvin Woods Floor 3",
+    "IMG_1471": "Dr. Alvin Woods Floor 4",
+    "IMG_1472": "Dr. Alvin Woods Floor 5"
+  },
+  "identification": "Room-number prefixes, printed floor captions and user confirmation. Peters/Schlegel treated as connected wings; Arts/Concourse is one area.",
+  "sources": [
+    "https://students.wlu.ca/campus-services/classrooms-and-spaces/classrooms/index.html",
+    "https://ammcs.wlu.ca/2023/conference-program/ammcs2023_program.pdf"
+  ]
+}

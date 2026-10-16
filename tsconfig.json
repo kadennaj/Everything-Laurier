@@ -3,5 +3,10 @@
   "compilerOptions": {
     "strict": true
   },
-  "exclude": ["supabase/functions", "tests"]
+  "exclude": [
+    "dist",
+    "supabase/functions",
+    "tests",
+    "indoor-campus-map"
+  ]
 }

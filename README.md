@@ -69,3 +69,12 @@ Reviewed September 27, 2026. Original poster artwork is illustrative; no venue e
 - [Imprint’s Crown rebrand report](https://uwimprint.ca/the-crown-makes-grand-entrance-in-waterloo/): The Drink became Crown in September 2025.
 
 Weekly programmes do not create dated occurrences. The archived special is not shown as an upcoming event. Crowd levels, wait times, and ticket availability are not fabricated. Source links and review dates appear in detail views.
+
+
+## Map, tutoring, and private owner review (October 16, 2026)
+
+The `/map` route now integrates the map branch's campus and 28 indoor floor models, connected-building and sheltered routes, floor controls, source-plan comparison, and foreground location. The app keeps its own navigation; the embedded renderer has no duplicate branded header. Map data and renderer are bundled; source images load on demand. Run `npm ci --prefix indoor-campus-map` then `npm run build:map` after editing map sources. Native uses a WebView with a narrow foreground-location/image/share bridge. No hosted map service or service key is required.
+
+Academic help → Tutoring support includes a course tutor directory, application form, private JPEG transcript upload, application status, and withdrawal. Listings require manual owner approval and explicit applicant consent. The `/owner` route and Your space → Owner tools are authorized by the backend for the verified `everythinglaurier@gmail.com` account only; no client email comparison grants access. The owner reviews transcript evidence and reported profiles/posts/tutor listings. See `docs/tutoring-owner-dashboard.md`.
+
+The canonical policy is `docs/privacy-policy.md`. `npm run build:privacy` generates the in-app policy and standalone HTML. The public policy is at https://everythinglaurier.ca/privacy/. See `docs/integration-verification.md` for evidence and remaining launch checks.

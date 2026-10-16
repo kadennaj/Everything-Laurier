@@ -7,7 +7,7 @@ import { colors as c, fonts as f } from '../lib/theme';
 import { Button, Card, Icon, Pill, T, body } from './ui';
 
 type PostActions = { venueName: string; hidePost: () => void; hideVenue: () => void; disabled: boolean };
-export function ReportContent({ kind, target, postActions }: { kind: 'profile' | 'post'; target: string; postActions?: PostActions }) {
+export function ReportContent({ kind, target, postActions }: { kind: 'profile' | 'post' | 'tutor'; target: string; postActions?: PostActions }) {
   const { session } = useAuth();
   const [open, setOpen] = useState(false);
   const [showMenu, setShowMenu] = useState(false);

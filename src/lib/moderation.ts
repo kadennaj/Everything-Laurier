@@ -7,7 +7,7 @@ export const reportReasons = [
 ] as const;
 export type ReportReason = typeof reportReasons[number]['id'];
 export type ProfileBlock = { target_id: string; display_name: string; created_at: string };
-export async function reportContent(kind: 'profile' | 'post', target: string, reason: ReportReason) {
+export async function reportContent(kind: 'profile' | 'post' | 'tutor', target: string, reason: ReportReason) {
   if (!supabase) throw new Error('Reporting is unavailable. Email everythinglaurier@gmail.com for help.');
   const { error } = await supabase.rpc('report_content', { p_kind: kind, p_target: target, p_reason: reason });
   if (error) throw new Error('Your report could not be saved. Try again or email everythinglaurier@gmail.com.');

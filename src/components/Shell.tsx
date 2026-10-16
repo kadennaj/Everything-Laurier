@@ -85,9 +85,9 @@ export function Shell({ children }: { children: React.ReactNode }) {
           <IconButton name={session ? 'user-check' : 'user'} label={session ? 'Your account' : 'Sign in'} onPress={() => router.push(session || !ready ? '/profile' : '/login')} style={{ backgroundColor: c.lavender }} />
         </View>
       </View>
-      <ScrollView key={pathname} style={{ flex: 1 }} contentContainerStyle={{ paddingHorizontal: desktop ? 40 : 20, paddingTop: desktop ? 36 : 24, paddingBottom: desktop ? 48 : 32, alignItems: 'center' }} keyboardShouldPersistTaps="handled">
+      {pathname === '/map' ? <View style={{flex:1,minHeight:0}}>{children}</View> : <ScrollView key={pathname} style={{ flex: 1 }} contentContainerStyle={{ paddingHorizontal: desktop ? 40 : 20, paddingTop: desktop ? 36 : 24, paddingBottom: desktop ? 48 : 32, alignItems: 'center' }} keyboardShouldPersistTaps="handled">
         <Animated.View style={{ width: '100%', maxWidth: 1120, gap: desktop ? 36 : 28, opacity: contentOpacity }}>{children}</Animated.View>
-      </ScrollView>
+      </ScrollView>}
       {!desktop && <View style={[styles.bottomNav, { paddingBottom: Math.max(insets.bottom, 7) }]}>{navigation.map(item => {
         const active = current === item.label;
         return <Pressable key={item.label} accessibilityRole="button" accessibilityState={{ selected: active }} onPress={() => router.navigate(item.path)} style={({ pressed }) => [styles.bottomItem, pressed && styles.pressed]}>

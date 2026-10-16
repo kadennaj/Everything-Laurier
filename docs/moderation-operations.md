@@ -34,3 +34,7 @@ Investigate reports, apply the appropriate content decision, and resolve or dism
 Account deletion cascades to all associated moderation reports and profile blocks, including blocks targeting the deleted account. Do not restore deleted users during a backup restore. Verify deletion handling before making any recovery public.
 
 Release requires proof the queue/contact are operated, venue/media permission, profile removal/report operations and resolution of the profile/venue objectionable-content filtering gaps, plus native account/report/block/hide/deletion tests.
+
+## Owner dashboard (October 16)
+
+The designated verified operator can now use `/owner` after signing in as `everythinglaurier@gmail.com`; ordinary users are denied by server-side authorization. Review reported profiles/posts/tutor listings and confirm removal/restriction plus resolution, resolution without removal, or dismissal. The older database-only workflow remains an administrator recovery option. See [tutoring-owner-dashboard.md](tutoring-owner-dashboard.md) for the allowlist, private transcript handling, review steps and retention. Do not distribute service credentials to use this dashboard.
