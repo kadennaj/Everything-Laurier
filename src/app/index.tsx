@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Image, Pressable, useWindowDimensions, View } from 'react-native';
 import { ClubCard, EventCard } from '../components/cards';
 import { InstagramFeed } from '../components/InstagramFeed';
-import { Button, Card, Chips, Empty, Icon, IconName, SectionTitle, T, s } from '../components/ui';
+import { Button, Card, Chips, Empty, Eyebrow, Icon, IconName, SectionTitle, T, s } from '../components/ui';
 import { CalendarStatus } from '../components/CalendarStatus';
 import { clubs } from '../data/content';
 import { useOfficialEvents } from '../lib/official-events';
@@ -12,44 +12,43 @@ import { useLocal } from '../lib/state';
 import { colors as c, fonts as f, radii } from '../lib/theme';
 
 export default function Discover() {
-  const { width } = useWindowDimensions(); const compact = width < 650; const desktop = width >= 1000;
-  const [filter, setFilter] = useState('For you'); const { saved } = useLocal();
-  const { events, loading, error, now } = useOfficialEvents(); const [limit, setLimit] = useState(12);
-  const candidates = filter === 'Saved' ? events.filter(e => saved.includes(`event:${e.id}`)) : events.filter(e => Date.parse(e.endsAt) >= now);
-  const visible = candidates.slice(0, filter === 'For you' ? 3 : limit);
+  const { width, fontScale } = useWindowDimensions();
+  const compact = width / fontScale < 700;
+  const singleColumn = width / fontScale < 330;
+  const [filter, setFilter] = useState('Upcoming');
+  const { saved } = useLocal();
+  const { events, loading, error, now } = useOfficialEvents();
+  const [limit, setLimit] = useState(3);
+  const candidates = filter === 'Saved' ? events.filter(event => saved.includes(`event:${event.id}`)) : events.filter(event => Date.parse(event.endsAt) >= now);
   const featuredClubs = ['laurier-computing-society-lcs', 'laurier-outdoors-club'].map(id => clubs.find(club => club.id === id)).filter(club => !!club);
-  const shortcuts: { label: string; sub: string; icon: IconName; path: '/clubs' | '/map' | '/people' | '/help' }[] = [
-    { label: 'Clubs', sub: 'Find your community', icon: 'users', path: '/clubs' },
-    { label: 'Campus map', sub: 'Find your way', icon: 'map', path: '/map' },
-    { label: 'People', sub: 'Make a connection', icon: 'coffee', path: '/people' },
-    { label: 'Academic help', sub: 'A little support', icon: 'book-open', path: '/help' },
+  const shortcuts: { label: string; sub: string; icon: IconName; path: '/map' | '/help' | '/people' | '/saved' }[] = [
+    { label: 'Find a room', sub: 'Campus & indoor maps', icon: 'map', path: '/map' },
+    { label: 'Academic help', sub: 'Support & peer tutors', icon: 'book-open', path: '/help' },
+    { label: 'Meet people', sub: 'Your campus community', icon: 'users', path: '/people' },
+    { label: 'Saved items', sub: saved.length ? `${saved.length} kept for later` : 'Your places & plans', icon: 'bookmark', path: '/saved' },
   ];
   return <>
-    <View style={{ gap: 6 }}><T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: compact ? 29 : 36, lineHeight: compact ? 38 : 44, letterSpacing: -0.4 }}>Make campus yours.</T><T muted style={{ fontSize: 15 }}>Your guide to life at Laurier.</T></View>
-    <View style={{ minHeight: compact ? 244 : 288, borderRadius: radii.hero, overflow: 'hidden', backgroundColor: c.purpleDark }}>
-      <Image source={require('../../assets/images/campus.jpg')} accessibilityLabel="Schlegel Centre at Laurier Waterloo, photographed by LeonV" style={{ position: 'absolute', right: 0, width: compact ? '100%' : '70%', height: '100%' }} resizeMode="cover" />
-      <LinearGradient colors={compact ? ['#292136DD', '#29213688'] : ['#292136', '#292136E6', '#29213610']} locations={compact ? [0, 1] : [0, 0.38, 1]} start={{ x: 0, y: 1 }} end={{ x: 1, y: 0 }} style={{ position: 'absolute', inset: 0 }} />
-      <View style={{ padding: compact ? 24 : 36, gap: 18, alignItems: 'flex-start', maxWidth: compact ? undefined : 560 }}>
-        <T style={{ fontSize: 12, fontFamily: f.medium, color: c.gold }}>Discover your community</T>
-        <T accessibilityRole="header" style={{ fontFamily: f.bold, color: c.surface, fontSize: compact ? 30 : 41, lineHeight: compact ? 39 : 50, letterSpacing: -0.4 }}>Good people.{'\n'}Great possibilities.</T>
-        <T style={{ color: '#F1EAF5', fontSize: 14, lineHeight: 22 }}>Explore {clubs.length} clubs. Find your people.</T>
-        <Pressable accessibilityRole="button" onPress={() => router.push('/clubs')} style={({ pressed }) => [s.row, { backgroundColor: c.surface, borderRadius: radii.control, paddingVertical: 13, paddingHorizontal: 18, gap: 16, minHeight: 48, opacity: pressed ? 0.8 : 1 }]}><T style={{ fontFamily: f.medium, fontSize: 14, color: c.purpleDark }}>Explore clubs</T><Icon name="arrow-right" size={17} color={c.purpleDark} /></Pressable>
-      </View>
-    </View>
-    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>{shortcuts.map(item => <Pressable key={item.label} accessibilityRole="button" accessibilityLabel={item.label} onPress={() => router.push(item.path)} style={({ pressed }) => ({ flexBasis: compact ? '46%' : '22%', flexGrow: 1, minHeight: 112, borderWidth: 1, borderColor: c.border, borderRadius: 18, padding: 16, backgroundColor: pressed ? c.pressed : c.surface, gap: 12 })}>
-      <Icon name={item.icon} size={22} color={c.purple} /><View style={{ gap: 3 }}><T style={{ fontFamily: f.medium, fontSize: 14 }}>{item.label}</T><T muted style={{ fontSize: 12, lineHeight: 18 }}>{item.sub}</T></View>
+    <View style={{ gap: 9 }}><Eyebrow>WATERLOO CAMPUS</Eyebrow><T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: compact ? 30 : 36, lineHeight: compact ? 38 : 44, letterSpacing: -0.6 }}>Campus, within reach.</T><T muted style={{ fontSize: 17, lineHeight: 26 }}>Find your way. Make a connection.</T></View>
+    <Pressable accessibilityRole="button" accessibilityLabel="Search rooms, buildings, clubs and events" onPress={() => router.push('/search')} style={({ pressed }) => [s.row, { minHeight: 60, padding: 17, gap: 13, borderRadius: radii.control, backgroundColor: pressed ? c.pressed : c.surface, borderWidth: 1, borderColor: c.border }]}>
+      <Icon name="search" color={c.purple} /><T muted style={{ flex: 1, fontSize: 17, lineHeight: 24 }}>Search rooms, clubs, events…</T><Icon name="chevron-right" color={c.muted} size={18} />
+    </Pressable>
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>{shortcuts.map((item, index) => <Pressable key={item.path} accessibilityRole="button" accessibilityLabel={item.label} accessibilityHint={item.sub} onPress={() => router.push(item.path)} style={({ pressed }) => ({ flexBasis: singleColumn ? '100%' : compact ? '46%' : '22%', flexGrow: 1, minHeight: 128, borderWidth: 1, borderColor: index === 0 ? '#D7C9E9' : c.border, borderRadius: 20, padding: 18, backgroundColor: pressed ? c.pressed : index === 0 ? c.lavender : c.surface, gap: 14 })}>
+      <View style={[s.row, { justifyContent: 'space-between' }]}><Icon name={item.icon} size={24} color={c.purple} /><Icon name="chevron-right" size={16} color={c.muted} /></View><View style={{ gap: 5 }}><T style={{ fontFamily: f.bold, fontSize: 17, lineHeight: 23 }}>{item.label}</T><T muted style={{ fontSize: 14, lineHeight: 21 }}>{item.sub}</T></View>
     </Pressable>)}</View>
-    <InstagramFeed preview />
+    <Pressable accessibilityRole="button" accessibilityLabel={`Explore ${clubs.length} clubs and communities`} onPress={() => router.push('/clubs')} style={({ pressed }) => ({ minHeight: 184, borderRadius: radii.hero, overflow: 'hidden', backgroundColor: c.purpleDark, opacity: pressed ? 0.85 : 1 })}>
+      <Image source={require('../../assets/images/campus.jpg')} accessible={false} style={{ position: 'absolute', right: 0, width: '100%', height: '100%' }} resizeMode="cover" />
+      <LinearGradient colors={['#292136F5', '#292136DD', '#292136CC']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ position: 'absolute', inset: 0 }} />
+      <View style={{ padding: compact ? 24 : 30, gap: 10, alignItems: 'flex-start' }}><T style={{ fontSize: 13, lineHeight: 20, fontFamily: f.medium, color: c.gold }}>MORE THAN THE LECTURE HALL</T><T style={{ fontFamily: f.bold, color: c.surface, fontSize: 27, lineHeight: 35, letterSpacing: -0.4 }}>Find your people.</T><View style={[s.row, { gap: 12, flexWrap: 'wrap' }]}><T style={{ color: c.surface, fontSize: 16, lineHeight: 24 }}>Explore {clubs.length} clubs & communities</T><Icon name="arrow-right" size={20} color={c.surface} /></View></View>
+    </Pressable>
     <View style={{ gap: 18 }}>
-      <SectionTitle title="Around campus" subtitle="Waterloo and online events. Times shown in Waterloo time." />
-      <Chips items={['For you', 'Events', 'Saved']} value={filter} onChange={value => { setFilter(value); setLimit(12); }} />
+      <SectionTitle title="Around campus" subtitle="Events from Laurier’s official calendar." />
+      <Chips items={['Upcoming', 'Saved']} value={filter} onChange={value => { setFilter(value); setLimit(3); }} />
+      {candidates.length > 0 && <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 18 }}>{candidates.slice(0, limit).map(event => <View key={event.id} style={{ flexBasis: compact ? '100%' : '30%', flexGrow: 1, maxWidth: compact ? undefined : 420 }}><EventCard event={event} /></View>)}</View>}
+      {!candidates.length && !loading && !error && <Card><Empty title={filter === 'Saved' ? 'Keep your next plan here' : 'No upcoming campus events'} icon="calendar" description={filter === 'Saved' ? 'Tap the bookmark on an event to save it for later.' : 'New events appear when Laurier publishes them.'} /></Card>}
+      {candidates.length > limit && <Button secondary label="Show more events" onPress={() => setLimit(value => value + 6)} />}
       <CalendarStatus />
-      {visible.length ? <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 18 }}>{visible.map(event => <View key={event.id} style={{ width: compact ? '100%' : undefined, flexBasis: compact ? undefined : '30%', flexGrow: compact ? undefined : 1, maxWidth: compact ? undefined : 420 }}><EventCard event={event} /></View>)}</View> : !loading && !error && <Card><Empty title={filter === 'Saved' ? 'No saved campus events.' : 'No upcoming campus events.'} icon="calendar" description={filter === 'Saved' ? 'Save an event to keep it here.' : 'New listings appear as Laurier publishes them.'} /></Card>}
-      {filter !== 'For you' && candidates.length > limit && <Button secondary label="Show more events" onPress={() => setLimit(value => value + 12)} />}
     </View>
-    <View style={{ flexDirection: desktop ? 'row' : 'column', gap: 24 }}>
-      <View style={{ flex: 1.5, gap: 18 }}><SectionTitle title="Find your community" action="All clubs" onPress={() => router.push('/clubs')} /><View style={{ flexDirection: compact ? 'column' : 'row', gap: 16 }}>{featuredClubs.map(club => <View key={club.id} style={{ flex: 1 }}><ClubCard club={club} /></View>)}</View></View>
-      <View style={{ flex: 1, borderRadius: radii.card, backgroundColor: c.sage, padding: 28, gap: 16, justifyContent: 'center' }}><Icon name="navigation" size={25} color={c.green} /><T style={{ fontFamily: f.bold, fontSize: 25, lineHeight: 33, letterSpacing: -0.4 }}>Your next class,{'\n'}a little closer.</T><T style={{ color: c.green, lineHeight: 23, fontSize: 14 }}>Search a building or room code to find your way around campus.</T><Pressable accessibilityRole="button" onPress={() => router.push('/map')} style={({ pressed }) => [s.row, { gap: 9, minHeight: 44, opacity: pressed ? 0.65 : 1 }]}><T style={{ fontFamily: f.medium, color: c.green, fontSize: 14 }}>Open campus map</T><Icon name="arrow-right" color={c.green} size={17} /></Pressable></View>
-    </View>
+    <InstagramFeed preview />
+    <View style={{ gap: 18 }}><SectionTitle title="A community for you" action="All clubs" onPress={() => router.push('/clubs')} /><View style={{ flexDirection: compact ? 'column' : 'row', gap: 16 }}>{featuredClubs.map(club => <View key={club.id} style={{ flex: 1 }}><ClubCard club={club} /></View>)}</View></View>
   </>;
 }

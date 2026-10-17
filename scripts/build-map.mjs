@@ -2,6 +2,7 @@ import { createRequire } from 'node:module';
 import { readFile, mkdir, writeFile, copyFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import './build-map-search.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const mapRoot=path.join(root,'indoor-campus-map');
 const require=createRequire(path.join(mapRoot,'package.json'));

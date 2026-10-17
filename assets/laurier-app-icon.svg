@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
-  <rect width="1024" height="1024" fill="#49365F"/>
-  <!-- Original geometric EL monogram; no emoji or system symbol assets. -->
-  <path d="M214 278H476V354H298V474H450V550H298V670H476V746H214Z" fill="#F7F4EE"/>
-  <path d="M550 278H634V670H810V746H550Z" fill="#F7F4EE"/>
-  <rect x="214" y="814" width="596" height="12" rx="6" fill="#C9B8DE"/>
-</svg>

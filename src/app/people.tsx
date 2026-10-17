@@ -9,7 +9,7 @@ import { colors as c, fonts as f } from '../lib/theme';
 export default function People() {
   const { session, ready } = useAuth();
   const userId = session?.user.id;
-  const { width } = useWindowDimensions();
+  const { width, fontScale } = useWindowDimensions(); const layoutWidth = width / fontScale;
   const [search, setSearch] = useState('');
   const currentSearch = useRef('');
   const [results, setResults] = useState<DirectoryProfile[]>([]);
@@ -65,7 +65,7 @@ export default function People() {
     {loading ? <View style={{ padding: 32, alignItems: 'center', gap: 12 }}><ActivityIndicator color={c.purple} /><T muted>Finding students…</T></View> : <>
       {!!error && <Card style={{ padding: 20, gap: 12 }}><T accessibilityRole="alert" style={{ color: '#8E3434' }}>{error}</T><Button secondary label="Try again" onPress={() => { setLoading(true); setRetry(value => value + 1); }} /></Card>}
       {!error && results.length === 0 && <Empty title="No profiles here yet." description={search ? 'Try another program name, or check back as more students join.' : 'Be among the first students to share a profile.'} icon="users" />}
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 18 }}>{results.map(person => <Card key={person.id} style={{ width: width < 650 ? '100%' : undefined, flexBasis: width < 650 ? undefined : '30%', flexGrow: 1, maxWidth: width < 650 ? undefined : 460 }}>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 18 }}>{results.map(person => <Card key={person.id} style={{ width: layoutWidth < 700 ? '100%' : undefined, flexBasis: layoutWidth < 700 ? undefined : '30%', flexGrow: 1, maxWidth: layoutWidth < 700 ? undefined : 460 }}>
         <View style={{ height: 48, backgroundColor: c.background }} />
         <View style={{ padding: 22, gap: 13 }}>
           <View style={[s.row, { justifyContent: 'space-between', marginTop: -44 }]}>

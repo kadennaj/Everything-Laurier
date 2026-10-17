@@ -5,6 +5,7 @@ import { Button, Card, Icon, T, body } from '../components/ui';
 import { useAuth } from '../lib/auth';
 import { AUTH_UNAVAILABLE } from '../lib/auth-flow';
 import { colors as c, fonts as f } from '../lib/theme';
+import { BrandLogo } from '../components/BrandLogo';
 
 export default function Login() {
   const { session, ready, configured, recoveryError, pendingEmail, cooldownEmail, resendAvailableAt, busy, sendCode, verifyCode, changeEmail } = useAuth();
@@ -52,7 +53,7 @@ export default function Login() {
 
   return <View style={styles.container}>
     <View style={styles.intro}>
-      <View style={styles.mark}><Icon name="feather" color={c.gold} size={30} /></View>
+      <BrandLogo size={104} />
 
       <T accessibilityRole="header" style={styles.heading}>{isVerifying ? 'Check your inbox.' : 'Welcome to Laurier.'}</T>
       <T style={[body, { textAlign: 'center' }]}>{isVerifying ? 'One small step, and you’re in.' : 'Sign in or create an account with your email. No password to remember.'}</T>
@@ -96,7 +97,6 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: { width: '100%', maxWidth: 480, alignSelf: 'center', gap: 18, paddingVertical: 8 },
   intro: { alignItems: 'center', gap: 12 },
-  mark: { width: 56, height: 56, borderRadius: 18, backgroundColor: c.purple, alignItems: 'center', justifyContent: 'center', marginBottom: 3 },
   heading: { fontFamily: f.bold, fontSize: 31, lineHeight: 38, letterSpacing: -0.4, textAlign: 'center' },
   form: { padding: 24, gap: 20 },
   label: { fontFamily: f.bold, fontSize: 13 },

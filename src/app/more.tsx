@@ -1,17 +1,22 @@
 import { router, Href } from 'expo-router';
 import React from 'react';
-import { Pressable, View } from 'react-native';
-import { Card, Icon, IconName, PageHeading, T, s } from '../components/ui';
+import { View } from 'react-native';
+import { Card, NavigationRow, PageHeading, T } from '../components/ui';
 import { colors as c, fonts as f } from '../lib/theme';
 
-const links: { title: string; description: string; path: Href; icon: IconName }[] = [
-  { title: 'People', description: 'Connections beyond your usual circle.', path: '/people', icon: 'users' },
-  { title: 'Academic help', description: 'Campus support and a little direction.', path: '/help', icon: 'book-open' },
-  { title: 'Saved for later', description: 'Your clubs, places, and next good plans.', path: '/saved', icon: 'bookmark' },
-  { title: 'Your space', description: 'Your account, preferences, and Everything Laurier.', path: '/profile', icon: 'user' },
-  { title: 'Community & support', description: 'Report concerns, manage sources, and get help.', path: '/community', icon: 'flag' },
-  { title: 'Privacy policy', description: 'Your information and your choices.', path: '/privacy', icon: 'shield' },
+const groups: { title: string; items: { title: string; description: string; path: Href; icon: React.ComponentProps<typeof NavigationRow>['icon'] }[] }[] = [
+  { title: 'Campus life', items: [
+    { title: 'Academic help', description: 'Official academic and personal support', path: '/help', icon: 'book-open' },
+    { title: 'Peer tutoring', description: 'Find a course tutor or apply to tutor', path: { pathname: '/help', params: { section: 'tutoring' } }, icon: 'award' },
+    { title: 'People', description: 'Meet students in your program', path: '/people', icon: 'users' },
+    { title: 'Saved items', description: 'Your clubs, places and campus events', path: '/saved', icon: 'bookmark' },
+  ] },
+  { title: 'Your account & support', items: [
+    { title: 'Your space', description: 'Your account, profile and preferences', path: '/profile', icon: 'user' },
+    { title: 'Community & support', description: 'Report a concern or get app help', path: '/community', icon: 'flag' },
+    { title: 'Privacy policy', description: 'Your information and your choices', path: '/privacy', icon: 'shield' },
+  ] },
 ];
 export default function More() {
-  return <><PageHeading eyebrow="EVERYTHING ELSE" title="More for you." subtitle="The useful things, all in one place." /><View style={{ gap: 10 }}>{links.map(link => <Card key={link.title}><Pressable accessibilityRole="button" onPress={() => router.push(link.path)} style={({ pressed }) => [s.row, { gap: 15, minHeight: 82, paddingHorizontal: 17, paddingVertical: 13, opacity: pressed ? 0.7 : 1 }]}><View style={{ width: 46, height: 46, alignItems: 'center', justifyContent: 'center', backgroundColor: c.lavender, borderRadius: 14 }}><Icon name={link.icon} color={c.purple} /></View><View style={{ flex: 1, gap: 4 }}><T style={{ fontFamily: f.bold, fontSize: 16 }}>{link.title}</T><T muted style={{ lineHeight: 18, fontSize: 12 }}>{link.description}</T></View><Icon name="chevron-right" size={19} color={c.purple} /></Pressable></Card>)}</View></>;
+  return <><PageHeading title="Campus services" subtitle="People, course support and the useful everyday things." />{groups.map(group => <View key={group.title} style={{ gap: 12 }}><T accessibilityRole="header" style={{ color: c.muted, fontFamily: f.medium, fontSize: 14, lineHeight: 21 }}>{group.title}</T><Card>{group.items.map((item, index) => <NavigationRow key={item.title} title={item.title} description={item.description} icon={item.icon} last={index === group.items.length - 1} onPress={() => router.push(item.path)} />)}</Card></View>)}</>;
 }

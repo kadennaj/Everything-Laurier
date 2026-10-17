@@ -1,5 +1,7 @@
 # Public website deployment — October 9, 2026
 
+Branding update: Sites version 7 published the supplied logo across the landing, privacy, support, community and fallback pages, including browser icons. Source commit `2959b3c2f295e413078c818c84b308a34e79c459`; successful deployment `appgdep_6ad293f0c5f481919ade68b3e8eed2cb`. The unchanged PNG is publicly served at https://everythinglaurier.ca/assets/everything-laurier-logo.png for the prepared email template. Site audience and policy text were preserved.
+
 Published URLs: https://everythinglaurier.ca/ and https://www.everythinglaurier.ca/. Both hostname and SSL states are active. Public /privacy/, /support/ and /community/ pages are deployed; the production app release check confirmed successful readable HTML responses and the authorized contact. Native Chrome verified the public privacy page, support page and account-deletion instructions.
 
 Public contact: everythinglaurier@gmail.com. No paid Porkbun hosting, hosting trial, purchase or nameserver change was needed. The existing Sites connection hosts the pages. Website source is the separate `everything-laurier-website` directory, not synced `sources/`.

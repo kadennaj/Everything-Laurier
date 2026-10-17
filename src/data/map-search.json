@@ -1,0 +1,6234 @@
+[
+  {
+    "title": "Bricker Academic Building",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "",
+    "kind": "building"
+  },
+  {
+    "title": "BA 113",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA113",
+    "kind": "classroom"
+  },
+  {
+    "title": "BA 111",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA111",
+    "kind": "classroom"
+  },
+  {
+    "title": "BA 112",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA112",
+    "kind": "classroom"
+  },
+  {
+    "title": "BA 110",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA110",
+    "kind": "classroom"
+  },
+  {
+    "title": "BA 101",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA101",
+    "kind": "lecture"
+  },
+  {
+    "title": "BA 102",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA102",
+    "kind": "lecture"
+  },
+  {
+    "title": "BA 117",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA117",
+    "kind": "office"
+  },
+  {
+    "title": "BA 116",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA116",
+    "kind": "office"
+  },
+  {
+    "title": "BA 109",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA109",
+    "kind": "office"
+  },
+  {
+    "title": "BA 108",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA108",
+    "kind": "office"
+  },
+  {
+    "title": "BA 107",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA107",
+    "kind": "office"
+  },
+  {
+    "title": "BA 103",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA103",
+    "kind": "office"
+  },
+  {
+    "title": "BA 104",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA104",
+    "kind": "office"
+  },
+  {
+    "title": "Elevator",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA1-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Washrooms",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA1-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "Stairs",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA1-west-north",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA1-west-south",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA1-east-north",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA1-east-south",
+    "kind": "stairs"
+  },
+  {
+    "title": "South entrance",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA-entrance",
+    "kind": "entrance"
+  },
+  {
+    "title": "Science atrium connection",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 1,
+    "room": "BA-science",
+    "kind": "entrance"
+  },
+  {
+    "title": "BA 211",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 2,
+    "room": "BA211",
+    "kind": "classroom"
+  },
+  {
+    "title": "BA 209",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 2,
+    "room": "BA209",
+    "kind": "classroom"
+  },
+  {
+    "title": "BA 207",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 2,
+    "room": "BA207",
+    "kind": "classroom"
+  },
+  {
+    "title": "BA 210",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 2,
+    "room": "BA210",
+    "kind": "classroom"
+  },
+  {
+    "title": "BA 208",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 2,
+    "room": "BA208",
+    "kind": "classroom"
+  },
+  {
+    "title": "BA 206",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 2,
+    "room": "BA206",
+    "kind": "classroom"
+  },
+  {
+    "title": "BA 201",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 2,
+    "room": "BA201",
+    "kind": "lecture"
+  },
+  {
+    "title": "BA 202",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 2,
+    "room": "BA202",
+    "kind": "classroom"
+  },
+  {
+    "title": "BA 200",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 2,
+    "room": "BA200",
+    "kind": "study"
+  },
+  {
+    "title": "BA 205",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 2,
+    "room": "BA205",
+    "kind": "office"
+  },
+  {
+    "title": "Elevator",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 2,
+    "room": "BA2-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Washrooms",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 2,
+    "room": "BA2-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "Stairs",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 2,
+    "room": "BA2-west-north",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 2,
+    "room": "BA2-west-south",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 2,
+    "room": "BA2-east-north",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 2,
+    "room": "BA2-east-south",
+    "kind": "stairs"
+  },
+  {
+    "title": "BA 314",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA314",
+    "kind": "office"
+  },
+  {
+    "title": "BA 313A",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA313A",
+    "kind": "office"
+  },
+  {
+    "title": "BA 313B",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA313B",
+    "kind": "office"
+  },
+  {
+    "title": "BA 313D",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA313D",
+    "kind": "office"
+  },
+  {
+    "title": "BA 313F",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA313F",
+    "kind": "office"
+  },
+  {
+    "title": "BA 313H",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA313H",
+    "kind": "office"
+  },
+  {
+    "title": "BA 313K",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA313K",
+    "kind": "office"
+  },
+  {
+    "title": "BA 313L",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA313L",
+    "kind": "office"
+  },
+  {
+    "title": "BA 313M",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA313M",
+    "kind": "office"
+  },
+  {
+    "title": "BA 313",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA313",
+    "kind": "office"
+  },
+  {
+    "title": "BA 313C",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA313C",
+    "kind": "office"
+  },
+  {
+    "title": "BA 313E",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA313E",
+    "kind": "office"
+  },
+  {
+    "title": "BA 313G",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA313G",
+    "kind": "office"
+  },
+  {
+    "title": "BA 313J",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA313J",
+    "kind": "office"
+  },
+  {
+    "title": "BA 308",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA308",
+    "kind": "office"
+  },
+  {
+    "title": "BA 307",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA307",
+    "kind": "office"
+  },
+  {
+    "title": "BA 306",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA306",
+    "kind": "office"
+  },
+  {
+    "title": "BA 305",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA305",
+    "kind": "office"
+  },
+  {
+    "title": "BA 316 · ICT support",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA316",
+    "kind": "office"
+  },
+  {
+    "title": "BA 310",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA310",
+    "kind": "office"
+  },
+  {
+    "title": "BA 311",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA311",
+    "kind": "office"
+  },
+  {
+    "title": "BA 312",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA312",
+    "kind": "office"
+  },
+  {
+    "title": "BA 304",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA304",
+    "kind": "office"
+  },
+  {
+    "title": "BA 303A · Meeting room",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA303A",
+    "kind": "study"
+  },
+  {
+    "title": "BA 303E",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA303E",
+    "kind": "office"
+  },
+  {
+    "title": "BA 303D",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA303D",
+    "kind": "office"
+  },
+  {
+    "title": "BA 303C",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA303C",
+    "kind": "office"
+  },
+  {
+    "title": "Elevator",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA3-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Washrooms",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA3-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "Stairs",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA3-west-north",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA3-west-south",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA3-east-north",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "BA",
+    "buildingName": "Bricker Academic Building",
+    "floor": 3,
+    "room": "BA3-east-south",
+    "kind": "stairs"
+  },
+  {
+    "title": "Lazaridis Hall",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "",
+    "kind": "building"
+  },
+  {
+    "title": "LH 1001",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1001",
+    "kind": "lecture"
+  },
+  {
+    "title": "LH 1009",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1009",
+    "kind": "lecture"
+  },
+  {
+    "title": "LH 1010",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1010",
+    "kind": "lecture"
+  },
+  {
+    "title": "LH 1011",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1011",
+    "kind": "lecture"
+  },
+  {
+    "title": "Student lounge",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1-Student lounge",
+    "kind": "study"
+  },
+  {
+    "title": "Study area",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1-Study area",
+    "kind": "study"
+  },
+  {
+    "title": "Byte 75",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1-South lobby",
+    "kind": "food"
+  },
+  {
+    "title": "Elevators",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Washrooms",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "Stairs",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1-northwest",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1-southwest",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1-northeast",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1-southeast",
+    "kind": "stairs"
+  },
+  {
+    "title": "Atrium stairs",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1-atrium-stairs",
+    "kind": "stairs"
+  },
+  {
+    "title": "South entrance",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH-entrance",
+    "kind": "entrance"
+  },
+  {
+    "title": "University Avenue entrance",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH-north-entrance",
+    "kind": "entrance"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1-east-0",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1-east-1",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1-east-2",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1-east-3",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 1,
+    "room": "LH1-east-4",
+    "kind": "office"
+  },
+  {
+    "title": "Upper lecture theatre gallery",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-gallery",
+    "kind": "lecture"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-north-0",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-north-1",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-north-2",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-north-3",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-north-4",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-north-5",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-north-6",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-north-7",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-north-8",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-north-9",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-north-10",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-north-11",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-north-12",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-inner-0",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-inner-1",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-inner-2",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-inner-3",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-inner-4",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-inner-5",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-inner-6",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-inner-7",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-inner-8",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-inner-9",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-core-0",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-core-1",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-core-2",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-core-3",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-core-4",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-core-5",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-core-6",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-core-7",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-core-8",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-core-9",
+    "kind": "office"
+  },
+  {
+    "title": "Northwest meeting room",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-northwest-room",
+    "kind": "classroom"
+  },
+  {
+    "title": "LH 2066",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2066",
+    "kind": "lecture"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-south-service-0",
+    "kind": "office"
+  },
+  {
+    "title": "LH 2068",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2068",
+    "kind": "lecture"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-south-service-1",
+    "kind": "office"
+  },
+  {
+    "title": "LH 2070",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2070",
+    "kind": "lecture"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-south-service-2",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-east-0",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-east-1",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-east-2",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-east-3",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-east-4",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-east-inner-0",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-east-inner-1",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-east-inner-2",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-east-inner-3",
+    "kind": "office"
+  },
+  {
+    "title": "Elevators",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Washrooms",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "Stairs",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-northwest",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-southwest",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-northeast",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 2,
+    "room": "LH2-southeast",
+    "kind": "stairs"
+  },
+  {
+    "title": "West hallway",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-west-study",
+    "kind": "hallway"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-west-0",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-west-1",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-west-2",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-west-3",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-west-4",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-west-5",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-west-6",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-west-7",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-west-8",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-west-9",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-west-10",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-west-11",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-southwest-0",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-southwest-1",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-southwest-2",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-southwest-3",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-southwest-4",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-southwest-5",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-north-0",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-north-1",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-north-2",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-north-3",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-north-4",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-north-5",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-north-6",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-north-7",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-north-8",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-north-9",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-north-10",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-north-11",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-north-12",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-north-13",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-inner-0",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-inner-1",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-inner-2",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-inner-3",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-inner-4",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-inner-5",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-inner-6",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-inner-7",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-inner-8",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-inner-9",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-inner-10",
+    "kind": "office"
+  },
+  {
+    "title": "Northwest meeting room",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-northwest-room",
+    "kind": "classroom"
+  },
+  {
+    "title": "Seminar room A",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-seminar-0",
+    "kind": "classroom"
+  },
+  {
+    "title": "Seminar room B",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-seminar-1",
+    "kind": "classroom"
+  },
+  {
+    "title": "Seminar room C",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-seminar-2",
+    "kind": "classroom"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-core-0",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-core-1",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-core-2",
+    "kind": "office"
+  },
+  {
+    "title": "LH 3094",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3094",
+    "kind": "lecture"
+  },
+  {
+    "title": "South lecture room A",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-south-0",
+    "kind": "lecture"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-south-service-0",
+    "kind": "office"
+  },
+  {
+    "title": "LH 3098",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3098",
+    "kind": "lecture"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-south-service-1",
+    "kind": "office"
+  },
+  {
+    "title": "South lecture room C",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-south-2",
+    "kind": "lecture"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-south-service-2",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-east-0",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-east-1",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-east-2",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-east-3",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-east-4",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-east-inner-0",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-east-inner-1",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-east-inner-2",
+    "kind": "office"
+  },
+  {
+    "title": "Office",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-east-inner-3",
+    "kind": "office"
+  },
+  {
+    "title": "Elevators",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Washrooms",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "Stairs",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-northwest",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-southwest",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-northeast",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "LH",
+    "buildingName": "Lazaridis Hall",
+    "floor": 3,
+    "room": "LH3-southeast",
+    "kind": "stairs"
+  },
+  {
+    "title": "Laurier Library",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "",
+    "kind": "building"
+  },
+  {
+    "title": "Main stairs",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 1,
+    "room": "LIB1-stairs",
+    "kind": "stairs"
+  },
+  {
+    "title": "Elevator",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 1,
+    "room": "LIB1-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Washrooms",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 1,
+    "room": "LIB1-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "1-122 · Archives reading area",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 1,
+    "room": "LIB1-122",
+    "kind": "study"
+  },
+  {
+    "title": "Main stairs",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-stairs",
+    "kind": "stairs"
+  },
+  {
+    "title": "Elevator",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Main entrance · Floor 2",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-entrance",
+    "kind": "entrance"
+  },
+  {
+    "title": "2-207 · Learning Lab",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-207",
+    "kind": "classroom"
+  },
+  {
+    "title": "2-205 · Makerspace",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-205",
+    "kind": "classroom"
+  },
+  {
+    "title": "2-202",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-202",
+    "kind": "office"
+  },
+  {
+    "title": "Robert Langen Art Gallery",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-gallery",
+    "kind": "study"
+  },
+  {
+    "title": "Holds & reserves",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-holds",
+    "kind": "study"
+  },
+  {
+    "title": "Café",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-cafe",
+    "kind": "study"
+  },
+  {
+    "title": "2-210",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-210",
+    "kind": "office"
+  },
+  {
+    "title": "Service desk",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-desk",
+    "kind": "study"
+  },
+  {
+    "title": "2-215",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-215",
+    "kind": "office"
+  },
+  {
+    "title": "2-214",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-214",
+    "kind": "office"
+  },
+  {
+    "title": "Accessible washroom",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-accessible",
+    "kind": "washroom"
+  },
+  {
+    "title": "2-213A",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-213A",
+    "kind": "office"
+  },
+  {
+    "title": "Reference collection & computers",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-reference",
+    "kind": "study"
+  },
+  {
+    "title": "Study tables",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-tables",
+    "kind": "study"
+  },
+  {
+    "title": "Self check",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 2,
+    "room": "LIB2-self-check",
+    "kind": "study"
+  },
+  {
+    "title": "Main stairs",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-stairs",
+    "kind": "stairs"
+  },
+  {
+    "title": "Elevator",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "3-320",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-320",
+    "kind": "office"
+  },
+  {
+    "title": "3-319",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-319",
+    "kind": "office"
+  },
+  {
+    "title": "3-318 · Interlibrary loans",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-318",
+    "kind": "study"
+  },
+  {
+    "title": "3-314 · Instruction room",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-314",
+    "kind": "classroom"
+  },
+  {
+    "title": "3-300 · Graduate Commons",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-300",
+    "kind": "study"
+  },
+  {
+    "title": "3-317 · Individual study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-317",
+    "kind": "study"
+  },
+  {
+    "title": "3-316 · Individual study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-316",
+    "kind": "study"
+  },
+  {
+    "title": "3-315 · Individual study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-315",
+    "kind": "study"
+  },
+  {
+    "title": "3-321",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-321",
+    "kind": "office"
+  },
+  {
+    "title": "3-322",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-322",
+    "kind": "office"
+  },
+  {
+    "title": "3-323",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-323",
+    "kind": "office"
+  },
+  {
+    "title": "3-324",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-324",
+    "kind": "office"
+  },
+  {
+    "title": "3-306 · Accessibility Services",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-306",
+    "kind": "office"
+  },
+  {
+    "title": "3-301",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-301",
+    "kind": "study"
+  },
+  {
+    "title": "3-302",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-302",
+    "kind": "study"
+  },
+  {
+    "title": "3-303",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-303",
+    "kind": "study"
+  },
+  {
+    "title": "3-304",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-304",
+    "kind": "study"
+  },
+  {
+    "title": "3-305",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-305",
+    "kind": "study"
+  },
+  {
+    "title": "3-310",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-310",
+    "kind": "office"
+  },
+  {
+    "title": "3-311",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-311",
+    "kind": "office"
+  },
+  {
+    "title": "3-312A",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-312A",
+    "kind": "office"
+  },
+  {
+    "title": "3-312B",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-312B",
+    "kind": "office"
+  },
+  {
+    "title": "3-312C",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-312C",
+    "kind": "office"
+  },
+  {
+    "title": "Government documents",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-gov",
+    "kind": "study"
+  },
+  {
+    "title": "Microform",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-microform",
+    "kind": "study"
+  },
+  {
+    "title": "Computers & Datastream",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-computers",
+    "kind": "study"
+  },
+  {
+    "title": "Washrooms",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "Accessible washroom",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 3,
+    "room": "LIB3-accessible",
+    "kind": "washroom"
+  },
+  {
+    "title": "Main stairs",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 4,
+    "room": "LIB4-stairs",
+    "kind": "stairs"
+  },
+  {
+    "title": "Elevator",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 4,
+    "room": "LIB4-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "4-413 · Individual study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 4,
+    "room": "LIB4-413",
+    "kind": "study"
+  },
+  {
+    "title": "4-412 · Individual study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 4,
+    "room": "LIB4-412",
+    "kind": "study"
+  },
+  {
+    "title": "4-411 · Individual study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 4,
+    "room": "LIB4-411",
+    "kind": "study"
+  },
+  {
+    "title": "4-408 · Group study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 4,
+    "room": "LIB4-408",
+    "kind": "study"
+  },
+  {
+    "title": "4-406 · Group study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 4,
+    "room": "LIB4-406",
+    "kind": "study"
+  },
+  {
+    "title": "4-415 · Meeting room",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 4,
+    "room": "LIB4-415",
+    "kind": "office"
+  },
+  {
+    "title": "4-414 · Music, LP & film collection",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 4,
+    "room": "LIB4-414",
+    "kind": "study"
+  },
+  {
+    "title": "Journals",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 4,
+    "room": "LIB4-journals",
+    "kind": "study"
+  },
+  {
+    "title": "Music books, scores & media",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 4,
+    "room": "LIB4-music",
+    "kind": "study"
+  },
+  {
+    "title": "Journals · PN – ZA",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 4,
+    "room": "LIB4-collection-north",
+    "kind": "study"
+  },
+  {
+    "title": "Washrooms",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 4,
+    "room": "LIB4-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "Accessible washroom",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 4,
+    "room": "LIB4-accessible",
+    "kind": "washroom"
+  },
+  {
+    "title": "Main stairs",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 5,
+    "room": "LIB5-stairs",
+    "kind": "stairs"
+  },
+  {
+    "title": "Elevator",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 5,
+    "room": "LIB5-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "5-513 · Individual study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 5,
+    "room": "LIB5-513",
+    "kind": "study"
+  },
+  {
+    "title": "5-512 · Individual study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 5,
+    "room": "LIB5-512",
+    "kind": "study"
+  },
+  {
+    "title": "5-511 · Individual study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 5,
+    "room": "LIB5-511",
+    "kind": "study"
+  },
+  {
+    "title": "5-507 · Group study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 5,
+    "room": "LIB5-507",
+    "kind": "study"
+  },
+  {
+    "title": "5-505 · Group study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 5,
+    "room": "LIB5-505",
+    "kind": "study"
+  },
+  {
+    "title": "Quiet study area",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 5,
+    "room": "LIB5-quiet",
+    "kind": "study"
+  },
+  {
+    "title": "5-501 · Corpus Christianorum",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 5,
+    "room": "LIB5-501",
+    "kind": "study"
+  },
+  {
+    "title": "Books · DS – GV",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 5,
+    "room": "LIB5-collection-north",
+    "kind": "study"
+  },
+  {
+    "title": "Books · BV – DS",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 5,
+    "room": "LIB5-collection-middle",
+    "kind": "study"
+  },
+  {
+    "title": "Books · A – BV",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 5,
+    "room": "LIB5-collection-south",
+    "kind": "study"
+  },
+  {
+    "title": "Washrooms",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 5,
+    "room": "LIB5-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "Accessible washroom",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 5,
+    "room": "LIB5-accessible",
+    "kind": "washroom"
+  },
+  {
+    "title": "Main stairs",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 6,
+    "room": "LIB6-stairs",
+    "kind": "stairs"
+  },
+  {
+    "title": "Elevator",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 6,
+    "room": "LIB6-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "6-613 · Individual study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 6,
+    "room": "LIB6-613",
+    "kind": "study"
+  },
+  {
+    "title": "6-612 · Individual study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 6,
+    "room": "LIB6-612",
+    "kind": "study"
+  },
+  {
+    "title": "6-611 · Individual study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 6,
+    "room": "LIB6-611",
+    "kind": "study"
+  },
+  {
+    "title": "6-607 · Group study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 6,
+    "room": "LIB6-607",
+    "kind": "study"
+  },
+  {
+    "title": "6-605 · Group study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 6,
+    "room": "LIB6-605",
+    "kind": "study"
+  },
+  {
+    "title": "Quiet study area",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 6,
+    "room": "LIB6-quiet",
+    "kind": "study"
+  },
+  {
+    "title": "Books · JX – PN",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 6,
+    "room": "LIB6-collection-north",
+    "kind": "study"
+  },
+  {
+    "title": "Books · HN – JV",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 6,
+    "room": "LIB6-collection-middle",
+    "kind": "study"
+  },
+  {
+    "title": "Books · H – HN",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 6,
+    "room": "LIB6-collection-south",
+    "kind": "study"
+  },
+  {
+    "title": "Washrooms",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 6,
+    "room": "LIB6-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "Accessible washroom",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 6,
+    "room": "LIB6-accessible",
+    "kind": "washroom"
+  },
+  {
+    "title": "Main stairs",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 7,
+    "room": "LIB7-stairs",
+    "kind": "stairs"
+  },
+  {
+    "title": "Elevator",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 7,
+    "room": "LIB7-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "7-712 · Individual study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 7,
+    "room": "LIB7-712",
+    "kind": "study"
+  },
+  {
+    "title": "7-711 · Individual study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 7,
+    "room": "LIB7-711",
+    "kind": "study"
+  },
+  {
+    "title": "7-707 · Group study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 7,
+    "room": "LIB7-707",
+    "kind": "study"
+  },
+  {
+    "title": "7-705 · Group study",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 7,
+    "room": "LIB7-705",
+    "kind": "study"
+  },
+  {
+    "title": "Quiet study area",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 7,
+    "room": "LIB7-quiet",
+    "kind": "study"
+  },
+  {
+    "title": "Books · QL – Z",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 7,
+    "room": "LIB7-collection-north",
+    "kind": "study"
+  },
+  {
+    "title": "Books · PT – QL",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 7,
+    "room": "LIB7-collection-middle",
+    "kind": "study"
+  },
+  {
+    "title": "Books · PQ – PT",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 7,
+    "room": "LIB7-collection-south",
+    "kind": "study"
+  },
+  {
+    "title": "Washrooms",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 7,
+    "room": "LIB7-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "Accessible washroom",
+    "building": "LIB",
+    "buildingName": "Laurier Library",
+    "floor": 7,
+    "room": "LIB7-accessible",
+    "kind": "washroom"
+  },
+  {
+    "title": "Science Building",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "",
+    "kind": "building"
+  },
+  {
+    "title": "Atrium entrance A",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "SCI1-entrance-a",
+    "kind": "entrance"
+  },
+  {
+    "title": "Atrium entrance B",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "SCI1-entrance-b",
+    "kind": "entrance"
+  },
+  {
+    "title": "Bricker building connection",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "SCI1-bricker-connection",
+    "kind": "entrance"
+  },
+  {
+    "title": "N 1000",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1000",
+    "kind": "study"
+  },
+  {
+    "title": "N 1002",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1002",
+    "kind": "lecture"
+  },
+  {
+    "title": "N 1001",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1001",
+    "kind": "lecture"
+  },
+  {
+    "title": "N 1004",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1004",
+    "kind": "office"
+  },
+  {
+    "title": "N 1005",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1005",
+    "kind": "office"
+  },
+  {
+    "title": "N 1006",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1006",
+    "kind": "office"
+  },
+  {
+    "title": "N 1007",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1007",
+    "kind": "office"
+  },
+  {
+    "title": "N 1009",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1009",
+    "kind": "office"
+  },
+  {
+    "title": "N 1011",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1011",
+    "kind": "office"
+  },
+  {
+    "title": "N 1011A",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1011A",
+    "kind": "office"
+  },
+  {
+    "title": "N 1021",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1021",
+    "kind": "office"
+  },
+  {
+    "title": "N 1023",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1023",
+    "kind": "office"
+  },
+  {
+    "title": "N 1025",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1025",
+    "kind": "office"
+  },
+  {
+    "title": "N 1017",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1017",
+    "kind": "office"
+  },
+  {
+    "title": "N 1018",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1018",
+    "kind": "office"
+  },
+  {
+    "title": "N 1019",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1019",
+    "kind": "office"
+  },
+  {
+    "title": "N 1020",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1020",
+    "kind": "office"
+  },
+  {
+    "title": "N 1026",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1026",
+    "kind": "office"
+  },
+  {
+    "title": "N 1027",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1027",
+    "kind": "office"
+  },
+  {
+    "title": "N 1028",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1028",
+    "kind": "office"
+  },
+  {
+    "title": "N 1029",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1029",
+    "kind": "office"
+  },
+  {
+    "title": "N 1022",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1022",
+    "kind": "office"
+  },
+  {
+    "title": "N 1033",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1033",
+    "kind": "washroom"
+  },
+  {
+    "title": "N 1034",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1034",
+    "kind": "washroom"
+  },
+  {
+    "title": "N 1042",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1042",
+    "kind": "classroom"
+  },
+  {
+    "title": "N 1043",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1043",
+    "kind": "classroom"
+  },
+  {
+    "title": "N 1037",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1037",
+    "kind": "office"
+  },
+  {
+    "title": "N 1044",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1044",
+    "kind": "lecture"
+  },
+  {
+    "title": "N 1057",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1057",
+    "kind": "classroom"
+  },
+  {
+    "title": "N 1059",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1059",
+    "kind": "classroom"
+  },
+  {
+    "title": "N 1068",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1068",
+    "kind": "office"
+  },
+  {
+    "title": "N 1066",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1066",
+    "kind": "office"
+  },
+  {
+    "title": "N 1048",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1048",
+    "kind": "office"
+  },
+  {
+    "title": "N 1048A",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1048A",
+    "kind": "office"
+  },
+  {
+    "title": "N 1047",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "N1047",
+    "kind": "office"
+  },
+  {
+    "title": "Atrium stairwell",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "SCI1-stairs-atrium",
+    "kind": "stairs"
+  },
+  {
+    "title": "Office stairwell A",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "SCI1-stairs-office-upper",
+    "kind": "stairs"
+  },
+  {
+    "title": "Office stairwell B",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "SCI1-stairs-office-lower",
+    "kind": "stairs"
+  },
+  {
+    "title": "End-wing stairwell",
+    "building": "SCI",
+    "buildingName": "Science Building",
+    "floor": 1,
+    "room": "SCI1-stairs-wing-end",
+    "kind": "stairs"
+  },
+  {
+    "title": "Arts & Concourse",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "",
+    "kind": "building"
+  },
+  {
+    "title": "Concourse · 1E101 / 1E102",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-concourse",
+    "kind": "study"
+  },
+  {
+    "title": "1E1 · Lecture hall",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1E1",
+    "kind": "lecture"
+  },
+  {
+    "title": "Toyota Solarium connecting link",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-solarium",
+    "kind": "hallway"
+  },
+  {
+    "title": "Starbucks · Concourse",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-starbucks",
+    "kind": "food"
+  },
+  {
+    "title": "The Hub",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-hub",
+    "kind": "office"
+  },
+  {
+    "title": "OneCard office",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-onecard",
+    "kind": "office"
+  },
+  {
+    "title": "1C18",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1C18",
+    "kind": "classroom"
+  },
+  {
+    "title": "1C17",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1C17",
+    "kind": "classroom"
+  },
+  {
+    "title": "1C16",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1C16",
+    "kind": "classroom"
+  },
+  {
+    "title": "1C14",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1C14",
+    "kind": "office"
+  },
+  {
+    "title": "1C15",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1C15",
+    "kind": "office"
+  },
+  {
+    "title": "1C15B",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1C15B",
+    "kind": "office"
+  },
+  {
+    "title": "1C12",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1C12",
+    "kind": "office"
+  },
+  {
+    "title": "1C11 · Accessible Learning",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1C11",
+    "kind": "office"
+  },
+  {
+    "title": "1C10",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1C10",
+    "kind": "office"
+  },
+  {
+    "title": "1C09",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1C09",
+    "kind": "office"
+  },
+  {
+    "title": "1C08",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1C08",
+    "kind": "office"
+  },
+  {
+    "title": "1C07",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1C07",
+    "kind": "office"
+  },
+  {
+    "title": "1A5 · Multi-faith room",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1A5",
+    "kind": "study"
+  },
+  {
+    "title": "1A1",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1A1",
+    "kind": "office"
+  },
+  {
+    "title": "1A2",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1A2",
+    "kind": "office"
+  },
+  {
+    "title": "1A3B",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1A3B",
+    "kind": "office"
+  },
+  {
+    "title": "1A3A",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1A3A",
+    "kind": "office"
+  },
+  {
+    "title": "1A4",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1A4",
+    "kind": "office"
+  },
+  {
+    "title": "1A4A",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1A4A",
+    "kind": "office"
+  },
+  {
+    "title": "1A4B",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-1A4B",
+    "kind": "office"
+  },
+  {
+    "title": "Elevator",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Stairs",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-stairs-e",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-stairs-c-west",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-stairs-c-east",
+    "kind": "stairs"
+  },
+  {
+    "title": "Arts C washrooms",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-washroom-c",
+    "kind": "washroom"
+  },
+  {
+    "title": "Concourse washrooms",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-washroom-e",
+    "kind": "washroom"
+  },
+  {
+    "title": "Concourse entrance",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 1,
+    "room": "ARTS1-entrance",
+    "kind": "entrance"
+  },
+  {
+    "title": "2E8",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2E8",
+    "kind": "office"
+  },
+  {
+    "title": "2E7",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2E7",
+    "kind": "office"
+  },
+  {
+    "title": "2E6",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2E6",
+    "kind": "office"
+  },
+  {
+    "title": "2E5C",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2E5C",
+    "kind": "office"
+  },
+  {
+    "title": "2E5B",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2E5B",
+    "kind": "office"
+  },
+  {
+    "title": "2E5A",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2E5A",
+    "kind": "office"
+  },
+  {
+    "title": "2E9",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2E9",
+    "kind": "office"
+  },
+  {
+    "title": "2E10",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2E10",
+    "kind": "office"
+  },
+  {
+    "title": "2E11",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2E11",
+    "kind": "office"
+  },
+  {
+    "title": "2E12",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2E12",
+    "kind": "office"
+  },
+  {
+    "title": "2E1",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2E1",
+    "kind": "office"
+  },
+  {
+    "title": "2E2",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2E2",
+    "kind": "office"
+  },
+  {
+    "title": "2E3",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2E3",
+    "kind": "office"
+  },
+  {
+    "title": "2E4",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2E4",
+    "kind": "office"
+  },
+  {
+    "title": "2C17",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2C17",
+    "kind": "classroom"
+  },
+  {
+    "title": "2C16",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2C16",
+    "kind": "classroom"
+  },
+  {
+    "title": "2C15",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2C15",
+    "kind": "classroom"
+  },
+  {
+    "title": "2C07",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2C07",
+    "kind": "office"
+  },
+  {
+    "title": "2C08",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2C08",
+    "kind": "office"
+  },
+  {
+    "title": "2C09",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2C09",
+    "kind": "office"
+  },
+  {
+    "title": "2C10",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2C10",
+    "kind": "office"
+  },
+  {
+    "title": "2C11",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2C11",
+    "kind": "office"
+  },
+  {
+    "title": "2C12",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2C12",
+    "kind": "office"
+  },
+  {
+    "title": "2C13",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2C13",
+    "kind": "office"
+  },
+  {
+    "title": "2C04",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2C04",
+    "kind": "office"
+  },
+  {
+    "title": "2C03",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2C03",
+    "kind": "office"
+  },
+  {
+    "title": "2C02",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-2C02",
+    "kind": "office"
+  },
+  {
+    "title": "Elevator",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Stairs",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-stairs-e",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-stairs-c-west",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-stairs-c-east",
+    "kind": "stairs"
+  },
+  {
+    "title": "Arts E washrooms",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "To Peters · Floor 1",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-peters-link",
+    "kind": "entrance"
+  },
+  {
+    "title": "Arts E stair landing · Floor 2",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 2,
+    "room": "ARTS2-landing",
+    "kind": "entrance"
+  },
+  {
+    "title": "3E14",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E14",
+    "kind": "office"
+  },
+  {
+    "title": "3E12",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E12",
+    "kind": "office"
+  },
+  {
+    "title": "3E8C",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E8C",
+    "kind": "office"
+  },
+  {
+    "title": "3E10",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E10",
+    "kind": "office"
+  },
+  {
+    "title": "3E8B",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E8B",
+    "kind": "office"
+  },
+  {
+    "title": "3E8A",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E8A",
+    "kind": "office"
+  },
+  {
+    "title": "3E15",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E15",
+    "kind": "office"
+  },
+  {
+    "title": "3E16",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E16",
+    "kind": "office"
+  },
+  {
+    "title": "3E17",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E17",
+    "kind": "office"
+  },
+  {
+    "title": "3E18",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E18",
+    "kind": "office"
+  },
+  {
+    "title": "3E1",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E1",
+    "kind": "office"
+  },
+  {
+    "title": "3E2",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E2",
+    "kind": "office"
+  },
+  {
+    "title": "3E3",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E3",
+    "kind": "office"
+  },
+  {
+    "title": "3E4",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E4",
+    "kind": "office"
+  },
+  {
+    "title": "3E5",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E5",
+    "kind": "office"
+  },
+  {
+    "title": "3E6",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E6",
+    "kind": "office"
+  },
+  {
+    "title": "3E7",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3E7",
+    "kind": "office"
+  },
+  {
+    "title": "3C17",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C17",
+    "kind": "office"
+  },
+  {
+    "title": "3C16",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C16",
+    "kind": "office"
+  },
+  {
+    "title": "3C15",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C15",
+    "kind": "office"
+  },
+  {
+    "title": "3C14",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C14",
+    "kind": "office"
+  },
+  {
+    "title": "3C13",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C13",
+    "kind": "office"
+  },
+  {
+    "title": "3C12",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C12",
+    "kind": "office"
+  },
+  {
+    "title": "3C11",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C11",
+    "kind": "office"
+  },
+  {
+    "title": "3C10B",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C10B",
+    "kind": "office"
+  },
+  {
+    "title": "3C10A",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C10A",
+    "kind": "office"
+  },
+  {
+    "title": "3C09A",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C09A",
+    "kind": "office"
+  },
+  {
+    "title": "3C09B",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C09B",
+    "kind": "office"
+  },
+  {
+    "title": "3C08",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C08",
+    "kind": "office"
+  },
+  {
+    "title": "3C01",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C01",
+    "kind": "office"
+  },
+  {
+    "title": "3C02",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C02",
+    "kind": "office"
+  },
+  {
+    "title": "3C03",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C03",
+    "kind": "office"
+  },
+  {
+    "title": "3C04",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C04",
+    "kind": "office"
+  },
+  {
+    "title": "3C05",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C05",
+    "kind": "office"
+  },
+  {
+    "title": "3C06",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C06",
+    "kind": "office"
+  },
+  {
+    "title": "3C07",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-3C07",
+    "kind": "office"
+  },
+  {
+    "title": "Elevator",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Stairs",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-stairs-e",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-stairs-c-east",
+    "kind": "stairs"
+  },
+  {
+    "title": "Arts E washrooms",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "Arts E stair landing · Floor 3",
+    "building": "ARTS",
+    "buildingName": "Arts & Concourse",
+    "floor": 3,
+    "room": "ARTS3-landing",
+    "kind": "entrance"
+  },
+  {
+    "title": "Frank C. Peters Building",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "",
+    "kind": "building"
+  },
+  {
+    "title": "P119",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P119",
+    "kind": "office"
+  },
+  {
+    "title": "P120",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P120",
+    "kind": "classroom"
+  },
+  {
+    "title": "P115",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P115",
+    "kind": "classroom"
+  },
+  {
+    "title": "P118",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P118",
+    "kind": "office"
+  },
+  {
+    "title": "P111",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P111",
+    "kind": "office"
+  },
+  {
+    "title": "P114",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P114",
+    "kind": "office"
+  },
+  {
+    "title": "P109",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P109",
+    "kind": "office"
+  },
+  {
+    "title": "P108",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P108",
+    "kind": "office"
+  },
+  {
+    "title": "P107 · Service Laurier",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P107",
+    "kind": "office"
+  },
+  {
+    "title": "P103",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P103",
+    "kind": "office"
+  },
+  {
+    "title": "P101",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P101",
+    "kind": "office"
+  },
+  {
+    "title": "P110 · Lecture theatre (P110A/B)",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P110",
+    "kind": "lecture"
+  },
+  {
+    "title": "P104",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P104",
+    "kind": "office"
+  },
+  {
+    "title": "Elevator",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P1-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Stairs",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P1-stairs-north",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P1-stairs-east",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P1-stairs-west",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P1-stairs-south",
+    "kind": "stairs"
+  },
+  {
+    "title": "Peters washrooms",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P1-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "To Schlegel · Floor 1",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P1-schlegel-link",
+    "kind": "entrance"
+  },
+  {
+    "title": "To Arts · Floor 2",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P1-arts-link",
+    "kind": "entrance"
+  },
+  {
+    "title": "Peters south entrance",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 1,
+    "room": "P1-entrance",
+    "kind": "entrance"
+  },
+  {
+    "title": "P224",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 2,
+    "room": "P224",
+    "kind": "office"
+  },
+  {
+    "title": "P226",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 2,
+    "room": "P226",
+    "kind": "office"
+  },
+  {
+    "title": "P225",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 2,
+    "room": "P225",
+    "kind": "office"
+  },
+  {
+    "title": "P234",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 2,
+    "room": "P234",
+    "kind": "office"
+  },
+  {
+    "title": "P233",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 2,
+    "room": "P233",
+    "kind": "office"
+  },
+  {
+    "title": "P232",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 2,
+    "room": "P232",
+    "kind": "office"
+  },
+  {
+    "title": "P231",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 2,
+    "room": "P231",
+    "kind": "office"
+  },
+  {
+    "title": "P230",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 2,
+    "room": "P230",
+    "kind": "office"
+  },
+  {
+    "title": "P228",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 2,
+    "room": "P228",
+    "kind": "office"
+  },
+  {
+    "title": "Elevator",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 2,
+    "room": "P2-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Stairs",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 2,
+    "room": "P2-stairs-east",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 2,
+    "room": "P2-stairs-west",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 2,
+    "room": "P2-stairs-south",
+    "kind": "stairs"
+  },
+  {
+    "title": "Peters washrooms",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 2,
+    "room": "P2-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "To Schlegel · Floor 2",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 2,
+    "room": "P2-schlegel-link",
+    "kind": "entrance"
+  },
+  {
+    "title": "Peters south landing · Floor 2",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 2,
+    "room": "P2-landing",
+    "kind": "entrance"
+  },
+  {
+    "title": "Stairs",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P3-stairs-north",
+    "kind": "stairs"
+  },
+  {
+    "title": "P344",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P344",
+    "kind": "office"
+  },
+  {
+    "title": "P337",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P337",
+    "kind": "office"
+  },
+  {
+    "title": "P351",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P351",
+    "kind": "office"
+  },
+  {
+    "title": "P357",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P357",
+    "kind": "office"
+  },
+  {
+    "title": "P358",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P358",
+    "kind": "office"
+  },
+  {
+    "title": "P359",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P359",
+    "kind": "office"
+  },
+  {
+    "title": "P331",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P331",
+    "kind": "office"
+  },
+  {
+    "title": "P329",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P329",
+    "kind": "office"
+  },
+  {
+    "title": "P360",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P360",
+    "kind": "office"
+  },
+  {
+    "title": "P361",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P361",
+    "kind": "office"
+  },
+  {
+    "title": "P364",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P364",
+    "kind": "office"
+  },
+  {
+    "title": "P327",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P327",
+    "kind": "office"
+  },
+  {
+    "title": "P328",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P328",
+    "kind": "office"
+  },
+  {
+    "title": "Elevator",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P3-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Stairs",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P3-stairs-west",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P3-stairs-south",
+    "kind": "stairs"
+  },
+  {
+    "title": "Peters washrooms",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P3-washroom",
+    "kind": "washroom"
+  },
+  {
+    "title": "To Schlegel · Floor 3",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P3-schlegel-link",
+    "kind": "entrance"
+  },
+  {
+    "title": "Peters south landing · Floor 3",
+    "building": "P",
+    "buildingName": "Frank C. Peters Building",
+    "floor": 3,
+    "room": "P3-landing",
+    "kind": "entrance"
+  },
+  {
+    "title": "Schlegel Building",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 1,
+    "room": "",
+    "kind": "building"
+  },
+  {
+    "title": "SB106",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 1,
+    "room": "SB106",
+    "kind": "lecture"
+  },
+  {
+    "title": "SB107",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 1,
+    "room": "SB107",
+    "kind": "lecture"
+  },
+  {
+    "title": "SB105",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 1,
+    "room": "SB105",
+    "kind": "lecture"
+  },
+  {
+    "title": "SB103",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 1,
+    "room": "SB103",
+    "kind": "lecture"
+  },
+  {
+    "title": "SB102",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 1,
+    "room": "SB102",
+    "kind": "office"
+  },
+  {
+    "title": "SB101",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 1,
+    "room": "SB101",
+    "kind": "office"
+  },
+  {
+    "title": "SB104",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 1,
+    "room": "SB104",
+    "kind": "office"
+  },
+  {
+    "title": "SB108",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 1,
+    "room": "SB108",
+    "kind": "office"
+  },
+  {
+    "title": "Schlegel washroom",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 1,
+    "room": "SB109",
+    "kind": "washroom"
+  },
+  {
+    "title": "Schlegel washroom",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 1,
+    "room": "SB110",
+    "kind": "washroom"
+  },
+  {
+    "title": "Elevator",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 1,
+    "room": "SC1-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Stairs",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 1,
+    "room": "SC1-stairs-west",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 1,
+    "room": "SC1-stairs-east",
+    "kind": "stairs"
+  },
+  {
+    "title": "To Peters · Floor 1",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 1,
+    "room": "SC1-peters-link",
+    "kind": "entrance"
+  },
+  {
+    "title": "Schlegel entrance / landing · Floor 1",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 1,
+    "room": "SC1-entrance",
+    "kind": "entrance"
+  },
+  {
+    "title": "SB210",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SB210",
+    "kind": "office"
+  },
+  {
+    "title": "SB212",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SB212",
+    "kind": "office"
+  },
+  {
+    "title": "SB213",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SB213",
+    "kind": "office"
+  },
+  {
+    "title": "SB208",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SB208",
+    "kind": "office"
+  },
+  {
+    "title": "SB205",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SB205",
+    "kind": "office"
+  },
+  {
+    "title": "SB206",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SB206",
+    "kind": "office"
+  },
+  {
+    "title": "SB204",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SB204",
+    "kind": "lecture"
+  },
+  {
+    "title": "SB203",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SB203",
+    "kind": "lecture"
+  },
+  {
+    "title": "SB201",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SB201",
+    "kind": "office"
+  },
+  {
+    "title": "SB202",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SB202",
+    "kind": "office"
+  },
+  {
+    "title": "SB218",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SB218",
+    "kind": "office"
+  },
+  {
+    "title": "Schlegel washroom A",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SC2-washroom-a",
+    "kind": "washroom"
+  },
+  {
+    "title": "Schlegel washroom B",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SC2-washroom-b",
+    "kind": "washroom"
+  },
+  {
+    "title": "Elevator",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SC2-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Stairs",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SC2-stairs-west",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SC2-stairs-east",
+    "kind": "stairs"
+  },
+  {
+    "title": "To Peters · Floor 2",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SC2-peters-link",
+    "kind": "entrance"
+  },
+  {
+    "title": "Schlegel entrance / landing · Floor 2",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 2,
+    "room": "SC2-entrance",
+    "kind": "entrance"
+  },
+  {
+    "title": "SB304F",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 3,
+    "room": "SB304F",
+    "kind": "office"
+  },
+  {
+    "title": "SB305",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 3,
+    "room": "SB305",
+    "kind": "classroom"
+  },
+  {
+    "title": "SB306",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 3,
+    "room": "SB306",
+    "kind": "office"
+  },
+  {
+    "title": "SB304",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 3,
+    "room": "SB304",
+    "kind": "office"
+  },
+  {
+    "title": "SB302",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 3,
+    "room": "SB302",
+    "kind": "office"
+  },
+  {
+    "title": "SB310",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 3,
+    "room": "SB310",
+    "kind": "office"
+  },
+  {
+    "title": "Schlegel washroom A",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 3,
+    "room": "SC3-washroom-a",
+    "kind": "washroom"
+  },
+  {
+    "title": "Schlegel washroom B",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 3,
+    "room": "SC3-washroom-b",
+    "kind": "washroom"
+  },
+  {
+    "title": "Elevator",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 3,
+    "room": "SC3-lift",
+    "kind": "elevator"
+  },
+  {
+    "title": "Stairs",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 3,
+    "room": "SC3-stairs-east",
+    "kind": "stairs"
+  },
+  {
+    "title": "To Peters · Floor 3",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 3,
+    "room": "SC3-peters-link",
+    "kind": "entrance"
+  },
+  {
+    "title": "Schlegel entrance / landing · Floor 3",
+    "building": "SC",
+    "buildingName": "Schlegel Building",
+    "floor": 3,
+    "room": "SC3-entrance",
+    "kind": "entrance"
+  },
+  {
+    "title": "Dr. Alvin Woods Building",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 1,
+    "room": "",
+    "kind": "building"
+  },
+  {
+    "title": "AW1-301A",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 1,
+    "room": "AW1-301A",
+    "kind": "office"
+  },
+  {
+    "title": "AW1-301B",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 1,
+    "room": "AW1-301B",
+    "kind": "office"
+  },
+  {
+    "title": "AW1-301C",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 1,
+    "room": "AW1-301C",
+    "kind": "office"
+  },
+  {
+    "title": "AW1-108",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 1,
+    "room": "AW1-108",
+    "kind": "office"
+  },
+  {
+    "title": "AW1-407",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 1,
+    "room": "AW1-407",
+    "kind": "office"
+  },
+  {
+    "title": "AW1-215 · Concourse-side open area",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 1,
+    "room": "AW1-215",
+    "kind": "study"
+  },
+  {
+    "title": "DAWB Floor 1 washroom A",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 1,
+    "room": "DAWB1-washroom-a",
+    "kind": "washroom"
+  },
+  {
+    "title": "DAWB Floor 1 washroom B",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 1,
+    "room": "DAWB1-washroom-b",
+    "kind": "washroom"
+  },
+  {
+    "title": "Elevator",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 1,
+    "room": "DAWB1-lift-a",
+    "kind": "elevator"
+  },
+  {
+    "title": "Elevator",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 1,
+    "room": "DAWB1-lift-b",
+    "kind": "elevator"
+  },
+  {
+    "title": "Stairs",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 1,
+    "room": "DAWB1-stairs-west",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 1,
+    "room": "DAWB1-stairs-inner",
+    "kind": "stairs"
+  },
+  {
+    "title": "DAWB south entrance",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 1,
+    "room": "DAWB1-entrance",
+    "kind": "entrance"
+  },
+  {
+    "title": "DAWB 2-105",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-105",
+    "kind": "classroom"
+  },
+  {
+    "title": "AW2-113",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-113",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-115",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-115",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-117",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-117",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 2-101",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-101",
+    "kind": "classroom"
+  },
+  {
+    "title": "DAWB 2-104",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-104",
+    "kind": "classroom"
+  },
+  {
+    "title": "DAWB 2-106",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-106",
+    "kind": "classroom"
+  },
+  {
+    "title": "DAWB 2-108",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-108",
+    "kind": "classroom"
+  },
+  {
+    "title": "AW2-142",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-142",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-140",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-140",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-139",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-139",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-138",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-138",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-136",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-136",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-134",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-134",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-110",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-110",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-111",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-111",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-112",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-112",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-114",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-114",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-116",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-116",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-118",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-118",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-133A",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-133A",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-133",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-133",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-133B",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-133B",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-130",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-130",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-128",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-128",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-126",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-126",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-124",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-124",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-123",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-123",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-119B",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-119B",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-119",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-119",
+    "kind": "office"
+  },
+  {
+    "title": "AW2-119A",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "AW2-119A",
+    "kind": "office"
+  },
+  {
+    "title": "Elevator",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "DAWB2-lift-a",
+    "kind": "elevator"
+  },
+  {
+    "title": "Elevator",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "DAWB2-lift-b",
+    "kind": "elevator"
+  },
+  {
+    "title": "Stairs",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "DAWB2-stairs-west",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "DAWB2-stairs-inner",
+    "kind": "stairs"
+  },
+  {
+    "title": "DAWB washroom A",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "DAWB2-washroom-a",
+    "kind": "washroom"
+  },
+  {
+    "title": "DAWB washroom B",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "DAWB2-washroom-b",
+    "kind": "washroom"
+  },
+  {
+    "title": "DAWB west landing · Floor 2",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 2,
+    "room": "DAWB2-landing",
+    "kind": "entrance"
+  },
+  {
+    "title": "AW3-101B",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-101B",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-101A",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-101A",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-103",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-103",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-105",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-105",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-108",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-108",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 3-106",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-106",
+    "kind": "classroom"
+  },
+  {
+    "title": "DAWB 3-147",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-147",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 3-148",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-148",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 3-149",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-149",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 3-150",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-150",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 3-151",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-151",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 3-152",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-152",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 3-153",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-153",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 3-154",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-154",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 3-155",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-155",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 3-156",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-156",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 3-157",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-157",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-146",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-146",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-145",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-145",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-144",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-144",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-143",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-143",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-142",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-142",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-140",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-140",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-139",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-139",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-138",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-138",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-136",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-136",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-158",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-158",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-159",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-159",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-109",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-109",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-110",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-110",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-112",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-112",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-114",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-114",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-116",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-116",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-118",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-118",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-119",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-119",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-134A",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-134A",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-134",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-134",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-132",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-132",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-130",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-130",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-128",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-128",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-126",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-126",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-124",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-124",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-120",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-120",
+    "kind": "office"
+  },
+  {
+    "title": "AW3-120A",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "AW3-120A",
+    "kind": "office"
+  },
+  {
+    "title": "Elevator",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "DAWB3-lift-a",
+    "kind": "elevator"
+  },
+  {
+    "title": "Elevator",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "DAWB3-lift-b",
+    "kind": "elevator"
+  },
+  {
+    "title": "Stairs",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "DAWB3-stairs-west",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "DAWB3-stairs-inner",
+    "kind": "stairs"
+  },
+  {
+    "title": "DAWB washroom A",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "DAWB3-washroom-a",
+    "kind": "washroom"
+  },
+  {
+    "title": "DAWB washroom B",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "DAWB3-washroom-b",
+    "kind": "washroom"
+  },
+  {
+    "title": "DAWB west landing · Floor 3",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 3,
+    "room": "DAWB3-landing",
+    "kind": "entrance"
+  },
+  {
+    "title": "AW4-101",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-101",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-103A",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-103A",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-103B",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-103B",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-105A",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-105A",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-105B",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-105B",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-103C",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-103C",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-103D",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-103D",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-105C",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-105C",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-105D",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-105D",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-108",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-108",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 4-106",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-106",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 4-148",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-148",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 4-149",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-149",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 4-150",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-150",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 4-151",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-151",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 4-152",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-152",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 4-153",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-153",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 4-154",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-154",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 4-155",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-155",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 4-156",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-156",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 4-157",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-157",
+    "kind": "office"
+  },
+  {
+    "title": "DAWB 4-159",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-159",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-147",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-147",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-146",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-146",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-145",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-145",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-144",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-144",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-142",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-142",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-141",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-141",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-140",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-140",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-138",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-138",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-136",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-136",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-158",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-158",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-160",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-160",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-109",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-109",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-110",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-110",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-112",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-112",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-114",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-114",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-116",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-116",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-118",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-118",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-119",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-119",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-135A",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-135A",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-135",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-135",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-132",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-132",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-130",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-130",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-128",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-128",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-126",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-126",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-124",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-124",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-120",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-120",
+    "kind": "office"
+  },
+  {
+    "title": "AW4-120A",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "AW4-120A",
+    "kind": "office"
+  },
+  {
+    "title": "Elevator",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "DAWB4-lift-a",
+    "kind": "elevator"
+  },
+  {
+    "title": "Elevator",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "DAWB4-lift-b",
+    "kind": "elevator"
+  },
+  {
+    "title": "Stairs",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "DAWB4-stairs-west",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "DAWB4-stairs-inner",
+    "kind": "stairs"
+  },
+  {
+    "title": "DAWB washroom A",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "DAWB4-washroom-a",
+    "kind": "washroom"
+  },
+  {
+    "title": "DAWB washroom B",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "DAWB4-washroom-b",
+    "kind": "washroom"
+  },
+  {
+    "title": "DAWB west landing · Floor 4",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 4,
+    "room": "DAWB4-landing",
+    "kind": "entrance"
+  },
+  {
+    "title": "Lecture room · north (number not shown)",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 5,
+    "room": "DAWB5-lecture-north",
+    "kind": "classroom"
+  },
+  {
+    "title": "Lecture room · south (number not shown)",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 5,
+    "room": "DAWB5-lecture-south",
+    "kind": "classroom"
+  },
+  {
+    "title": "Meeting room · west (number not shown)",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 5,
+    "room": "DAWB5-meeting-a",
+    "kind": "study"
+  },
+  {
+    "title": "Meeting room · east (number not shown)",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 5,
+    "room": "DAWB5-meeting-b",
+    "kind": "study"
+  },
+  {
+    "title": "Men’s washroom",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 5,
+    "room": "DAWB5-washroom-a",
+    "kind": "washroom"
+  },
+  {
+    "title": "Women’s washroom",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 5,
+    "room": "DAWB5-washroom-b",
+    "kind": "washroom"
+  },
+  {
+    "title": "Elevator",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 5,
+    "room": "DAWB5-lift-a",
+    "kind": "elevator"
+  },
+  {
+    "title": "Elevator",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 5,
+    "room": "DAWB5-lift-b",
+    "kind": "elevator"
+  },
+  {
+    "title": "Stairs",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 5,
+    "room": "DAWB5-stairs-west",
+    "kind": "stairs"
+  },
+  {
+    "title": "Stairs",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 5,
+    "room": "DAWB5-stairs-inner",
+    "kind": "stairs"
+  },
+  {
+    "title": "DAWB west landing · Floor 5",
+    "building": "DAWB",
+    "buildingName": "Dr. Alvin Woods Building",
+    "floor": 5,
+    "room": "DAWB5-landing",
+    "kind": "entrance"
+  },
+  {
+    "title": "Martin Luther University College",
+    "building": "MLUC",
+    "buildingName": "Martin Luther University College",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Fred Nichols Campus Centre",
+    "building": "FNCC",
+    "buildingName": "Fred Nichols Campus Centre",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Dining Hall",
+    "building": "DH",
+    "buildingName": "Dining Hall",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "John Aird Centre / Music Building",
+    "building": "JAC",
+    "buildingName": "John Aird Centre / Music Building",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Theatre Auditorium",
+    "building": "TA",
+    "buildingName": "Theatre Auditorium",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "MacDonald House",
+    "building": "RES-113027056",
+    "buildingName": "MacDonald House",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Athletics Complex",
+    "building": "AC",
+    "buildingName": "Athletics Complex",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Bricker Residence",
+    "building": "RES-113045568",
+    "buildingName": "Bricker Residence",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Bouckaert Residence",
+    "building": "RES-113045569",
+    "buildingName": "Bouckaert Residence",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Leopold Residence",
+    "building": "RES-113045571",
+    "buildingName": "Leopold Residence",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Euler Residence",
+    "building": "RES-113045575",
+    "buildingName": "Euler Residence",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Little House Residence",
+    "building": "RES-113045579",
+    "buildingName": "Little House Residence",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Willison Residence",
+    "building": "RES-113045582",
+    "buildingName": "Willison Residence",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Alumni Hall",
+    "building": "AH",
+    "buildingName": "Alumni Hall",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "King Street Residence",
+    "building": "RES-118662073",
+    "buildingName": "King Street Residence",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Regina Residence",
+    "building": "RES-118662080",
+    "buildingName": "Regina Residence",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Alumni Field",
+    "building": "AF",
+    "buildingName": "Alumni Field",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Arts Building - A Wing",
+    "building": "ARTS-A",
+    "buildingName": "Arts Building - A Wing",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Arts Building - C Wing",
+    "building": "ARTS-C",
+    "buildingName": "Arts Building - C Wing",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Concourse / Arts E Wing",
+    "building": "ARTS-E",
+    "buildingName": "Concourse / Arts E Wing",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Conrad Hall Residence",
+    "building": "CONRAD",
+    "buildingName": "Conrad Hall Residence",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Starbucks",
+    "building": "FOOD-2938254270",
+    "buildingName": "Starbucks",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Tim Hortons",
+    "building": "FOOD-5037259930",
+    "buildingName": "Tim Hortons",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  },
+  {
+    "title": "Byte 75",
+    "building": "FOOD-5037259931",
+    "buildingName": "Byte 75",
+    "floor": 0,
+    "room": "",
+    "kind": "place"
+  }
+]

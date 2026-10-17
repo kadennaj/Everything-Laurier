@@ -56,6 +56,7 @@ function readView() {
     ? requested
     : (building?.defaultFloor ?? 1);
   const room = p.get("room");
+  const place = !building ? campus.places.find(candidate => candidate.id === p.get("place")) : null;
   return {
     building,
     floor,
@@ -64,7 +65,7 @@ function readView() {
       .filter(f => f.level === floor).flatMap((f) => f.rooms)
       .some((r) => r.id === room)
       ? room
-      : null,
+      : (place?.id ?? null),
   };
 }
 const categories = [
@@ -339,13 +340,15 @@ export default function App() {
       p.set("floor", String(floor));
       if (!connectedView) p.set("view", "individual");
       if (selectedRoom?.floor === floor) p.set("room", selectedRoom.id);
+    } else if (selectedPlace) {
+      p.set("place", selectedPlace.id);
     }
     window.__EL_VIEW__=p.toString();
     if(location.protocol!=='about:') history.replaceState(null, "", p.size ? `#${p}` : location.pathname);
     const message={type:'map-view',params:p.toString()};
     if(window.ReactNativeWebView)window.ReactNativeWebView.postMessage(JSON.stringify(message));
     else if(window.parent!==window)window.parent.postMessage(message,location.origin);
-  }, [building, floor, selectedRoom, connectedView]);
+  }, [building, floor, selectedRoom, selectedPlace, connectedView]);
   useEffect(() => {
     const changed = () => {
       const view = readView();

@@ -1,5 +1,7 @@
 # Email verification sign-in
 
+Branding update, October 17, 2026: `supabase/templates/email-code.html` now includes the supplied Everything Laurier logo at the published HTTPS asset URL. The owner asked to leave this template ready for manual application in the Supabase dashboard; the hosted email template was not changed by this update. Keep the OTP token placeholder intact when applying it.
+
 The app uses Supabase Auth email OTP: an email address requests a code, and only successful server verification creates a signed-in session. The same flow supports new and returning users, with no domain restriction. Public browsing and local bookmarks remain available without signing in.
 
 ## Connect the project

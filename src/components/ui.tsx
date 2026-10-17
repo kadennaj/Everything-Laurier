@@ -14,7 +14,7 @@ export function Button({ label, onPress, secondary, icon, style, disabled = fals
   return <Pressable accessibilityRole="button" accessibilityState={{ disabled: unavailable, busy: loading }} accessibilityLabel={label} onPress={onPress} disabled={unavailable}
     style={({ pressed }) => [s.button, secondary && s.secondary, style, { opacity: unavailable ? (loading ? 0.8 : 0.45) : pressed ? 0.76 : 1 }]}>
     {loading ? <ActivityIndicator size="small" color={secondary ? c.purple : c.surface} /> : icon ? <Icon name={icon} size={18} color={secondary ? c.purple : c.surface} /> : null}
-    <T style={{ color: secondary ? c.purple : c.surface, fontFamily: f.medium, fontSize: 14, flexShrink: 1, textAlign: 'center' }}>{label}</T>
+    <T style={{ color: secondary ? c.purple : c.surface, fontFamily: f.medium, fontSize: 16, lineHeight: 22, flexShrink: 1, textAlign: 'center' }}>{label}</T>
   </Pressable>;
 }
 export function IconButton({ name, label, onPress, active, style }: { name: IconName; label: string; onPress: () => void; active?: boolean; style?: StyleProp<ViewStyle> }) {
@@ -24,10 +24,10 @@ export function IconButton({ name, label, onPress, active, style }: { name: Icon
   </Pressable>;
 }
 export function Pill({ label, active, onPress, icon }: { label: string; active?: boolean; onPress?: () => void; icon?: IconName }) {
-  return <Pressable accessibilityRole={onPress ? 'button' : 'text'} accessibilityLabel={label} accessibilityState={onPress ? { selected: active } : undefined} onPress={onPress}
+  return <Pressable accessibilityRole={onPress ? 'button' : 'text'} accessibilityLabel={label} aria-pressed={onPress ? !!active : undefined} accessibilityState={onPress ? { selected: active } : undefined} onPress={onPress}
     style={({ pressed }) => [s.pill, active && s.pillActive, pressed && { opacity: 0.7 }]}>
     {icon && <Icon name={icon} size={15} color={active ? c.surface : c.muted} />}
-    <T style={{ fontSize: 13, fontFamily: f.medium, color: active ? c.surface : c.muted }}>{label}</T>
+    <T style={{ fontSize: 15, lineHeight: 21, fontFamily: f.medium, color: active ? c.surface : c.muted }}>{label}</T>
   </Pressable>;
 }
 export function Chips({ items, value, onChange }: { items: string[]; value: string; onChange: (v: string) => void }) {
@@ -45,20 +45,20 @@ export function PageHeading({ eyebrow, title, subtitle, action }: { eyebrow?: st
   return <View style={[s.heading, width < 700 && { flexDirection: 'column', alignItems: 'stretch' }]}>
     <View style={{ flex: 1, gap: 10 }}>{eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
       <T accessibilityRole="header" style={{ fontSize: width < 600 ? 30 : 38, lineHeight: width < 600 ? 38 : 46, fontFamily: f.bold, letterSpacing: -0.4 }}>{title}</T>
-      {subtitle ? <T muted style={{ maxWidth: 560, fontSize: 15, lineHeight: 24 }}>{subtitle}</T> : null}
+      {subtitle ? <T muted style={{ maxWidth: 620, fontSize: 17, lineHeight: 26 }}>{subtitle}</T> : null}
     </View>{action ? <View style={{ alignItems: 'flex-start' }}>{action}</View> : null}
   </View>;
 }
 export function SectionTitle({ title, subtitle, action, onPress }: { title: string; subtitle?: string; action?: string; onPress?: () => void }) {
   return <View style={[s.row, { justifyContent: 'space-between', gap: 16, alignItems: 'flex-start' }]}>
-    <View style={{ flex: 1, gap: 6 }}><T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: 21, lineHeight: 28, letterSpacing: -0.4 }}>{title}</T>{subtitle && <T muted style={{ fontSize: 14, lineHeight: 22 }}>{subtitle}</T>}</View>
-    {action && <Pressable onPress={onPress} accessibilityRole="button" style={({ pressed }) => [s.row, { minHeight: 44, gap: 5, opacity: pressed ? 0.6 : 1 }]}><T style={{ fontSize: 13, fontFamily: f.medium, color: c.purple }}>{action}</T><Icon name="chevron-right" size={16} color={c.purple} /></Pressable>}
+    <View style={{ flex: 1, gap: 6 }}><T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: 22, lineHeight: 29, letterSpacing: -0.4 }}>{title}</T>{subtitle && <T muted style={{ fontSize: 15, lineHeight: 23 }}>{subtitle}</T>}</View>
+    {action && <Pressable onPress={onPress} accessibilityRole="button" style={({ pressed }) => [s.row, { minHeight: 48, maxWidth: '40%', gap: 5, opacity: pressed ? 0.6 : 1 }]}><T style={{ fontSize: 15, lineHeight: 22, flexShrink: 1, fontFamily: f.medium, color: c.purple }}>{action}</T><Icon name="chevron-right" size={16} color={c.purple} /></Pressable>}
   </View>;
 }
-export function Search({ value, onChange, placeholder, onSubmit, style }: { value: string; onChange: (v: string) => void; placeholder: string; onSubmit?: () => void; style?: StyleProp<ViewStyle> }) {
+export function Search({ value, onChange, placeholder, onSubmit, style, autoFocus = false }: { value: string; onChange: (v: string) => void; placeholder: string; onSubmit?: () => void; style?: StyleProp<ViewStyle>; autoFocus?: boolean }) {
   const [focused, setFocused] = React.useState(false);
   return <View style={[s.search, style, focused && { borderColor: c.purple }]}><Icon name="search" size={19} color={c.muted} />
-    <TextInput accessibilityLabel={placeholder} placeholder={placeholder} placeholderTextColor={c.muted} value={value} onChangeText={onChange} onSubmitEditing={onSubmit} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)} returnKeyType="search" style={s.input} autoCapitalize="none" autoCorrect={false} />
+    <TextInput accessibilityLabel={placeholder} placeholder={placeholder} placeholderTextColor={c.muted} value={value} onChangeText={onChange} onSubmitEditing={onSubmit} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)} returnKeyType="search" style={s.input} autoFocus={autoFocus} autoCapitalize="none" autoCorrect={false} />
     {value.length > 0 && <Pressable onPress={() => onChange('')} accessibilityLabel="Clear search" accessibilityRole="button" style={{ minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' }}><Icon name="x" size={16} /></Pressable>}
   </View>;
 }
@@ -75,23 +75,29 @@ export function ExternalButton({ url, label, secondary = true }: { url: string; 
   return <Button label={label} secondary={secondary} icon="arrow-up-right" onPress={() => Linking.openURL(url).catch(() => notify('The link could not open. Please try again.'))} />;
 }
 export function Card({ children, style, ...props }: React.ComponentProps<typeof View>) { return <View {...props} style={[s.card, style]}>{children}</View>; }
+export function NavigationRow({ title, description, icon, onPress, last = false }: { title: string; description?: string; icon: IconName; onPress: () => void; last?: boolean }) {
+  return <Pressable accessibilityRole="button" accessibilityLabel={title} accessibilityHint={description} onPress={onPress} style={({ pressed }) => [s.row, { minHeight: 78, paddingHorizontal: 18, paddingVertical: 16, gap: 14, backgroundColor: pressed ? c.pressed : c.surface, borderBottomWidth: last ? 0 : 1, borderBottomColor: c.border }]}>
+    <View style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: c.lavender, alignItems: 'center', justifyContent: 'center' }}><Icon name={icon} color={c.purple} /></View>
+    <View style={{ flex: 1, minWidth: 0, gap: 4 }}><T style={{ fontFamily: f.medium, fontSize: 17, lineHeight: 24 }}>{title}</T>{description && <T muted style={{ fontSize: 14, lineHeight: 21 }}>{description}</T>}</View><Icon name="chevron-right" color={c.muted} size={18} />
+  </Pressable>;
+}
 export function FeedSkeleton({ compact = false }: { compact?: boolean }) {
   return <View accessibilityLabel="Loading recent posts" accessibilityState={{ busy: true }} style={{ flexDirection: 'row', gap: 16 }}>
     {[0, 1].map(item => <Card key={item} style={{ flex: 1 }}><View style={{ height: compact ? 132 : 180, backgroundColor: c.skeleton }} /><View style={{ padding: 20, gap: 12 }}><View style={{ height: 14, width: '65%', borderRadius: 5, backgroundColor: c.skeleton }} /><View style={{ height: 10, width: '90%', borderRadius: 5, backgroundColor: c.skeleton }} /><View style={{ height: 10, width: '45%', borderRadius: 5, backgroundColor: c.skeleton }} /></View></Card>)}
   </View>;
 }
-export const body: TextStyle = { fontSize: 15, lineHeight: 25, color: c.muted };
+export const body: TextStyle = { fontSize: 17, lineHeight: 26, color: c.muted };
 export const s = StyleSheet.create({
-  text: { fontFamily: f.regular, fontSize: 15, color: c.ink }, row: { flexDirection: 'row', alignItems: 'center' },
+  text: { fontFamily: f.regular, fontSize: 17, color: c.ink }, row: { flexDirection: 'row', alignItems: 'center' },
   card: { backgroundColor: c.surface, borderColor: c.border, borderWidth: 1, borderRadius: radii.card, overflow: 'hidden' },
-  button: { minHeight: 48, backgroundColor: c.purple, borderRadius: radii.control, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 9, paddingHorizontal: 20, paddingVertical: 13 },
+  button: { minHeight: 50, minWidth: 48, backgroundColor: c.purple, borderRadius: radii.control, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 9, paddingHorizontal: 20, paddingVertical: 13 },
   secondary: { backgroundColor: c.lavender },
-  iconButton: { width: 44, height: 44, borderRadius: 14, backgroundColor: c.surface, alignItems: 'center', justifyContent: 'center' },
+  iconButton: { width: 48, height: 48, borderRadius: 14, backgroundColor: c.surface, alignItems: 'center', justifyContent: 'center' },
   pill: { minHeight: 44, borderRadius: 22, paddingHorizontal: 18, paddingVertical: 11, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, borderWidth: 1, borderColor: c.border, backgroundColor: c.surface },
   pillActive: { backgroundColor: c.purpleDark, borderColor: c.purpleDark },
   heading: { flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', gap: 20, paddingTop: 4, paddingBottom: 4 },
   search: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: c.surface, borderWidth: 1, borderColor: c.border, borderRadius: radii.control, paddingLeft: 16, minHeight: 54 },
-  input: { flex: 1, minWidth: 0, minHeight: 52, fontFamily: f.regular, color: c.ink, fontSize: 15, paddingVertical: 14, paddingRight: 12 },
+  input: { flex: 1, minWidth: 0, minHeight: 52, fontFamily: f.regular, color: c.ink, fontSize: 17, paddingVertical: 14, paddingRight: 12 },
   empty: { paddingHorizontal: 24, paddingVertical: 36, alignItems: 'center', gap: 12 },
   emptyIcon: { backgroundColor: c.lavender, width: 56, height: 56, borderRadius: 18, alignItems: 'center', justifyContent: 'center', marginBottom: 4 },
 });
