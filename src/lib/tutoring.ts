@@ -7,7 +7,7 @@ export type ContentReport={id:string;reason:string;status:string;created_at:stri
 export async function tutorRequest<T>(action:string,payload:object={}):Promise<T> {
  if(!supabase)throw Error('Tutoring is unavailable. Please try again later.');
  const {data,error}=await supabase.rpc('tutor_portal',{p_action:action,p_payload:payload});
- if(error)throw Error(error.code==='23505'?'You already have an active application for this course. Check My applications.':error.code==='42501'?'Sign in again to continue.':'The application could not be saved. Check your connection and try again.');
+ if(error)throw Error(error.message?.includes('terms')?'Review account terms and age confirmation in Your space → Your data & choices.':error.message?.toLowerCase().includes('limit')?'Usage limit reached. Wait before retrying; applications are limited to 5/hour and 10/day. Contact support if needed.':error.code==='23505'?'You already have an active application for this course. Check My applications.':error.code==='42501'?'Sign in again to continue.':'The application could not be saved. Check your connection and try again.');
  return data as T;
 }
 export async function ownerRequest<T>(action:string,payload:object={}):Promise<T> {
@@ -21,7 +21,7 @@ export async function submitTutorDraft(application:TutorApplication,bytes:Uint8A
  validateTranscript(bytes);
  if(!supabase)throw Error('Uploads are unavailable.');
  const {error}=await supabase.storage.from('tutor-transcripts').upload(application.transcript_path,bytes.buffer as ArrayBuffer,{contentType:'image/jpeg',upsert:false,cacheControl:'0'});
- if(error && !['409','Duplicate'].includes(error.statusCode??''))throw Error('The transcript upload failed. Your draft is saved; retry with the same image.');
+ if(error && !['409','Duplicate'].includes(error.statusCode??''))throw Error('The transcript upload could not finish or a usage limit was reached. Your draft is saved. Wait before retrying, or contact support.');
  return tutorRequest<TutorApplication>('submit',{id:application.id});
 }
 export async function withdrawApplication(application:TutorApplication) {

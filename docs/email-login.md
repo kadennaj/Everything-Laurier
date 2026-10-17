@@ -53,3 +53,5 @@ Automated auth tests use the real Supabase client with a test-only HTTP transpor
 Once connected, validate with an authorized real email: request code → receive email → enter wrong code → enter correct code → profile shows email → reload/relaunch retains sign-in → sign out → reload stays signed out. Also test resend/expired codes and a physical iPhone or simulator. No production bypass or hardcoded verification code is present in the app.
 
 References: [Supabase email OTP](https://supabase.com/docs/guides/auth/auth-email-passwordless), [React Native auth](https://supabase.com/docs/guides/auth/quickstarts/react-native), [custom SMTP](https://supabase.com/docs/guides/auth/auth-smtp), [Expo SecureStore](https://docs.expo.dev/versions/latest/sdk/securestore/).
+
+Security review, October 17, 2026: the prepared OTP template explains requested, non-marketing delivery and support for unwanted codes. No fake newsletter unsubscribe is added. It is still not applied to hosted Auth, per the owner’s earlier instruction. Configure Auth CAPTCHA/rate limits and SMTP sending budgets before public launch; see security-privacy-review.md.

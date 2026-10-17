@@ -83,3 +83,12 @@ test('account cleanup waits for outstanding writes and cannot restore old hidden
   assert.equal(next.value.hiddenPosts.length, 0); assert.equal(next.value.hiddenSources.length, 0);
   assert.equal(next.value.nightlifeAgeConfirmed, false); next.unmount();
 });
+
+test('external images default off, opt in persists, and account cleanup revokes the choice', async()=>{
+ const data=new Map(); const storage={getItem:async key=>data.get(key)??null,setItem:async(key,value)=>{data.set(key,value);},removeItem:async key=>{data.delete(key);}};
+ const first=mount(storage);await first.settle();assert.equal(first.value.externalMediaEnabled,false);
+ first.value.setExternalMediaEnabled(true);await first.settle();first.unmount();
+ const second=mount(storage);await second.settle();assert.equal(second.value.externalMediaEnabled,true);
+ await second.value.purgeSaved();await second.settle();second.unmount();
+ const third=mount(storage);await third.settle();assert.equal(third.value.externalMediaEnabled,false);third.unmount();
+});

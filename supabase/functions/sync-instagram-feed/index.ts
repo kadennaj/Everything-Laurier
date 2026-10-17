@@ -26,6 +26,13 @@ Deno.serve(async request => {
   }
 
   try {
+    const budget = await fetch(`${supabaseUrl}/rest/v1/rpc/claim_sync_budget`, {
+      method: 'POST', signal: AbortSignal.timeout(15000),
+      headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_job: 'instagram' }),
+    });
+    if (!budget.ok) return reply(503, { error: 'Could not reserve sync budget' });
+    if (await budget.json() !== true) return reply(429, { error: 'Sync frequency or daily budget reached' });
     const scrape = await fetch(
       'https://api.apify.com/v2/acts/apify~instagram-scraper/run-sync-get-dataset-items?maxTotalChargeUsd=0.05',
       {
@@ -45,14 +52,22 @@ Deno.serve(async request => {
       console.error('Apify feed sync failed with status', scrape.status);
       return reply(502, { error: 'Post provider unavailable' });
     }
-    const raw: unknown = await scrape.json();
+    const reader = scrape.body?.getReader();
+    if (!reader) return reply(502, { error: 'Empty provider response' });
+    let size = 0, text = ''; const decoder = new TextDecoder();
+    for (;;) { const {done, value} = await reader.read(); if (done) break; size += value.byteLength;
+      if (size > 2000000) { await reader.cancel(); return reply(502, { error: 'Provider response too large' }); }
+      text += decoder.decode(value, {stream:true}); }
+    text += decoder.decode();
+    const raw: unknown = JSON.parse(text);
     if (!Array.isArray(raw)) return reply(502, { error: 'Unexpected post provider response' });
 
     const syncedAt = new Date().toISOString();
-    const posts = raw.map(post => normalizePost(post, syncedAt)).filter(post => post !== null);
+    const posts = raw.slice(0,16).map(post => normalizePost(post, syncedAt)).filter(post => post !== null);
     if (posts.length) {
       const save = await fetch(`${supabaseUrl}/rest/v1/instagram_feed_posts?on_conflict=id`, {
         method: 'POST',
+        signal: AbortSignal.timeout(15000),
         headers: {
           ...jsonHeaders,
           apikey: serviceKey,

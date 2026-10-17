@@ -6,7 +6,7 @@ import { useAuth } from '../lib/auth';
 import { currentLineStatus, isLineReportingOpen, lineOptions, lineTimeAgo, lineWaitLabel, type LineStatus } from '../lib/line-reporting';
 import { supabase } from '../lib/supabase';
 import { colors as c, fonts as f } from '../lib/theme';
-import { Icon, T } from './ui';
+import { Button, Icon, T } from './ui';
 
 export function LineCheckIns() {
   const { width } = useWindowDimensions();
@@ -44,7 +44,7 @@ export function LineCheckIns() {
     setSubmitError('');
     const venueId = editing;
     const { error } = await supabase.rpc('submit_venue_line_report', { p_venue_id: venueId, p_wait_minutes: selected });
-    if (error) setSubmitError(error.message.includes('open at 6 PM') ? 'Reports open at 6 PM Waterloo time.' : 'Could not save your report. Try again.');
+    if (error) setSubmitError(error.message.includes('open at 6 PM') ? 'Reports open at 6 PM Waterloo time.' : error.message.includes('terms') ? 'Review the terms and age confirmation in Your data before sharing.' : error.message.includes('limit') ? 'Report limit reached. Wait a minute and try again; the daily limit is 30 updates.' : 'Could not save your report. Try again.');
     else { await refresh(); setEditing(null); setSelected(null); setSavedVenue(venueId); }
     setSubmitting(false);
   }
@@ -65,7 +65,7 @@ export function LineCheckIns() {
           <Pressable accessibilityRole="button" accessibilityLabel={actionLabel} accessibilityState={{ expanded, disabled: !open }} disabled={!open} onPress={() => { if (!session) router.push('/login'); else { setEditing(expanded ? null : venue.id); setSelected(null); setSubmitError(''); setSavedVenue(null); } }} style={({ pressed }) => ({ width: 44, height: 44, borderRadius: 11, alignItems: 'center', justifyContent: 'center', opacity: !open ? 0.4 : pressed ? 0.65 : 1 })}><Icon name={expanded ? 'x' : 'plus'} color={c.purple} size={20} /></Pressable>
         </View>
         {expanded && <View style={{ paddingHorizontal: 16, paddingBottom: 16, gap: 14 }}>
-          <T style={{ color: c.muted, fontSize: 12 }}>How long is the line right now?</T>
+          <T style={{ color: c.muted, fontSize: 14 }}>How long is the line right now? One update per minute, up to 30 per day.</T><Button secondary label="Review account terms & choices" onPress={() => router.push('/data-controls')} />
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 7 }}>{lineOptions.map(option => <Pressable key={option.minutes} accessibilityRole="button" accessibilityState={{ selected: selected === option.minutes }} onPress={() => setSelected(option.minutes)} style={({ pressed }) => ({ minHeight: 44, paddingHorizontal: 10, borderRadius: 9, justifyContent: 'center', backgroundColor: selected === option.minutes ? c.purple : c.lavender, opacity: pressed ? 0.7 : 1 })}><T style={{ color: selected === option.minutes ? c.surface : c.purple, fontFamily: f.bold, fontSize: 12 }}>{option.label}</T></Pressable>)}</View>
           {!!submitError && <T accessibilityRole="alert" style={{ color: c.error, fontSize: 12 }}>{submitError}</T>}
           <Pressable accessibilityRole="button" accessibilityState={{ disabled: submitting || selected === null }} disabled={submitting || selected === null} onPress={() => { void submit(); }} style={({ pressed }) => ({ minHeight: 44, borderRadius: 10, backgroundColor: c.purple, alignItems: 'center', justifyContent: 'center', opacity: submitting || selected === null ? 0.48 : pressed ? 0.78 : 1 })}><T style={{ color: c.surface, fontFamily: f.medium, fontSize: 13 }}>{submitting ? 'Saving…' : 'Share line update'}</T></Pressable>

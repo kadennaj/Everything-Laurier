@@ -19,6 +19,13 @@ export async function handleSync(request: Request): Promise<Response> {
   const observedAt = new Date().toISOString();
   let stage = 'fetch', upstreamStatus: number | null = null, databaseCode: string | null = null;
   try {
+    const budget = await fetch(`${url}/rest/v1/rpc/claim_sync_budget`, {
+      method: 'POST', signal: AbortSignal.timeout(15000),
+      headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_job: 'calendar' }),
+    });
+    if (!budget.ok) return json(503, { error: 'Could not reserve sync budget' });
+    if (await budget.json() !== true) return json(429, { error: 'Sync frequency or daily budget reached' });
     const response = await fetch(SOURCE_URL, { signal: AbortSignal.timeout(20000), redirect: 'error', headers: { Accept: 'application/json' } });
     upstreamStatus = response.status;
     if (!response.ok || !response.headers.get('Content-Type')?.includes('application/json')) throw Error('Calendar unavailable');

@@ -29,6 +29,7 @@ test('a successful run fetches four accounts and saves only valid posts', async 
   const originalFetch = globalThis.fetch;
   const calls = [];
   globalThis.fetch = async (url, options) => {
+    if(String(url).endsWith('/claim_sync_budget'))return Response.json(true);
     calls.push({ url, options });
     if (calls.length === 1) return Response.json([
       { ownerUsername: 'thepubonking', url: 'https://www.instagram.com/reel/CODE1/', caption: 'Tonight', timestamp: '2026-09-30T10:00:00Z' },
@@ -52,3 +53,12 @@ test('a successful run fetches four accounts and saves only valid posts', async 
     assert.deepEqual(JSON.parse(calls[1].options.body).map(post => post.id), ['CODE1']);
   } finally { globalThis.fetch = originalFetch; }
 });
+
+ test('budget denial prevents any paid provider request', async () => {
+ const original=globalThis.fetch; let calls=0; globalThis.fetch=async(url)=>{calls++;assert.match(String(url),/claim_sync_budget$/);return Response.json(false);};
+ try{assert.equal((await handler(request(testSyncToken))).status,429);assert.equal(calls,1);}finally{globalThis.fetch=original;}
+ });
+ test('unavailable budget fails closed without calling Apify', async () => {
+ const original=globalThis.fetch; let calls=0; globalThis.fetch=async()=>{calls++;return new Response(null,{status:503});};
+ try{assert.equal((await handler(request(testSyncToken))).status,503);assert.equal(calls,1);}finally{globalThis.fetch=original;}
+ });

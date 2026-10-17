@@ -1,3 +1,4 @@
+import { AccountConsent } from './AccountConsent';
 import { Redirect, router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, TextInput, View } from 'react-native';
@@ -55,7 +56,7 @@ export function ProfileQuestionnaire({ editing = false }: { editing?: boolean })
   if (loadError) return <Card style={styles.card}><T accessibilityRole="alert" style={{ color: '#8E3434' }}>{loadError}</T>
     <Button secondary label="Try again" onPress={() => { setLoaded(false); setReload(value => value + 1); }} /></Card>;
 
-  return <View style={{ width: '100%', maxWidth: 700, alignSelf: 'center', gap: 24 }}>
+  return <><AccountConsent><View style={{ width: '100%', maxWidth: 700, alignSelf: 'center', gap: 24 }}>
     <PageHeading eyebrow={editing ? 'YOUR STUDENT PROFILE' : 'ONE LAST STEP'} title={editing ? 'Make it yours.' : 'Tell campus about you.'}
       subtitle={editing ? 'Update what other students can find about you.' : 'Answer a few questions so students in your program can find you. Your profile stays private until you choose to share it.'} />
     <Card style={styles.card}>
@@ -89,7 +90,7 @@ export function ProfileQuestionnaire({ editing = false }: { editing?: boolean })
       {!!error && <T accessibilityRole="alert" style={{ color: '#8E3434', lineHeight: 22 }}>{error}</T>}
       <Button label={saving ? 'Saving your profile…' : editing ? 'Save profile' : 'Finish and save profile'} icon="check" disabled={saving} loading={saving} onPress={() => { void save(); }} />
     </Card>
-  </View>;
+  </View></AccountConsent><Button secondary label={editing ? 'Keep my current profile' : 'Skip profile for now'} onPress={() => router.replace('/profile')} /></>;
 }
 
 function Field({ label, helper, value, onChange, placeholder, maxLength, multiline = false }: {
@@ -108,9 +109,9 @@ function Field({ label, helper, value, onChange, placeholder, maxLength, multili
 
 const styles = StyleSheet.create({
   card: { padding: 24, gap: 24 },
-  label: { fontFamily: f.medium, fontSize: 15 },
-  input: { minHeight: 52, paddingHorizontal: 14, paddingVertical: 12, borderWidth: 1, borderColor: c.border,
-    borderRadius: 14, backgroundColor: c.background, color: c.ink, fontFamily: f.regular, fontSize: 15 },
+  label: { fontFamily: f.medium, fontSize: 17 },
+  input: { minHeight: 52, paddingHorizontal: 14, paddingVertical: 12, borderWidth: 1, borderColor: '#89818F',
+    borderRadius: 14, backgroundColor: c.background, color: c.ink, fontFamily: f.regular, fontSize: 17 },
   discover: { flexDirection: 'row', gap: 12, padding: 16, borderWidth: 1, borderColor: c.border, borderRadius: 12 },
   checkbox: { width: 23, height: 23, borderRadius: 6, borderWidth: 1, borderColor: c.muted, alignItems: 'center', justifyContent: 'center' },
   loading: { padding: 40, alignItems: 'center', gap: 14 },

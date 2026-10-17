@@ -13,6 +13,7 @@ insert into public.student_profiles(id,display_name,program,is_discoverable,cont
  ('00000000-0000-4000-a000-000000000013','Unverified','Test Program',true,'unverified@example.invalid'),
  ('00000000-0000-4000-a000-000000000014','Private','Test Program',false,null);
 select pg_temp.assert_true((select moderation_status='pending' from public.student_profiles where id='00000000-0000-4000-a000-000000000013'),'unverified profiles do not publish');
+insert into private.account_consents(user_id,terms_version,privacy_version,age_16_confirmed) select id,'2026-10-17','2026-10-17',true from auth.users where email like '%@example.invalid' on conflict do nothing;
 select set_config('request.jwt.claims','{"sub":"00000000-0000-4000-a000-000000000011","role":"authenticated","email":"auto-a@example.invalid","session_id":"00000000-0000-4000-b000-000000000011"}',true);
 set local role authenticated;
 insert into public.student_profiles(id,display_name,program,is_discoverable,contact_email)

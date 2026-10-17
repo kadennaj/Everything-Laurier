@@ -13,6 +13,7 @@ insert into auth.sessions(id,user_id)values
 insert into private.app_owners values('00000000-0000-4000-a100-000000000003');
 insert into public.student_profiles(id,display_name,program,is_discoverable,contact_email)values
  ('00000000-0000-4000-a100-000000000001','Synthetic Tutor','Audit',true,'tutor-a@example.invalid');
+insert into private.account_consents(user_id,terms_version,privacy_version,age_16_confirmed) select id,'2026-10-17','2026-10-17',true from auth.users where email like '%@example.invalid' on conflict do nothing;
 set local role anon;
 select pg_temp.assert_true(pg_temp.denied($sql$select public.owner_portal('applications')$sql$),'guest cannot read owner queue');
 select pg_temp.assert_true(pg_temp.denied($sql$select public.tutor_portal('directory')$sql$),'guest cannot read tutor contact details');

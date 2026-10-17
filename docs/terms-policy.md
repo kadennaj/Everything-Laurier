@@ -1,0 +1,33 @@
+# Terms of service
+
+## The service and operator
+
+Effective October 17, 2026. Everything Laurier is operated by Kaden Najarali. Contact everythinglaurier@gmail.com for support, privacy requests, complaints or rights concerns. This independent student app is not an official service of Wilfrid Laurier University, its library, the Students’ Union or listed venues.
+
+## Eligibility and your choices
+
+Account features are for people aged 16 or older who can understand these terms and the privacy notice. Do not create an account or submit personal information if you are under 16. We do not offer a children’s account or collect birth dates. Nightlife features separately require confirmation that you are 19 or older; venue admission rules still apply. Public campus information can be browsed without an account. A parent or guardian can contact support about a child’s information.
+
+## Account terms and optional sharing
+
+Keep email codes and account access private. Do not impersonate another person or use another person’s records. Account-feature acceptance records the terms version, privacy-notice version, age confirmation and time. Profile discovery, private transcript review, location and third-party images have their own choices. You can decline optional sharing and still browse campus information.
+
+## Campus information and maps
+
+Maps, floor plans, room labels, entrances, stairs, elevators, route times, accessibility information, venue offers and event listings can be incomplete or outdated. Confirm important details with the university, venue or organizer. GPS cannot reliably identify an indoor floor or room. Follow signs and staff instructions. This app does not provide emergency, evacuation, medical or personal-safety directions. Contact emergency services when needed.
+
+## Tutoring and payments
+
+Tutors apply for individual courses and the operator manually reviews the submitted evidence before a listing is approved. Review is not a background check, teaching qualification, endorsement or guarantee of grades, safety or results. Confirm suitability with the tutor. The app does not book sessions, take payments, charge a commission or mediate purchases. Agree directly with the tutor on the total CAD price, taxes if any, duration, cancellation and refund terms before booking or paying. Do not offer or request completion of graded work or other academic misconduct.
+
+## Community rules
+
+Do not post threats, harassment, discriminatory or sexual content, spam, misleading claims, private information, unlawful material or material you lack rights to share. Do not upload another person’s transcript. Do not scrape personal contact details, send unsolicited bulk messages, bypass access controls or automate abusive requests. Report concerns through the app or support. Limits may temporarily restrict repeated actions to protect the service.
+
+## Your content and moderation
+
+You retain rights to content you submit. You authorize us to store it and display only the fields needed for the features you choose, as described in the privacy policy. This permission does not authorize sale of transcripts or unrelated advertising. You are responsible for having the rights and consent needed for submissions. The operator may remove content or restrict accounts to investigate reports, protect users or meet legal obligations. You can contact support to ask about or challenge a decision. Good-faith reports are private, not a public review feed.
+
+## Changes, availability and legal rights
+
+We aim to provide accurate information and reasonable security, but cannot promise uninterrupted service, complete accuracy or elimination of security risk. These terms do not exclude rights or remedies that cannot lawfully be excluded. Material changes will be dated and brought to users’ attention; changed account terms require fresh acceptance before protected submissions. You can stop using the service and request deletion at any time. Contact support first about a dispute. Applicable Canadian and Ontario law applies, subject to mandatory rights in your jurisdiction.

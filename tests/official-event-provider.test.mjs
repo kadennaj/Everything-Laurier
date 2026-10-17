@@ -43,6 +43,8 @@ test('simultaneous readers share one cache request and a failed refresh retains 
   release({ data: snapshot, error: null }); await first; await provider.settle();
   assert.equal(provider.value.events[0].title, 'Meetup'); assert.equal(provider.value.loading, false);
   response = Promise.resolve({ data: null, error: { message: 'offline' } });
+  await provider.value.refresh(); await provider.settle(); assert.equal(provider.calls, 1, 'manual refreshes are throttled for 30 seconds');
+  provider.advance(31000);
   await provider.value.refresh(); await provider.settle();
   assert.equal(provider.value.events.length, 1); assert.equal(provider.value.syncedAt, snapshot.syncedAt); assert.ok(provider.value.error);
   provider.unmount();

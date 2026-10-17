@@ -7,11 +7,11 @@ if (process.env.EAS_BUILD_PROFILE === 'production' || process.env.APP_STORE_RELE
   if (!process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY.startsWith('sb_publishable_')) throw new Error('Use a Supabase publishable key for the app.');
   await import('./check-release-privacy.mjs');
   if (process.exitCode) throw new Error('Privacy-policy check failed.');
-  for (const path of ['support', 'community']) {
+  for (const path of ['support', 'community', 'terms', 'cookies', 'refunds', 'credits']) {
     const response = await fetch(`https://everythinglaurier.ca/${path}/`, { signal: AbortSignal.timeout(15000) });
     if (!response.ok || !new URL(response.url).href.startsWith('https://') || !response.headers.get('content-type')?.includes('text/html')) throw new Error(`The public ${path} page must be accessible before release.`);
     const page = await response.text();
     if (!page.includes('everythinglaurier@gmail.com')) throw new Error(`The ${path} page must include the authorized contact.`);
   }
-  console.log('Public policy, support and community pages verified. Complete native/store checks before submission.');
+  console.log('Public policy, legal, support and community pages verified. Complete native/store checks before submission.');
 }

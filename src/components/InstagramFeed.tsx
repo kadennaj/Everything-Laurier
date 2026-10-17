@@ -12,14 +12,14 @@ import { colors as c, fonts as f } from '../lib/theme';
 const openInstagram = (url: string) => { void Linking.openURL(url); };
 
 function PostCard({ post, compact = false }: { post: InstagramPost; compact?: boolean }) {
-  const { hideSource, hidePost, ready } = useLocal();
+  const { hideSource, hidePost, ready, externalMediaEnabled } = useLocal();
   const [imageFailed, setImageFailed] = useState(false);
   const account = instagramAccounts.find(item => item.username === post.source_username);
   const posted = new Date(post.posted_at).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' });
   const name = account?.name ?? post.source_username;
   const linkLabel = `Open ${name}'s Instagram post from ${posted}`;
   return <Card style={{ padding: 0, overflow: 'hidden', flex: 1 }}>
-      {post.image_url && !imageFailed ? <Pressable accessibilityRole="link" accessibilityLabel={linkLabel} onPress={() => openInstagram(post.post_url)} style={({ pressed }) => ({ opacity: pressed ? 0.75 : 1 })}><Image source={{ uri: post.image_url }} accessibilityLabel="Instagram post preview"
+      {externalMediaEnabled && post.image_url && !imageFailed ? <Pressable accessibilityRole="link" accessibilityLabel={linkLabel} onPress={() => openInstagram(post.post_url)} style={({ pressed }) => ({ opacity: pressed ? 0.75 : 1 })}><Image source={{ uri: post.image_url }} accessibilityLabel={`${name} post image, ${posted}. Read the caption below for details.`}
         onError={() => setImageFailed(true)} style={{ width: '100%', aspectRatio: compact ? 1.7 : 1.8, backgroundColor: c.lavender }} resizeMode="cover" /></Pressable> : null}
       <View style={{ padding: compact ? 18 : 22, gap: 12 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
@@ -44,7 +44,7 @@ export function InstagramFeed({ preview = false }: { preview?: boolean }) {
 
 function VenueInstagramFeed({ preview = false }: { preview?: boolean }) {
   const { width } = useWindowDimensions();
-  const { hiddenSources, hiddenPosts } = useLocal();
+  const { hiddenSources, hiddenPosts, externalMediaEnabled, setExternalMediaEnabled, ready } = useLocal();
   const [posts, setPosts] = useState<InstagramPost[]>([]);
   const [selected, setSelected] = useState('all');
   const [loading, setLoading] = useState(true);
@@ -77,6 +77,7 @@ function VenueInstagramFeed({ preview = false }: { preview?: boolean }) {
   return <View style={{ gap: 18 }}>
     <SectionTitle title="Latest from the venues" subtitle="Waterloo nightlife, straight from Instagram."
       action={preview ? 'View all' : undefined} onPress={preview ? () => router.push('/nightlife') : undefined} />
+    {!externalMediaEnabled && <Card style={{padding:18,gap:12}}><T style={{fontSize:15,lineHeight:23}}>Instagram images are off. Loading them contacts Meta, which receives your IP address and connection details. Captions and links work without images.</T><Button secondary label="Allow Instagram images" disabled={!ready} onPress={() => setExternalMediaEnabled(true)} /><Button secondary label="Manage data choices" onPress={() => router.push('/data-controls')} /></Card>}
     {!preview && <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8, paddingVertical: 4 }}>
       <Pill label="All venues" active={selected === 'all'} onPress={() => setSelected('all')} />
       {instagramAccounts.map(account => <Pill key={account.username} label={account.name} active={selected === account.username} onPress={() => setSelected(account.username)} />)}

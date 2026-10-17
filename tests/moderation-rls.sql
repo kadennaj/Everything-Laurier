@@ -15,6 +15,7 @@ insert into public.instagram_feed_posts(id,source_username,post_url,caption,post
 values('audit-only-post','rarenightclub','https://www.instagram.com/p/audit-only-post/','Test caption',now());
 update public.instagram_feed_posts set moderation_status='pending' where id='audit-only-post';
 select pg_temp.assert_true((select moderation_status='pending' from public.instagram_feed_posts where id='audit-only-post'),'operator can hold a post');
+insert into private.account_consents(user_id,terms_version,privacy_version,age_16_confirmed) select id,'2026-10-17','2026-10-17',true from auth.users where email like '%@example.invalid' on conflict do nothing;
 select set_config('request.jwt.claims','{"sub":"00000000-0000-4000-a000-000000000001","role":"authenticated","email":"audit-a@example.invalid","session_id":"00000000-0000-4000-b000-000000000001"}',true);
 set local role authenticated;
 select pg_temp.assert_true((select count(*)=1 from public.student_profiles where id in('00000000-0000-4000-a000-000000000001','00000000-0000-4000-a000-000000000002')),'pending peers hidden, own visible');

@@ -12,6 +12,7 @@ export function OfficialEventsProvider({ children }: { children: React.ReactNode
   const pending = useRef<Promise<void> | null>(null), mounted = useRef(false), lastRead = useRef(0);
   const refresh = useCallback((): Promise<void> => {
     if (pending.current) return pending.current;
+    if (Date.now() - lastRead.current < 30000) return Promise.resolve();
     lastRead.current = Date.now();
     const request = (async () => {
       const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), 15000);

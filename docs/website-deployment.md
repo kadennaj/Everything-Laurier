@@ -27,3 +27,9 @@ The app privacy fallback and example environment use https://everythinglaurier.c
 ## October 16 update
 
 Sites version 6 publishes policy version 2026-10-16 plus tutoring/map support and community instructions. Source commit `686b3560309fd6d6bcf5457592a7d5b5a53324f4`; deployment `appgdep_6ad28edec4688191820cffc32ccae38f` succeeded. Public audience and existing domain/DNS configuration are unchanged. The native app's private owner dashboard is not part of this public information website.
+
+Legal/privacy update, October 17, 2026: public privacy v2026-10-17, terms, cookies/storage, payments/refunds and credits published as Sites version 8. Source commit 2ad52c594d3abe8982927671f3990934db64063f; saved version appgprj_6ac97fe38ea88191914df8b0e70ef9dc~appgver_cab0219d366881919ab2ffe3b54b3b83; successful deployment appgdep_6ad3ba9ba7348191bde5af79821fa2d6. Existing public audience and domain preserved. These notices do not imply rights clearance or legal certification.
+
+Licence inventory refresh: Sites version 9 includes the updated open-source notices for the patched decoder and UUID dependency. Source 9daf0ecdf9b4709c70a020ce87d7d54ae96601c7; saved version appgprj_6ac97fe38ea88191914df8b0e70ef9dc~appgver_7c4786a29bf08191927b3f5804560916; deployment appgdep_6ad3bc04c8d88191897dc2cb0478c477 succeeded.
+
+Retention wording clarification: Sites version 10 explains the daily cleanup grace period for new usage counters. Source 49999441eaca715f75435c53d0d991e80ee7d8b9; saved version appgprj_6ac97fe38ea88191914df8b0e70ef9dc~appgver_c0202ad7afec8191b88921daaabc279a; deployment appgdep_6ad3bd198c688191ad0145fbc40ffcba succeeded.
