@@ -1,3 +1,4 @@
+import { readDeletionBody } from './request-body.ts';
 type Dependencies = { url: string; serviceKey: string; fetch: typeof fetch };
 
 // Never accept a target user ID. Only the identity verified by Supabase Auth
@@ -15,10 +16,12 @@ export function deletionHandler(deps: Dependencies) {
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers });
     if (request.method !== 'POST') return reply(405, 'Use POST to delete your account.');
     const token = request.headers.get('authorization')?.match(/^Bearer ([^\s]+)$/i)?.[1];
-    if (!token) return reply(401, 'Sign in before deleting your account.');
+    if (!token || token.length>8192) return reply(401, 'Sign in before deleting your account.');
     if (!deps.url.startsWith('https://') || !deps.serviceKey) return reply(503, 'Account deletion is temporarily unavailable.');
+    const parsed = await readDeletionBody(request);
+    if ('status' in parsed) return reply(parsed.status,parsed.status===413?'Request too large.':parsed.status===408?'Request timed out. Try again.':'Confirm permanent account deletion.');
     try {
-      const body = await request.json();
+      const body = parsed.value as Record<string,unknown> | null;
       if (!body || body.confirm !== true || Object.keys(body).some(key => key !== 'confirm')) {
         return reply(400, 'Confirm permanent account deletion.');
       }
@@ -40,6 +43,10 @@ export function deletionHandler(deps: Dependencies) {
       const active = await call('/rest/v1/rpc/account_session_active', 'POST', token, {});
       if (!active.ok) return reply(503, 'Unable to verify your session. Please try again.');
       if (await active.json() !== true) return reply(401, 'Your session expired. Sign in again before deleting your account.');
+      const quota = await call('/rest/v1/rpc/claim_account_deletion','POST',token,{});
+      if (quota.status===429) return reply(429,'Too many deletion attempts. Wait before retrying.');
+      if (!quota.ok) return reply(503,'Unable to reserve this request. Please try again.');
+      if (await quota.json() !== true) return reply(429,'Too many deletion attempts. Wait before retrying.');
       // Revoke every refresh session before hard deletion. Sensitive database
       // operations also check auth.sessions, so old access JWTs cannot be reused.
       const revoked = await call('/auth/v1/logout?scope=global', 'POST', token);

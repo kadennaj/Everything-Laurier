@@ -1,0 +1,71 @@
+-- Run in a transaction and roll back every synthetic user, record and quota.
+begin;
+create function pg_temp.assert_ok(p boolean,label text) returns void language plpgsql as $$begin if p is distinct from true then raise exception 'FAILED: %',label; end if; end;$$;
+create function pg_temp.denied(command text, expected text default null) returns boolean language plpgsql as $$begin execute command;return false;exception when others then if expected is null or sqlerrm ilike '%'||expected||'%' then return true;else raise;end if;end;$$;
+grant execute on function pg_temp.assert_ok(boolean,text),pg_temp.denied(text,text) to anon,authenticated;
+insert into auth.users(id,email,email_confirmed_at) values
+ ('00000000-0000-4000-a721-000000000001','endpoint-a@example.invalid',now()),
+ ('00000000-0000-4000-a721-000000000002','endpoint-b@example.invalid',now());
+insert into auth.sessions(id,user_id) values
+ ('00000000-0000-4000-b721-000000000001','00000000-0000-4000-a721-000000000001');
+select set_config('request.jwt.claims','{"role":"authenticated","sub":"00000000-0000-4000-a721-000000000001","session_id":"00000000-0000-4000-b721-000000000001","email":"endpoint-a@example.invalid","user_metadata":{"admin":true}}',true);
+select pg_temp.assert_ok(pg_temp.denied($q$update auth.users set raw_user_meta_data='{"admin":true}' where id=auth.uid()$q$,'metadata'),'Auth metadata cannot accept arbitrary admin fields');
+select pg_temp.assert_ok(pg_temp.denied($q$update auth.users set raw_user_meta_data=jsonb_build_object('email',repeat('x',3000)) where id=auth.uid()$q$,'metadata'),'oversized Auth metadata rejected');
+update auth.users set raw_user_meta_data=jsonb_build_object('sub',id::text,'email',email,'email_verified',true,'phone_verified',false) where id=auth.uid();
+select set_config('request.method','POST',true);
+select set_config('request.path','/rpc/account_privacy',true);
+select set_config('request.headers','{}',true);
+set local role authenticated;
+select public.check_api_request();
+select public.account_privacy('accept','{"terms_version":"2026-10-17","age_16_confirmed":true}');
+select pg_temp.assert_ok(pg_temp.denied($q$select public.tutor_portal('create','{"consent":true,"role":"owner"}')$q$,'Unexpected'),'mass assignment rejected');
+select pg_temp.assert_ok(pg_temp.denied($q$select public.tutor_portal('directory','{"query":{"sql":"drop table"}}')$q$,'text'),'nested objects rejected');
+select pg_temp.assert_ok(pg_temp.denied($q$select public.tutor_portal('directory','{"offset":-1}')$q$,'page'),'negative page rejected');
+select pg_temp.assert_ok(pg_temp.denied($q$select public.tutor_portal('directory','{"offset":0.5}')$q$,'page'),'fractional page rejected');
+select pg_temp.assert_ok(pg_temp.denied($q$select public.account_privacy('accept','{"terms_version":"2026-10-17","age_16_confirmed":"true"}')$q$,'confirmation'),'string consent rejected');
+select pg_temp.assert_ok(pg_temp.denied($q$select public.tutor_portal('directory',jsonb_build_object('query',repeat('a',20000)))$q$,'payload'),'oversized payload rejected');
+select pg_temp.assert_ok(pg_temp.denied($q$select public.tutor_portal('drop table','{}')$q$,'action'),'unknown actions rejected');
+select pg_temp.assert_ok(pg_temp.denied($q$select public.owner_portal('access')$q$,'Owner'),'user metadata cannot grant owner access');
+select pg_temp.assert_ok(not has_table_privilege(current_user,'public.instagram_feed_posts','INSERT,UPDATE,DELETE,TRUNCATE'),'no imported post write/truncate privileges');
+select pg_temp.assert_ok(not has_column_privilege(current_user,'public.student_profiles','moderation_status','UPDATE'),'cannot change moderation status');
+insert into public.student_profiles(id,display_name,program) values(auth.uid(),'Valid Student','Computer Science');
+select pg_temp.assert_ok(pg_temp.denied($q$insert into public.student_profiles(id,display_name,program) values('00000000-0000-4000-a721-000000000002','Impersonation','BBA')$q$),'cannot write another user profile');
+select pg_temp.assert_ok(pg_temp.denied($q$update public.student_profiles set bio=repeat('x',501) where id=auth.uid()$q$),'profile size remains enforced');
+select set_config('request.path','/instagram_feed_posts',true);
+select pg_temp.assert_ok(pg_temp.denied($q$select public.check_api_request()$q$,'not writable'),'imported post endpoint blocked');
+select set_config('request.path','/rpc/account_privacy',true);
+select set_config('request.headers','{"content-length":"32769"}',true);
+select pg_temp.assert_ok(pg_temp.denied($q$select public.check_api_request()$q$,'too large'),'oversized declared request rejected');
+select set_config('request.headers','{}',true);
+-- The first request already used one slot; 19 more fit the burst window.
+do $$begin for i in 1..19 loop perform public.check_api_request(); end loop;end;$$;
+select pg_temp.assert_ok(pg_temp.denied($q$select public.check_api_request()$q$,'Too many'),'21st burst request rejected');
+reset role;
+select set_config('request.jwt.claims','{"role":"anon"}',true);
+set local role anon;
+select pg_temp.assert_ok(pg_temp.denied($q$select public.check_api_request()$q$,'Sign in'),'guest writes rejected');
+select set_config('request.path','/rpc/official_event_feed',true);
+select public.check_api_request();
+select pg_temp.assert_ok(public.official_event_feed() ? 'events','public calendar still works');
+select set_config('request.method','GET',true);
+select set_config('request.path','/instagram_feed_posts',true);
+select public.check_api_request();
+select pg_temp.assert_ok(not has_table_privilege(current_user,'public.instagram_feed_posts','INSERT,UPDATE,DELETE,TRUNCATE'),'guest cannot alter imported posts');
+reset role;
+select set_config('request.jwt.claims','{"role":"authenticated","sub":"00000000-0000-4000-a721-000000000001","session_id":"00000000-0000-4000-b721-000000000001"}',true);
+-- Simulate bucket boundaries without sending a request flood.
+delete from private.usage_buckets where user_id=auth.uid() and action like 'api_write_%';
+insert into private.usage_buckets values(auth.uid(),'api_write_minute',to_timestamp(floor(extract(epoch from now())/60)*60),60);
+select pg_temp.assert_ok(pg_temp.denied($q$select private.check_api_write_budget()$q$,'Too many'),'minute quota enforced');
+delete from private.usage_buckets where user_id=auth.uid() and action like 'api_write_%';
+insert into private.usage_buckets values(auth.uid(),'api_write_hour',to_timestamp(floor(extract(epoch from now())/3600)*3600),1200);
+select pg_temp.assert_ok(pg_temp.denied($q$select private.check_api_write_budget()$q$,'Too many'),'hourly quota enforced');
+select pg_temp.assert_ok(public.claim_account_deletion(),'first deletion attempt reserved');
+select pg_temp.assert_ok(pg_temp.denied($q$select public.claim_account_deletion()$q$,'Too many'),'repeated deletion attempt denied');
+delete from private.usage_buckets where user_id=auth.uid() and action like 'delete_account_%';
+insert into private.usage_buckets values(auth.uid(),'delete_account_daily',to_timestamp(floor(extract(epoch from now())/86400)*86400),3);
+select pg_temp.assert_ok(pg_temp.denied($q$select public.claim_account_deletion()$q$,'Too many'),'daily deletion quota enforced');
+delete from auth.sessions where id='00000000-0000-4000-b721-000000000001';
+select pg_temp.assert_ok(pg_temp.denied($q$select private.check_api_write_budget()$q$,'Sign in'),'revoked session rejected');
+select 'Endpoint protection assertions passed; all fixtures rolled back' as result;
+rollback;

@@ -2,6 +2,8 @@
 begin;
 create function pg_temp.assert_true(p boolean,label text) returns void language plpgsql as $$begin if p is distinct from true then raise exception 'FAILED: %',label;end if;end;$$;
 create function pg_temp.denied(command text, expected text default null) returns boolean language plpgsql as $$begin execute command;return false;exception when others then if expected is null or sqlerrm ilike '%'||expected||'%' then return true;else raise;end if;end;$$;
+grant execute on function pg_temp.assert_true(boolean,text) to anon,authenticated,service_role;
+grant execute on function pg_temp.denied(text,text) to anon,authenticated,service_role;
 insert into auth.users(id,email,email_confirmed_at)values
  ('00000000-0000-4000-a700-000000000001','safety-a@example.invalid',now()),
  ('00000000-0000-4000-a700-000000000002','safety-b@example.invalid',now());

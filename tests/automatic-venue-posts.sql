@@ -1,5 +1,6 @@
 begin;
 create function pg_temp.assert_true(p boolean,p_label text) returns void language plpgsql as $$ begin if p is distinct from true then raise exception 'FAILED: %',p_label; end if; end; $$;
+grant execute on function pg_temp.assert_true(boolean,text) to anon,authenticated,service_role;
 insert into public.instagram_feed_posts(id,source_username,post_url,caption,posted_at)
 values('audit_auto_venue','thepubonking','https://www.instagram.com/p/audit_auto_venue/','Synthetic venue announcement',now()),
  ('audit_bad_url','thepubonking','https://example.invalid/p/audit_bad_url/','Synthetic invalid URL',now());

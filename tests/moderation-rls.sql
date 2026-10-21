@@ -1,6 +1,7 @@
 begin;
 create function pg_temp.assert_true(p boolean,p_label text) returns void language plpgsql as $$ begin if p is distinct from true then raise exception 'FAILED: %',p_label; end if; end; $$;
 -- Synthetic users exist only within this transaction. No emails, accounts or reports persist.
+grant execute on function pg_temp.assert_true(boolean,text) to anon,authenticated,service_role;
 insert into auth.users(id,email,email_confirmed_at) values
 ('00000000-0000-4000-a000-000000000001','audit-a@example.invalid',now()),
 ('00000000-0000-4000-a000-000000000002','audit-b@example.invalid',now());
