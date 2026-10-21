@@ -33,7 +33,9 @@
     "react-native-svg": "15.15.4",
     "react-native-url-polyfill": "^4.0.0",
     "react-native-web": "^0.21.2",
-    "react-native-webview": "13.16.1"
+    "react-native-webview": "13.16.1",
+    "braces": "file:vendor/braces",
+    "node-forge": "file:vendor/node-forge"
   },
   "devDependencies": {
     "@types/react": "~19.2.2",
@@ -59,6 +61,8 @@
   },
   "private": true,
   "overrides": {
+    "braces": "$braces",
+    "node-forge": "$node-forge",
     "decode-uri-component": "$decode-uri-component",
     "xcode": {
       "uuid": "11.1.1"

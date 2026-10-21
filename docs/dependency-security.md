@@ -1,11 +1,18 @@
-# Dependency security review — October 17, 2026
+# Dependency security review — October 21, 2026
 
-Initial npm production-dependency audit: {'info': 0, 'low': 0, 'moderate': 11, 'high': 18, 'critical': 0, 'total': 29}
+The October 17 audit reported 18 high-severity transitive findings, all originating in two build-tool advisories. Both affected implementations now have targeted, locally maintained patches. The current npm audit reports zero critical, high, moderate, low or informational findings, and an isolated clean `npm ci --ignore-scripts` resolves the patched copies.
 
-Direct advisory roots: braces (Metro build glob parsing, no patched registry release available); node-forge (Expo signing/build tooling, no patched registry release available); decode-uri-component (URL decoder used by Expo Router); uuid (xcode uses v4, advisory concerns buffer-based v3/v5/v6). Do not use npm audit --force: suggested Expo 44/React Native 0.72 downgrades are incompatible with SDK 57.
+## What changed
 
-The URI decoder uses the patched upstream 0.5.0 implementation with documented CommonJS export and literal fallback-replacement adaptations so query-string 7 remains compatible. The vendor directory contains provenance and the original MIT licence. xcode’s UUID is pinned to compatible CommonJS v11.1.1; its v4 call and native-config/export paths are checked. Reassess both pins when upstream SDK packages resolve them. The malformed-input regression test exposed oversized regex compilation in the upstream fallback; literal split/join handles that path without compiling a user-sized pattern. Remaining upstream toolchain advisories require tracking and a fixed compatible SDK/toolchain before treating release risk as closed. Keep development servers private; never expose Metro or process untrusted project/build inputs.
+- `braces` 3.0.3: local copy in `vendor/braces`, with parser nesting bounded at 128 (including parentheses and malformed/unclosed patterns), plus iterative validation before compile/expand/stringify walkers. Caller-supplied, cyclic and deeply nested ASTs are rejected before recursion. Original ordinary glob/range behavior remains tested. Advisory: https://github.com/advisories/GHSA-vfj7-8cjw-p6xm.
+- `node-forge` 1.4.0: local copy in `vendor/node-forge`, incorporating the nested DigestAlgorithm element-count fix proposed in upstream PR https://github.com/digitalbazaar/forge/pull/1152. It rejects extra ASN.1 children while preserving permitted optional NULL parameters and normal signing/verification. Advisory: https://github.com/advisories/GHSA-86w9-cpqp-85rv.
+- Root local-file dependencies and npm overrides direct Expo, its signing tools and micromatch to these copies. Patches do not depend on install scripts. Original upstream package names, versions and licences are retained; `everythingLaurierSecurityPatch: 2026-10-21.1` identifies the local modifications. Provenance, patch explanations and SHA-256 file manifests live in each vendor directory.
+- The earlier patched URI decoder and compatible xcode UUID override remain in place. No framework major downgrade or blanket audit suppression was used.
 
-Final production-dependency audit: 18 high-severity transitive findings trace to the remaining braces and node-forge advisories; zero critical/moderate findings. These are unresolved and are not a clean audit.
+## Evidence and limits
 
-Reproducibility: the patched module is a direct local-file dependency, with an npm override referencing that dependency. The first nested file override produced an unsuitable lock entry; it was replaced and a clean isolated npm ci plus URI/room parsing checks now pass. No framework major downgrade was applied.
+`tests/build-tool-security.test.mjs` verifies transitive resolution, rejection of nested/cyclic brace inputs and rejection of RSA DigestAlgorithm garbage using a low-exponent RSA key. Valid signatures, absent/present NULL parameters, altered messages, ordinary brace expansion and AST stringification are covered. Restoring the unpatched implementations makes both attack regression tests fail; the patched implementations pass. Typecheck, lint, app tests, the actual signed iPhone Release build and web production export also pass.
+
+**A zero npm audit is not an independent audit of these local sources.** npm does not independently assess vendored code. These patches fix the two specific reported mechanisms; they are not upstream fixed releases or a guarantee against other flaws. Keep the regression tests, inspect changes to the vendor copies and overrides, and replace them with reviewed compatible upstream fixes when available. The original advisories remain visible in `docs/dependency-audit-summary.json` alongside the current scan and this limitation.
+
+Do not use `npm audit --force` to downgrade Expo/React Native to incompatible versions. Keep Metro and other development servers private and avoid processing untrusted build/project inputs.

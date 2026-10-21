@@ -69,7 +69,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
         </View>
         {pathname !== '/search' && (regular ? <Search value={query} onChange={setQuery} onSubmit={goSearch} placeholder="Search campus" style={{ width: width >= 1280 ? 300 : 240, backgroundColor: c.background }} /> : <IconButton name="search" label="Search campus" onPress={() => router.push('/search')} />)}
       </View>
-      {pathname === '/map' ? <View style={{ flex: 1, minHeight: 0 }}>{children}</View> : <ScrollView key={pathname} style={{ flex: 1 }} contentContainerStyle={{ paddingHorizontal: horizontalPadding, paddingTop: regular ? 32 : 24, paddingBottom: 40, alignItems: 'center' }} keyboardShouldPersistTaps="handled" keyboardDismissMode={Platform.OS === 'ios' ? 'interactive' : 'on-drag'}>
+      {pathname === '/map' ? <View style={{ flex: 1, minHeight: 0 }}>{children}</View> : <ScrollView key={pathname} pinchGestureEnabled={false} minimumZoomScale={1} maximumZoomScale={1} bouncesZoom={false} style={{ flex: 1 }} contentContainerStyle={{ paddingHorizontal: horizontalPadding, paddingTop: regular ? 32 : 24, paddingBottom: 40, alignItems: 'center' }} keyboardShouldPersistTaps="handled" keyboardDismissMode={Platform.OS === 'ios' ? 'interactive' : 'on-drag'}>
         <Animated.View style={{ width: '100%', maxWidth: 1120, gap: regular ? 32 : 28, opacity: contentOpacity }}>{children}</Animated.View>
       </ScrollView>}
       {!regular && <View accessibilityRole="tablist" accessibilityLabel="Main navigation" style={[styles.bottomNav, { paddingBottom: Math.max(insets.bottom, 8) }]}>

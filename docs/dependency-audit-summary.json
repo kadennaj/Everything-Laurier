@@ -1,179 +1,40 @@
 {
-  "checked": "2026-10-17",
+  "checked": "2026-10-21",
   "metadata": {
     "vulnerabilities": {
       "info": 0,
       "low": 0,
       "moderate": 0,
-      "high": 18,
+      "high": 0,
       "critical": 0,
-      "total": 18
+      "total": 0
     },
     "dependencies": {
-      "prod": 597,
+      "prod": 599,
       "dev": 260,
       "optional": 38,
       "peer": 16,
       "peerOptional": 0,
-      "total": 883
+      "total": 885
     }
   },
-  "findings": [
-    {
-      "name": "@expo/cli",
-      "severity": "high",
-      "advisories": [],
-      "affectedPaths": [
-        "node_modules/@expo/cli"
-      ]
-    },
-    {
-      "name": "@expo/code-signing-certificates",
-      "severity": "high",
-      "advisories": [],
-      "affectedPaths": [
-        "node_modules/@expo/code-signing-certificates"
-      ]
-    },
-    {
-      "name": "@expo/metro",
-      "severity": "high",
-      "advisories": [],
-      "affectedPaths": [
-        "node_modules/@expo/metro"
-      ]
-    },
-    {
-      "name": "@expo/metro-config",
-      "severity": "high",
-      "advisories": [],
-      "affectedPaths": [
-        "node_modules/@expo/metro-config"
-      ]
-    },
-    {
-      "name": "@react-native/community-cli-plugin",
-      "severity": "high",
-      "advisories": [],
-      "affectedPaths": [
-        "node_modules/@react-native/community-cli-plugin"
-      ]
-    },
-    {
-      "name": "@react-native/metro-config",
-      "severity": "high",
-      "advisories": [],
-      "affectedPaths": [
-        "node_modules/@react-native/metro-config"
-      ]
-    },
-    {
-      "name": "@react-native/virtualized-lists",
-      "severity": "high",
-      "advisories": [],
-      "affectedPaths": [
-        "node_modules/@react-native/virtualized-lists"
-      ]
-    },
+  "findings": [],
+  "localSecurityPatches": [
     {
       "name": "braces",
-      "severity": "high",
-      "advisories": [
-        {
-          "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
-          "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
-          "range": "<=3.0.3"
-        }
-      ],
-      "affectedPaths": [
-        "node_modules/braces"
-      ]
-    },
-    {
-      "name": "expo",
-      "severity": "high",
-      "advisories": [],
-      "affectedPaths": [
-        "node_modules/expo"
-      ]
-    },
-    {
-      "name": "metro",
-      "severity": "high",
-      "advisories": [],
-      "affectedPaths": [
-        "node_modules/metro"
-      ]
-    },
-    {
-      "name": "metro-config",
-      "severity": "high",
-      "advisories": [],
-      "affectedPaths": [
-        "node_modules/metro-config"
-      ]
-    },
-    {
-      "name": "metro-file-map",
-      "severity": "high",
-      "advisories": [],
-      "affectedPaths": [
-        "node_modules/metro-file-map"
-      ]
-    },
-    {
-      "name": "metro-transform-worker",
-      "severity": "high",
-      "advisories": [],
-      "affectedPaths": [
-        "node_modules/metro-transform-worker"
-      ]
-    },
-    {
-      "name": "micromatch",
-      "severity": "high",
-      "advisories": [],
-      "affectedPaths": [
-        "node_modules/micromatch"
-      ]
+      "baseVersion": "3.0.3",
+      "patch": "2026-10-21.1",
+      "advisory": "GHSA-vfj7-8cjw-p6xm",
+      "path": "vendor/braces"
     },
     {
       "name": "node-forge",
-      "severity": "high",
-      "advisories": [
-        {
-          "title": "node-forge RSA PKCS#1 v1.5 signature verification accepts extra nested DigestAlgorithm elements",
-          "url": "https://github.com/advisories/GHSA-86w9-cpqp-85rv",
-          "range": "<=1.4.0"
-        }
-      ],
-      "affectedPaths": [
-        "node_modules/node-forge"
-      ]
-    },
-    {
-      "name": "react-native",
-      "severity": "high",
-      "advisories": [],
-      "affectedPaths": [
-        "node_modules/react-native"
-      ]
-    },
-    {
-      "name": "react-native-reanimated",
-      "severity": "high",
-      "advisories": [],
-      "affectedPaths": [
-        "node_modules/react-native-reanimated"
-      ]
-    },
-    {
-      "name": "react-native-worklets",
-      "severity": "high",
-      "advisories": [],
-      "affectedPaths": [
-        "node_modules/react-native-worklets"
-      ]
+      "baseVersion": "1.4.0",
+      "patch": "2026-10-21.1",
+      "advisory": "GHSA-86w9-cpqp-85rv",
+      "path": "vendor/node-forge"
     }
-  ]
+  ],
+  "scanLimitation": "npm audit does not independently analyze the local vendored code. Regression tests and clean-install resolution checks verify the targeted fixes; no upstream patched release is claimed.",
+  "previousHighFindings": 18
 }

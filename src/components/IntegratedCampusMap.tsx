@@ -47,6 +47,7 @@ export function IntegratedCampusMap() {
  }
  if(failed) return <View style={{padding:24,gap:16}}><T>The map could not load. Check your device’s WebGL support and try again.</T><Button label="Try map again" onPress={()=>{setFailed(false);setAttempt(v=>v+1);}} /></View>;
  return <WebView key={attempt} ref={web} source={source} style={{flex:1,backgroundColor:'#eef0eb'}} originWhitelist={['about:blank']} javaScriptEnabled domStorageEnabled={false} sharedCookiesEnabled={false} incognito
+  setBuiltInZoomControls={false} setDisplayZoomControls={false} scalesPageToFit={false}
   onError={()=>{stop();setFailed(true);}} onContentProcessDidTerminate={()=>{stop();setFailed(true);}}
   onMessage={event=>{try{const message=JSON.parse(event.nativeEvent.data);if(message.type==='share'&&typeof message.params==='string'){const p=new URLSearchParams(message.params);const queryParams:Record<string,string>={};for(const key of ['building','floor','room','view','place'])if(p.get(key))queryParams[key]=p.get(key)!;void Share.share({message:ExpoLinking.createURL('/map',{queryParams})}).catch(()=>{});}else if(message.type==='blueprint'&&typeof message.path==='string'){void blueprint(message.path);}else if(message.type==='location-start'){tracking.current=true;void start();}else if(message.type==='location-stop'){tracking.current=false;stop();}}catch{/* Unknown bridge messages are ignored. */}}}
   onShouldStartLoadWithRequest={request=>{if(request.url==='about:blank')return true;external(request.url);return false;}}

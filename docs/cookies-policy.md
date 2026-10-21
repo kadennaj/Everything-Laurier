@@ -2,7 +2,11 @@
 
 ## What is stored
 
-Effective October 17, 2026. The app uses necessary browser/device storage for sign-in sessions, pending email-code requests, saved items, hidden feeds/posts, age confirmation and your external-image choice. Native credentials use secure device storage; web sessions use browser storage. These are local-storage functions, not an advertising cookie system. The separate information website has no sign-in forms, advertising analytics or tracking cookies in its source.
+Effective October 21, 2026. The app uses necessary browser/device storage for sign-in sessions, pending email-code requests, saved items, hidden feeds/posts, age confirmation and your external-image choice. Native credentials use secure device storage; web sessions use browser storage. These are local-storage functions, not an advertising cookie system. The separate information website has no sign-in forms, advertising analytics or tracking cookies in its source.
+
+## Sign-in security check
+
+Cloudflare Turnstile loads only when you request or resend a sign-in code. It processes browser/device and connection signals and may use necessary browser storage to prevent abuse. Our widget does not issue a pre-clearance cookie. The short-lived verification token stays in memory until sent to Supabase for the requested sign-in, expires, or is cleared; it is not saved in our database. Browsing as a guest does not load Turnstile. Read Cloudflare’s Turnstile privacy addendum at https://www.cloudflare.com/turnstile-privacy-policy/.
 
 ## Optional external images
 

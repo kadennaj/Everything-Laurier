@@ -1,9 +1,11 @@
 import { Redirect, router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, StyleSheet, TextInput, View } from 'react-native';
+import { ActivityIndicator, Keyboard, StyleSheet, TextInput, View } from 'react-native';
 import { Button, Card, Icon, T, body } from '../components/ui';
 import { useAuth } from '../lib/auth';
-import { AUTH_UNAVAILABLE } from '../lib/auth-flow';
+import { AUTH_UNAVAILABLE, normalizeEmail } from '../lib/auth-flow';
+import { CAPTCHA_MAX_AGE_MS } from '../lib/captcha';
+import { AuthCaptcha } from '../components/AuthCaptcha';
 import { colors as c, fonts as f } from '../lib/theme';
 import { BrandLogo } from '../components/BrandLogo';
 
@@ -14,6 +16,10 @@ export default function Login() {
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
   const [now, setNow] = useState(() => Date.now());
+  const [captchaOpen, setCaptchaOpen] = useState(false);
+  const [captchaAttempt, setCaptchaAttempt] = useState(0);
+  const [captchaRequest] = useState(() => `${Date.now()}-${Math.random().toString(36).slice(2)}`);
+  const [captcha, setCaptcha] = useState<{ token: string; email: string; at: number } | null>(null);
   const codeInput = useRef<TextInput>(null);
   const emailInput = useRef<TextInput>(null);
   const isVerifying = !!pendingEmail;
@@ -33,7 +39,15 @@ export default function Login() {
   async function send() {
     setError(''); setNotice('');
     try {
-      await sendCode(pendingEmail || email);
+      const destination = normalizeEmail(pendingEmail || email);
+      if (!captcha || captcha.email !== destination || Date.now() - captcha.at >= CAPTCHA_MAX_AGE_MS) {
+        Keyboard.dismiss();
+        setCaptcha(null); setCaptchaAttempt(value => value + 1); setCaptchaOpen(true); return;
+      }
+      // Tokens are single-use, including requests that fail or hit a rate limit.
+      const token = captcha.token;
+      setCaptcha(null); setCaptchaOpen(false);
+      await sendCode(destination, token);
       setNow(Date.now());
       setCode('');
       setNotice('Code requested. Check your inbox and spam folder.');
@@ -71,10 +85,18 @@ export default function Login() {
           returnKeyType="done" onSubmitEditing={() => { if (!busy) void verify(); }} />
       </View> : <View style={{ gap: 8 }}>
         <T style={styles.label}>Email address</T>
-        <TextInput ref={emailInput} accessibilityLabel="Email address" value={email} onChangeText={value => { setEmail(value); setError(''); }}
+        <TextInput ref={emailInput} accessibilityLabel="Email address" value={email} onChangeText={value => { setEmail(value); setError(''); setCaptcha(null); setCaptchaOpen(false); }}
           placeholder="you@example.com" placeholderTextColor={c.muted} style={styles.input} keyboardType="email-address" inputMode="email"
           textContentType="emailAddress" autoComplete="email" autoCapitalize="none" autoCorrect={false} maxLength={254} editable={!busy}
           returnKeyType="go" onSubmitEditing={() => { if (!busy && configured && !remaining) void send(); }} />
+      </View>}
+      {captchaOpen && <View style={{ gap: 8 }}>
+        <T style={styles.label}>Quick security check</T>
+        <T muted style={{ lineHeight: 22 }}>Cloudflare checks browser and connection signals to prevent automated sign-in requests. Your email is sent to Supabase only when you request the code.</T>
+        <AuthCaptcha key={captchaAttempt} requestId={`${captchaRequest}-${captchaAttempt}`}
+          onToken={token => { setCaptcha({ token, email: currentEmail, at: Date.now() }); setError(''); }}
+          onError={message => { setCaptcha(null); setError(message); }} />
+        <Button secondary label="Restart security check" onPress={() => { setCaptcha(null); setError(''); setCaptchaAttempt(value => value + 1); }} />
       </View>}
       {(!configured || error || recoveryError) ? <View accessibilityRole="alert" style={styles.error}><T style={{ color: '#8E3434', lineHeight: 22 }}>{!configured ? AUTH_UNAVAILABLE : error || recoveryError}</T></View> : null}
       {!!notice && <T accessibilityLiveRegion="polite" style={{ color: c.green, lineHeight: 22 }}>{notice}</T>}
@@ -84,7 +106,7 @@ export default function Login() {
       {isVerifying && <>
         <T muted style={{ fontSize: 12, lineHeight: 20 }}>Can’t find it? Check your spam folder. Use the latest code if you requested more than one.</T>
         <Button secondary label={remaining ? `Resend code in ${remaining}s` : 'Resend code'} disabled={busy || remaining > 0} onPress={() => { void send(); }} />
-        <Button secondary label="Use a different email" disabled={busy} onPress={() => { setEmail(pendingEmail); changeEmail(); setCode(''); setError(''); setNotice(''); }} />
+        <Button secondary label="Use a different email" disabled={busy} onPress={() => { setEmail(pendingEmail); changeEmail(); setCode(''); setError(''); setNotice(''); setCaptcha(null); setCaptchaOpen(false); }} />
       </>}
       <View style={styles.privacy}><Icon name="lock" size={15} color={c.muted} /><T muted style={{ fontSize: 12, lineHeight: 19, flex: 1 }}>Your email code replaces a password. After signing in, you can create your student profile. You choose whether it appears in search.</T></View>
     </Card>

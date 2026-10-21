@@ -18,7 +18,7 @@ for(const name of ['dm-sans','lora']){
 }
 for(const file of ['indoor-campus-map/node_modules/three/LICENSE','indoor-campus-map/node_modules/react/LICENSE','indoor-campus-map/node_modules/react-dom/LICENSE'])try{const value=await readFile(new URL(file,root),'utf8');if(!texts.has(value))texts.set(value,String(texts.size));}catch{}
 packages.sort((a,b)=>a.name.localeCompare(b.name));
-const result={generated:'2026-10-17',packages,texts:[...texts].map(([text,id])=>({id,text})),missing};
+const result={generated:'2026-10-21',packages,texts:[...texts].map(([text,id])=>({id,text})),missing};
 await writeFile(new URL('src/data/third-party-notices.json',root),JSON.stringify(result,null,2)+'\n');
 const normalizeNotice=value=>value.split(/\r?\n/).map(line=>line.trimEnd()).join('\n').trimEnd()+'\n';
 await writeFile(new URL('docs/THIRD-PARTY-NOTICES.txt',root),normalizeNotice(packages.map(p=>`${p.name} ${p.version} — ${p.license}`).join('\n')+'\n\n'+[...texts.keys()].join('\n\n----------------\n\n')));

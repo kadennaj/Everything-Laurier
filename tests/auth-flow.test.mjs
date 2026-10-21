@@ -47,9 +47,10 @@ test('email normalization accepts any domain and rejects malformed addresses bef
 
 test('requesting a code allows signup but does not authenticate; verification restores and logout removes session', async () => {
   const { client, makeClient, requests, stored } = fixture();
-  assert.equal(await requestEmailCode(client.auth, ' Student@Example.com '), 'student@example.com');
+  assert.equal(await requestEmailCode(client.auth, ' Student@Example.com ', 'test-captcha-token'), 'student@example.com');
   assert.equal(requests[0].body.email, 'student@example.com');
   assert.equal(requests[0].body.create_user, true);
+  assert.equal(requests[0].body.gotrue_meta_security.captcha_token, 'test-captcha-token');
   assert.equal((await client.auth.getSession()).data.session, null);
   await assert.rejects(verifyEmailCode(client.auth, 'student@example.com', '000000'), /invalid or has expired/);
   assert.equal((await client.auth.getSession()).data.session, null);
@@ -76,13 +77,13 @@ test('incomplete codes and malformed code characters never reach verification', 
 test('server rate limits are surfaced without exposing backend details', async () => {
   const { client, fail } = fixture();
   fail(429, { code: 'over_email_send_rate_limit', msg: 'Private backend details' });
-  await assert.rejects(requestEmailCode(client.auth, 'student@example.com'), /Too many attempts/);
+  await assert.rejects(requestEmailCode(client.auth, 'student@example.com', 'test-captcha-token'), /Too many attempts/);
 });
 
 test('email and verification failures leave the user signed out', async () => {
   const { client, fail } = fixture();
   fail(400, { code: 'unexpected_failure', msg: 'Private backend details' });
-  await assert.rejects(requestEmailCode(client.auth, 'student@example.com'), /couldn’t send/);
+  await assert.rejects(requestEmailCode(client.auth, 'student@example.com', 'test-captcha-token'), /couldn’t send/);
   await assert.rejects(verifyEmailCode(client.auth, 'student@example.com', '123456'), /couldn’t verify/);
   assert.equal((await client.auth.getSession()).data.session, null);
 });
@@ -105,4 +106,13 @@ test('a code request survives reload only while its code is still valid', () => 
   assert.equal(restorePendingEmailDraft(draft, sentAt - 1), null);
   assert.equal(restorePendingEmailDraft('{', sentAt), null);
   assert.equal(restorePendingEmailDraft(JSON.stringify({ email: 'invalid', sentAt }), sentAt), null);
+});
+
+ test('missing CAPTCHA tokens cannot send OTP requests and CAPTCHA failures are actionable', async () => {
+ const { client, requests, fail } = fixture();
+ await assert.rejects(requestEmailCode(client.auth, 'student@example.com', ''), /security check/);
+ assert.equal(requests.length, 0);
+ fail(400, {code:'captcha_failed', msg:'private provider error'});
+ await assert.rejects(requestEmailCode(client.auth, 'student@example.com', 'rejected-token'), /new check/);
+ assert.equal(requests.length, 1);
 });

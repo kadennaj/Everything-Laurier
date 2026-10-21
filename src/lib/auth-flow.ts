@@ -32,6 +32,7 @@ export function restorePendingEmailDraft(raw: string | null, now = Date.now()) {
 
 export function authErrorMessage(error: unknown, action: 'send' | 'verify' | 'signout') {
   const details = error as { code?: string; status?: number; name?: string } | null;
+  if (details?.code === 'captcha_failed') return 'The security check could not be verified. Complete a new check and try again.';
   if (details?.status === 429 || details?.code === 'over_email_send_rate_limit' || details?.code === 'over_request_rate_limit') {
     return 'Too many attempts. Please wait a minute before trying again.';
   }
@@ -48,10 +49,11 @@ export function authErrorMessage(error: unknown, action: 'send' | 'verify' | 'si
 
 type EmailAuth = Pick<SupabaseClient['auth'], 'signInWithOtp' | 'verifyOtp'>;
 
-export async function requestEmailCode(auth: EmailAuth, value: string) {
+export async function requestEmailCode(auth: EmailAuth, value: string, captchaToken: string) {
   const email = normalizeEmail(value);
+  if (!captchaToken?.trim() || captchaToken.length > 4096) throw new Error('Complete the security check before requesting a code.');
   try {
-    const { error } = await auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
+    const { error } = await auth.signInWithOtp({ email, options: { shouldCreateUser: true, captchaToken } });
     if (error) throw error;
   } catch (error) {
     throw new Error(authErrorMessage(error, 'send'));

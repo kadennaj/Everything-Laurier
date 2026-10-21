@@ -18,7 +18,7 @@ type AuthState = {
   cooldownEmail: string;
   resendAvailableAt: number;
   busy: boolean;
-  sendCode: (email: string) => Promise<void>;
+  sendCode: (email: string, captchaToken: string) => Promise<void>;
   verifyCode: (code: string) => Promise<void>;
   changeEmail: () => void;
   signOut: () => Promise<void>;
@@ -99,11 +99,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     finally { inFlight.current = false; setBusy(false); }
   }
 
-  const sendCode = (email: string) => perform(async () => {
+  const sendCode = (email: string, captchaToken: string) => perform(async () => {
     if (!supabase || !emailLoginEnabled) throw new Error(AUTH_UNAVAILABLE);
     const normalizedEmail = normalizeEmail(email);
     if (normalizedEmail === cooldownEmail && Date.now() < resendAvailableAt) throw new Error('Please wait before requesting another code.');
-    await requestEmailCode(supabase.auth, normalizedEmail);
+    await requestEmailCode(supabase.auth, normalizedEmail, captchaToken);
     const sentAt = Date.now();
     setPendingEmail(normalizedEmail);
     setCooldownEmail(normalizedEmail);

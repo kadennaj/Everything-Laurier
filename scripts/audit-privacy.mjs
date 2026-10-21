@@ -31,7 +31,7 @@ if(picker?.cameraPermission!==false||picker?.microphonePermission!==false)findin
 const map=await readFile(path.join(root,'src/generated/campus-map.ts'),'utf8');
 if(/fonts\.googleapis\.com|fonts\.gstatic\.com/.test(map))findings.push('Map loads an external font service');
 const policy=JSON.parse(await readFile(path.join(root,'src/data/privacy-policy.json'),'utf8'));
-if(policy.version!=='2026-10-17')findings.push('Privacy policy version is stale');
+if(policy.version!=='2026-10-21')findings.push('Privacy policy version is stale');
 await writeFile(path.join(root,'docs/privacy-review-inventory.csv'),'file,lines,sha256\n'+rows.sort((a,b)=>a.file.localeCompare(b.file)).map(r=>`${r.file},${r.lines},${r.sha256}`).join('\n')+'\n');
 if(findings.length){console.error(findings.join('\n'));process.exitCode=1;}
 else console.log(`Privacy scan passed: ${rows.length} first-party code files / ${rows.reduce((sum,r)=>sum+r.lines,0)} lines. Hashed inventory saved; manual data-flow review is documented separately.`);

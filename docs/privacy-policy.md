@@ -1,10 +1,12 @@
 # Privacy policy
 
-Effective October 17, 2026 · Version 2026-10-17
+Effective October 21, 2026 · Version 2026-10-21
 
 Everything Laurier is an independently operated student app for life around Laurier Waterloo, with an information and support website. It is not an official Wilfrid Laurier University service. Kaden Najarali is the operator and is responsible for the personal information described here. For access, correction, deletion, complaints, or any privacy question, contact everythinglaurier@gmail.com.
 
 ## Accounts and student profiles
+
+Requesting or resending a sign-in code requires a Cloudflare Turnstile security check. It loads only when you choose to request a code, in a small browser view hosted at everythinglaurier.ca/captcha/. Cloudflare processes your IP address, browser/device and connection signals to distinguish people from automated requests, under its Turnstile privacy terms. The check does not include your email, transcript, map search or GPS location. A short-lived, single-use verification token is sent with your email-code request to Supabase for server-side verification. We keep the token only in app memory and do not add it to account exports, analytics or our database. Failed, expired or already-used tokens require a new check. You can continue browsing without a check or an account.
 
 You can browse public campus information and use the map without an account. Signing in uses your email address to deliver a one-time verification code. Supabase maintains an account identifier, verification status, session tokens, and ordinary connection/security information such as IP address and user agent. Resend processes the recipient email, email content, and delivery information to deliver sign-in messages. We do not use these messages for marketing. Email verification confirms control of an inbox, not current university enrolment.
 
@@ -56,7 +58,7 @@ Supabase processes authentication, profiles, applications, transcript storage, r
 
 Apify retrieves selected venues' public Instagram posts for a shared feed. We do not send your account, private application, transcript, device location, profile, or line report to Apify. Selected imports publish automatically after source/link checks; this is not AI screening or manual approval of every venue post. You can report posts and the owner can remove them. Instagram-hosted images are off by default. If you choose to allow them, the image host receives your IP address and ordinary connection details, subject to Meta's privacy terms. You can turn them off in Your space → Your data & choices; captions and links work without loading the images.
 
-The information website is hosted through Sites on Cloudflare infrastructure. Our website and web-app hosts process ordinary web requests to deliver and secure pages and assets. The information website has no account forms, advertising analytics, or tracking cookies. The app uses essential account storage as explained above. Opening university resources, venue pages, Instagram, external maps, or email takes you to a separate service with its own privacy practices. Emailing support shares your address, message, and any attachments with the operator's inbox and email provider.
+The information website is hosted through Sites on Cloudflare infrastructure. Our website and web-app hosts process ordinary web requests to deliver and secure pages and assets. The information website has no account forms, advertising analytics, or tracking cookies in its source. Its dedicated sign-in security-check page loads Cloudflare Turnstile on request; security processing and browser storage are governed by that provider’s terms. Pre-clearance cookies are disabled for our Turnstile widget. The app uses essential account storage as explained above. Opening university resources, venue pages, Instagram, external maps, or email takes you to a separate service with its own privacy practices. Emailing support shares your address, message, and any attachments with the operator's inbox and email provider.
 
 We do not sell your personal information, use advertising identifiers or advertising tracking, or send your account data, transcripts, or location to third-party AI or language models. The app does not request contacts, Bluetooth, microphone, camera, Face ID, or background-location permission. Optional foreground location and deliberately selected transcript images are used only for the features described above.
 
