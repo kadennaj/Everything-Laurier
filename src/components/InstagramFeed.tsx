@@ -1,6 +1,7 @@
+import { useContentLayout } from '../lib/use-content-layout';
 import React, { useCallback, useEffect, useState } from 'react';
 import { router } from 'expo-router';
-import { Image, Linking, Pressable, ScrollView, useWindowDimensions, View } from 'react-native';
+import { Image, Linking, Pressable, ScrollView, View } from 'react-native';
 import { Button, Card, FeedSkeleton, Icon, Pill, SectionTitle, T } from './ui';
 import { getInstagramPosts, instagramAccounts, InstagramPost } from '../lib/instagram-feed';
 import { useLocal } from '../lib/state';
@@ -43,7 +44,7 @@ export function InstagramFeed({ preview = false }: { preview?: boolean }) {
 }
 
 function VenueInstagramFeed({ preview = false }: { preview?: boolean }) {
-  const { width } = useWindowDimensions();
+  const { width } = useContentLayout();
   const { hiddenSources, hiddenPosts, externalMediaEnabled, setExternalMediaEnabled, ready } = useLocal();
   const [posts, setPosts] = useState<InstagramPost[]>([]);
   const [selected, setSelected] = useState('all');
@@ -67,7 +68,7 @@ function VenueInstagramFeed({ preview = false }: { preview?: boolean }) {
     return () => { active = false; clearInterval(interval); };
   }, []);
 
-  const previewCardWidth = width >= 1000 ? Math.min(360, (Math.min(width - 312, 1120) - 32) / 3) : Math.min(280, width - 64);
+  const previewCardWidth = Math.min(360, width >= 960 ? (width - 32) / 3 : width * 0.82);
   const visible = visibleFeedPosts(posts, preview ? 'all' : selected, hiddenSources, hiddenPosts, preview ? 3 : 12);
   const personallyHidden = posts.some(post => (preview || selected === 'all' || post.source_username === selected)
     && (hiddenSources.includes(post.source_username) || hiddenPosts.includes(post.id)));

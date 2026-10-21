@@ -15,6 +15,7 @@ insert into auth.sessions(id,user_id)values
 insert into private.app_owners values('00000000-0000-4000-a100-000000000003');
 insert into public.student_profiles(id,display_name,program,is_discoverable,contact_email)values
  ('00000000-0000-4000-a100-000000000001','Synthetic Tutor','Audit',true,'tutor-a@example.invalid');
+select private.review_profile('00000000-0000-4000-a100-000000000001','approved');
 insert into private.account_consents(user_id,terms_version,privacy_version,age_16_confirmed) select id,'2026-10-17','2026-10-17',true from auth.users where email like '%@example.invalid' on conflict do nothing;
 set local role anon;
 select pg_temp.assert_true(pg_temp.denied($sql$select public.owner_portal('applications')$sql$),'guest cannot read owner queue');
@@ -69,7 +70,7 @@ do $$declare r jsonb;begin
  end loop;
 end;$$;
 reset role;
-select pg_temp.assert_true((select moderation_status='suspended' from public.student_profiles where id='00000000-0000-4000-a100-000000000001'),'owner report action suspends profile despite automatic publication trigger');
+select pg_temp.assert_true((select moderation_status='suspended' from public.student_profiles where id='00000000-0000-4000-a100-000000000001'),'owner report action suspends profile through the review trigger');
 select pg_temp.assert_true((select status='rejected' from private.tutor_applications where id=current_setting('test.application')::uuid),'reported tutor listing removed');
 select pg_temp.assert_true(not (select public from storage.buckets where id='tutor-transcripts'),'transcript bucket is private');
 delete from auth.sessions where id='00000000-0000-4000-b100-000000000003';

@@ -1,6 +1,7 @@
+import { useContentLayout } from '../../lib/use-content-layout';
 import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { useWindowDimensions, View } from 'react-native';
+import { View } from 'react-native';
 import { Artwork } from '../../components/Artwork';
 import { Badge, Button, Card, Empty, ExternalButton, Eyebrow, Icon, T, body, s } from '../../components/ui';
 import { CalendarStatus } from '../../components/CalendarStatus';
@@ -9,7 +10,7 @@ import { useLocal } from '../../lib/state';
 import { colors as c, fonts as f } from '../../lib/theme';
 
 export default function EventDetail() {
-  const { id } = useLocalSearchParams<{ id: string }>(); const { events, loading, error, now } = useOfficialEvents(); const event = events.find(item => item.id === id); const { saved, toggleSave } = useLocal(); const { width } = useWindowDimensions();
+  const { id } = useLocalSearchParams<{ id: string }>(); const { events, loading, error, now } = useOfficialEvents(); const event = events.find(item => item.id === id); const { saved, toggleSave } = useLocal(); const { width } = useContentLayout();
   if (!event) return <><CalendarStatus />{!loading && !error && <Empty title="This event is no longer listed." description="The organizer may have removed it or its listing may have expired." />}
     {saved.includes(`event:${id}`) && <Button secondary label="Remove saved bookmark" onPress={() => toggleSave(`event:${id}`)} />}
     <Button label="Back to Discover" onPress={() => router.replace('/')} /></>;

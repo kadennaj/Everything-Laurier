@@ -1,5 +1,6 @@
+import { useContentLayout } from '../lib/use-content-layout';
 import React from 'react';
-import { Pressable, useWindowDimensions, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { router } from 'expo-router';
 import Svg, { Circle, Ellipse, G, Line, Path } from 'react-native-svg';
 import { Night, NightPalette, Venue, getVenue } from '../data/nightlife';
@@ -14,7 +15,7 @@ export const nightColors = {
 };
 
 export function NightArt({ palette, title, subtitle, height = 200, hero = false }: { palette: NightPalette; title: string; subtitle: string; height?: number; hero?: boolean }) {
-  const compact = useWindowDimensions().width < 600;
+  const compact = useContentLayout().width < 600;
   const p = nightColors[palette];
   return <View style={{ minHeight: height, overflow: 'hidden', backgroundColor: p.bg, padding: hero ? (compact ? 20 : 28) : 23, justifyContent: 'space-between' }}>
     <Svg aria-hidden={true} width="100%" height="100%" viewBox="0 0 600 360" preserveAspectRatio="xMaxYMid slice" style={{ position: 'absolute', inset: 0, opacity: hero ? 0.8 : 0.62 }}>

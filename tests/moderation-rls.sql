@@ -58,7 +58,7 @@ set local role authenticated;
 select public.change_profile_block('00000000-0000-4000-a000-000000000002',false);
 select pg_temp.assert_true((select count(*)=1 from public.student_profiles where id='00000000-0000-4000-a000-000000000002'),'unblock restores peer');
 update public.student_profiles set bio='Changed content' where id='00000000-0000-4000-a000-000000000001';
-select pg_temp.assert_true((select moderation_status='approved' from public.student_profiles where id='00000000-0000-4000-a000-000000000001'),'edit publishes automatically');
+select pg_temp.assert_true((select moderation_status='pending' from public.student_profiles where id='00000000-0000-4000-a000-000000000001'),'edit returns to review');
 reset role;
 select set_config('request.jwt.claims','{}',true);
 select private.review_profile('00000000-0000-4000-a000-000000000001','suspended');

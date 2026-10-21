@@ -1,7 +1,8 @@
+import { useContentLayout } from '../../lib/use-content-layout';
 import { NightlifeAgeBoundary } from '../../components/NightlifeAgeGate';
 import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { useWindowDimensions, View } from 'react-native';
+import { View } from 'react-native';
 import { NightArt, NightCard } from '../../components/Nightlife';
 import { Badge, Button, Card, Empty, ExternalButton, Eyebrow, Icon, SectionTitle, T, body, s } from '../../components/ui';
 import { getVenue, nightlifeChecked, nights } from '../../data/nightlife';
@@ -9,7 +10,7 @@ import { useLocal } from '../../lib/state';
 import { colors as c, fonts as f } from '../../lib/theme';
 
 export default function VenueDetail() {
-  const { id } = useLocalSearchParams<{ id: string }>(); const venue = getVenue(id); const { saved, toggleSave } = useLocal(); const { width } = useWindowDimensions(); const compact = width < 800;
+  const { id } = useLocalSearchParams<{ id: string }>(); const venue = getVenue(id); const { saved, toggleSave } = useLocal(); const { width, fontScale } = useContentLayout(); const compact = width / fontScale < 800;
   if (!venue) return <Empty title="We haven’t met this place yet." description="Explore the venues in the Waterloo edit." action={<Button label="Explore Nightlife" onPress={() => router.replace('/nightlife')} />} />;
   const selected = saved.includes(`venue:${venue.id}`);
   return <NightlifeAgeBoundary><><View style={{ alignItems: 'flex-start' }}><Button secondary label="Nightlife" icon="arrow-left" onPress={() => router.navigate('/nightlife')} /></View><Card><NightArt palette={venue.palette} title={venue.shortName} subtitle={`${venue.area} / The venue edit`} height={compact ? 270 : 320} hero /></Card>

@@ -1,6 +1,7 @@
+import { useContentLayout } from '../lib/use-content-layout';
 import { router } from 'expo-router';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, Pressable, useWindowDimensions, View } from 'react-native';
+import { ActivityIndicator, Pressable, View } from 'react-native';
 import { lineVenues } from '../data/line-venues';
 import { useAuth } from '../lib/auth';
 import { currentLineStatus, isLineReportingOpen, lineOptions, lineTimeAgo, lineWaitLabel, type LineStatus } from '../lib/line-reporting';
@@ -9,7 +10,7 @@ import { colors as c, fonts as f } from '../lib/theme';
 import { Button, Icon, T } from './ui';
 
 export function LineCheckIns() {
-  const { width } = useWindowDimensions();
+  const { width } = useContentLayout();
   const { session } = useAuth();
   const [statuses, setStatuses] = useState<Record<string, LineStatus>>({});
   const [now, setNow] = useState(new Date());

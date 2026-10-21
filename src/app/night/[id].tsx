@@ -1,7 +1,8 @@
+import { useContentLayout } from '../../lib/use-content-layout';
 import { NightlifeAgeBoundary } from '../../components/NightlifeAgeGate';
 import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
-import { useWindowDimensions, View } from 'react-native';
+import { View } from 'react-native';
 import { NightArt, NightCard, VenueCard } from '../../components/Nightlife';
 import { Badge, Button, Card, Empty, ExternalButton, Icon, IconName, SectionTitle, T, body, s } from '../../components/ui';
 import { allNights, getVenue, nightlifeChecked, nights } from '../../data/nightlife';
@@ -10,7 +11,7 @@ import { colors as c, fonts as f } from '../../lib/theme';
 
 export default function NightDetail() {
   const { id } = useLocalSearchParams<{ id: string }>(); const night = allNights.find(n => n.id === id);
-  const { saved, toggleSave } = useLocal(); const { width } = useWindowDimensions(); const compact = width < 800;
+  const { saved, toggleSave } = useLocal(); const { width, fontScale } = useContentLayout(); const compact = width / fontScale < 800;
   if (!night) return <Empty title="This night isn’t on the list." description="Find another plan in the nightlife edit." action={<Button label="Explore Nightlife" onPress={() => router.replace('/nightlife')} />} />;
   const venue = getVenue(night.venueId)!; const active = saved.includes(`night:${night.id}`);
   const facts: { icon: IconName; label: string; value: string }[] = [{ icon: 'calendar', label: 'WHEN', value: night.schedule }, { icon: 'clock', label: 'TIME', value: night.time }, { icon: 'music', label: 'ON THE SOUNDTRACK', value: night.lineup }, { icon: 'tag', label: 'AT THE DOOR', value: night.cost }];

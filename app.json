@@ -173,6 +173,14 @@
         {
           "motionPermission": "Use height changes to estimate your floor after you confirm a starting floor. Readings stay on your phone."
         }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "enableSceneSupport": true
+          }
+        }
       ]
     ],
     "scheme": "everythinglaurier"

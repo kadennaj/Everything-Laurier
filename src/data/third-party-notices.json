@@ -2366,6 +2366,14 @@
       ]
     },
     {
+      "name": "expo-build-properties",
+      "version": "57.0.22",
+      "license": "MIT",
+      "texts": [
+        "7"
+      ]
+    },
+    {
       "name": "expo-constants",
       "version": "57.0.22",
       "license": "MIT",

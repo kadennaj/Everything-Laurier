@@ -1,7 +1,9 @@
+import { gridItemStyle } from '../lib/layout';
+import { useContentLayout } from '../lib/use-content-layout';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Image, Pressable, useWindowDimensions, View } from 'react-native';
+import { Image, Pressable, View } from 'react-native';
 import { ClubCard, EventCard } from '../components/cards';
 import { InstagramFeed } from '../components/InstagramFeed';
 import { Button, Card, Chips, Empty, Eyebrow, Icon, IconName, SectionTitle, T, s } from '../components/ui';
@@ -12,7 +14,7 @@ import { useLocal } from '../lib/state';
 import { colors as c, fonts as f, radii } from '../lib/theme';
 
 export default function Discover() {
-  const { width, fontScale } = useWindowDimensions();
+  const { width, fontScale } = useContentLayout();
   const compact = width / fontScale < 700;
   const singleColumn = width / fontScale < 330;
   const [filter, setFilter] = useState('Upcoming');
@@ -43,7 +45,7 @@ export default function Discover() {
     <View style={{ gap: 18 }}>
       <SectionTitle title="Around campus" subtitle="Events from Laurier’s official calendar." />
       <Chips items={['Upcoming', 'Saved']} value={filter} onChange={value => { setFilter(value); setLimit(3); }} />
-      {candidates.length > 0 && <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 18 }}>{candidates.slice(0, limit).map(event => <View key={event.id} style={{ flexBasis: compact ? '100%' : '30%', flexGrow: 1, maxWidth: compact ? undefined : 420 }}><EventCard event={event} /></View>)}</View>}
+      {candidates.length > 0 && <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 18 }}>{candidates.slice(0, limit).map(event => <View key={event.id} style={gridItemStyle(width, fontScale)}><EventCard event={event} /></View>)}</View>}
       {!candidates.length && !loading && !error && <Card><Empty title={filter === 'Saved' ? 'Keep your next plan here' : 'No upcoming campus events'} icon="calendar" description={filter === 'Saved' ? 'Tap the bookmark on an event to save it for later.' : 'New events appear when Laurier publishes them.'} /></Card>}
       {candidates.length > limit && <Button secondary label="Show more events" onPress={() => setLimit(value => value + 6)} />}
       <CalendarStatus />

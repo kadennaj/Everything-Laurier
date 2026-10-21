@@ -1,6 +1,7 @@
+import { useContentLayout } from '../lib/use-content-layout';
 import { NightlifeAgeBoundary } from '../components/NightlifeAgeGate';
 import React, { useState } from 'react';
-import { Pressable, useWindowDimensions, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { router } from 'expo-router';
 import { NightCard, VenueCard } from '../components/Nightlife';
 import { InstagramFeed } from '../components/InstagramFeed';
@@ -11,13 +12,13 @@ import { colors as c, fonts as f } from '../lib/theme';
 import { useLocal } from '../lib/state';
 
 export default function Nightlife() {
-  const { width } = useWindowDimensions(); const compact = width < 700;
+  const { width } = useContentLayout(); const compact = width < 700;
   const [tab, setTab] = useState('The lineup'); const [day, setDay] = useState('Any day');
   const [mood, setMood] = useState('All moods'); const [query, setQuery] = useState('');
   const { saved } = useLocal();
   const matching = (tab === 'Saved' ? allNights : nights).filter(n => (tab === 'Saved' || day === 'Any day' || n.day === day) && (tab === 'Saved' || mood === 'All moods' || n.genre === mood) && `${n.title} ${n.genre} ${venues.find(v => v.id === n.venueId)?.name}`.toLowerCase().includes(query.toLowerCase()) && (tab !== 'Saved' || saved.includes(`night:${n.id}`)));
   const places = venues.filter(v => `${v.name} ${v.tags.join(' ')} ${v.kind}`.toLowerCase().includes(query.toLowerCase()) && (tab !== 'Saved' || saved.includes(`venue:${v.id}`)));
-  const cardWidth = compact ? '100%' : width >= 1450 ? '31%' : '47%';
+  const cardWidth = compact ? '100%' : width >= 1020 ? '31%' : '47%';
   return <NightlifeAgeBoundary><>
     <View style={{ borderRadius: 26, padding: compact ? 24 : 36, gap: 20, backgroundColor: c.night }}>
       <View style={[s.row, { justifyContent: 'space-between' }]}><Icon name="moon" size={23} color={c.gold} /><T style={{ color: c.nightMuted, fontSize: 12 }}>Waterloo · 19+</T></View>

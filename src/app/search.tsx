@@ -1,6 +1,8 @@
+import { gridItemStyle } from '../lib/layout';
+import { useContentLayout } from '../lib/use-content-layout';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState } from 'react';
-import { useWindowDimensions, View } from 'react-native';
+import { View } from 'react-native';
 import { ClubCard, EventCard } from '../components/cards';
 import { Button, Card, Chips, Empty, NavigationRow, PageHeading, Search, SectionTitle, T } from '../components/ui';
 import { NightCard, VenueCard } from '../components/Nightlife';
@@ -20,8 +22,7 @@ function SearchResults({ initialQuery }: { initialQuery: string }) {
   const { nightlifeAgeConfirmed } = useLocal();
   const { events, loading, error, now } = useOfficialEvents();
   const [query, setQuery] = useState(initialQuery), [scope, setScope] = useState('All'), [limit, setLimit] = useState(8);
-  const { width, fontScale } = useWindowDimensions();
-  const compact = width / fontScale < 700;
+  const { width, fontScale } = useContentLayout();
   const normalized = query.trim().toLowerCase();
   const places = findMapPlaces(query, mapEntries);
   const foundClubs = normalized ? clubs.filter(club => `${club.name} ${club.theme}`.toLowerCase().includes(normalized)) : [];
@@ -30,7 +31,7 @@ function SearchResults({ initialQuery }: { initialQuery: string }) {
   const foundVenues = normalized && nightlifeAgeConfirmed ? venues.filter(venue => `${venue.name} ${venue.tags.join(' ')}`.toLowerCase().includes(normalized)) : [];
   const show = (name: string) => scope === 'All' || scope === name;
   const resultCount = (show('Places') ? places.length : 0) + (show('Clubs') ? foundClubs.length : 0) + (show('Events') ? foundEvents.length : 0) + (show('Nightlife') ? foundNights.length + foundVenues.length : 0);
-  const cardStyle = { flexBasis: compact ? '100%' as const : '30%' as const, flexGrow: 1, maxWidth: compact ? undefined : 420 };
+  const cardStyle = gridItemStyle(width, fontScale);
   return <><PageHeading title="Search campus" subtitle="Buildings, rooms, clubs and your next plan." />
     <Search value={query} onChange={value => { setQuery(value); setLimit(8); }} placeholder="Try Library, LH 1001 or Computing" autoFocus={!initialQuery} />
     <Chips items={nightlifeAgeConfirmed ? ['All', 'Places', 'Clubs', 'Events', 'Nightlife'] : ['All', 'Places', 'Clubs', 'Events']} value={scope} onChange={value => { setScope(value); setLimit(8); }} />

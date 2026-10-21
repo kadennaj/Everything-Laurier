@@ -7,6 +7,8 @@ import { colors as c, fonts as f } from '../lib/theme';
 import { navigationSection, primaryNavigation, screenTitle } from '../lib/navigation';
 import { Icon, IconButton, Search, T } from './ui';
 import { BrandLogo } from './BrandLogo';
+import { appLayout } from '../lib/layout';
+import { ContentWidthContext } from '../lib/use-content-layout';
 
 const services = [
   { label: 'Academic help', path: '/help', icon: 'book-open' },
@@ -17,14 +19,16 @@ const services = [
 
 export function Shell({ children }: { children: React.ReactNode }) {
   const { width, height, fontScale } = useWindowDimensions();
-  const regular = width >= 1000 && width / fontScale >= 760;
+
   const pathname = usePathname();
   const current = navigationSection(pathname);
   const title = screenTitle(pathname);
   const primary = primaryNavigation.some(item => item.path === pathname);
   const insets = useSafeAreaInsets();
+  const { regular, padding: horizontalPadding } = appLayout(width, fontScale, insets.left, insets.right);
   const { saved, toast } = useLocal();
   const [query, setQuery] = useState('');
+  const [contentWidth, setContentWidth] = useState<number | null>(null);
   const contentOpacity = useState(() => new Animated.Value(1))[0];
   const [reduceMotion, setReduceMotion] = useState(true);
   useEffect(() => {
@@ -43,10 +47,10 @@ export function Shell({ children }: { children: React.ReactNode }) {
   }, [pathname, reduceMotion, contentOpacity]);
   const goSearch = () => { router.push({ pathname: '/search', params: { q: query } }); setQuery(''); };
   const goBack = () => { if (router.canGoBack()) router.back(); else router.replace('/'); };
-  const horizontalPadding = regular ? 36 : width < 360 ? 16 : 20;
+
 
   return <View style={[styles.root, { paddingTop: insets.top, paddingLeft: insets.left, paddingRight: insets.right }]}>
-    {regular && <View style={styles.sidebar}>
+    {regular && <View style={[styles.sidebar, { paddingBottom: Math.max(insets.bottom, 16) }]}>
       <Pressable accessibilityRole="button" accessibilityLabel="Everything Laurier home" onPress={() => router.navigate('/')} style={({ pressed }) => [styles.brand, pressed && styles.pressed]}>
         <BrandLogo size={54} decorative /><View style={{ flex: 1 }}><T style={{ fontSize: 14, lineHeight: 20, fontFamily: f.medium }}>Everything</T><T style={{ fontSize: 22, lineHeight: 28, fontFamily: f.bold }}>Laurier</T></View>
       </Pressable>
@@ -70,7 +74,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
         {pathname !== '/search' && (regular ? <Search value={query} onChange={setQuery} onSubmit={goSearch} placeholder="Search campus" style={{ width: width >= 1280 ? 300 : 240, backgroundColor: c.background }} /> : <IconButton name="search" label="Search campus" onPress={() => router.push('/search')} />)}
       </View>
       {pathname === '/map' ? <View style={{ flex: 1, minHeight: 0 }}>{children}</View> : <ScrollView key={pathname} pinchGestureEnabled={false} minimumZoomScale={1} maximumZoomScale={1} bouncesZoom={false} style={{ flex: 1 }} contentContainerStyle={{ paddingHorizontal: horizontalPadding, paddingTop: regular ? 32 : 24, paddingBottom: 40, alignItems: 'center' }} keyboardShouldPersistTaps="handled" keyboardDismissMode={Platform.OS === 'ios' ? 'interactive' : 'on-drag'}>
-        <Animated.View style={{ width: '100%', maxWidth: 1120, gap: regular ? 32 : 28, opacity: contentOpacity }}>{children}</Animated.View>
+        <Animated.View onLayout={event => setContentWidth(event.nativeEvent.layout.width)} style={{ width: '100%', maxWidth: 1120, gap: regular ? 32 : 28, opacity: contentOpacity }}><ContentWidthContext.Provider value={contentWidth}>{children}</ContentWidthContext.Provider></Animated.View>
       </ScrollView>}
       {!regular && <View accessibilityRole="tablist" accessibilityLabel="Main navigation" style={[styles.bottomNav, { paddingBottom: Math.max(insets.bottom, 8) }]}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ flexGrow: 0 }} contentContainerStyle={{ flexGrow: 1 }}>

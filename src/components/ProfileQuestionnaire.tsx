@@ -82,7 +82,7 @@ export function ProfileQuestionnaire({ editing = false }: { editing?: boolean })
         </View>
         <View style={{ flex: 1, gap: 5 }}>
           <T style={{ fontFamily: f.bold }}>Let students find and contact me</T>
-          <T muted style={{ lineHeight: 20, fontSize: 12 }}>Turning this on automatically shares your name, program, year, introduction, and verified email ({session.user.email}) with signed-in students. Leave this off to keep your profile private.</T>
+          <T muted style={{ lineHeight: 20, fontSize: 12 }}>After owner review, this shares your name, program, year, introduction, and verified email ({session.user.email}) with signed-in students. New profiles and edits stay hidden until approved. Leave this off to stay private.</T>
         </View>
       </Pressable>
       <T muted style={{ fontSize: 12, lineHeight: 20 }}>By saving, you agree to follow the community rules. Only share your own information.</T>

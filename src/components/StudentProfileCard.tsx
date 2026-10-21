@@ -35,9 +35,9 @@ export function StudentProfileCard() {
         <T style={{ fontFamily: f.bold, fontSize: 25 }}>{profile.display_name}</T>
         <T muted>{profile.program}{profile.year_label ? ` · ${profile.year_label}` : ''}</T>
         {!!profile.bio && <T style={body}>{profile.bio}</T>}
-        <Badge label={profile.is_discoverable ? (profile.moderation_status === 'approved' ? 'Visible to students' : 'Not published') : 'Private profile'}
+        <Badge label={profile.is_discoverable ? (profile.moderation_status === 'approved' ? 'Visible to students' : profile.moderation_status === 'pending' ? 'Awaiting review' : 'Not published') : 'Private profile'}
           color={profile.is_discoverable ? c.sage : c.background} textColor={profile.is_discoverable ? c.green : c.muted} />
-        {profile.is_discoverable && <T muted style={{ fontSize: 12, lineHeight: 20 }}>{profile.moderation_status === 'approved' ? 'Your profile and verified email are visible to signed-in students. Edits publish automatically. Turn sharing off to keep your profile private.' : profile.moderation_status === 'pending' ? 'Your profile isn’t visible to other students. Make sure your account email is verified. Contact support if it stays unpublished.' : 'Your profile has been restricted. Contact everythinglaurier@gmail.com to ask about this decision.'}</T>}
+        {profile.is_discoverable && <T muted style={{ fontSize: 12, lineHeight: 20 }}>{profile.moderation_status === 'approved' ? 'Your profile and verified email are visible to signed-in students. Edits need another review. Turn sharing off to keep your profile private.' : profile.moderation_status === 'pending' ? 'Waiting for owner review. Your profile stays hidden until approved.' : profile.moderation_status === 'rejected' ? 'Your profile wasn’t approved. Edit it to request another review, or contact everythinglaurier@gmail.com.' : 'Your profile has been restricted. Contact everythinglaurier@gmail.com to ask about this decision.'}</T>}
         <View style={{ alignItems: 'flex-start' }}><Button secondary label="Edit your profile" icon="edit-2" onPress={() => router.push('/edit-profile')} /></View>
       </>}
   </Card>;

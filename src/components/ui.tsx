@@ -1,6 +1,7 @@
+import { useContentLayout } from '../lib/use-content-layout';
 import { Feather } from '@expo/vector-icons';
 import React from 'react';
-import { ActivityIndicator, Linking, Pressable, ScrollView, StyleProp, StyleSheet, Text, TextInput, TextStyle, useWindowDimensions, View, ViewStyle } from 'react-native';
+import { ActivityIndicator, Linking, Pressable, ScrollView, StyleProp, StyleSheet, Text, TextInput, TextStyle, View, ViewStyle } from 'react-native';
 import { colors as c, fonts as f, radii } from '../lib/theme';
 import { useLocal } from '../lib/state';
 
@@ -27,7 +28,7 @@ export function Pill({ label, active, onPress, icon }: { label: string; active?:
   return <Pressable accessibilityRole={onPress ? 'button' : 'text'} accessibilityLabel={label} aria-pressed={onPress ? !!active : undefined} accessibilityState={onPress ? { selected: active } : undefined} onPress={onPress}
     style={({ pressed }) => [s.pill, active && s.pillActive, pressed && { opacity: 0.7 }]}>
     {icon && <Icon name={icon} size={15} color={active ? c.surface : c.muted} />}
-    <T style={{ fontSize: 15, lineHeight: 21, fontFamily: f.medium, color: active ? c.surface : c.muted }}>{label}</T>
+    <T style={{ fontSize: 15, lineHeight: 21, fontFamily: f.medium, color: active ? c.surface : c.muted, flexShrink: 1 }}>{label}</T>
   </Pressable>;
 }
 export function Chips({ items, value, onChange }: { items: string[]; value: string; onChange: (v: string) => void }) {
@@ -41,8 +42,8 @@ export function Badge({ label, color = c.lavender, textColor = c.purple }: { lab
   return <View style={{ alignSelf: 'flex-start', paddingHorizontal: 10, paddingVertical: 6, backgroundColor: color, borderRadius: 8 }}><T style={{ fontSize: 11, lineHeight: 15, fontFamily: f.medium, color: textColor }}>{label}</T></View>;
 }
 export function PageHeading({ eyebrow, title, subtitle, action }: { eyebrow?: string; title: string; subtitle?: string; action?: React.ReactNode }) {
-  const { width } = useWindowDimensions();
-  return <View style={[s.heading, width < 700 && { flexDirection: 'column', alignItems: 'stretch' }]}>
+  const { width, fontScale } = useContentLayout();
+  return <View style={[s.heading, width / fontScale < 700 && { flexDirection: 'column', alignItems: 'stretch' }]}>
     <View style={{ flex: 1, gap: 10 }}>{eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
       <T accessibilityRole="header" style={{ fontSize: width < 600 ? 30 : 38, lineHeight: width < 600 ? 38 : 46, fontFamily: f.bold, letterSpacing: -0.4 }}>{title}</T>
       {subtitle ? <T muted style={{ maxWidth: 620, fontSize: 17, lineHeight: 26 }}>{subtitle}</T> : null}
