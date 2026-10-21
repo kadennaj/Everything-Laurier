@@ -680,8 +680,8 @@ export class MapScene {
       const route = { ...s.route, nodes: shared ? s.route.nodes.map(displayNode) : s.route.nodes };
       this.drawRoute(route, true, renderState);
       const first = route.nodes[0], last = route.nodes.at(-1)!;
-      if ((shared || first.buildingId === building.id) && (s.stacked || first.floor === level)) this.marker(first.point,this.routeY(first.floor)+.2,"#279476",shared ? 1 : .55);
-      if ((shared || last.buildingId === building.id) && (s.stacked || last.floor === level)) this.marker(last.point,this.routeY(last.floor)+.2,"#7643ae",shared ? 1.2 : .65);
+      if ((members.some(b => b.id === first.buildingId)) && (s.stacked || first.floor === level)) this.marker(first.point,this.routeY(first.floor)+.2,"#279476",shared ? 1 : .55);
+      if ((members.some(b => b.id === last.buildingId)) && (s.stacked || last.floor === level)) this.marker(last.point,this.routeY(last.floor)+.2,"#7643ae",shared ? 1.2 : .65);
     }
   }
   private buildWing(s: MapState, building: IndoorBuilding, floors: Floor[], reference: boolean) {
@@ -904,9 +904,11 @@ export class MapScene {
   }
   private drawRoute(route: Route | null, indoor: boolean, state = this.state!) {
     if (!route) return;
+    const allowed = indoor && this.state?.building ? new Set((state.building?.id === "connected-complex" ? connectedBuildings(this.state.building) : [this.state.building]).map(b => b.id)) : null;
     for (let i = 1; i < route.nodes.length; i++) {
       const a = route.nodes[i - 1],
         b = route.nodes[i];
+      if (route.edges[i - 1].kind === "transfer" || (!indoor && (a.buildingId || b.buildingId))) continue;
       if (!indoor && route.edges[i - 1].kind === "indoor") {
         const height = (node: RouteNode) => (campus.places.find(p => p.id === node.placeId)?.height ?? 0) + .5;
         const length = Math.hypot(a.point[0] - b.point[0], a.point[1] - b.point[1]);
@@ -917,7 +919,7 @@ export class MapScene {
         }
         continue;
       }
-      if (indoor && state.building?.id !== "connected-complex" && (a.buildingId !== state.building?.id || b.buildingId !== state.building?.id)) continue;
+      if (indoor && (!allowed?.has(a.buildingId ?? "") || !allowed.has(b.buildingId ?? ""))) continue;
       if (
         indoor &&
         !state.stacked &&

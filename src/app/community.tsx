@@ -7,7 +7,7 @@ import { instagramAccounts } from '../lib/instagram-feed';
 export default function Community() {
   const { hiddenSources, unhideSource, unhideSources, hiddenPosts, unhidePosts, ready, nightlifeAgeConfirmed, resetNightlifeAge } = useLocal();
   return <>
-    <PageHeading eyebrow="SUPPORT & SAFETY" title="Community." subtitle="Make campus connections with care." />
+    <PageHeading eyebrow="SUPPORT & SAFETY" title="Community" subtitle="Make campus connections with care." />
     <Card style={{ padding: 22, gap: 15 }}>
       <T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: 21 }}>Share respectfully</T>
       <T style={body}>No harassment, threats, hate, explicit sexual content, dangerous activity, impersonation, spam, or other people’s private information. Share your own profile and truthful line reports. Follow venue age requirements and local laws.</T>

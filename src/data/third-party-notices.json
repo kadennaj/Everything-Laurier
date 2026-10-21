@@ -2492,6 +2492,14 @@
       ]
     },
     {
+      "name": "expo-sensors",
+      "version": "57.0.3",
+      "license": "MIT",
+      "texts": [
+        "7"
+      ]
+    },
+    {
       "name": "expo-server",
       "version": "57.0.3",
       "license": "MIT",

@@ -20,7 +20,7 @@ export default function Saved() {
   const savedVenues = nightlifeAgeConfirmed && ['Everything', 'Nightlife'].includes(tab) ? venues.filter(v => saved.includes(`venue:${v.id}`)) : [];
   const count = savedEvents.length + savedClubs.length + savedNights.length + savedVenues.length;
   const cardStyle = { flexBasis: layoutWidth < 700 ? '100%' as const : '30%' as const, flexGrow: 1, maxWidth: layoutWidth < 700 ? undefined : 420 };
-  return <><PageHeading eyebrow="YOUR COLLECTION" title="Saved for later." subtitle="Your favourite clubs, venues, and plans in one place." /><Chips items={['Everything', 'Nightlife', 'Events', 'Clubs']} value={tab} onChange={setTab} />
+  return <><PageHeading eyebrow="YOUR COLLECTION" title="Saved for later" subtitle="Your favourite clubs, venues, and plans in one place." /><Chips items={['Everything', 'Nightlife', 'Events', 'Clubs']} value={tab} onChange={setTab} />
     <T muted style={{ fontSize: 12 }}>Saved on this device · {count} items</T>
     {showEvents && <CalendarStatus />}
     {!!unavailable.length && <View style={{ gap: 8 }}><T muted>{unavailable.length} saved event{unavailable.length === 1 ? ' is' : 's are'} no longer listed.</T><Button secondary label="Remove unavailable bookmarks" onPress={() => unavailable.forEach(id => toggleSave(id))} /></View>}

@@ -85,7 +85,7 @@ export interface RouteEdge {
   distanceMeters?: number;
   drawingDistance?: number;
   boardingSeconds?: number;
-  kind: "walk" | "stairs" | "elevator" | "connection" | "indoor";
+  kind: "walk" | "stairs" | "elevator" | "connection" | "indoor" | "transfer";
   instruction?: string;
 }
 export interface IndoorConnection {
@@ -107,6 +107,7 @@ export interface Route {
   outdoorDistanceMeters?: number;
   indoorOverview?: boolean;
   preference?: "fastest" | "indoors";
+  hasUnmeasuredAccess?: boolean;
   departureAccess?: Point;
   arrivalAccess?: Point;
 }

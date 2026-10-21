@@ -154,7 +154,7 @@
           "locationWhenInUsePermission": "Show your blue dot and directions on the campus map while you use it. Your location stays on your device.",
           "locationAlwaysPermission": false,
           "locationAlwaysAndWhenInUsePermission": false,
-          "motionUsagePermission": false,
+          "motionUsagePermission": "Use height changes to estimate your floor after you confirm a starting floor. Readings stay on your phone.",
           "isIosBackgroundLocationEnabled": false,
           "isAndroidBackgroundLocationEnabled": false,
           "isAndroidForegroundServiceEnabled": false
@@ -166,6 +166,12 @@
           "photosPermission": "Choose a transcript image to submit privately for tutor application review.",
           "cameraPermission": false,
           "microphonePermission": false
+        }
+      ],
+      [
+        "expo-sensors",
+        {
+          "motionPermission": "Use height changes to estimate your floor after you confirm a starting floor. Readings stay on your phone."
         }
       ]
     ],

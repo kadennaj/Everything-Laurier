@@ -14,9 +14,9 @@ export function AccountCard() {
       <Badge label="Signed in" color={c.sage} textColor={c.green} />
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 14 }}>
         <View style={{ padding: 14, backgroundColor: c.lavender, borderRadius: 18 }}><Icon name="user" color={c.purple} size={25} /></View>
-        <View style={{ flex: 1, gap: 6 }}><T style={{ fontFamily: f.bold, fontSize: 23 }}>Make yourself at home.</T><T selectable style={{ color: c.muted }}>{session.user.email}</T></View>
+        <View style={{ flex: 1, gap: 6 }}><T style={{ fontFamily: f.bold, fontSize: 23 }}>Account</T><T selectable style={{ color: c.muted }}>{session.user.email}</T></View>
       </View>
-      <T style={body}>You’re signed in to Everything Laurier. Your saved items currently stay on this device.</T>
+      <T style={body}>Bookmarks stay on this device.</T>
       {!!error && <T accessibilityRole="alert" style={{ color: c.error }}>{error}</T>}
       <View style={{ alignItems: 'flex-start' }}><Button secondary label={signingOut ? 'Signing out…' : 'Sign out'} icon="log-out" disabled={busy} loading={signingOut} onPress={() => {
         setError('');
@@ -25,10 +25,10 @@ export function AccountCard() {
       }} /></View>
     </> : <>
       <Badge label="Your account" />
-      <T style={{ fontFamily: f.bold, fontSize: 24 }}>A little more at home.</T>
-      <T style={body}>Sign in or create your account with an email verification code. No password needed.</T>
+      <T style={{ fontFamily: f.bold, fontSize: 24 }}>Sign in</T>
+      <T style={body}>Use an email code to sign in or create an account.</T>
       <View style={{ alignItems: 'flex-start' }}><Button label="Sign in with email" icon="mail" onPress={() => router.push('/login')} /></View>
-      <T muted style={{ fontSize: 12, lineHeight: 20 }}>You can also keep exploring as a guest. Bookmarks stay on this device.</T>
+      <T muted style={{ fontSize: 12, lineHeight: 20 }}>Browsing as a guest is always available.</T>
     </>}
   </Card>;
 }

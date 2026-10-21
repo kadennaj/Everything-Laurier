@@ -28,7 +28,7 @@ export default function Discover() {
     { label: 'Saved items', sub: saved.length ? `${saved.length} kept for later` : 'Your places & plans', icon: 'bookmark', path: '/saved' },
   ];
   return <>
-    <View style={{ gap: 9 }}><Eyebrow>WATERLOO CAMPUS</Eyebrow><T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: compact ? 30 : 36, lineHeight: compact ? 38 : 44, letterSpacing: -0.6 }}>Campus, within reach.</T><T muted style={{ fontSize: 17, lineHeight: 26 }}>Find your way. Make a connection.</T></View>
+    <View style={{ gap: 9 }}><Eyebrow>WATERLOO CAMPUS</Eyebrow><T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: compact ? 30 : 36, lineHeight: compact ? 38 : 44, letterSpacing: -0.6 }}>Your campus</T></View>
     <Pressable accessibilityRole="button" accessibilityLabel="Search rooms, buildings, clubs and events" onPress={() => router.push('/search')} style={({ pressed }) => [s.row, { minHeight: 60, padding: 17, gap: 13, borderRadius: radii.control, backgroundColor: pressed ? c.pressed : c.surface, borderWidth: 1, borderColor: c.border }]}>
       <Icon name="search" color={c.purple} /><T muted style={{ flex: 1, fontSize: 17, lineHeight: 24 }}>Search rooms, clubs, events…</T><Icon name="chevron-right" color={c.muted} size={18} />
     </Pressable>
@@ -38,7 +38,7 @@ export default function Discover() {
     <Pressable accessibilityRole="button" accessibilityLabel={`Explore ${clubs.length} clubs and communities`} onPress={() => router.push('/clubs')} style={({ pressed }) => ({ minHeight: 184, borderRadius: radii.hero, overflow: 'hidden', backgroundColor: c.purpleDark, opacity: pressed ? 0.85 : 1 })}>
       <Image source={require('../../assets/images/campus.jpg')} accessible={false} style={{ position: 'absolute', right: 0, width: '100%', height: '100%' }} resizeMode="cover" />
       <LinearGradient colors={['#292136F5', '#292136DD', '#292136CC']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ position: 'absolute', inset: 0 }} />
-      <View style={{ padding: compact ? 24 : 30, gap: 10, alignItems: 'flex-start' }}><T style={{ fontSize: 13, lineHeight: 20, fontFamily: f.medium, color: c.gold }}>MORE THAN THE LECTURE HALL</T><T style={{ fontFamily: f.bold, color: c.surface, fontSize: 27, lineHeight: 35, letterSpacing: -0.4 }}>Find your people.</T><View style={[s.row, { gap: 12, flexWrap: 'wrap' }]}><T style={{ color: c.surface, fontSize: 16, lineHeight: 24 }}>Explore {clubs.length} clubs & communities</T><Icon name="arrow-right" size={20} color={c.surface} /></View></View>
+      <View style={{ padding: compact ? 24 : 30, gap: 10, alignItems: 'flex-start' }}><T style={{ fontFamily: f.bold, color: c.surface, fontSize: 27, lineHeight: 35, letterSpacing: -0.4 }}>Explore clubs</T><View style={[s.row, { gap: 12, flexWrap: 'wrap' }]}><T style={{ color: c.surface, fontSize: 16, lineHeight: 24 }}>Explore {clubs.length} clubs & communities</T><Icon name="arrow-right" size={20} color={c.surface} /></View></View>
     </Pressable>
     <View style={{ gap: 18 }}>
       <SectionTitle title="Around campus" subtitle="Events from Laurier’s official calendar." />
@@ -49,6 +49,6 @@ export default function Discover() {
       <CalendarStatus />
     </View>
     <InstagramFeed preview />
-    <View style={{ gap: 18 }}><SectionTitle title="A community for you" action="All clubs" onPress={() => router.push('/clubs')} /><View style={{ flexDirection: compact ? 'column' : 'row', gap: 16 }}>{featuredClubs.map(club => <View key={club.id} style={{ flex: 1 }}><ClubCard club={club} /></View>)}</View></View>
+    <View style={{ gap: 18 }}><SectionTitle title="Clubs for you" action="All clubs" onPress={() => router.push('/clubs')} /><View style={{ flexDirection: compact ? 'column' : 'row', gap: 16 }}>{featuredClubs.map(club => <View key={club.id} style={{ flex: 1 }}><ClubCard club={club} /></View>)}</View></View>
   </>;
 }

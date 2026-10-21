@@ -37,9 +37,9 @@ import { campus, colors, connectedBuildings, geoToPoint, indoorConnections, indo
 import { floorAtLevel, isSharedBuilding, levelCaption, sharedLevel } from "./connected-layout";
 import { FloorPlanImage } from "./FloorPlanImage";
 import { MapScene } from "./MapScene";
-import { routeConnectedIndoors } from "./routing";
+import { routeJourney } from "./journey-routing";
+import { useFloorEstimate } from "./use-floor-estimate";
 import { YOUR_LOCATION } from "./campus-directions";
-import { routeCampusJourney } from "./sheltered-routing";
 import campusIndoorNetwork from "./data/campus-indoor-links.json";
 import type { MapState } from "./MapScene";
 import { useLiveLocation } from "./use-live-location";
@@ -84,6 +84,7 @@ function travelTimeLabel(seconds?: number) {
   return `About ${Math.max(1, Math.ceil(seconds / 60))} min`;
 }
 function travelMode(route: Route) {
+  if (route.hasUnmeasuredAccess) return "Indoor + campus walk";
   if (route.indoorOverview) return route.outdoorDistanceMeters ? "Indoor + outdoor walk" : "Indoor walk";
   return route.edges.some(e => e.kind === "elevator") ? "Walk + elevator"
     : route.edges.some(e => e.kind === "stairs") ? "Walk + stairs" : "Walking";
@@ -108,7 +109,8 @@ function routeSteps(
   for (let i = 0; i < route.edges.length; i++) {
     const e = route.edges[i];
     if (e.instruction) {
-      steps.push({ text: e.instruction, floor: 0, kind: e.kind });
+      const target = e.kind === "transfer" ? route.nodes[i+1] : undefined;
+      steps.push({ text: e.instruction, floor: target?.floor ?? 0, kind: e.kind, buildingId: target?.buildingId });
     } else if (e.kind === "connection") {
       const destination = route.nodes[i+1];
       const name = indoors.find(b => b.id === destination.buildingId)?.name ?? "the connected building";
@@ -146,6 +148,13 @@ export default function App() {
   const [campusRoutePreference, setCampusRoutePreference] = useState<"fastest" | "indoors">("fastest");
   const [routeFiltersOpen, setRouteFiltersOpen] = useState(false);
   const [indoorLocationId, setIndoorLocationId] = useState("");
+  const [locationPicker, setLocationPicker] = useState(false);
+  const [locationBuilding, setLocationBuilding] = useState(initial.building?.id ?? "LIB");
+  const [locationFloor, setLocationFloor] = useState(initial.floor);
+  const [locationRoom, setLocationRoom] = useState("");
+  const [floorHeight, setFloorHeight] = useState(3.5);
+  const floorEstimate = useFloorEstimate();
+  const confirmedAt = useRef(0);
   const [stacked, setStacked] = useState(false),
     [flat, setFlat] = useState(false),
     [showAmenities, setShowAmenities] = useState(true);
@@ -186,7 +195,9 @@ export default function App() {
       f.rooms.map((room) => ({ ...room, floor: f.level })),
     ) ?? [];
   const directionBuildings = building ? connectedBuildings(building) : [];
-  const directionRooms = directionBuildings.flatMap(b => b.floors.flatMap(f => f.rooms.map(r => ({...r, floor: f.level, buildingId: b.id}))));
+  const mappedRooms = indoors.flatMap(b => b.floors.flatMap(f => f.rooms.map(r => ({...r,floor:f.level,buildingId:b.id}))));
+  const confirmedRoom = mappedRooms.find(r => r.id === indoorLocationId);
+  const pickerBuilding = indoors.find(b => b.id === locationBuilding)!;
   const currentFloor = building?.floors.find((f) => f.level === floor);
   const sharedView = connectedView && isSharedBuilding(building?.id);
   const currentLevel = building ? sharedLevel(building.id, floor) : floor;
@@ -228,12 +239,12 @@ export default function App() {
     setDirections(false);
     setRoute(null);
     setFrom(
-      entranceOf(indoor),
+      indoorLocationId ? YOUR_LOCATION : entranceOf(indoor),
     );
     setTo(roomId ?? "");
     setStacked(false);
     setBlueprint(false);
-  }, []);
+  }, [indoorLocationId]);
   callbackRef.current = openBuilding;
   selectRef.current = (id: string) => {
     if (id.startsWith("building:")) {
@@ -304,16 +315,16 @@ export default function App() {
     connectedView,
   ]);
   useEffect(() => {
-    if (building || !directions || !hasRoute || !locationValue || (from !== YOUR_LOCATION && to !== YOUR_LOCATION)) return;
+    if (building || indoorLocationId || !directions || !hasRoute || !locationValue || locationValue.accuracy > 50 || (from !== YOUR_LOCATION && to !== YOUR_LOCATION)) return;
     const previous = latestRouteFix.current;
     if (previous && Math.hypot(previous.point[0] - locationValue.point[0], previous.point[1] - locationValue.point[1]) * 4 < Math.max(5, Math.min(locationValue.accuracy, 15))) return;
     // Use a movement threshold rather than debouncing fixes: a continuous GPS
     // stream must not keep postponing the recalculation timer indefinitely.
-    const next = routeCampusJourney(campus, campusIndoorNetwork, from, to, locationValue.point, stepFree, campusRoutePreference === "indoors");
+    const next = routeJourney(campus,campusIndoorNetwork,indoors,indoorConnections,from,to,locationValue.point,stepFree,campusRoutePreference === "indoors");
     latestRouteFix.current = { point: locationValue.point, timestamp: Date.now() };
     if (next) { setRoute(next); setRouteError(""); }
     else setRouteError("Your live location could not be connected to this route. Choose a mapped starting place.");
-  }, [building, directions, hasRoute, locationValue, from, to, stepFree, campusRoutePreference]);
+  }, [building, indoorLocationId, directions, hasRoute, locationValue, from, to, stepFree, campusRoutePreference]);
   useEffect(() => {
     const scroll = document.querySelector<HTMLElement>(".sidebar-scroll");
     if (scroll) scroll.scrollTop = 0;
@@ -376,6 +387,7 @@ export default function App() {
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
+        setLocationPicker(false);
         setInfo(false);
         setBlueprint(false);
         setSearch("");
@@ -385,13 +397,13 @@ export default function App() {
     return () => window.removeEventListener("keydown", key);
   }, []);
   useEffect(() => {
-    if (!info && !blueprint) return;
+    if (!info && !blueprint && !locationPicker) return;
     const previous = document.activeElement as HTMLElement | null;
     const trap = (event: KeyboardEvent) => {
       if (event.key !== "Tab") return;
       const elements = [
         ...document.querySelectorAll<HTMLElement>(
-          ".modal button,.modal a[href]",
+          ".modal button,.modal a[href],.modal select,.modal input,.modal summary",
         ),
       ];
       const first = elements[0],
@@ -409,7 +421,7 @@ export default function App() {
       document.removeEventListener("keydown", trap);
       previous?.focus();
     };
-  }, [info, blueprint]);
+  }, [info, blueprint, locationPicker]);
 
   const filteredPlaces = campus.places
     .filter(
@@ -440,6 +452,7 @@ export default function App() {
       id = food.locationBuildingId!;
     }
     const target = indoorForPlace(id);
+    if (target?.id !== indoorLocation?.buildingId) floorEstimate.stop();
     if (building && target && sharedView && directionBuildings.some(b => b.id === target.id)) {
       const targetFloor = roomId ? target.floors.find(f => f.rooms.some(r => r.id === roomId)) : floorAtLevel(target,currentLevel,true);
       setBuilding(target);
@@ -462,6 +475,7 @@ export default function App() {
     else openBuilding(id);
   }
   function back() {
+    floorEstimate.stop();
     if (building) setRoomBuildingId(building.id);
     setLocationStatus("");
     setBuilding(null);
@@ -476,6 +490,7 @@ export default function App() {
     setBlueprint(false);
   }
   function chooseRoomBuilding(id: string) {
+    if (id !== indoorLocation?.buildingId) floorEstimate.stop();
     const next = indoors.find(b => b.id === id);
     if (!next) return;
     setLocationStatus("");
@@ -484,7 +499,7 @@ export default function App() {
     setFloor(next.defaultFloor ?? next.floors[0].level);
     setSelected(null);
     setSearch("");
-    setFrom(entranceOf(next));
+    setFrom(indoorLocationId ? YOUR_LOCATION : entranceOf(next));
     setTo("");
     setRoute(null);
     setRouteError("");
@@ -503,6 +518,7 @@ export default function App() {
       chooseRoomBuilding(indoorForPlace(destination?.locationBuildingId ?? destination?.id ?? to)?.id ?? roomBuildingId);
       return;
     }
+    floorEstimate.stop();
     // Starting campus directions from an indoor view preselects that building.
     if (building) setRoomBuildingId(building.id);
     const campusStart = campus.places.find(p => p.id === building?.id)
@@ -511,7 +527,7 @@ export default function App() {
     setBuilding(null);
     setFloor(1);
     setSelected(null);
-    setFrom(campusStart?.id ?? "");
+    setFrom(indoorLocationId ? YOUR_LOCATION : campusStart?.id ?? "");
     setTo("");
     setRoute(null);
     setRouteError("");
@@ -531,7 +547,7 @@ export default function App() {
       return;
     }
     setDirections(true);
-    setFrom(from || defaultEntrance);
+    setFrom(indoorLocationId ? YOUR_LOCATION : from || defaultEntrance);
     setTo(selectedRoom?.id ?? selectedPlace?.id ?? to);
     setRoute(null);
     setRouteError("");
@@ -551,12 +567,10 @@ export default function App() {
       setRouteError("Choose both a starting point and a destination.");
       return;
     }
-    const startId = building && from === YOUR_LOCATION ? indoorLocationId : from;
-    const endId = building && to === YOUR_LOCATION ? indoorLocationId : to;
-    if (building && (from === YOUR_LOCATION || to === YOUR_LOCATION) && !directionRooms.some(r => r.id === indoorLocationId)) {
-      setRoute(null);
-      setRouteError("Set your indoor location first: close directions, select a room, and choose ‘Set as your location’.");
-      return;
+    const startId = from === YOUR_LOCATION && indoorLocationId ? indoorLocationId : from;
+    const endId = to === YOUR_LOCATION && indoorLocationId ? indoorLocationId : to;
+    if (building && (startId === YOUR_LOCATION || endId === YOUR_LOCATION)) {
+      setRoute(null); setRouteError("Confirm your starting room or entrance first."); openLocationPicker(); return;
     }
     if (startId === endId) {
       setRoute(null);
@@ -572,17 +586,12 @@ export default function App() {
         return;
       }
     }
-    let next: Route | null = null;
-    if (building) next = routeConnectedIndoors(directionBuildings, indoorConnections, startId, endId, avoidStairs);
-    else {
-      if ((from === YOUR_LOCATION || to === YOUR_LOCATION) && !locationValue) {
-        setRoute(null);
-        setRouteError("Your outdoor location is needed. Allow browser location access, or choose a campus place instead.");
-        if (!locationLoading) requestOutdoorLocation();
-        return;
-      }
-      next = routeCampusJourney(campus, campusIndoorNetwork, from, to, locationValue?.point ?? null, avoidStairs, preference === "indoors");
+    if ((startId === YOUR_LOCATION || endId === YOUR_LOCATION) && !locationValue) {
+      setRoute(null); setRouteError("Allow location access or choose a starting place.");
+      if (!locationLoading) requestOutdoorLocation(); return;
     }
+    if ((startId === YOUR_LOCATION || endId === YOUR_LOCATION) && locationValue && locationValue.accuracy > 50) {setRoute(null);setRouteError("GPS is too approximate for this route. Move outdoors or choose a mapped starting point.");return;}
+    const next = routeJourney(campus,campusIndoorNetwork,indoors,indoorConnections,startId,endId,locationValue?.point ?? null,avoidStairs,preference === "indoors");
     if (!next) {
       setRoute(null);
       setRouteError(
@@ -602,22 +611,16 @@ export default function App() {
     }
     setToast(`Route ready · ${travelTimeLabel(next.estimatedSeconds)}`);
   }
+  function openLocationPicker(estimatedFloor?: number) {
+    const owner = indoors.find(b => b.id === indoorLocation?.buildingId) ?? building ?? indoors.find(b => b.id === "LIB")!;
+    setLocationBuilding(owner.id);
+    setLocationFloor(estimatedFloor ?? indoorLocation?.floor ?? owner.defaultFloor ?? owner.floors[0].level);
+    setLocationRoom(estimatedFloor === undefined ? indoorLocationId : "");
+    setLocationPicker(true);
+  }
   function locationClick() {
-    if (building) {
-      if (indoorLocation?.buildingId === building.id) {
-        viewFloor(indoorLocation.floor);
-        scene.current?.locate(indoorLocation.point);
-        setLocationStatus(`Starting point set by you · Floor ${indoorLocation.floor}`);
-      } else if (selectedRoom && selectedRoom.routeable !== false) {
-        markIndoorLocation(selectedRoom.id);
-      } else {
-        setDirections(true);
-        setLocationStatus("Choose your starting room or entrance in From to place your blue dot.");
-      }
-      return;
-    }
-    setLocationStatus("");
-    liveLocation.start("center");
+    if (building) openLocationPicker();
+    else {setLocationStatus("");liveLocation.start("center");}
   }
   function requestOutdoorLocation() {
     setLocationStatus("");
@@ -639,33 +642,31 @@ export default function App() {
   }
   function viewRouteStep(buildingId: string | undefined, level: number) {
     const next = indoors.find(b => b.id === buildingId);
-    if (next) setBuilding(next);
+    if (next?.id !== indoorLocation?.buildingId) floorEstimate.stop();
+    setBuilding(next ?? null);
+    setBlueprint(false); setStacked(false);
     viewFloor(level);
   }
   function setStartingPoint(id: string) {
     changeEndpoint(setFrom, id);
   }
   function markIndoorLocation(id: string) {
-    changeEndpoint(setFrom, YOUR_LOCATION);
-    const room = directionRooms.find(r => r.id === id);
-    if (building && room && room.routeable !== false) {
-      const next = indoors.find(b => b.id === room.buildingId);
-      if (next) setBuilding(next);
-      setIndoorLocation({ buildingId: room.buildingId, floor: room.floor, point: room.door });
-      setIndoorLocationId(room.id);
-      setFloor(room.floor);
-      setSelected(null);
-      setLocationStatus(`Your location: ${room.name} · Floor ${room.floor}. Set by you; update it as you move.`);
-    } else if (building) {
-      setIndoorLocation(null);
-      setLocationStatus("");
-    }
+    const room = mappedRooms.find(r => r.id === id && r.routeable !== false);
+    if (!room) return;
+    floorEstimate.stop();
+    setFrom(YOUR_LOCATION); setRoute(null); setRouteError("");
+    const next = indoors.find(b => b.id === room.buildingId)!;
+    setBuilding(next); setRoomBuildingId(next.id);
+    setIndoorLocation({buildingId:room.buildingId,floor:room.floor,point:room.door});
+    confirmedAt.current = Date.now();
+    setIndoorLocationId(room.id); setFloor(room.floor); setSelected(null); setLocationPicker(false);
+    setLocationStatus(`${room.name} · Floor ${room.floor} · Set by you`);
   }
   function changeEndpoint(setter: (v: string) => void, value: string) {
     setter(value);
     setRoute(null);
     setRouteError("");
-    if (value === YOUR_LOCATION && !building && !locationValue) requestOutdoorLocation();
+    if (value === YOUR_LOCATION && !indoorLocationId && !building && !locationValue) requestOutdoorLocation();
   }
   const listRooms = (currentFloor?.rooms ?? []).filter(
     (r) =>
@@ -675,9 +676,7 @@ export default function App() {
   const routeFloors = [
     ...new Set(route?.nodes.filter(n => !n.buildingId || n.buildingId === building?.id).map((n) => n.floor) ?? []),
   ].filter((n) => n > 0);
-  const selectedDestination = to === YOUR_LOCATION ? "Your location" : building
-    ? directionRooms.find((r) => r.id === to)?.name
-    : campus.places.find((p) => p.id === to)?.name;
+  const selectedDestination = to === YOUR_LOCATION ? "Your location" : mappedRooms.find(r => r.id === to)?.name ?? campus.places.find(p => p.id === to)?.name;
   const externalDestination = campus.places.find(
     (p) => p.id === (to || selected),
   );
@@ -687,6 +686,17 @@ export default function App() {
 
   return (
     <div className="app">
+      {locationPicker && <div className="modal-scrim" onClick={() => setLocationPicker(false)}><section className="modal location-modal" role="dialog" aria-modal="true" aria-labelledby="location-title" onClick={e => e.stopPropagation()}>
+        <div className="section-heading"><h2 id="location-title">Where are you?</h2><button autoFocus className="icon-button" aria-label="Close location" onClick={() => setLocationPicker(false)}><X size={20}/></button></div>
+        <p className="small-text">Choose a room or entrance near you. Your blue dot stays there until you update it.</p>
+        <label>Building<select value={locationBuilding} onChange={e => {const b=indoors.find(b => b.id === e.target.value)!;setLocationBuilding(b.id);setLocationFloor(b.defaultFloor ?? b.floors[0].level);setLocationRoom("");}}>{indoors.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}</select></label>
+        <label>Floor<select value={locationFloor} onChange={e => {setLocationFloor(Number(e.target.value));setLocationRoom("");}}>{pickerBuilding.floors.map(f => <option key={f.level} value={f.level}>{f.label}</option>)}</select></label>
+        <label>Room or entrance<select value={locationRoom} onChange={e => setLocationRoom(e.target.value)}><option value="">Choose your nearest mapped point</option>{pickerBuilding.floors.find(f => f.level === locationFloor)?.rooms.filter(r => r.routeable !== false && r.name !== 'Office').map(r => <option key={r.id} value={r.id}>{r.name}</option>)}</select></label>
+        <details><summary>About floor estimates</summary><p className="small-text">Your phone can estimate height changes after calibration. Pressure changes and different floor heights can make it wrong. It cannot detect your room. Confirm your location before routing.</p><label>Approximate floor height (m)<input type="number" min="2.5" max="6" step="0.1" value={floorHeight} onChange={e => {floorEstimate.stop();setFloorHeight(Number(e.target.value));}} onBlur={() => {if (floorHeight < 2.5 || floorHeight > 6 || !Number.isFinite(floorHeight)) setFloorHeight(3.5);}}/></label><p className="small-text">Default 3.5 m is an assumption, not a measured building height. Estimates reset after a pause and expire after 10 minutes. Readings stay on your phone.</p></details>
+        <button className="primary-button" disabled={!locationRoom} onClick={() => markIndoorLocation(locationRoom)}>Confirm location</button>
+        {indoorLocationId && <button className="text-link" onClick={() => {floorEstimate.stop();setIndoorLocationId("");setIndoorLocation(null);setRoute(null);setLocationPicker(false);}}>Clear indoor location</button>}
+      </section></div>}
+
       <main className="main-layout">
         <aside className="sidebar" aria-label="Map explorer">
           <div className="sidebar-top">
@@ -695,22 +705,24 @@ export default function App() {
                 <button className="back-link" onClick={back}>
                   <ArrowLeft size={16} /> Campus map
                 </button>
-                <div className="eyebrow">EXPLORE INSIDE · {building.id}</div>
                 <h1>
                   {building.id === "BA" ? "Bricker Academic" : building.name}
-                  <span className="title-dot">.</span>
-                </h1>
-                <p className="intro">{building.id === "SCI" ? "The supplied floor, room by room." : "Every floor. A little more familiar."}</p>
+                  </h1>
               </>
             ) : (
               <>
-                <div className="eyebrow">A LITTLE LESS LOST.</div>
                 <h1>
-                  Find your way<span className="title-dot">.</span>
+                  Campus map
                 </h1>
-                <p className="intro">Your campus, from the outside in.</p>
               </>
             )}
+            <div className="location-summary">
+              {confirmedRoom ? <>
+                <button className="location-summary-button" onClick={() => openLocationPicker()}><LocateFixed size={16}/><span>{indoors.find(b => b.id === confirmedRoom.buildingId)?.name} · Floor {confirmedRoom.floor}<small>{confirmedRoom.name} · Set by you</small></span><ChevronRight size={16}/></button>
+                {building?.id === confirmedRoom.buildingId && (floorEstimate.estimate ? <div className="floor-hint" role="status"><span>{floorEstimate.estimate.floor !== null ? `Estimated floor ${floorEstimate.estimate.floor}` : floorEstimate.estimate.status === 'calibrating' ? 'Calibrating height… Stay on this floor' : 'Floor uncertain — confirm your location'}</span><button className="text-link" onClick={() => openLocationPicker(floorEstimate.estimate?.floor ?? undefined)}>Update</button><button className="text-link" onClick={floorEstimate.stop}>Stop</button></div> : <button className="text-link" onClick={() => {if (Date.now()-confirmedAt.current > 60000) {openLocationPicker();setToast("Confirm your floor, then enable estimates");} else floorEstimate.start(confirmedRoom.floor,indoors.find(b => b.id === confirmedRoom.buildingId)!.floors.map(f => f.level),floorHeight);}}>Estimate floor changes</button>)}
+                {building?.id === confirmedRoom.buildingId && floorEstimate.message && <p className="small-text" role="status">{floorEstimate.message}</p>}
+              </> : <button className="text-link" onClick={() => openLocationPicker()}><LocateFixed size={15}/> Set indoor location</button>}
+            </div>
             <label className="searchbox">
               <Search size={18} />
               <input
@@ -836,11 +848,7 @@ export default function App() {
                     <X size={18} />
                   </button>
                 </div>
-                <p className="small-text">
-                  {building
-                    ? "Choose a building, then a room or entrance. Connected buildings share one route."
-                    : "Walk between any campus buildings or places, or use your outdoor location."}
-                </p>
+
                 {building && <label className="route-building-picker">
                   BUILDING
                   <select aria-label="Building for room directions" value={building.id} onChange={e => chooseRoomBuilding(e.target.value)}>
@@ -865,6 +873,7 @@ export default function App() {
                       >
                         <option value="">Choose a starting point</option>
                         <option value={YOUR_LOCATION}>Your location</option>
+                        {mappedRooms.some(r => r.id === from && !directionBuildings.some(b => b.id === r.buildingId)) && <option value={from}>{mappedRooms.find(r => r.id === from)?.name}</option>}
                         {building ? (
                           directionBuildings.flatMap((b) => b.floors.map((f) => (
                             <optgroup key={`${b.id}-${f.level}`} label={`${b.name} · ${f.label}`}>
@@ -902,6 +911,7 @@ export default function App() {
                       >
                         <option value="">Choose a destination</option>
                         <option value={YOUR_LOCATION}>Your location</option>
+                        {mappedRooms.some(r => r.id === to && !directionBuildings.some(b => b.id === r.buildingId)) && <option value={to}>{mappedRooms.find(r => r.id === to)?.name}</option>}
                         {building
                           ? directionBuildings.flatMap((b) => b.floors.map((f) => (
                               <optgroup key={`${b.id}-${f.level}`} label={`${b.name} · ${f.label}`}>
@@ -963,18 +973,13 @@ export default function App() {
                   <div className="endpoint-location" role="status">
                     <LocateFixed size={16} aria-hidden="true" />
                     <div>
-                      <p>{building
-                        ? directionRooms.find(r => r.id === indoorLocationId)
-                          ? `Set by you: ${directionRooms.find(r => r.id === indoorLocationId)!.name} · Floor ${indoorLocation?.floor}. Update it as you move.`
-                          : "Indoor GPS cannot identify your room. Close directions, select your room, then choose ‘Set as your location’."
-                        : displayedLocationStatus || (locationValue ? `Live GPS · accuracy ±${Math.round(locationValue.accuracy)} m. Updates as you move.` : "Allow browser location access to use your outdoor location.")}</p>
-                      {!building && <button className="text-link" onClick={requestOutdoorLocation} disabled={locationLoading}>
-                        {locationLoading ? "Finding your location…" : locationValue ? "Follow my location" : "Try location again"}
-                      </button>}
+                      <p>{confirmedRoom ? `${confirmedRoom.name} · Floor ${confirmedRoom.floor} · Set by you` : building ? "Confirm your room or entrance." : displayedLocationStatus || (locationValue ? `GPS · ±${Math.round(locationValue.accuracy)} m` : "Choose GPS or set an indoor starting point.")}</p>
+                      <button className="text-link" onClick={() => openLocationPicker()}>Set indoor location</button>
+                      {!building && <button className="text-link" onClick={() => {setIndoorLocationId("");setIndoorLocation(null);floorEstimate.stop();requestOutdoorLocation();}} disabled={locationLoading}>{locationLoading ? "Finding location…" : "Use GPS outdoors"}</button>}
                     </div>
                   </div>
                 )}
-                <button className="primary-button" onClick={() => computeRoute()} disabled={!building && locationLoading && (from === YOUR_LOCATION || to === YOUR_LOCATION)}>
+                <button className="primary-button" onClick={() => computeRoute()} disabled={!building && !indoorLocationId && locationLoading && (from === YOUR_LOCATION || to === YOUR_LOCATION)}>
                   <Navigation size={16} /> Show route <ArrowRight size={16} />
                 </button>
                 {routeError && (
@@ -1006,13 +1011,14 @@ export default function App() {
                       </div>
                       <Check size={17} />
                     </div>
+                    {route.hasUnmeasuredAccess && <p className="small-text">Time and distance cover mapped portions. Allow extra time between the entrance and campus path.</p>}
                     <p className="route-estimate" title="Estimated walking at 1.3 m/s; stairs 20 seconds per floor; elevator 25 seconds to board plus 6 seconds per floor. Indoor overview links estimate gaps between building footprints, not surveyed corridors. No live access or queue data.">{route.preference === "indoors" ? "Least outdoor walking, then fastest time" : "Fastest mapped route"}{stepFree ? building ? " using elevators" : " without mapped outdoor stairs" : ""} · {route.indoorOverview ? "rough time estimate" : "approximate time"}{building ? ", including floor changes" : ""}</p>
-                    {!building && !locationValue && (from === YOUR_LOCATION || to === YOUR_LOCATION) && <p className="route-error">GPS paused or unavailable. This route uses your last location; start live GPS to update it.</p>}
+                    {!building && !indoorLocationId && !locationValue && (from === YOUR_LOCATION || to === YOUR_LOCATION) && <p className="route-error">GPS paused or unavailable. This route uses your last location; start live GPS to update it.</p>}
                     {routeSteps(route).map((step, i) => (
                       <button
                         className="route-step"
                         key={i}
-                        onClick={() => step.buildingId && viewRouteStep(step.buildingId, step.floor)}
+                        onClick={() => viewRouteStep(step.buildingId, step.floor)}
                       >
                         <span>{i + 1}</span>
                         <div>
@@ -1064,7 +1070,7 @@ export default function App() {
                     <Layers size={21} />
                   </span>
                 </div>
-                {building.coverage && <p className="coverage-note">{building.coverage}</p>}
+                {building.coverage && <details className="coverage-note"><summary>Plan coverage</summary><p>{building.coverage}</p></details>}
                 {directionBuildings.length > 1 && <div className="connected-card">
                   <div className="section-heading"><h2>Connected indoors</h2><Layers size={16}/></div>
                   <p>{building.id === "SCI" || building.id === "BA" ? "Science and Bricker join through the Floor 1 connection portal." : "Arts Floor 2 joins Peters Floor 1. Peters and Schlegel share floor levels."} Choose a connected map or an individual building view.</p>
@@ -1488,7 +1494,7 @@ export default function App() {
                 onClick={() => {
                   setDirections(!directions);
                   setRoute(null);
-                  setFrom(from || defaultEntrance);
+                  setFrom(indoorLocationId ? YOUR_LOCATION : from || defaultEntrance);
                   setTo(to || selected || "");
                 }}
               >
@@ -1532,7 +1538,8 @@ export default function App() {
         <div
           className="modal-scrim"
           onClick={() => {
-            setInfo(false);
+            setLocationPicker(false);
+        setInfo(false);
             setBlueprint(false);
           }}
         >
@@ -1559,7 +1566,8 @@ export default function App() {
                 className="icon-button"
                 aria-label="Close dialog"
                 onClick={() => {
-                  setInfo(false);
+                  setLocationPicker(false);
+        setInfo(false);
                   setBlueprint(false);
                 }}
               >
@@ -1591,13 +1599,13 @@ export default function App() {
                 <div className="about-feature">
                   <LocateFixed size={24} />
                   <div>
-                    <h3>Your location, honestly</h3>
+                    <h3>Location</h3>
                     <p>
                       Live outdoor location uses your device’s foreground location permission,
                       with an accuracy radius and device compass when available.
                       Follow heading rotates the map as you turn. Coordinates stay
                       on this device; tracking pauses when the map is hidden. Indoors, set your starting room or entrance;
-                      phone GPS does not establish a reliable room or floor.
+                      phone GPS does not establish a reliable room or floor. Optional height-change estimates use your phone’s pressure sensor after you confirm a floor. They need confirmation before routing and stop when the app is paused.
                     </p>
                   </div>
                 </div>

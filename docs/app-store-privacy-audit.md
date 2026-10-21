@@ -46,3 +46,7 @@ Backend project: `ekptnmermhvtrdqpjwwa` (Everything-Laurier). Applied migration:
 ## October 16 map/tutoring update
 
 The earlier no-photo/no-location statement above describes the pre-integration app. The current app optionally uses foreground location and selected transcript images. The current policy, permissions, private tutor storage, owner authorization, deletion/retention behavior and verification limits are documented in [integration-verification.md](integration-verification.md). In-app and public policies were updated to version 2026-10-16. Review the actual native archive and final App Store privacy labels before submission.
+
+## October 21, 2026: optional floor-change estimates
+
+The installed app now includes `expo-sensors` for an opt-in foreground barometer. Motion/fitness purpose text explains height-change estimates calibrated from a confirmed floor. Pressure/relative-height readings are processed only in device memory, never uploaded or linked to the account; subscriptions stop on pause/closure. The current public policy discloses this optional use. This does not add collected location history or reliable automatic indoor room/floor positioning. See [indoor-location-and-ui.md](indoor-location-and-ui.md) for limits and verification. Review the generated archive's permission strings and store disclosures before submission.

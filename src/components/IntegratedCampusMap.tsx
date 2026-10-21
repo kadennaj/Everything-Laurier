@@ -7,6 +7,7 @@ import { Asset } from 'expo-asset';
 import { File } from 'expo-file-system';
 import { mapAssets } from '../generated/campus-map-assets';
 import * as Location from 'expo-location';
+import { useMapElevation } from './useMapElevation';
 import html from '../generated/campus-map';
 import { Button, T } from './ui';
 
@@ -17,6 +18,8 @@ export function IntegratedCampusMap() {
  const subscriptions=useRef<Location.LocationSubscription[]>([]);
  const [failed,setFailed]=useState(false), [attempt,setAttempt]=useState(0);
  const send=useCallback((value: object) => web.current?.injectJavaScript(`window.dispatchEvent(new CustomEvent('el-location',{detail:${JSON.stringify(value)}}));true;`),[]);
+ const sendElevation=useCallback((value: object) => web.current?.injectJavaScript(`window.dispatchEvent(new CustomEvent('el-elevation',{detail:${JSON.stringify(value)}}));true;`),[]);
+ const elevation=useMapElevation(sendElevation);
  const stop=useCallback(() => { generation.current++; subscriptions.current.forEach(s=>s.remove()); subscriptions.current=[]; },[]);
  const start=useCallback(async () => {
   stop(); const version=generation.current;
@@ -24,7 +27,7 @@ export function IntegratedCampusMap() {
    const permission=await Location.requestForegroundPermissionsAsync();
    if(version!==generation.current) return;
    if(!permission.granted) { tracking.current=false; send({type:'error',code:1}); return; }
-   const gps=await Location.watchPositionAsync({accuracy:Location.Accuracy.High,distanceInterval:2,timeInterval:2000},fix=>send({type:'position',coords:fix.coords,timestamp:fix.timestamp}));
+   const gps=await Location.watchPositionAsync({accuracy:Location.Accuracy.BestForNavigation,distanceInterval:1,timeInterval:1000},fix=>send({type:'position',coords:fix.coords,timestamp:fix.timestamp}));
    if(version!==generation.current) { gps.remove(); return; } subscriptions.current.push(gps);
    try {
     const heading=await Location.watchHeadingAsync(value=>{const degrees=value.trueHeading>=0?value.trueHeading:value.magHeading;if(Number.isFinite(degrees)&&value.accuracy>0)send({type:'heading',degrees,accuracy:value.accuracy===3?10:value.accuracy===2?30:45});});
@@ -48,8 +51,8 @@ export function IntegratedCampusMap() {
  if(failed) return <View style={{padding:24,gap:16}}><T>The map could not load. Check your device’s WebGL support and try again.</T><Button label="Try map again" onPress={()=>{setFailed(false);setAttempt(v=>v+1);}} /></View>;
  return <WebView key={attempt} ref={web} source={source} style={{flex:1,backgroundColor:'#eef0eb'}} originWhitelist={['about:blank']} javaScriptEnabled domStorageEnabled={false} sharedCookiesEnabled={false} incognito
   setBuiltInZoomControls={false} setDisplayZoomControls={false} scalesPageToFit={false}
-  onError={()=>{stop();setFailed(true);}} onContentProcessDidTerminate={()=>{stop();setFailed(true);}}
-  onMessage={event=>{try{const message=JSON.parse(event.nativeEvent.data);if(message.type==='share'&&typeof message.params==='string'){const p=new URLSearchParams(message.params);const queryParams:Record<string,string>={};for(const key of ['building','floor','room','view','place'])if(p.get(key))queryParams[key]=p.get(key)!;void Share.share({message:ExpoLinking.createURL('/map',{queryParams})}).catch(()=>{});}else if(message.type==='blueprint'&&typeof message.path==='string'){void blueprint(message.path);}else if(message.type==='location-start'){tracking.current=true;void start();}else if(message.type==='location-stop'){tracking.current=false;stop();}}catch{/* Unknown bridge messages are ignored. */}}}
+  onError={()=>{stop();elevation.stop();setFailed(true);}} onContentProcessDidTerminate={()=>{stop();elevation.stop();setFailed(true);}}
+  onMessage={event=>{try{const message=JSON.parse(event.nativeEvent.data);if(message.type==='share'&&typeof message.params==='string'){const p=new URLSearchParams(message.params);const queryParams:Record<string,string>={};for(const key of ['building','floor','room','view','place'])if(p.get(key))queryParams[key]=p.get(key)!;void Share.share({message:ExpoLinking.createURL('/map',{queryParams})}).catch(()=>{});}else if(message.type==='blueprint'&&typeof message.path==='string'){void blueprint(message.path);}else if(message.type==='elevation-start'){void elevation.start();}else if(message.type==='elevation-stop'){elevation.stop();}else if(message.type==='location-start'){tracking.current=true;void start();}else if(message.type==='location-stop'){tracking.current=false;stop();}}catch{/* Unknown bridge messages are ignored. */}}}
   onShouldStartLoadWithRequest={request=>{if(request.url==='about:blank')return true;external(request.url);return false;}}
   onOpenWindow={event=>external(event.nativeEvent.targetUrl)} />;
 }

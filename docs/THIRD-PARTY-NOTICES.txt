@@ -315,6 +315,7 @@ expo-modules-core 57.0.23 — MIT
 expo-modules-jsi 57.1.2 — MIT
 expo-router 57.0.28 — MIT
 expo-secure-store 57.0.4 — MIT
+expo-sensors 57.0.3 — MIT
 expo-server 57.0.3 — MIT
 expo-splash-screen 57.0.10 — MIT
 expo-status-bar 57.0.1 — MIT

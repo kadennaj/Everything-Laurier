@@ -17,8 +17,14 @@ export function EventCard({ event }: { event: CampusEvent }) {
     {event.place ? <View style={[s.row, { gap: 8 }]}><Icon name="map-pin" size={15} color={c.muted} /><T muted style={{ fontSize: 13, flex: 1 }}>{event.place}</T></View> : null}
   </Pressable></Card>;
 }
-export function ClubCard({ club }: { club: Club }) {
-  return <Card style={{ height: '100%' }}><View style={{ padding: 22, gap: 18 }}>
+export function ClubCard({ club, compact = false }: { club: Club; compact?: boolean }) {
+  if (compact) return <Card><View style={[s.row, { padding: 14, gap: 12 }]}>
+    <Pressable accessibilityRole="button" accessibilityLabel={`View ${club.name}`} onPress={() => router.push(`/club/${club.id}`)} style={({ pressed }) => ({ flex: 1, flexDirection: 'row', alignItems: 'center', gap: 14, minHeight: 56, opacity: pressed ? 0.7 : 1 })}>
+      <View style={{ width: 44, height: 44, borderRadius: 14, backgroundColor: c.lavender, alignItems: 'center', justifyContent: 'center' }}><T style={{ fontFamily: f.medium, fontSize: 15, color: c.purple }}>{initials(club.name)}</T></View>
+      <View style={{ flex: 1, gap: 4 }}><T style={{ fontFamily: f.bold, fontSize: 17, lineHeight: 24 }}>{club.name}</T><T muted style={{ fontSize: 13 }}>{club.theme}</T></View>
+    </Pressable><SaveButton id={`club:${club.id}`} title={club.name} />
+  </View></Card>;
+  return <Card><View style={{ padding: 22, gap: 18 }}>
     <View style={[s.row, { justifyContent: 'space-between' }]}><View style={{ width: 48, height: 48, borderRadius: 16, backgroundColor: c.lavender, alignItems: 'center', justifyContent: 'center' }}><T style={{ fontFamily: f.medium, fontSize: 17, color: c.purple }}>{initials(club.name)}</T></View><SaveButton id={`club:${club.id}`} title={club.name} /></View>
     <Pressable accessibilityRole="button" accessibilityLabel={`View ${club.name}`} onPress={() => router.push(`/club/${club.id}`)} style={({ pressed }) => ({ gap: 10, opacity: pressed ? 0.7 : 1, minHeight: 94 })}>
       <T style={{ fontFamily: f.bold, fontSize: 17, lineHeight: 25, letterSpacing: -0.3 }}>{club.name}</T>

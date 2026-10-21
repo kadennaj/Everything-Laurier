@@ -13,7 +13,7 @@ import { DeleteAccountCard } from '../components/DeleteAccountCard';
 export default function Profile() {
   const { owner } = useOwner();
   const { saved, clearSaved } = useLocal(); const [confirm, setConfirm] = useState(false); const [showAbout, setShowAbout] = useState(false);
-  return <><PageHeading eyebrow="YOUR ACCOUNT" title="Your space." subtitle="Your student profile, account, and the things you’ve saved." />
+  return <><PageHeading title="Profile" />
     <Card><NavigationRow title="Campus services" description="Academic help, peer tutors and your campus community" icon="grid" last onPress={() => router.push('/more')} /></Card>
     <AccountCard />
     {owner && <Card style={{padding:20,gap:12}}><T style={{fontFamily:f.bold,fontSize:18}}>Owner tools</T><Button label="Open private review dashboard" icon="shield" onPress={()=>router.push('/owner')} /></Card>}

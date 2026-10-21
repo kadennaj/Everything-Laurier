@@ -18,5 +18,5 @@ const groups: { title: string; items: { title: string; description: string; path
   ] },
 ];
 export default function More() {
-  return <><PageHeading title="Campus services" subtitle="People, course support and the useful everyday things." />{groups.map(group => <View key={group.title} style={{ gap: 12 }}><T accessibilityRole="header" style={{ color: c.muted, fontFamily: f.medium, fontSize: 14, lineHeight: 21 }}>{group.title}</T><Card>{group.items.map((item, index) => <NavigationRow key={item.title} title={item.title} description={item.description} icon={item.icon} last={index === group.items.length - 1} onPress={() => router.push(item.path)} />)}</Card></View>)}</>;
+  return <><PageHeading title="Campus services" />{groups.map(group => <View key={group.title} style={{ gap: 12 }}><T accessibilityRole="header" style={{ color: c.muted, fontFamily: f.medium, fontSize: 14, lineHeight: 21 }}>{group.title}</T><Card>{group.items.map((item, index) => <NavigationRow key={item.title} title={item.title} description={item.description} icon={item.icon} last={index === group.items.length - 1} onPress={() => router.push(item.path)} />)}</Card></View>)}</>;
 }

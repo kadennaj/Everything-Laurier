@@ -44,7 +44,7 @@ export default function OwnerDashboard() {
  if(!owner)return <Card><Empty icon="lock" title="Owner access only" description={session?'This account cannot access applications, transcripts, or the report queue.':'Sign in with the owner account to review applications and reports.'} action={<Button label={session?'Your account':'Sign in'} onPress={()=>router.push(session?'/profile':'/login')}/>}/></Card>;
  const count=tab==='Tutor applications'?applications.length:reports.length;
  return <>
-  <PageHeading eyebrow="PRIVATE · OWNER ONLY" title="Review desk." subtitle="Tutor applications and content reports. Private records stay out of the public app." action={<Button secondary label="Refresh queue" icon="refresh-cw" loading={loading} onPress={()=>{setLoading(true);setError('');setRevision(v=>v+1);}}/>}/>
+  <PageHeading eyebrow="PRIVATE · OWNER ONLY" title="Review desk" subtitle="Tutor applications and content reports. Private records stay out of the public app." action={<Button secondary label="Refresh queue" icon="refresh-cw" loading={loading} onPress={()=>{setLoading(true);setError('');setRevision(v=>v+1);}}/>}/>
   <Chips items={['Tutor applications','Content reports']} value={tab} onChange={changeTab}/>
   <SecurityUsage />
   <View style={{flexDirection:'row',gap:8,flexWrap:'wrap'}}>{(tab==='Tutor applications'?['pending','approved','rejected']:['open','resolved','dismissed']).map(item=><Pill key={item} label={item.charAt(0).toUpperCase()+item.slice(1)} active={status===item} onPress={()=>{setLoading(true);setStatus(item);setPage(0);}}/>)}</View>

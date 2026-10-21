@@ -52,7 +52,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
       </Pressable>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ gap: 5, paddingBottom: 24 }}>
         {primaryNavigation.map(item => <Pressable key={item.path} accessibilityRole="button" accessibilityState={{ selected: current === item.label }} onPress={() => router.navigate(item.path)} style={({ pressed }) => [styles.sideLink, current === item.label && styles.selected, pressed && styles.pressed]}>
-          <Icon name={item.icon} size={21} color={current === item.label ? c.purple : c.muted} /><T style={[styles.sideText, current === item.label && { color: c.purple, fontFamily: f.bold }]}>{item.label === 'You' ? 'Your space' : item.label}</T>
+          <Icon name={item.icon} size={21} color={current === item.label ? c.purple : c.muted} /><T style={[styles.sideText, current === item.label && { color: c.purple, fontFamily: f.bold }]}>{item.label === 'You' ? 'Profile' : item.label}</T>
         </Pressable>)}
         <T style={styles.groupLabel}>CAMPUS</T>
         {services.map(item => <Pressable key={item.path} accessibilityRole="button" accessibilityState={{ selected: pathname === item.path }} onPress={() => router.navigate(item.path)} style={({ pressed }) => [styles.sideLink, pathname === item.path && styles.selected, pressed && styles.pressed]}>

@@ -28,7 +28,7 @@ export function StudentProfileCard() {
     <Badge label="Student profile" />
     {loading ? <ActivityIndicator color={c.purple} /> : error ? <><T accessibilityRole="alert" style={{ color: c.error }}>{error}</T>
       <View style={{ alignItems: 'flex-start' }}><Button secondary label="Try again" onPress={() => { setLoading(true); setRetry(value => value + 1); }} /></View></>
-      : !profile ? <><T style={{ fontFamily: f.bold, fontSize: 24 }}>Tell campus about you.</T>
+      : !profile ? <><T style={{ fontFamily: f.bold, fontSize: 24 }}>Your profile</T>
         <T style={body}>Add your name and program, then choose whether other students can find and email you.</T>
         <View style={{ alignItems: 'flex-start' }}><Button label="Complete your profile" icon="user-plus" onPress={() => router.push('/account-setup')} /></View></>
       : <>

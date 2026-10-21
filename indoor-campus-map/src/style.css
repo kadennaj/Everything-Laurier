@@ -2137,3 +2137,19 @@ button {
  .app{height:500px;min-height:500px}
  .main-layout{min-height:500px}
 }
+
+/* Starting point and height estimates stay compact; full controls open on demand. */
+.location-summary { margin: 12px 0; display: grid; gap: 8px; }
+.location-summary-button { display: flex; align-items: center; gap: 9px; padding: 10px; border: 1px solid #ded7e9; border-radius: 12px; background: #f5f1fa; text-align: left; min-height: 48px; color: #382354; width: 100%; }
+.location-summary-button span { flex: 1; font-size: 13px; line-height: 1.5; }
+.location-summary-button small { display: block; color: #595262; }
+.floor-hint { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 13px; }
+.location-modal { display: grid; gap: 16px; }
+.location-modal label { display: grid; gap: 7px; font-size: 14px; font-weight: 600; }
+.location-modal select,.location-modal input { width: 100%; min-width: 0; min-height: 44px; padding: 10px; border: 1px solid #b6adbd; border-radius: 10px; background: #fff; color: #30223c; font: inherit; }
+.location-modal summary { min-height: 44px; padding: 12px 0; cursor: pointer; }
+.location-modal .small-text { margin: 0; }
+.location-summary .text-link { color: #583785; min-height: 44px; justify-self: start; display: inline-flex; align-items: center; gap: 7px; }
+
+.location-modal .small-text,.location-summary .small-text { color: #625a66; }
+.coverage-note summary { min-height:44px; display:flex; align-items:center; cursor:pointer; }

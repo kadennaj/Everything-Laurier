@@ -50,21 +50,21 @@ export default function People() {
   }
 
   if (!ready) return <ActivityIndicator color={c.purple} />;
-  if (!session) return <><PageHeading eyebrow="STUDENT CONNECTIONS" title="Find your people." subtitle="Meet students in your program and make your next campus connection." />
-    <Empty title="Sign in to meet students." description="Student profiles are available to people who have verified their email."
+  if (!session) return <><PageHeading title="People" />
+    <Empty title="Sign in to meet students" description="Student profiles are available to people who have verified their email."
       icon="users" action={<Button label="Sign in with email" icon="mail" onPress={() => router.push('/login')} />} /></>;
 
   return <>
-    <PageHeading eyebrow="STUDENT CONNECTIONS" title="Find your people." subtitle="Meet students in your program. Each person chooses what they share."
+    <PageHeading title="People"
       action={<Button secondary label="Your profile" icon="user" onPress={() => router.push('/profile')} />} />
     <Card style={{ padding: 22, gap: 12 }}>
       <View style={[s.row, { gap: 12 }]}><Icon name="search" color={c.purple} /><T style={{ fontFamily: f.bold, fontSize: 16 }}>Who’s in your program?</T></View>
-      <T muted style={{ lineHeight: 22 }}>Try a program name such as Computer Science, BBA, or Psychology.</T>
+
       <Search value={search} onChange={value => { currentSearch.current = value; setSearch(value); setLoading(true); setResults([]); setHasMore(false); }} placeholder="Search by program…" />
     </Card>
     {loading ? <View style={{ padding: 32, alignItems: 'center', gap: 12 }}><ActivityIndicator color={c.purple} /><T muted>Finding students…</T></View> : <>
       {!!error && <Card style={{ padding: 20, gap: 12 }}><T accessibilityRole="alert" style={{ color: '#8E3434' }}>{error}</T><Button secondary label="Try again" onPress={() => { setLoading(true); setRetry(value => value + 1); }} /></Card>}
-      {!error && results.length === 0 && <Empty title="No profiles here yet." description={search ? 'Try another program name, or check back as more students join.' : 'Be among the first students to share a profile.'} icon="users" />}
+      {!error && results.length === 0 && <Empty title="No profiles yet" description={search ? 'Try another program name, or check back as more students join.' : 'Be among the first students to share a profile.'} icon="users" />}
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 18 }}>{results.map(person => <Card key={person.id} style={{ width: layoutWidth < 700 ? '100%' : undefined, flexBasis: layoutWidth < 700 ? undefined : '30%', flexGrow: 1, maxWidth: layoutWidth < 700 ? undefined : 460 }}>
         <View style={{ height: 48, backgroundColor: c.background }} />
         <View style={{ padding: 22, gap: 13 }}>
