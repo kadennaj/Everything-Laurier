@@ -25,3 +25,9 @@ Records expire after seven days and inactive devices after 60 days through daily
 Current dependency audit: 27 findings (2 high, 23 moderate, 2 low), including upstream Zod build-tool and glob/matcher advisories. These are not cleared by the UI/notification work; avoid a forced Expo downgrade. Previously patched braces/node-forge/URI decoder regressions remain covered.
 
 The local iPad simulator build was stopped when the Mac ran out of free disk space (libtool errno 28); only its generated /tmp build directory was removed. Native iPad verification of this revision is incomplete. Responsive browser layouts were inspected at phone/tablet widths. Expo dependency alignment pins react-native-worklets 0.10.1 and react-native-reanimated 4.5.1; a clean npm 10 install dry-run passes after resolving the initial EAS lockfile/peer mismatch.
+
+## Signed iPhone preview
+
+EAS build ad794f1f-56a2-4b3b-b0fa-c9b048a19893 finished successfully. Its signature verifies, with production APNs entitlement, Apple team JRCUQ9JQW6, iPad device-family support and scene support. iOS rejected an in-place upgrade across the old personal team WXAN8479VC; after the operator explicitly approved replacing the old app and resetting local choices, the app was removed, installed and launched successfully on the connected iPhone 15. Server-side registration is temporarily available for the owner’s test; scheduled delivery remains paused pending confirmation.
+
+Token registration now serializes by user and token and repeats ownership checks in the conflict update. Rollback-only SQL tests also verify idempotent refresh registration; no token can move between accounts through a competing upsert.
