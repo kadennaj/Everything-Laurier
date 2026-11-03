@@ -74,7 +74,7 @@ export default function Login() {
     </View>
     <Card style={styles.form}>
       <View style={{ gap: 8 }}>
-        <T style={{ fontFamily: f.bold, fontSize: 19 }}>{isVerifying ? 'Enter your verification code' : 'Let’s get you signed in'}</T>
+        <T style={{ fontWeight: '600', fontSize: 19 }}>{isVerifying ? 'Enter your verification code' : 'Let’s get you signed in'}</T>
         <T muted style={{ lineHeight: 22 }}>{isVerifying ? `Enter the code sent to ${pendingEmail}.` : 'For ages 16 and older. We’ll email a requested sign-in code, without marketing. Account submissions require agreeing to the terms.'}</T>
       </View>
       {isVerifying ? <View style={{ gap: 8 }}>
@@ -119,11 +119,11 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: { width: '100%', maxWidth: 480, alignSelf: 'center', gap: 18, paddingVertical: 8 },
   intro: { alignItems: 'center', gap: 12 },
-  heading: { fontFamily: f.bold, fontSize: 31, lineHeight: 38, letterSpacing: -0.4, textAlign: 'center' },
+  heading: { fontWeight: '600', fontSize: 31, lineHeight: 38, letterSpacing: -0.4, textAlign: 'center' },
   form: { padding: 24, gap: 20 },
-  label: { fontFamily: f.bold, fontSize: 13 },
+  label: { fontWeight: '600', fontSize: 13 },
   input: { minHeight: 54, borderWidth: 1, borderColor: '#89818F', borderRadius: 13, paddingHorizontal: 14, paddingVertical: 12, color: c.ink, fontFamily: f.regular, fontSize: 16, backgroundColor: c.background },
-  code: { fontFamily: f.medium, letterSpacing: 3, fontSize: 20 },
+  code: { fontWeight: '500', letterSpacing: 3, fontSize: 20 },
   error: { padding: 12, backgroundColor: '#FAEEEE', borderRadius: 10 },
   privacy: { flexDirection: 'row', gap: 9, paddingTop: 16, borderTopWidth: 1, borderTopColor: c.border },
   loading: { padding: 40, alignItems: 'center', gap: 15 },

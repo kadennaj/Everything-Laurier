@@ -3,7 +3,7 @@ import { router } from 'expo-router';
 import { Linking, Modal, Pressable, ScrollView, View } from 'react-native';
 import { useAuth } from '../lib/auth';
 import { reportContent, reportReasons, ReportReason } from '../lib/moderation';
-import { colors as c, fonts as f } from '../lib/theme';
+import { colors as c } from '../lib/theme';
 import { Button, Card, Icon, Pill, T, body } from './ui';
 
 type PostActions = { venueName: string; hidePost: () => void; hideVenue: () => void; disabled: boolean };
@@ -34,7 +34,7 @@ export function ReportContent({ kind, target, postActions }: { kind: 'profile' |
         <Pressable accessible={false} onPress={close} style={{ position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 }} />
         <Card accessibilityViewIsModal style={{ width: '100%', maxWidth: showMenu ? 360 : 520, maxHeight: '90%', padding: 24 }}>
           {showMenu && postActions ? <ScrollView contentContainerStyle={{ gap: 12 }}>
-            <T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: 21 }}>Post options</T>
+            <T accessibilityRole="header" style={{ fontWeight: '600', fontSize: 21 }}>Post options</T>
             <T muted style={{ fontSize: 13, marginBottom: 4 }}>{postActions.venueName}</T>
             <Button secondary label="Hide post" icon="eye-off" disabled={postActions.disabled} onPress={() => { close(); postActions.hidePost(); }} />
             <Button secondary label="Hide venue" icon="slash" disabled={postActions.disabled} onPress={() => { close(); postActions.hideVenue(); }} />
@@ -42,7 +42,7 @@ export function ReportContent({ kind, target, postActions }: { kind: 'profile' |
             <Button secondary label="Cancel" onPress={close} />
           </ScrollView> :
           <ScrollView contentContainerStyle={{ gap: 18 }}>
-            <T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: 25 }}>Report this {kind}</T>
+            <T accessibilityRole="header" style={{ fontWeight: '600', fontSize: 25 }}>Report this {kind}</T>
             <T style={body}>Choose the concern. Reports go to Everything Laurier for review. For immediate danger, contact emergency services.</T>
             {session ? <>
               {!success && <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>{reportReasons.map(item => <Pill key={item.id} label={item.label} active={reason === item.id} onPress={() => { if (!busy) setReason(item.id); }} />)}</View>}

@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Everything Laurier",
-    "slug": "everything-laurier",
+    "slug": "everythinglaurier",
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/laurier-app-icon.png",
@@ -102,6 +102,14 @@
             "NSPrivacyCollectedDataTypePurposes": [
               "NSPrivacyCollectedDataTypePurposeAppFunctionality"
             ]
+          },
+          {
+            "NSPrivacyCollectedDataType": "NSPrivacyCollectedDataTypeDeviceID",
+            "NSPrivacyCollectedDataTypeLinked": true,
+            "NSPrivacyCollectedDataTypeTracking": false,
+            "NSPrivacyCollectedDataTypePurposes": [
+              "NSPrivacyCollectedDataTypePurposeAppFunctionality"
+            ]
           }
         ],
         "NSPrivacyTracking": false,
@@ -111,7 +119,8 @@
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": false,
           "NSAllowsLocalNetworking": true
-        }
+        },
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
@@ -181,8 +190,22 @@
             "enableSceneSupport": true
           }
         }
+      ],
+      [
+        "expo-notifications",
+        {
+          "defaultChannel": "nightlife",
+          "enableBackgroundRemoteNotifications": false
+        }
       ]
     ],
-    "scheme": "everythinglaurier"
+    "scheme": "everythinglaurier",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "8417e84b-0ac0-4c27-b37d-227633550ba7"
+      }
+    },
+    "owner": "everythinglauriers-team"
   }
 }

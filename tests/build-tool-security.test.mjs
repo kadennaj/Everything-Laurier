@@ -8,7 +8,8 @@ const braces = require(process.env.LAURIER_TEST_BRACES_PATH || 'braces');
 const forge = require(process.env.LAURIER_TEST_FORGE_PATH || 'node-forge');
 
 test('Expo and micromatch resolve the patched dependencies', () => {
-  const expoRequire = createRequire(import.meta.resolve('@expo/cli'));
+  const expoPackageRequire = createRequire(require.resolve('expo/package.json'));
+  const expoRequire = createRequire(expoPackageRequire.resolve('@expo/cli'));
   const micromatchRequire = createRequire(import.meta.resolve('micromatch'));
   assert.equal(expoRequire.resolve('node-forge'), fileURLToPath(import.meta.resolve('node-forge')));
   assert.equal(micromatchRequire('braces/package.json').everythingLaurierSecurityPatch, '2026-10-21.1');

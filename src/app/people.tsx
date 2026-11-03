@@ -6,7 +6,7 @@ import { ActivityIndicator, Pressable, View } from 'react-native';
 import { Button, Card, Empty, Icon, PageHeading, Search, T, s } from '../components/ui';
 import { useAuth } from '../lib/auth';
 import { DirectoryProfile, findStudentProfiles } from '../lib/student-profiles';
-import { colors as c, fonts as f } from '../lib/theme';
+import { colors as c } from '../lib/theme';
 
 export default function People() {
   const { session, ready } = useAuth();
@@ -60,7 +60,7 @@ export default function People() {
     <PageHeading title="People"
       action={<Button secondary label="Your profile" icon="user" onPress={() => router.push('/profile')} />} />
     <Card style={{ padding: 22, gap: 12 }}>
-      <View style={[s.row, { gap: 12 }]}><Icon name="search" color={c.purple} /><T style={{ fontFamily: f.bold, fontSize: 16 }}>Who’s in your program?</T></View>
+      <View style={[s.row, { gap: 12 }]}><Icon name="search" color={c.purple} /><T style={{ fontWeight: '600', fontSize: 16 }}>Who’s in your program?</T></View>
 
       <Search value={search} onChange={value => { currentSearch.current = value; setSearch(value); setLoading(true); setResults([]); setHasMore(false); }} placeholder="Search by program…" />
     </Card>
@@ -72,15 +72,15 @@ export default function People() {
         <View style={{ padding: 22, gap: 13 }}>
           <View style={[s.row, { justifyContent: 'space-between', marginTop: -44 }]}>
             <View style={{ width: 68, height: 68, borderRadius: 23, borderWidth: 4, borderColor: c.surface, backgroundColor: c.peach, alignItems: 'center', justifyContent: 'center' }}>
-              <T style={{ fontFamily: f.bold, fontSize: 25, color: c.purple }}>{person.display_name.slice(0, 1).toUpperCase()}</T>
+              <T style={{ fontWeight: '600', fontSize: 25, color: c.purple }}>{person.display_name.slice(0, 1).toUpperCase()}</T>
             </View>
 
           </View>
-          <View style={{ gap: 5 }}><T style={{ fontFamily: f.bold, fontSize: 20 }}>{person.display_name}</T><T muted>{person.program}{person.year_label ? ` · ${person.year_label}` : ''}</T></View>
+          <View style={{ gap: 5 }}><T style={{ fontWeight: '600', fontSize: 20 }}>{person.display_name}</T><T muted>{person.program}{person.year_label ? ` · ${person.year_label}` : ''}</T></View>
           {!!person.bio && <T muted numberOfLines={3} style={{ lineHeight: 22 }}>{person.bio}</T>}
           <Pressable accessibilityRole="button" accessibilityLabel={`View ${person.display_name}'s profile`} onPress={() => router.push(`/student/${person.id}`)}
             style={[s.row, { justifyContent: 'space-between', minHeight: 46, borderTopWidth: 1, borderTopColor: c.border, paddingTop: 12 }]}>
-            <T style={{ fontFamily: f.bold, color: c.purple }}>View profile</T><Icon name="arrow-right" color={c.purple} size={18} />
+            <T style={{ fontWeight: '600', color: c.purple }}>View profile</T><Icon name="arrow-right" color={c.purple} size={18} />
           </Pressable>
         </View>
       </Card>)}</View>

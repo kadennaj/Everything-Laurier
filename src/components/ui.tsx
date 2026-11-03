@@ -2,7 +2,7 @@ import { useContentLayout } from '../lib/use-content-layout';
 import { Feather } from '@expo/vector-icons';
 import React from 'react';
 import { ActivityIndicator, Linking, Pressable, ScrollView, StyleProp, StyleSheet, Text, TextInput, TextStyle, View, ViewStyle } from 'react-native';
-import { colors as c, fonts as f, radii } from '../lib/theme';
+import { colors as c, fonts as f,  radii } from '../lib/theme';
 import { useLocal } from '../lib/state';
 
 export type IconName = keyof typeof Feather.glyphMap;
@@ -15,7 +15,7 @@ export function Button({ label, onPress, secondary, icon, style, disabled = fals
   return <Pressable accessibilityRole="button" accessibilityState={{ disabled: unavailable, busy: loading }} accessibilityLabel={label} onPress={onPress} disabled={unavailable}
     style={({ pressed }) => [s.button, secondary && s.secondary, style, { opacity: unavailable ? (loading ? 0.8 : 0.45) : pressed ? 0.76 : 1 }]}>
     {loading ? <ActivityIndicator size="small" color={secondary ? c.purple : c.surface} /> : icon ? <Icon name={icon} size={18} color={secondary ? c.purple : c.surface} /> : null}
-    <T style={{ color: secondary ? c.purple : c.surface, fontFamily: f.medium, fontSize: 16, lineHeight: 22, flexShrink: 1, textAlign: 'center' }}>{label}</T>
+    <T style={{ color: secondary ? c.purple : c.surface, fontWeight: '500', fontSize: 16, lineHeight: 22, flexShrink: 1, textAlign: 'center' }}>{label}</T>
   </Pressable>;
 }
 export function IconButton({ name, label, onPress, active, style }: { name: IconName; label: string; onPress: () => void; active?: boolean; style?: StyleProp<ViewStyle> }) {
@@ -28,32 +28,32 @@ export function Pill({ label, active, onPress, icon }: { label: string; active?:
   return <Pressable accessibilityRole={onPress ? 'button' : 'text'} accessibilityLabel={label} aria-pressed={onPress ? !!active : undefined} accessibilityState={onPress ? { selected: active } : undefined} onPress={onPress}
     style={({ pressed }) => [s.pill, active && s.pillActive, pressed && { opacity: 0.7 }]}>
     {icon && <Icon name={icon} size={15} color={active ? c.surface : c.muted} />}
-    <T style={{ fontSize: 15, lineHeight: 21, fontFamily: f.medium, color: active ? c.surface : c.muted, flexShrink: 1 }}>{label}</T>
+    <T style={{ fontSize: 15, lineHeight: 21, fontWeight: '500', color: active ? c.surface : c.muted, flexShrink: 1 }}>{label}</T>
   </Pressable>;
 }
 export function Chips({ items, value, onChange }: { items: string[]; value: string; onChange: (v: string) => void }) {
   return <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ flexGrow: 0 }} contentContainerStyle={{ gap: 8, paddingVertical: 4 }}>{items.map(item => <Pill key={item} label={item} active={item === value} onPress={() => onChange(item)} />)}</ScrollView>;
 }
 export function Eyebrow({ children, color = c.purple }: { children: React.ReactNode; color?: string }) {
-  return <T style={{ fontSize: 11, lineHeight: 16, fontFamily: f.medium, letterSpacing: 0.8, color }}>{children}</T>;
+  return <T style={{ fontSize: 11, lineHeight: 16, fontWeight: '500', letterSpacing: 0.8, color }}>{children}</T>;
 }
 export function Badge({ label, color = c.lavender, textColor = c.purple }: { label: string; color?: string; textColor?: string }) {
   if (!label?.trim()) return null;
-  return <View style={{ alignSelf: 'flex-start', paddingHorizontal: 10, paddingVertical: 6, backgroundColor: color, borderRadius: 8 }}><T style={{ fontSize: 11, lineHeight: 15, fontFamily: f.medium, color: textColor }}>{label}</T></View>;
+  return <View style={{ alignSelf: 'flex-start', paddingHorizontal: 10, paddingVertical: 6, backgroundColor: color, borderRadius: 8 }}><T style={{ fontSize: 11, lineHeight: 15, fontWeight: '500', color: textColor }}>{label}</T></View>;
 }
 export function PageHeading({ eyebrow, title, subtitle, action }: { eyebrow?: string; title: string; subtitle?: string; action?: React.ReactNode }) {
   const { width, fontScale } = useContentLayout();
   return <View style={[s.heading, width / fontScale < 700 && { flexDirection: 'column', alignItems: 'stretch' }]}>
     <View style={{ flex: 1, gap: 10 }}>{eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
-      <T accessibilityRole="header" style={{ fontSize: width < 600 ? 30 : 38, lineHeight: width < 600 ? 38 : 46, fontFamily: f.bold, letterSpacing: -0.4 }}>{title}</T>
+      <T accessibilityRole="header" style={{ fontSize: width < 600 ? 34 : 44, lineHeight: width < 600 ? 41 : 52, fontWeight: '600', letterSpacing: -0.7 }}>{title}</T>
       {subtitle ? <T muted style={{ maxWidth: 620, fontSize: 17, lineHeight: 26 }}>{subtitle}</T> : null}
     </View>{action ? <View style={{ alignItems: 'flex-start' }}>{action}</View> : null}
   </View>;
 }
 export function SectionTitle({ title, subtitle, action, onPress }: { title: string; subtitle?: string; action?: string; onPress?: () => void }) {
   return <View style={[s.row, { justifyContent: 'space-between', gap: 16, alignItems: 'flex-start' }]}>
-    <View style={{ flex: 1, gap: 6 }}><T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: 22, lineHeight: 29, letterSpacing: -0.4 }}>{title}</T>{subtitle && <T muted style={{ fontSize: 15, lineHeight: 23 }}>{subtitle}</T>}</View>
-    {action && <Pressable onPress={onPress} accessibilityRole="button" style={({ pressed }) => [s.row, { minHeight: 48, maxWidth: '40%', gap: 5, opacity: pressed ? 0.6 : 1 }]}><T style={{ fontSize: 15, lineHeight: 22, flexShrink: 1, fontFamily: f.medium, color: c.purple }}>{action}</T><Icon name="chevron-right" size={16} color={c.purple} /></Pressable>}
+    <View style={{ flex: 1, gap: 6 }}><T accessibilityRole="header" style={{ fontWeight: '600', fontSize: 22, lineHeight: 29, letterSpacing: -0.7 }}>{title}</T>{subtitle && <T muted style={{ fontSize: 15, lineHeight: 23 }}>{subtitle}</T>}</View>
+    {action && <Pressable onPress={onPress} accessibilityRole="button" style={({ pressed }) => [s.row, { minHeight: 48, maxWidth: '40%', gap: 5, opacity: pressed ? 0.6 : 1 }]}><T style={{ fontSize: 15, lineHeight: 22, flexShrink: 1, fontWeight: '500', color: c.purple }}>{action}</T><Icon name="chevron-right" size={16} color={c.purple} /></Pressable>}
   </View>;
 }
 export function Search({ value, onChange, placeholder, onSubmit, style, autoFocus = false }: { value: string; onChange: (v: string) => void; placeholder: string; onSubmit?: () => void; style?: StyleProp<ViewStyle>; autoFocus?: boolean }) {
@@ -64,7 +64,7 @@ export function Search({ value, onChange, placeholder, onSubmit, style, autoFocu
   </View>;
 }
 export function Empty({ title, description, icon = 'search', action }: { title: string; description: string; icon?: IconName; action?: React.ReactNode }) {
-  return <View style={s.empty}><View style={s.emptyIcon}><Icon name={icon} size={24} color={c.purple} /></View><T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: 21, lineHeight: 28, textAlign: 'center', letterSpacing: -0.4 }}>{title}</T><T muted style={{ textAlign: 'center', lineHeight: 24, maxWidth: 350 }}>{description}</T>{action ? <View style={{ marginTop: 8 }}>{action}</View> : null}</View>;
+  return <View style={s.empty}><View style={s.emptyIcon}><Icon name={icon} size={24} color={c.purple} /></View><T accessibilityRole="header" style={{ fontWeight: '600', fontSize: 21, lineHeight: 28, textAlign: 'center', letterSpacing: -0.7 }}>{title}</T><T muted style={{ textAlign: 'center', lineHeight: 24, maxWidth: 350 }}>{description}</T>{action ? <View style={{ marginTop: 8 }}>{action}</View> : null}</View>;
 }
 export function SaveButton({ id, title, style }: { id: string; title: string; style?: StyleProp<ViewStyle> }) {
   const { saved, toggleSave } = useLocal(); const active = saved.includes(id);
@@ -79,7 +79,7 @@ export function Card({ children, style, ...props }: React.ComponentProps<typeof 
 export function NavigationRow({ title, description, icon, onPress, last = false }: { title: string; description?: string; icon: IconName; onPress: () => void; last?: boolean }) {
   return <Pressable accessibilityRole="button" accessibilityLabel={title} accessibilityHint={description} onPress={onPress} style={({ pressed }) => [s.row, { minHeight: 78, paddingHorizontal: 18, paddingVertical: 16, gap: 14, backgroundColor: pressed ? c.pressed : c.surface, borderBottomWidth: last ? 0 : 1, borderBottomColor: c.border }]}>
     <View style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: c.lavender, alignItems: 'center', justifyContent: 'center' }}><Icon name={icon} color={c.purple} /></View>
-    <View style={{ flex: 1, minWidth: 0, gap: 4 }}><T style={{ fontFamily: f.medium, fontSize: 17, lineHeight: 24 }}>{title}</T>{description && <T muted style={{ fontSize: 14, lineHeight: 21 }}>{description}</T>}</View><Icon name="chevron-right" color={c.muted} size={18} />
+    <View style={{ flex: 1, minWidth: 0, gap: 4 }}><T style={{ fontWeight: '500', fontSize: 17, lineHeight: 24 }}>{title}</T>{description && <T muted style={{ fontSize: 14, lineHeight: 21 }}>{description}</T>}</View><Icon name="chevron-right" color={c.muted} size={18} />
   </Pressable>;
 }
 export function FeedSkeleton({ compact = false }: { compact?: boolean }) {
@@ -94,7 +94,7 @@ export const s = StyleSheet.create({
   button: { minHeight: 50, minWidth: 48, backgroundColor: c.purple, borderRadius: radii.control, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 9, paddingHorizontal: 20, paddingVertical: 13 },
   secondary: { backgroundColor: c.lavender },
   iconButton: { width: 48, height: 48, borderRadius: 14, backgroundColor: c.surface, alignItems: 'center', justifyContent: 'center' },
-  pill: { minHeight: 44, borderRadius: 22, paddingHorizontal: 18, paddingVertical: 11, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, borderWidth: 1, borderColor: c.border, backgroundColor: c.surface },
+  pill: { minHeight: 44, borderRadius: 999, paddingHorizontal: 18, paddingVertical: 11, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, borderWidth: 1, borderColor: c.border, backgroundColor: c.surface },
   pillActive: { backgroundColor: c.purpleDark, borderColor: c.purpleDark },
   heading: { flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', gap: 20, paddingTop: 4, paddingBottom: 4 },
   search: { flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: c.surface, borderWidth: 1, borderColor: c.border, borderRadius: radii.control, paddingLeft: 16, minHeight: 54 },

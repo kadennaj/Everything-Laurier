@@ -9,7 +9,7 @@ export const primaryNavigation = [
 export function navigationSection(pathname: string) {
   const direct = primaryNavigation.find(item => item.path === pathname);
   if (direct) return direct.label;
-  if (pathname.startsWith('/night/') || pathname.startsWith('/venue/')) return 'Nightlife';
+  if (pathname === '/notifications' || pathname.startsWith('/night/') || pathname.startsWith('/venue/')) return 'Nightlife';
   if (pathname.startsWith('/club/')) return 'Clubs';
   if (['/login', '/account-setup', '/edit-profile', '/saved', '/privacy', '/community', '/owner', '/legal', '/terms', '/cookies', '/refunds', '/licenses', '/data-controls'].includes(pathname)) return 'You';
   return 'Home';
@@ -17,7 +17,7 @@ export function navigationSection(pathname: string) {
 
 export function screenTitle(pathname: string) {
   const titles: Record<string, string> = {
-    '/legal': 'Legal & licences', '/terms': 'Terms of service', '/cookies': 'Cookies & storage', '/refunds': 'Payments & refunds', '/licenses': 'Licences & credits', '/data-controls': 'Your data & choices',
+    '/notifications': 'Notifications', '/legal': 'Legal & licences', '/terms': 'Terms of service', '/cookies': 'Cookies & storage', '/refunds': 'Payments & refunds', '/licenses': 'Licences & credits', '/data-controls': 'Your data & choices',
     '/': 'Home', '/map': 'Campus map', '/clubs': 'Clubs', '/nightlife': 'Nightlife',
     '/profile': 'Your space', '/more': 'Campus services', '/help': 'Academic help',
     '/people': 'People', '/search': 'Search', '/saved': 'Saved items', '/login': 'Sign in',
@@ -29,6 +29,6 @@ export function screenTitle(pathname: string) {
   if (pathname.startsWith('/event/')) return 'Campus event';
   if (pathname.startsWith('/student/') || pathname.startsWith('/person/')) return 'Student profile';
   if (pathname.startsWith('/venue/')) return 'Venue';
-  if (pathname.startsWith('/night/')) return 'Night out';
+  if (pathname === '/notifications' || pathname.startsWith('/night/')) return 'Night out';
   return 'Everything Laurier';
 }

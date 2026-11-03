@@ -2,13 +2,13 @@
 
 ## Visual direction
 
-A quiet, contemporary campus app. Warm neutral backgrounds, white surfaces, restrained Laurier purple, and occasional sage accents. Content and actions carry the hierarchy; decorative slogans and repeated labels should not compete with them.
+A quiet, contemporary campus app. Cool neutral backgrounds, white surfaces, restrained Laurier purple, and occasional sage accents. Content and actions carry the hierarchy; decorative slogans and repeated labels should not compete with them.
 
-- DM Sans throughout, including heroes and artwork: regular (400) for body text, medium (500) for controls, and semibold (600) for headings.
+- Platform system typography throughout: regular body text, medium controls and semibold headings. The supplied Laurier logo and purple accent retain the app’s identity.
 - Keep tracking close to natural spacing; avoid tightly packed headings or widely spaced small labels.
 - Shared colors, control radii, and card radii live in `src/lib/theme.ts`.
 - Page headings describe the task; supporting copy stays short.
-- Cards use a fine border rather than stacked shadows.
+- White cards and spacing group content. Quiet separators mark navigation and settings.
 - Buttons and filters use consistent sizing and pressed feedback.
 - Primary actions remain prominent, with secondary actions in lavender.
 - Navigation keeps the existing five destinations and all routes.
@@ -26,3 +26,7 @@ The empty future club-updates panel and outdated statement that crowd reports ar
 ## Review expectations
 
 Run lint, TypeScript checks, the existing functional tests, and the web export. Review phone, landscape, tablet, and desktop layouts. Exercise club search, detail navigation, bookmark persistence, nightlife filters, Instagram refresh and failures, room-code lookup, sign-in validation, profile forms, and line reporting with test transport. Test reduced motion and larger text. Native device review is still required before release; browser layout checks do not substitute for native accessibility testing.
+
+## November 3, 2026 update
+
+Home uses a campus-photo hero, a direct map action and four quick actions. The first-run welcome offers sign-in/create-account and guest browsing without requesting notification permission. Existing signed-in accounts skip the welcome. Notification settings use labelled native switches and an explicit enable action; denied permission provides a Settings path. Shared pages retain tablet/sidebar and large-text layouts. Apple-inspired typography and hierarchy do not imply Apple affiliation.

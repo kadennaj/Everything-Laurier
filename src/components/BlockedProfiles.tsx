@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { useAuth } from '../lib/auth';
 import { changeProfileBlock, getProfileBlocks, ProfileBlock } from '../lib/moderation';
-import { colors as c, fonts as f } from '../lib/theme';
+import { colors as c } from '../lib/theme';
 import { Button, Card, T, body } from './ui';
 export function BlockedProfiles() {
   const { session } = useAuth();
@@ -22,7 +22,7 @@ export function BlockedProfiles() {
   }, [userId, retry]);
   if (!session) return null;
   return <Card style={{ padding: 22, gap: 15 }}>
-    <T style={{ fontFamily: f.bold, fontSize: 19 }}>Blocked profiles</T>
+    <T style={{ fontWeight: '600', fontSize: 19 }}>Blocked profiles</T>
     <T style={body}>Blocking hides a profile from you and hides your discoverable profile from that student. It cannot recall an email already shared or block contact outside the app.</T>
     {loading ? <ActivityIndicator color={c.purple} /> : blocks.map(block => <View key={block.target_id} style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
       <T style={{ flex: 1 }}>{block.display_name}</T><Button secondary label="Unblock" disabled={!!busy} loading={busy === block.target_id} onPress={() => {

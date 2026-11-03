@@ -7,7 +7,7 @@ import { Badge, Button, Card, Empty, ExternalButton, Eyebrow, Icon, T, body, s }
 import { CalendarStatus } from '../../components/CalendarStatus';
 import { useOfficialEvents } from '../../lib/official-events';
 import { useLocal } from '../../lib/state';
-import { colors as c, fonts as f } from '../../lib/theme';
+import { colors as c } from '../../lib/theme';
 
 export default function EventDetail() {
   const { id } = useLocalSearchParams<{ id: string }>(); const { events, loading, error, now } = useOfficialEvents(); const event = events.find(item => item.id === id); const { saved, toggleSave } = useLocal(); const { width } = useContentLayout();
@@ -19,12 +19,12 @@ export default function EventDetail() {
     <Card><Artwork kind={event.art} height={width < 600 ? 150 : 180} showLabels={false} />
       <View style={{ padding: width < 600 ? 23 : 32, gap: 22 }}>
         <View style={[s.row, { gap: 10 }]}><Badge label={event.category} color={c.peach} /></View>
-        <T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: width < 600 ? 32 : 40, lineHeight: width < 600 ? 40 : 49, maxWidth: 750 }}>{event.title}</T>
+        <T accessibilityRole="header" style={{ fontWeight: '600', fontSize: width < 600 ? 32 : 40, lineHeight: width < 600 ? 40 : 49, maxWidth: 750 }}>{event.title}</T>
         {!!event.host && <T muted>By {event.host}</T>}
         <View style={{ height: 1, backgroundColor: c.border }} />
         <View style={{ flexDirection: width < 600 ? 'column' : 'row', gap: 25 }}>
-          <View style={[s.row, { gap: 12, flexShrink: 1 }]}><Icon name="calendar" color={c.purple} /><View style={{ flexShrink: 1 }}><T style={{ fontFamily: f.bold }}>{event.dateLabel}</T><T muted style={{ marginTop: 5 }}>{event.schedule}</T><T muted style={{ marginTop: 5, fontSize: 12 }}>Waterloo time{Date.parse(event.endsAt) < now ? ' · Past event' : ''}</T></View></View>
-          {!!event.place && <View style={[s.row, { gap: 12, flexShrink: 1 }]}><Icon name="map-pin" color={c.purple} /><T style={{ fontFamily: f.bold, flexShrink: 1 }}>{event.place}</T></View>}
+          <View style={[s.row, { gap: 12, flexShrink: 1 }]}><Icon name="calendar" color={c.purple} /><View style={{ flexShrink: 1 }}><T style={{ fontWeight: '600' }}>{event.dateLabel}</T><T muted style={{ marginTop: 5 }}>{event.schedule}</T><T muted style={{ marginTop: 5, fontSize: 12 }}>Waterloo time{Date.parse(event.endsAt) < now ? ' · Past event' : ''}</T></View></View>
+          {!!event.place && <View style={[s.row, { gap: 12, flexShrink: 1 }]}><Icon name="map-pin" color={c.purple} /><T style={{ fontWeight: '600', flexShrink: 1 }}>{event.place}</T></View>}
         </View>
         {!!event.cost && <T style={body}>{event.cost}</T>}
         {!!event.description && <><Eyebrow>ABOUT THE EVENT</Eyebrow><T style={[body, { maxWidth: 750 }]}>{event.description}</T></>}

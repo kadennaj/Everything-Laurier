@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { useAuth } from '../lib/auth';
 import { getMyProfile, StudentProfile } from '../lib/student-profiles';
-import { colors as c, fonts as f } from '../lib/theme';
+import { colors as c } from '../lib/theme';
 import { Badge, Button, Card, T, body } from './ui';
 
 export function StudentProfileCard() {
@@ -28,11 +28,11 @@ export function StudentProfileCard() {
     <Badge label="Student profile" />
     {loading ? <ActivityIndicator color={c.purple} /> : error ? <><T accessibilityRole="alert" style={{ color: c.error }}>{error}</T>
       <View style={{ alignItems: 'flex-start' }}><Button secondary label="Try again" onPress={() => { setLoading(true); setRetry(value => value + 1); }} /></View></>
-      : !profile ? <><T style={{ fontFamily: f.bold, fontSize: 24 }}>Your profile</T>
+      : !profile ? <><T style={{ fontWeight: '600', fontSize: 24 }}>Your profile</T>
         <T style={body}>Add your name and program, then choose whether other students can find and email you.</T>
         <View style={{ alignItems: 'flex-start' }}><Button label="Complete your profile" icon="user-plus" onPress={() => router.push('/account-setup')} /></View></>
       : <>
-        <T style={{ fontFamily: f.bold, fontSize: 25 }}>{profile.display_name}</T>
+        <T style={{ fontWeight: '600', fontSize: 25 }}>{profile.display_name}</T>
         <T muted>{profile.program}{profile.year_label ? ` · ${profile.year_label}` : ''}</T>
         {!!profile.bio && <T style={body}>{profile.bio}</T>}
         <Badge label={profile.is_discoverable ? (profile.moderation_status === 'approved' ? 'Visible to students' : profile.moderation_status === 'pending' ? 'Awaiting review' : 'Not published') : 'Private profile'}

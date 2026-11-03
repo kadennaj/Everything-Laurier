@@ -8,7 +8,7 @@ import { useLocal } from '../lib/state';
 import { visibleFeedPosts } from '../lib/feed-visibility';
 import { NightlifeAgeGate } from './NightlifeAgeGate';
 import { ReportContent } from './ReportContent';
-import { colors as c, fonts as f } from '../lib/theme';
+import { colors as c } from '../lib/theme';
 
 const openInstagram = (url: string) => { void Linking.openURL(url); };
 
@@ -25,29 +25,29 @@ function PostCard({ post, compact = false }: { post: InstagramPost; compact?: bo
       <View style={{ padding: compact ? 18 : 22, gap: 12 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 10 }}>
           <Pressable accessibilityRole="link" accessibilityLabel={linkLabel} onPress={() => openInstagram(post.post_url)} style={({ pressed }) => ({ flex: 1, gap: 3, opacity: pressed ? 0.75 : 1 })}>
-            <T style={{ fontFamily: f.bold, fontSize: 16, lineHeight: 23 }}>{name}</T>
+            <T style={{ fontWeight: '600', fontSize: 16, lineHeight: 23 }}>{name}</T>
             <T muted style={{ fontSize: 12 }}>@{post.source_username} · {posted}</T>
           </Pressable>
           <ReportContent kind="post" target={post.id} postActions={{ venueName: name, hidePost: () => hidePost(post.id), hideVenue: () => hideSource(post.source_username), disabled: !ready }} />
         </View>
         <Pressable accessibilityRole="link" accessibilityLabel={linkLabel} onPress={() => openInstagram(post.post_url)} style={({ pressed }) => ({ gap: 12, opacity: pressed ? 0.75 : 1 })}>
         {!!post.caption?.trim() && <T muted numberOfLines={compact ? 2 : 4} style={{ fontSize: 14, lineHeight: 22 }}>{post.caption.trim()}</T>}
-        <T style={{ fontFamily: f.medium, color: c.purple, fontSize: 12 }}>Open on Instagram ↗</T>
+        <T style={{ fontWeight: '500', color: c.purple, fontSize: 12 }}>Open on Instagram ↗</T>
         </Pressable>
       </View>
     </Card>;
 }
 
-export function InstagramFeed({ preview = false }: { preview?: boolean }) {
+export function InstagramFeed({ preview = false, source = null }: { preview?: boolean; source?: string | null }) {
   const { nightlifeAgeConfirmed } = useLocal();
-  return nightlifeAgeConfirmed ? <VenueInstagramFeed preview={preview} /> : <NightlifeAgeGate />;
+  return nightlifeAgeConfirmed ? <VenueInstagramFeed key={source ?? 'all'} preview={preview} source={source} /> : <NightlifeAgeGate />;
 }
 
-function VenueInstagramFeed({ preview = false }: { preview?: boolean }) {
+function VenueInstagramFeed({ preview = false, source = null }: { preview?: boolean; source?: string | null }) {
   const { width } = useContentLayout();
   const { hiddenSources, hiddenPosts, externalMediaEnabled, setExternalMediaEnabled, ready } = useLocal();
   const [posts, setPosts] = useState<InstagramPost[]>([]);
-  const [selected, setSelected] = useState('all');
+  const [selected, setSelected] = useState(source ?? 'all');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -95,7 +95,7 @@ function VenueInstagramFeed({ preview = false }: { preview?: boolean }) {
     </>}
     {!loading && !visible.length ? <Card style={{ padding: 22, gap: 16 }}>
       <View style={{ flexDirection: 'row', gap: 12, alignItems: 'flex-start' }}><Icon name={error ? 'wifi-off' : 'instagram'} color={c.purple} /><View style={{ flex: 1, gap: 6 }}>
-        <T accessibilityRole={error ? 'alert' : 'header'} style={{ fontFamily: f.bold, fontSize: 17 }}>{error ? 'Posts couldn’t load' : personallyHidden ? 'Posts are hidden' : 'No recent posts'}</T>
+        <T accessibilityRole={error ? 'alert' : 'header'} style={{ fontWeight: '600', fontSize: 17 }}>{error ? 'Posts couldn’t load' : personallyHidden ? 'Posts are hidden' : 'No recent posts'}</T>
         <T muted style={{ fontSize: 14, lineHeight: 22 }}>{error ? 'Try again or visit a venue on Instagram.' : personallyHidden ? 'Manage hidden posts and venues in Community to see them again.' : 'Posts from these venues appear automatically when the feed updates. You can also visit them on Instagram.'}</T>
       </View></View>
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>

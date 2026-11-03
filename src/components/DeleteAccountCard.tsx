@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, ScrollView, View } from 'react-native';
 import { useAuth } from '../lib/auth';
-import { colors as c, fonts as f } from '../lib/theme';
+import { colors as c } from '../lib/theme';
 import { Button, Card, T, body } from './ui';
 
 export function DeleteAccountCard() {
@@ -20,7 +20,7 @@ export function DeleteAccountCard() {
   };
   return <>
     <Card style={{ padding: 20, gap: 13 }}>
-      <T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: 18 }}>Delete your account</T>
+      <T accessibilityRole="header" style={{ fontWeight: '600', fontSize: 18 }}>Delete your account</T>
       <T style={body}>Permanently remove your account, profile, tutor applications, uploaded transcripts, and line reports.</T>
       <View style={{ alignItems: 'flex-start' }}><Button secondary label="Delete account" icon="trash-2" disabled={busy} onPress={() => { setError(''); setConfirming(true); }} /></View>
     </Card>
@@ -28,8 +28,8 @@ export function DeleteAccountCard() {
       <View style={{ flex: 1, justifyContent: 'center', padding: 24, backgroundColor: 'rgba(24,20,31,0.55)' }}>
         <View accessibilityViewIsModal style={{ width: '100%', maxWidth: 460, maxHeight: '90%', alignSelf: 'center', borderRadius: 22, backgroundColor: c.surface, overflow: 'hidden' }}>
           <ScrollView contentContainerStyle={{ padding: 24, gap: 18 }}>
-            <T muted style={{ fontFamily: f.medium, fontSize: 12 }}>Everything Laurier</T>
-            <T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: 25 }}>Permanently delete your account?</T>
+            <T muted style={{ fontWeight: '500', fontSize: 12 }}>Everything Laurier</T>
+            <T accessibilityRole="header" style={{ fontWeight: '600', fontSize: 25 }}>Permanently delete your account?</T>
             <T style={body}>Deletion is permanent and irreversible. Once confirmed, your account, profile, tutor applications, transcript files, and line reports are removed from the live app. You will be signed out on all devices. Saved items on this device will also be cleared.</T>
             <T muted style={{ fontSize: 12, lineHeight: 20 }}>Limited provider security logs and backups follow the retention terms in the privacy policy. Copies already received by other students cannot be recalled.</T>
             {!!error && <T accessibilityRole="alert" style={{ color: c.error }}>{error}</T>}

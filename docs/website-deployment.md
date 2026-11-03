@@ -33,3 +33,6 @@ Legal/privacy update, October 17, 2026: public privacy v2026-10-17, terms, cooki
 Licence inventory refresh: Sites version 9 includes the updated open-source notices for the patched decoder and UUID dependency. Source 9daf0ecdf9b4709c70a020ce87d7d54ae96601c7; saved version appgprj_6ac97fe38ea88191914df8b0e70ef9dc~appgver_7c4786a29bf08191927b3f5804560916; deployment appgdep_6ad3bc04c8d88191897dc2cb0478c477 succeeded.
 
 Retention wording clarification: Sites version 10 explains the daily cleanup grace period for new usage counters. Source 49999441eaca715f75435c53d0d991e80ee7d8b9; saved version appgprj_6ac97fe38ea88191914df8b0e70ef9dc~appgver_c0202ad7afec8191b88921daaabc279a; deployment appgdep_6ad3bd198c688191ad0145fbc40ffcba succeeded.
+
+
+November 3, 2026: privacy policy v2026-11-03 discloses optional venue choices, private notification tokens, Expo/APNs/FCM delivery, retention and off/export controls. Sites version 14 deployed privacy source 115339c655e89d3f04a9405dad10c35379b32dbb; version 15 refreshed open-source notices from source 40161d7d9cec5f54adc2abdd43359c3fd2ad3a56. Deployment appgdep_6aea3f28e6f88191939bcf77074c4327 succeeded. The returned Site URL is https://everything-laurier.sajjadnajarali.chatgpt.site; the existing custom domain remains https://everythinglaurier.ca. Public audience and DNS were preserved.

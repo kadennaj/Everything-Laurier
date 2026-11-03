@@ -1,10 +1,10 @@
 {
-  "version": "2026-10-21",
+  "version": "2026-11-03",
   "sections": [
     {
       "title": "About this policy",
       "paragraphs": [
-        "Effective October 21, 2026 · Version 2026-10-21",
+        "Effective November 3, 2026 · Version 2026-11-03",
         "Everything Laurier is an independently operated student app for life around Laurier Waterloo, with an information and support website. It is not an official Wilfrid Laurier University service. Kaden Najarali is the operator and is responsible for the personal information described here. For access, correction, deletion, complaints, or any privacy question, contact everythinglaurier@gmail.com."
       ]
     },
@@ -15,6 +15,14 @@
         "You can browse public campus information and use the map without an account. Signing in uses your email address to deliver a one-time verification code. Supabase maintains an account identifier, verification status, session tokens, and ordinary connection/security information such as IP address and user agent. Resend processes the recipient email, email content, and delivery information to deliver sign-in messages. We do not use these messages for marketing. Email verification confirms control of an inbox, not current university enrolment.",
         "Student profiles contain the name and program you enter, and an optional year and introduction. Profiles are private by default. If you enable discovery with a verified email, your name, program, optional year and introduction, and verified email become visible to other signed-in users. Opted-in profiles and edits stay hidden from other students until the operator checks and approves them. The operator can read submitted profile fields for this review; no external screening service receives them. You can turn discovery off in Profile → Edit your profile. Copies already received by others cannot be recalled.",
         "Program searches in the student directory and course searches in the tutor directory are sent to Supabase to return matching results. Requests may appear in ordinary operational logs. We do not maintain a separate personal search-history feature."
+      ]
+    },
+    {
+      "title": "Optional venue notifications",
+      "paragraphs": [
+        "Nightlife notifications are off by default and intended for people aged 19 or older. If you choose venue alerts in the installed app, we ask for operating-system notification permission and save your selected venue accounts, enabled choice, 19-or-older confirmation, account identifier, and update time. We do not collect a birth date for this choice. A notification device token, platform, session reference, and registration/last-seen times are stored privately in Supabase to deliver alerts to your signed-in devices.",
+        "Expo Push Service and Apple Push Notification service (iOS), or Google Firebase Cloud Messaging (Android), process the device token, a generic venue post alert, and the venue/post identifiers used to open the feed. Notification delivery does not include your email, transcript, profile text, map position or location history. Lock-screen previews may reveal the venue you follow; control previews in your device settings. These alerts are not email marketing and do not subscribe you to messages from venues.",
+        "Notifications follow periodic feed imports and can take several hours; they are not immediate Instagram alerts. We limit alerts to six attempts per device per UTC day and a service-wide daily cap. Delivery is best effort. Queue and delivery records are removed after seven days, and inactive device registrations after 60 days. Turning alerts off in Notifications removes your registered notification devices and queued deliveries. Signing out unregisters the current session/device; deleting your account removes the related preferences, tokens and records. You can change followed venues and disable alerts in Nightlife → Venue notifications, or revoke permission in device settings. Account exports show notification preferences and registration metadata, excluding the raw delivery token and session reference."
       ]
     },
     {

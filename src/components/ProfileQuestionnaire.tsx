@@ -81,7 +81,7 @@ export function ProfileQuestionnaire({ editing = false }: { editing?: boolean })
           {answers.discoverable && <Icon name="check" size={16} color={c.surface} />}
         </View>
         <View style={{ flex: 1, gap: 5 }}>
-          <T style={{ fontFamily: f.bold }}>Let students find and contact me</T>
+          <T style={{ fontWeight: '600' }}>Let students find and contact me</T>
           <T muted style={{ lineHeight: 20, fontSize: 12 }}>After owner review, this shares your name, program, year, introduction, and verified email ({session.user.email}) with signed-in students. New profiles and edits stay hidden until approved. Leave this off to stay private.</T>
         </View>
       </Pressable>
@@ -109,7 +109,7 @@ function Field({ label, helper, value, onChange, placeholder, maxLength, multili
 
 const styles = StyleSheet.create({
   card: { padding: 24, gap: 24 },
-  label: { fontFamily: f.medium, fontSize: 17 },
+  label: { fontWeight: '500', fontSize: 17 },
   input: { minHeight: 52, paddingHorizontal: 14, paddingVertical: 12, borderWidth: 1, borderColor: '#89818F',
     borderRadius: 14, backgroundColor: c.background, color: c.ink, fontFamily: f.regular, fontSize: 17 },
   discover: { flexDirection: 'row', gap: 12, padding: 16, borderWidth: 1, borderColor: c.border, borderRadius: 12 },

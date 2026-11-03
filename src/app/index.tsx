@@ -6,12 +6,12 @@ import React, { useState } from 'react';
 import { Image, Pressable, View } from 'react-native';
 import { ClubCard, EventCard } from '../components/cards';
 import { InstagramFeed } from '../components/InstagramFeed';
-import { Button, Card, Chips, Empty, Eyebrow, Icon, IconName, SectionTitle, T, s } from '../components/ui';
+import { Button, Card, Chips, Empty, Icon, IconName, SectionTitle, T, s } from '../components/ui';
 import { CalendarStatus } from '../components/CalendarStatus';
 import { clubs } from '../data/content';
 import { useOfficialEvents } from '../lib/official-events';
 import { useLocal } from '../lib/state';
-import { colors as c, fonts as f, radii } from '../lib/theme';
+import { colors as c, radii } from '../lib/theme';
 
 export default function Discover() {
   const { width, fontScale } = useContentLayout();
@@ -30,18 +30,22 @@ export default function Discover() {
     { label: 'Saved items', sub: saved.length ? `${saved.length} kept for later` : 'Your places & plans', icon: 'bookmark', path: '/saved' },
   ];
   return <>
-    <View style={{ gap: 9 }}><Eyebrow>WATERLOO CAMPUS</Eyebrow><T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: compact ? 30 : 36, lineHeight: compact ? 38 : 44, letterSpacing: -0.6 }}>Your campus</T></View>
-    <Pressable accessibilityRole="button" accessibilityLabel="Search rooms, buildings, clubs and events" onPress={() => router.push('/search')} style={({ pressed }) => [s.row, { minHeight: 60, padding: 17, gap: 13, borderRadius: radii.control, backgroundColor: pressed ? c.pressed : c.surface, borderWidth: 1, borderColor: c.border }]}>
-      <Icon name="search" color={c.purple} /><T muted style={{ flex: 1, fontSize: 17, lineHeight: 24 }}>Search rooms, clubs, events…</T><Icon name="chevron-right" color={c.muted} size={18} />
+    <View style={{ minHeight: compact ? 360 : 440, borderRadius: radii.hero, overflow: 'hidden', backgroundColor: c.purpleDark, justifyContent: 'flex-end' }}>
+      <Image source={require('../../assets/images/campus.jpg')} accessible={false} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} resizeMode="cover" />
+      <LinearGradient colors={['#10101420', '#101014D9']} style={{ position: 'absolute', inset: 0 }} />
+      <View style={{ padding: compact ? 28 : 44, gap: 18, alignItems: 'flex-start' }}>
+        <T style={{ color: '#FFFFFF', fontWeight: '500', fontSize: 15 }}>LAURIER WATERLOO</T>
+        <T accessibilityRole="header" style={{ color: '#FFFFFF', fontWeight: '700', fontSize: compact ? 44 : 66, lineHeight: compact ? 48 : 70, letterSpacing: -1.8 }}>Your campus.{'\n'}Made simple.</T>
+        <T style={{ color: '#FFFFFF', fontSize: 18, lineHeight: 27 }}>Rooms, clubs and what’s next.</T>
+        <Button label="Explore the map" icon="arrow-up-right" onPress={() => router.push('/map')} style={{ backgroundColor: c.purple }} />
+      </View>
+    </View>
+    <Pressable accessibilityRole="button" accessibilityLabel="Search rooms, buildings, clubs and events" onPress={() => router.push('/search')} style={({ pressed }) => [s.row, { minHeight: 58, padding: 18, gap: 12, borderRadius: 18, backgroundColor: pressed ? c.pressed : c.surface }]}>
+      <Icon name="search" color={c.muted} /><T muted style={{ flex: 1, fontSize: 17 }}>Search campus</T><Icon name="chevron-right" color={c.muted} size={18} />
     </Pressable>
-    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>{shortcuts.map((item, index) => <Pressable key={item.path} accessibilityRole="button" accessibilityLabel={item.label} accessibilityHint={item.sub} onPress={() => router.push(item.path)} style={({ pressed }) => ({ flexBasis: singleColumn ? '100%' : compact ? '46%' : '22%', flexGrow: 1, minHeight: 128, borderWidth: 1, borderColor: index === 0 ? '#D7C9E9' : c.border, borderRadius: 20, padding: 18, backgroundColor: pressed ? c.pressed : index === 0 ? c.lavender : c.surface, gap: 14 })}>
-      <View style={[s.row, { justifyContent: 'space-between' }]}><Icon name={item.icon} size={24} color={c.purple} /><Icon name="chevron-right" size={16} color={c.muted} /></View><View style={{ gap: 5 }}><T style={{ fontFamily: f.bold, fontSize: 17, lineHeight: 23 }}>{item.label}</T><T muted style={{ fontSize: 14, lineHeight: 21 }}>{item.sub}</T></View>
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>{shortcuts.map(item => <Pressable key={item.path} accessibilityRole="button" accessibilityLabel={item.label} accessibilityHint={item.sub} onPress={() => router.push(item.path)} style={({ pressed }) => ({ flexBasis: singleColumn ? '100%' : compact ? '46%' : '22%', flexGrow: 1, minHeight: 110, padding: 18, borderRadius: 22, backgroundColor: pressed ? c.pressed : c.surface, gap: 14 })}>
+      <Icon name={item.icon} size={25} color={c.purple} /><T style={{ fontWeight: '600', fontSize: 17 }}>{item.label}</T>
     </Pressable>)}</View>
-    <Pressable accessibilityRole="button" accessibilityLabel={`Explore ${clubs.length} clubs and communities`} onPress={() => router.push('/clubs')} style={({ pressed }) => ({ minHeight: 184, borderRadius: radii.hero, overflow: 'hidden', backgroundColor: c.purpleDark, opacity: pressed ? 0.85 : 1 })}>
-      <Image source={require('../../assets/images/campus.jpg')} accessible={false} style={{ position: 'absolute', right: 0, width: '100%', height: '100%' }} resizeMode="cover" />
-      <LinearGradient colors={['#292136F5', '#292136DD', '#292136CC']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={{ position: 'absolute', inset: 0 }} />
-      <View style={{ padding: compact ? 24 : 30, gap: 10, alignItems: 'flex-start' }}><T style={{ fontFamily: f.bold, color: c.surface, fontSize: 27, lineHeight: 35, letterSpacing: -0.4 }}>Explore clubs</T><View style={[s.row, { gap: 12, flexWrap: 'wrap' }]}><T style={{ color: c.surface, fontSize: 16, lineHeight: 24 }}>Explore {clubs.length} clubs & communities</T><Icon name="arrow-right" size={20} color={c.surface} /></View></View>
-    </Pressable>
     <View style={{ gap: 18 }}>
       <SectionTitle title="Around campus" subtitle="Events from Laurier’s official calendar." />
       <Chips items={['Upcoming', 'Saved']} value={filter} onChange={value => { setFilter(value); setLimit(3); }} />

@@ -3,7 +3,7 @@ import { ActivityIndicator, View } from 'react-native';
 import { useFocusEffect } from 'expo-router';
 import { ownerRequest } from '../lib/tutoring';
 import type { StudentProfile } from '../lib/student-profiles';
-import { colors as c, fonts as f } from '../lib/theme';
+import { colors as c } from '../lib/theme';
 import { Badge, Button, Card, Empty, Pill, T } from './ui';
 import { ReviewSheet } from './ReviewSheet';
 
@@ -39,7 +39,7 @@ export function ProfileReviewQueue() {
     {!!success && <T accessibilityLiveRegion="polite" style={{ color: c.green }}>{success}</T>}
     {loading ? <ActivityIndicator color={c.purple} /> : rows.length === 0 ? <Card><Empty icon="check-circle" title="This queue is clear" description="Shared profiles matching this status appear here." /></Card> : rows.map(profile => <Card key={profile.id} style={{ padding: 22, gap: 12 }}>
       <Badge label={profile.moderation_status === 'pending' ? 'Awaiting review' : profile.moderation_status} />
-      <T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: 21 }}>{profile.display_name}</T>
+      <T accessibilityRole="header" style={{ fontWeight: '600', fontSize: 21 }}>{profile.display_name}</T>
       <T muted>{profile.program}</T>
       <Button label="Review profile" onPress={() => { setSelected(profile); setChecked(false); setError(''); }} />
     </Card>)}
@@ -49,9 +49,9 @@ export function ProfileReviewQueue() {
       <Button secondary label="Next page" disabled={loading || rows.length < 100} onPress={() => { setLoading(true); setPage(v => v + 1); }} />
     </View>
     <ReviewSheet visible={!!selected} onClose={() => { if (!busy) setSelected(null); }} maxWidth={640}>
-      <T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: 24 }}>Review student profile</T>
+      <T accessibilityRole="header" style={{ fontWeight: '600', fontSize: 24 }}>Review student profile</T>
       {selected && <>
-        {[['Name', selected.display_name], ['Program', selected.program], ['Year', selected.year_label || 'Not supplied'], ['Introduction', selected.bio || 'Not supplied'], ['Verified contact email', selected.contact_email ?? 'Not available']].map(([label, value]) => <View key={label} style={{ gap: 6 }}><T style={{ fontFamily: f.bold }}>{label}</T><T selectable>{value}</T></View>)}
+        {[['Name', selected.display_name], ['Program', selected.program], ['Year', selected.year_label || 'Not supplied'], ['Introduction', selected.bio || 'Not supplied'], ['Verified contact email', selected.contact_email ?? 'Not available']].map(([label, value]) => <View key={label} style={{ gap: 6 }}><T style={{ fontWeight: '600' }}>{label}</T><T selectable>{value}</T></View>)}
         <Pill label={checked ? 'Profile checked' : 'I checked every field against the community rules'} active={checked} onPress={() => setChecked(v => !v)} />
         {!!error && <T accessibilityRole="alert" style={{ color: c.error }}>{error}</T>}
         {selected.moderation_status !== 'approved' && <Button label="Approve profile" loading={busy} disabled={!checked} onPress={() => { void review('approved'); }} />}

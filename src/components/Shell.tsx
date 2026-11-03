@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { AccessibilityInfo, Animated, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLocal } from '../lib/state';
-import { colors as c, fonts as f } from '../lib/theme';
+import { colors as c } from '../lib/theme';
 import { navigationSection, primaryNavigation, screenTitle } from '../lib/navigation';
 import { Icon, IconButton, Search, T } from './ui';
 import { BrandLogo } from './BrandLogo';
@@ -52,11 +52,11 @@ export function Shell({ children }: { children: React.ReactNode }) {
   return <View style={[styles.root, { paddingTop: insets.top, paddingLeft: insets.left, paddingRight: insets.right }]}>
     {regular && <View style={[styles.sidebar, { paddingBottom: Math.max(insets.bottom, 16) }]}>
       <Pressable accessibilityRole="button" accessibilityLabel="Everything Laurier home" onPress={() => router.navigate('/')} style={({ pressed }) => [styles.brand, pressed && styles.pressed]}>
-        <BrandLogo size={54} decorative /><View style={{ flex: 1 }}><T style={{ fontSize: 14, lineHeight: 20, fontFamily: f.medium }}>Everything</T><T style={{ fontSize: 22, lineHeight: 28, fontFamily: f.bold }}>Laurier</T></View>
+        <BrandLogo size={42} decorative /><View style={{ flex: 1 }}><T style={{ fontSize: 14, lineHeight: 20, fontWeight: '500' }}>Everything</T><T style={{ fontSize: 22, lineHeight: 28, fontWeight: '600' }}>Laurier</T></View>
       </Pressable>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ gap: 5, paddingBottom: 24 }}>
         {primaryNavigation.map(item => <Pressable key={item.path} accessibilityRole="button" accessibilityState={{ selected: current === item.label }} onPress={() => router.navigate(item.path)} style={({ pressed }) => [styles.sideLink, current === item.label && styles.selected, pressed && styles.pressed]}>
-          <Icon name={item.icon} size={21} color={current === item.label ? c.purple : c.muted} /><T style={[styles.sideText, current === item.label && { color: c.purple, fontFamily: f.bold }]}>{item.label === 'You' ? 'Profile' : item.label}</T>
+          <Icon name={item.icon} size={21} color={current === item.label ? c.purple : c.muted} /><T style={[styles.sideText, current === item.label && { color: c.purple, fontWeight: '600' }]}>{item.label === 'You' ? 'Profile' : item.label}</T>
         </Pressable>)}
         <T style={styles.groupLabel}>CAMPUS</T>
         {services.map(item => <Pressable key={item.path} accessibilityRole="button" accessibilityState={{ selected: pathname === item.path }} onPress={() => router.navigate(item.path)} style={({ pressed }) => [styles.sideLink, pathname === item.path && styles.selected, pressed && styles.pressed]}>
@@ -69,7 +69,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
       <View style={[styles.topbar, { paddingHorizontal: horizontalPadding }]}>
         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', minWidth: 0, gap: 8 }}>
           {!primary && <IconButton name="chevron-left" label="Back" onPress={goBack} />}
-          {!regular && primary ? <Pressable accessibilityRole="button" accessibilityLabel="Everything Laurier home" onPress={() => router.navigate('/')} style={({ pressed }) => [styles.mobileBrand, pressed && styles.pressed]}><BrandLogo size={40} decorative /><T style={{ fontFamily: f.bold, fontSize: 17, lineHeight: 23, flexShrink: 1 }}>Everything Laurier</T></Pressable> : <T style={{ fontFamily: f.medium, fontSize: 17, lineHeight: 24, flexShrink: 1 }}>{title}</T>}
+          {!regular && primary ? <Pressable accessibilityRole="button" accessibilityLabel="Everything Laurier home" onPress={() => router.navigate('/')} style={({ pressed }) => [styles.mobileBrand, pressed && styles.pressed]}><BrandLogo size={30} decorative /><T style={{ fontWeight: '600', fontSize: 17, lineHeight: 23, flexShrink: 1 }}>Everything Laurier</T></Pressable> : <T style={{ fontWeight: '500', fontSize: 17, lineHeight: 24, flexShrink: 1 }}>{title}</T>}
         </View>
         {pathname !== '/search' && (regular ? <Search value={query} onChange={setQuery} onSubmit={goSearch} placeholder="Search campus" style={{ width: width >= 1280 ? 300 : 240, backgroundColor: c.background }} /> : <IconButton name="search" label="Search campus" onPress={() => router.push('/search')} />)}
       </View>
@@ -81,7 +81,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
           {primaryNavigation.map(item => {
             const active = current === item.label;
             return <Pressable key={item.path} accessibilityRole="tab" accessibilityLabel={item.label} aria-selected={active} accessibilityState={{ selected: active }} onPress={() => router.navigate(item.path)} style={({ pressed }) => [styles.bottomItem, { minWidth: Math.max(60, 58 * fontScale), flexDirection: height < 450 && width > 600 ? 'row' : 'column' }, pressed && styles.pressed]}>
-              <View style={[styles.bottomIcon, active && styles.selected]}><Icon name={item.icon} size={22} color={active ? c.purple : c.muted} /></View><T style={{ color: active ? c.purple : c.muted, fontFamily: active ? f.bold : f.medium, fontSize: 12, lineHeight: 18, textAlign: 'center' }}>{item.label}</T>
+              <View style={[styles.bottomIcon, active && styles.selected]}><Icon name={item.icon} size={22} color={active ? c.purple : c.muted} /></View><T style={{ color: active ? c.purple : c.muted, fontWeight: active ? '600' : '500', fontSize: 12, lineHeight: 18, textAlign: 'center' }}>{item.label}</T>
             </Pressable>;
           })}
         </ScrollView>
@@ -98,11 +98,11 @@ const styles = StyleSheet.create({
   brand: { flexDirection: 'row', alignItems: 'center', minHeight: 80, paddingHorizontal: 9, gap: 10, marginBottom: 24 },
   sideLink: { minHeight: 52, flexDirection: 'row', alignItems: 'center', gap: 12, paddingHorizontal: 14, paddingVertical: 10, borderRadius: 13 },
   selected: { backgroundColor: c.lavender },
-  sideText: { flex: 1, color: c.muted, fontFamily: f.medium, fontSize: 16, lineHeight: 23 },
-  groupLabel: { color: c.muted, fontSize: 12, lineHeight: 18, fontFamily: f.bold, letterSpacing: 0.8, paddingHorizontal: 14, marginTop: 26, marginBottom: 8 },
-  topbar: { minHeight: 68, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 10, paddingVertical: 6, backgroundColor: c.surface, borderBottomWidth: 1, borderBottomColor: c.border },
+  sideText: { flex: 1, color: c.muted, fontWeight: '500', fontSize: 16, lineHeight: 23 },
+  groupLabel: { color: c.muted, fontSize: 12, lineHeight: 18, fontWeight: '600', letterSpacing: 0.8, paddingHorizontal: 14, marginTop: 26, marginBottom: 8 },
+  topbar: { minHeight: 60, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 10, paddingVertical: 6, backgroundColor: c.surface, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: c.border },
   mobileBrand: { minHeight: 48, flexDirection: 'row', alignItems: 'center', gap: 10, flexShrink: 1 },
-  bottomNav: { backgroundColor: c.surface, borderTopWidth: 1, borderTopColor: c.border, paddingTop: 6 },
+  bottomNav: { backgroundColor: c.surface, borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: c.border, paddingTop: 6 },
   bottomItem: { flex: 1, minHeight: 56, alignItems: 'center', justifyContent: 'center', gap: 2, paddingHorizontal: 5, paddingVertical: 3 },
   bottomIcon: { width: 48, height: 30, borderRadius: 15, alignItems: 'center', justifyContent: 'center' },
   toast: { position: 'absolute', alignSelf: 'center', backgroundColor: c.purpleDark, paddingHorizontal: 18, paddingVertical: 14, borderRadius: 14, flexDirection: 'row', alignItems: 'center', gap: 10, maxWidth: '90%' },

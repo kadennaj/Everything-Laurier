@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, View } from 'react-native';
 import Svg, { Circle, G, Path, Rect, Text as SvgText } from 'react-native-svg';
 import { Building, buildings } from '../data/content';
-import { colors as c, fonts as f } from '../lib/theme';
+import { colors as c } from '../lib/theme';
 import { Icon, T, s } from './ui';
 
 export function CampusMap({ selected, onSelect }: { selected: Building; onSelect: (b: Building) => void }) {
@@ -18,7 +18,7 @@ export function CampusMap({ selected, onSelect }: { selected: Building; onSelect
       <SvgText x="391" y="329" fill="#8C9385" fontSize="10" letterSpacing="2" transform="rotate(-8 391 329)">UNIVERSITY AVENUE</SvgText>
       <SvgText x="541" y="270" fill="#919887" fontSize="10" letterSpacing="2" transform="rotate(88 541 270)">KING STREET</SvgText>
     </Svg>
-    {buildings.map(building => <Pressable key={building.id} onPress={() => onSelect(building)} accessibilityRole="button" accessibilityLabel={`Select ${building.name}`} accessibilityState={{ selected: selected.id === building.id }} style={({ pressed }) => ({ position: 'absolute', left: `${building.x}%`, top: `${building.y}%`, marginLeft: -24, marginTop: -24, alignItems: 'center', justifyContent: 'center', minWidth: 48, minHeight: 48, borderRadius: 16, paddingHorizontal: 9, backgroundColor: selected.id === building.id ? c.purple : '#FFF', borderWidth: 3, borderColor: selected.id === building.id ? '#CABBDC' : '#FFFFFF', boxShadow: '0px 3px 8px rgba(55,50,45,0.12)', opacity: pressed ? 0.7 : 1 })}><T style={{ color: selected.id === building.id ? '#FFF' : c.purple, fontFamily: f.bold, fontSize: 12 }}>{building.id}</T></Pressable>)}
+    {buildings.map(building => <Pressable key={building.id} onPress={() => onSelect(building)} accessibilityRole="button" accessibilityLabel={`Select ${building.name}`} accessibilityState={{ selected: selected.id === building.id }} style={({ pressed }) => ({ position: 'absolute', left: `${building.x}%`, top: `${building.y}%`, marginLeft: -24, marginTop: -24, alignItems: 'center', justifyContent: 'center', minWidth: 48, minHeight: 48, borderRadius: 16, paddingHorizontal: 9, backgroundColor: selected.id === building.id ? c.purple : '#FFF', borderWidth: 3, borderColor: selected.id === building.id ? '#CABBDC' : '#FFFFFF', boxShadow: '0px 3px 8px rgba(55,50,45,0.12)', opacity: pressed ? 0.7 : 1 })}><T style={{ color: selected.id === building.id ? '#FFF' : c.purple, fontWeight: '600', fontSize: 12 }}>{building.id}</T></Pressable>)}
     <View style={[s.row, { position: 'absolute', left: 13, top: 13, padding: 9, borderRadius: 9, gap: 6, backgroundColor: '#FFFFFFEA' }]}><Icon name="map-pin" color={c.green} size={13} /><T style={{ fontSize: 10, color: c.green }}>WATERLOO CAMPUS</T></View>
     <View style={{ position: 'absolute', right: 13, bottom: 13, padding: 7, borderRadius: 7, backgroundColor: '#FFFFFFEA' }}><T style={{ fontSize: 9, color: '#666C60' }}>Illustrated guide · not to scale</T></View>
   </View>;

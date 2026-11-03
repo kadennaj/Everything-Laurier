@@ -1,9 +1,11 @@
-import { useFonts, DMSans_400Regular, DMSans_500Medium, DMSans_600SemiBold } from '@expo-google-fonts/dm-sans';
+import { NightlifeNotifications } from '../components/NightlifeNotifications';
+import { Welcome } from '../components/Welcome';
+import { useFonts } from 'expo-font';
 import { Feather } from '@expo/vector-icons';
 import { Slot } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { ActivityIndicator, Text, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Shell } from '../components/Shell';
 import { LocalState } from '../lib/state';
@@ -19,7 +21,7 @@ function AccountRoutes() {
 }
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({ DM: DMSans_400Regular, 'DM-Medium': DMSans_500Medium, 'DM-Semibold': DMSans_600SemiBold, ...Feather.font });
-  if (!loaded && !error) return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 18, backgroundColor: colors.background }}><BrandLogo size={160} /><ActivityIndicator color={colors.purple} /><Text style={{ color: colors.purple }}>Your campus, a little closer.</Text></View>;
-  return <SafeAreaProvider><LocalState><AuthProvider><OfficialEventsProvider><StatusBar style="dark" /><Shell><AccountRoutes /></Shell></OfficialEventsProvider></AuthProvider></LocalState></SafeAreaProvider>;
+  const [loaded, error] = useFonts(Feather.font);
+  if (!loaded && !error) return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 18, backgroundColor: colors.background }}><BrandLogo size={160} /><ActivityIndicator color={colors.purple} /></View>;
+  return <SafeAreaProvider><LocalState><AuthProvider><OfficialEventsProvider><StatusBar style="dark" /><Shell><AccountRoutes /></Shell><Welcome /><NightlifeNotifications /></OfficialEventsProvider></AuthProvider></LocalState></SafeAreaProvider>;
 }

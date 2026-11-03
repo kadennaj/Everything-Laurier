@@ -6,7 +6,7 @@ import { ReportContent } from '../../components/ReportContent';
 import { changeProfileBlock } from '../../lib/moderation';
 import { useAuth } from '../../lib/auth';
 import { DirectoryProfile, getDiscoverableProfile } from '../../lib/student-profiles';
-import { colors as c, fonts as f } from '../../lib/theme';
+import { colors as c } from '../../lib/theme';
 
 export default function StudentPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -42,15 +42,15 @@ export default function StudentPage() {
     <Card style={{ padding: 30, gap: 23 }}>
       <View style={[s.row, { justifyContent: 'space-between' }]}>
         <View style={{ width: 82, height: 82, borderRadius: 27, backgroundColor: c.peach, alignItems: 'center', justifyContent: 'center' }}>
-          <T style={{ fontFamily: f.bold, fontSize: 32, color: c.purple }}>{student.display_name.slice(0, 1).toUpperCase()}</T>
+          <T style={{ fontWeight: '600', fontSize: 32, color: c.purple }}>{student.display_name.slice(0, 1).toUpperCase()}</T>
         </View>
         <Badge label="STUDENT PROFILE" />
       </View>
-      <View style={{ gap: 9 }}><T accessibilityRole="header" style={{ fontFamily: f.bold, fontSize: 32, lineHeight: 42 }}>{student.display_name}</T>
+      <View style={{ gap: 9 }}><T accessibilityRole="header" style={{ fontWeight: '600', fontSize: 32, lineHeight: 42 }}>{student.display_name}</T>
         <T muted>{student.program}{student.year_label ? ` · ${student.year_label}` : ''}</T></View>
       {!!student.bio && <><Eyebrow>A LITTLE ABOUT ME</Eyebrow><T style={body}>{student.bio}</T></>}
       {!!student.contact_email?.trim() && <View style={{ padding: 19, backgroundColor: c.lavender, borderRadius: 16, gap: 12 }}>
-        <T style={{ fontFamily: f.bold }}>Reach out</T>
+        <T style={{ fontWeight: '600' }}>Reach out</T>
         <T muted style={{ lineHeight: 21 }}>This student chose to share their verified email with signed-in students.</T>
         {!!student.contact_email && <Button label="Send an email" icon="mail" onPress={() => {
           void Linking.openURL(`mailto:${student.contact_email}`).catch(() => setContactError('Your email app could not open.'));

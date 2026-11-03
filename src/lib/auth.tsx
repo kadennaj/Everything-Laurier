@@ -1,3 +1,4 @@
+import { notificationRequest } from './notifications';
 import type { Session } from '@supabase/supabase-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
@@ -125,6 +126,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signOut = () => perform(async () => {
     if (!supabase) return;
     try {
+      await notificationRequest('unregister').catch(() => {});
       const { error } = await supabase.auth.signOut({ scope: 'local' });
       if (error) throw error;
       setSession(null);
