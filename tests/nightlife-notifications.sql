@@ -12,6 +12,7 @@ do $$ begin begin perform public.nightlife_notifications('save','{"enabled":true
 do $$ begin begin perform public.nightlife_notifications('save','{"enabled":true,"venues":["rarenightclub"],"age_confirmed":false}'); raise exception 'Expected age denial'; exception when raise_exception then if sqlerrm='Expected age denial' then raise; end if; end; end $$;
 select public.nightlife_notifications('save','{"enabled":true,"venues":["rarenightclub"],"age_confirmed":true}');
 select public.nightlife_notifications('register','{"token":"ExpoPushToken[syntheticTestToken70]","platform":"ios"}');
+select pg_temp.assert_true((public.nightlife_notifications('register','{"token":"ExpoPushToken[syntheticTestToken70]","platform":"ios"}')->>'registered')='true','repeat registration is idempotent');
 do $$ begin begin perform token from private.nightlife_push_devices; raise exception 'Expected denial'; exception when insufficient_privilege then null; end; end $$;
 do $$ begin begin perform public.claim_nightlife_push(repeat('a',64)); raise exception 'Expected denial'; exception when insufficient_privilege then null; end; end $$;
 reset role;
