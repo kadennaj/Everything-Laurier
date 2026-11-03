@@ -16,7 +16,7 @@ The database enforces a maximum of 5 devices/account, 6 attempted alerts/device/
 
 The Edge worker checks a scheduler-secret SHA-256 digest before database access; SQL validates the same credential and service role. Vault holds the actual scheduler credential. If rotating it, update the server-only digest in the worker and the private settings hash together; never put the secret in source or app configuration. Provider URLs are fixed. Attempts are recorded before sends; ambiguous timeouts are not resent. Expo receipts are checked for delivery errors, and DeviceNotRegistered removes a token. Provider handoff is not proof that a person viewed an alert.
 
-Records expire after seven days and inactive devices after 60 days through daily cleanup. The dispatcher cron starts paused and global delivery starts disabled, pending a signed physical-device test. To pause a live system, set private.nightlife_push_settings.enabled=false and pause dispatch-nightlife-notifications in cron. Keep cleanup active.
+Records expire after seven days and inactive devices after 60 days through daily cleanup. The initial migration starts paused. The activation migration enables delivery after the signed physical-device test. To pause a live system, set private.nightlife_push_settings.enabled=false and pause dispatch-nightlife-notifications in cron. Keep cleanup active.
 
 ## Verification
 
@@ -28,6 +28,8 @@ The local iPad simulator build was stopped when the Mac ran out of free disk spa
 
 ## Signed iPhone preview
 
-EAS build ad794f1f-56a2-4b3b-b0fa-c9b048a19893 finished successfully. Its signature verifies, with production APNs entitlement, Apple team JRCUQ9JQW6, iPad device-family support and scene support. iOS rejected an in-place upgrade across the old personal team WXAN8479VC; after the operator explicitly approved replacing the old app and resetting local choices, the app was removed, installed and launched successfully on the connected iPhone 15. Server-side registration is temporarily available for the owner’s test; scheduled delivery remains paused pending confirmation.
+EAS build ad794f1f-56a2-4b3b-b0fa-c9b048a19893 finished successfully. Its signature verifies, with production APNs entitlement, Apple team JRCUQ9JQW6, iPad device-family support and scene support. iOS rejected an in-place upgrade across the old personal team WXAN8479VC; after the operator explicitly approved replacing the old app and resetting local choices, the app was removed, installed and launched successfully on the connected iPhone 15. The owner confirmed the welcome/sign-in/permission flow, then received the labelled test notification and confirmed that tapping it opened the venue feed. Expo returned an accepted ticket. The activation migration enables scheduled delivery every five minutes; the feed itself retains its existing eight-hour import interval.
 
 Token registration now serializes by user and token and repeats ownership checks in the conflict update. Rollback-only SQL tests also verify idempotent refresh registration; no token can move between accounts through a competing upsert.
+
+Final rollout: private delivery setting enabled and dispatch-nightlife-notifications cron verified active at */5 * * * *. Delivery attempts remain subject to the per-device and global daily caps. No synthetic venue feed post was inserted for the physical-device test.
