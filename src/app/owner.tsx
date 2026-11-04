@@ -1,3 +1,4 @@
+import { VenueReviewQueue } from '../components/VenueReviewQueue';
 import { ProfileReviewQueue } from '../components/ProfileReviewQueue';
 import { ReviewSheet } from '../components/ReviewSheet';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
@@ -23,7 +24,7 @@ export default function OwnerDashboard() {
  const [reportDecision,setReportDecision]=useState<{report:ContentReport;decision:string}|null>(null);
  useFocusEffect(useCallback(()=>{setRevision(v=>v+1);},[]));
  useEffect(()=>{
-  if(!owner||tab==='Student profiles')return;let active=true;
+  if(!owner||tab==='Student profiles'||tab==='Venue posts')return;let active=true;
   void (tab==='Tutor applications'?ownerRequest<TutorApplication[]>('applications',{status,offset:page*100}).then(result=>{if(active)setApplications(result);}):ownerRequest<ContentReport[]>('reports',{status,offset:page*100}).then(result=>{if(active)setReports(result);}))
    .catch(problem=>{if(active)setError(problem.message);}).finally(()=>{if(active)setLoading(false);});
   return()=>{active=false;};
@@ -46,9 +47,9 @@ export default function OwnerDashboard() {
  if(!owner)return <Card><Empty icon="lock" title="Owner access only" description={session?'This account cannot access applications, transcripts, or the report queue.':'Sign in with the owner account to review applications and reports.'} action={<Button label={session?'Your account':'Sign in'} onPress={()=>router.push(session?'/profile':'/login')}/>}/></Card>;
  const count=tab==='Tutor applications'?applications.length:reports.length;
  return <>
-  <PageHeading eyebrow="PRIVATE · OWNER ONLY" title="Review desk" subtitle="Approve profiles and tutors, and review reports." action={tab==='Student profiles'?undefined:<Button secondary label="Refresh queue" icon="refresh-cw" loading={loading} onPress={()=>{setLoading(true);setError('');setRevision(v=>v+1);}}/>}/>
-  <Chips items={['Tutor applications','Student profiles','Content reports']} value={tab} onChange={changeTab}/>
-  {tab==='Student profiles'?<ProfileReviewQueue />:<>
+  <PageHeading eyebrow="PRIVATE · OWNER ONLY" title="Review desk" subtitle="Approve profiles and tutors, and review reports." action={tab==='Student profiles'||tab==='Venue posts'?undefined:<Button secondary label="Refresh queue" icon="refresh-cw" loading={loading} onPress={()=>{setLoading(true);setError('');setRevision(v=>v+1);}}/>}/>
+  <Chips items={['Tutor applications','Student profiles','Venue posts','Content reports']} value={tab} onChange={changeTab}/>
+  {tab==='Student profiles'?<ProfileReviewQueue />:tab==='Venue posts'?<VenueReviewQueue />:<>
   <SecurityUsage />
   <View style={{flexDirection:'row',gap:8,flexWrap:'wrap'}}>{(tab==='Tutor applications'?['pending','approved','rejected']:['open','resolved','dismissed']).map(item=><Pill key={item} label={item.charAt(0).toUpperCase()+item.slice(1)} active={status===item} onPress={()=>{if(item===status)return;setLoading(true);setStatus(item);setPage(0);}}/>)}</View>
   {!!error&&<T accessibilityRole="alert" style={{color:c.error,lineHeight:22}}>{error}</T>}{!!success&&<T accessibilityLiveRegion="polite" style={{color:c.green,lineHeight:22}}>{success}</T>}

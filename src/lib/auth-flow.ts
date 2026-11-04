@@ -74,3 +74,16 @@ export async function verifyEmailCode(auth: EmailAuth, email: string, value: str
     throw new Error(authErrorMessage(error, 'verify'));
   }
 }
+
+export const APP_REVIEW_EMAIL = 'everythinglaurier+appreview@gmail.com';
+export function isAppReviewEmail(value: string) { return value.trim().toLowerCase() === APP_REVIEW_EMAIL; }
+export async function signInReviewAccount(auth: Pick<SupabaseClient['auth'], 'signInWithPassword'>, email: string, password: string, captchaToken: string) {
+  const address = normalizeEmail(email);
+  if (!isAppReviewEmail(address)) throw Error('Use email verification for this account.');
+  if (password.length < 16 || password.length > 128) throw Error('Enter the supplied review password.');
+  if (!captchaToken.trim() || captchaToken.length > 4096) throw Error('Complete the security check before signing in.');
+  const { data, error } = await auth.signInWithPassword({ email: address, password, options: { captchaToken } });
+  if (error) throw Error(error.code === 'captcha_failed' ? 'Complete a new security check and try again.' : error.status === 429 ? 'Too many attempts. Wait before trying again.' : 'Could not sign in. Check the review credentials and try again.');
+  if (!data.session?.access_token || !data.session.user?.id || data.session.user.email?.toLowerCase() !== APP_REVIEW_EMAIL) throw Error('Sign-in could not be confirmed.');
+  return data.session;
+}

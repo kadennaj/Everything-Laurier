@@ -1,3 +1,5 @@
+> Historical October9 build notes. For the November3 signed store archive, current permissions and thirteen privacy manifests, see [release-verification-2026-11-03.md](release-verification-2026-11-03.md). Older no-location/no-photo and missing-Device-Hub statements below are superseded.
+
 # Native Release verification — October 9, 2026
 
 Result: arm64 iOS Simulator Release build succeeded with Xcode 27.0 / iOS Simulator SDK 27.0, code signing disabled. The bundled JavaScript/assets are present. This is a simulator build, not a signed distribution archive, App Store validation or runtime test.

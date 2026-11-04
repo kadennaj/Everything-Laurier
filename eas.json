@@ -11,7 +11,8 @@
       },
       "env": {
         "EXPO_PUBLIC_PRIVACY_POLICY_URL": "https://everythinglaurier.ca/privacy/"
-      }
+      },
+      "environment": "production"
     },
     "production": {
       "distribution": "store",
@@ -21,7 +22,8 @@
       },
       "env": {
         "EXPO_PUBLIC_PRIVACY_POLICY_URL": "https://everythinglaurier.ca/privacy/"
-      }
+      },
+      "autoIncrement": true
     },
     "preview": {
       "distribution": "internal",
@@ -31,6 +33,15 @@
       },
       "env": {
         "EXPO_PUBLIC_PRIVACY_POLICY_URL": "https://everythinglaurier.ca/privacy/"
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "everythinglaurier@gmail.com",
+        "ascAppId": "6830356811",
+        "appleTeamId": "JRCUQ9JQW6"
       }
     }
   }

@@ -1,7 +1,7 @@
 import { router, usePathname } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { AccessibilityInfo, Animated, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, useWindowDimensions, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLocal } from '../lib/state';
 import { colors as c } from '../lib/theme';
 import { navigationSection, primaryNavigation, screenTitle } from '../lib/navigation';
@@ -18,7 +18,10 @@ const services = [
 ] as const;
 
 export function Shell({ children }: { children: React.ReactNode }) {
-  const { width, height, fontScale } = useWindowDimensions();
+  const { fontScale } = useWindowDimensions();
+  // Native safe-area frames follow the actual app window during rotation and
+  // iPad resizing, including when a WebView is the active route.
+  const { width, height } = useSafeAreaFrame();
 
   const pathname = usePathname();
   const current = navigationSection(pathname);
@@ -49,7 +52,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
   const goBack = () => { if (router.canGoBack()) router.back(); else router.replace('/'); };
 
 
-  return <View style={[styles.root, { paddingTop: insets.top, paddingLeft: insets.left, paddingRight: insets.right }]}>
+  return <View style={[styles.root, { width, height, paddingTop: insets.top, paddingLeft: insets.left, paddingRight: insets.right }]}>
     {regular && <View style={[styles.sidebar, { paddingBottom: Math.max(insets.bottom, 16) }]}>
       <Pressable accessibilityRole="button" accessibilityLabel="Everything Laurier home" onPress={() => router.navigate('/')} style={({ pressed }) => [styles.brand, pressed && styles.pressed]}>
         <BrandLogo size={42} decorative /><View style={{ flex: 1 }}><T style={{ fontSize: 14, lineHeight: 20, fontWeight: '500' }}>Everything</T><T style={{ fontSize: 22, lineHeight: 28, fontWeight: '600' }}>Laurier</T></View>

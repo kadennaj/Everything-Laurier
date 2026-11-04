@@ -3,16 +3,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Keyboard, StyleSheet, TextInput, View } from 'react-native';
 import { Button, Card, Icon, T, body } from '../components/ui';
 import { useAuth } from '../lib/auth';
-import { AUTH_UNAVAILABLE, normalizeEmail } from '../lib/auth-flow';
+import { AUTH_UNAVAILABLE, isAppReviewEmail, normalizeEmail } from '../lib/auth-flow';
 import { CAPTCHA_MAX_AGE_MS } from '../lib/captcha';
 import { AuthCaptcha } from '../components/AuthCaptcha';
 import { colors as c, fonts as f } from '../lib/theme';
 import { BrandLogo } from '../components/BrandLogo';
 
 export default function Login() {
-  const { session, ready, configured, recoveryError, pendingEmail, cooldownEmail, resendAvailableAt, busy, sendCode, verifyCode, changeEmail } = useAuth();
+  const { session, ready, configured, recoveryError, pendingEmail, cooldownEmail, resendAvailableAt, busy, sendCode, verifyCode, reviewSignIn, changeEmail } = useAuth();
   const [email, setEmail] = useState(pendingEmail);
   const [code, setCode] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
   const [now, setNow] = useState(() => Date.now());
@@ -24,6 +25,7 @@ export default function Login() {
   const emailInput = useRef<TextInput>(null);
   const isVerifying = !!pendingEmail;
   const currentEmail = (pendingEmail || email).trim().toLowerCase();
+  const reviewing = !isVerifying && isAppReviewEmail(currentEmail);
   const remaining = currentEmail === cooldownEmail ? Math.max(0, Math.ceil((resendAvailableAt - now) / 1000)) : 0;
 
   useEffect(() => {
@@ -40,6 +42,7 @@ export default function Login() {
     setError(''); setNotice('');
     try {
       const destination = normalizeEmail(pendingEmail || email);
+      if (reviewing && password.length < 16) throw Error('Enter the supplied review password.');
       if (!captcha || captcha.email !== destination || Date.now() - captcha.at >= CAPTCHA_MAX_AGE_MS) {
         Keyboard.dismiss();
         setCaptcha(null); setCaptchaAttempt(value => value + 1); setCaptchaOpen(true); return;
@@ -47,6 +50,7 @@ export default function Login() {
       // Tokens are single-use, including requests that fail or hit a rate limit.
       const token = captcha.token;
       setCaptcha(null); setCaptchaOpen(false);
+      if (reviewing) { await reviewSignIn(destination, password, token); setPassword(''); return; }
       await sendCode(destination, token);
       setNow(Date.now());
       setCode('');
@@ -70,12 +74,12 @@ export default function Login() {
       <BrandLogo size={104} />
 
       <T accessibilityRole="header" style={styles.heading}>{isVerifying ? 'Check your inbox.' : 'Welcome to Laurier.'}</T>
-      <T style={[body, { textAlign: 'center' }]}>{isVerifying ? 'One small step, and you’re in.' : 'Sign in or create an account with your email. No password to remember.'}</T>
+      <T style={[body, { textAlign: 'center' }]}>{isVerifying ? 'One small step, and you’re in.' : reviewing ? 'Sign in with the review account supplied to Apple.' : 'Sign in or create an account with your email. No password to remember.'}</T>
     </View>
     <Card style={styles.form}>
       <View style={{ gap: 8 }}>
         <T style={{ fontWeight: '600', fontSize: 19 }}>{isVerifying ? 'Enter your verification code' : 'Let’s get you signed in'}</T>
-        <T muted style={{ lineHeight: 22 }}>{isVerifying ? `Enter the code sent to ${pendingEmail}.` : 'For ages 16 and older. We’ll email a requested sign-in code, without marketing. Account submissions require agreeing to the terms.'}</T>
+        <T muted style={{ lineHeight: 22 }}>{isVerifying ? `Enter the code sent to ${pendingEmail}.` : reviewing ? 'Enter the review-only password, then complete the security check.' : 'For ages 16 and older. We’ll email a requested sign-in code, without marketing. Account submissions require agreeing to the terms.'}</T>
       </View>
       {isVerifying ? <View style={{ gap: 8 }}>
         <T style={styles.label}>Verification code</T>
@@ -85,14 +89,15 @@ export default function Login() {
           returnKeyType="done" onSubmitEditing={() => { if (!busy) void verify(); }} />
       </View> : <View style={{ gap: 8 }}>
         <T style={styles.label}>Email address</T>
-        <TextInput ref={emailInput} accessibilityLabel="Email address" value={email} onChangeText={value => { setEmail(value); setError(''); setCaptcha(null); setCaptchaOpen(false); }}
+        <TextInput ref={emailInput} accessibilityLabel="Email address" value={email} onChangeText={value => { setEmail(value); setPassword(''); setError(''); setCaptcha(null); setCaptchaOpen(false); }}
           placeholder="you@example.com" placeholderTextColor={c.muted} style={styles.input} keyboardType="email-address" inputMode="email"
           textContentType="emailAddress" autoComplete="email" autoCapitalize="none" autoCorrect={false} maxLength={254} editable={!busy}
           returnKeyType="go" onSubmitEditing={() => { if (!busy && configured && !remaining) void send(); }} />
       </View>}
+      {reviewing && <View style={{ gap: 8 }}><T style={styles.label}>Review account password</T><TextInput accessibilityLabel="Review account password" secureTextEntry value={password} onChangeText={value => { setPassword(value); setError(''); }} style={styles.input} textContentType="password" autoComplete="current-password" autoCapitalize="none" autoCorrect={false} maxLength={128} editable={!busy} returnKeyType="go" onSubmitEditing={() => { if (!busy && configured) void send(); }} /></View>}
       {captchaOpen && <View style={{ gap: 8 }}>
         <T style={styles.label}>Quick security check</T>
-        <T muted style={{ lineHeight: 22 }}>Cloudflare checks browser and connection signals to prevent automated sign-in requests. Your email is sent to Supabase only when you request the code.</T>
+        <T muted style={{ lineHeight: 22 }}>Cloudflare checks browser and connection signals to prevent automated sign-in requests. Your credentials are sent to Supabase when you sign in or request a code.</T>
         <AuthCaptcha key={captchaAttempt} requestId={`${captchaRequest}-${captchaAttempt}`}
           onToken={token => { setCaptcha({ token, email: currentEmail, at: Date.now() }); setError(''); }}
           onError={message => { setCaptcha(null); setError(message); }} />
@@ -100,15 +105,15 @@ export default function Login() {
       </View>}
       {(!configured || error || recoveryError) ? <View accessibilityRole="alert" style={styles.error}><T style={{ color: '#8E3434', lineHeight: 22 }}>{!configured ? AUTH_UNAVAILABLE : error || recoveryError}</T></View> : null}
       {!!notice && <T accessibilityLiveRegion="polite" style={{ color: c.green, lineHeight: 22 }}>{notice}</T>}
-      <Button label={busy ? (isVerifying ? 'Please wait…' : 'Sending code…') : isVerifying ? 'Verify & sign in' : remaining ? `Send another code in ${remaining}s` : 'Send verification code'}
-        loading={busy} icon={busy ? undefined : isVerifying ? 'check-circle' : 'mail'} disabled={busy || !configured || (!isVerifying && remaining > 0)}
+      <Button label={busy ? (isVerifying ? 'Please wait…' : reviewing ? 'Signing in…' : 'Sending code…') : isVerifying ? 'Verify & sign in' : reviewing ? 'Sign in' : remaining ? `Send another code in ${remaining}s` : 'Send verification code'}
+        loading={busy} icon={busy ? undefined : isVerifying ? 'check-circle' : 'mail'} disabled={busy || !configured || (!isVerifying && !reviewing && remaining > 0)}
         onPress={() => { void (isVerifying ? verify() : send()); }} />
       {isVerifying && <>
         <T muted style={{ fontSize: 12, lineHeight: 20 }}>Can’t find it? Check your spam folder. Use the latest code if you requested more than one.</T>
         <Button secondary label={remaining ? `Resend code in ${remaining}s` : 'Resend code'} disabled={busy || remaining > 0} onPress={() => { void send(); }} />
         <Button secondary label="Use a different email" disabled={busy} onPress={() => { setEmail(pendingEmail); changeEmail(); setCode(''); setError(''); setNotice(''); setCaptcha(null); setCaptchaOpen(false); }} />
       </>}
-      <View style={styles.privacy}><Icon name="lock" size={15} color={c.muted} /><T muted style={{ fontSize: 12, lineHeight: 19, flex: 1 }}>Your email code replaces a password. After signing in, you can create your student profile. You choose whether it appears in search.</T></View>
+      <View style={styles.privacy}><Icon name="lock" size={15} color={c.muted} /><T muted style={{ fontSize: 12, lineHeight: 19, flex: 1 }}>{reviewing ? 'This account uses ordinary account permissions. Owner tools remain private.' : 'Your email code replaces a password. After signing in, you can create your student profile. You choose whether it appears in search.'}</T></View>
     </Card>
     <Button secondary label="Continue exploring" icon="arrow-right" disabled={busy} onPress={() => router.replace('/')} />
     <Button secondary label="Privacy policy" icon="shield" onPress={() => router.push('/privacy')} /><Button secondary label="Terms of service" onPress={() => router.push('/terms')} />

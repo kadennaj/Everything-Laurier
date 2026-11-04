@@ -40,7 +40,7 @@ function VenueChoices() {
     finally { setBusy(false); }
   }
   return <View style={{ gap: 20 }}>
-    <Card style={{ padding: 24, gap: 16 }}><T style={{ fontSize: 22, fontWeight: '600' }}>Venue posts</T><T style={body}>Get an alert when a selected venue’s new post reaches our feed. Updates are periodic and may take several hours.</T>
+    <Card style={{ padding: 24, gap: 16 }}><T style={{ fontSize: 22, fontWeight: '600' }}>Venue posts</T><T style={body}>Get an alert when a selected venue’s new post reaches our feed. Posts need owner review. Updates are periodic and may take several hours.</T>
       {!prefs && !error && <ActivityIndicator color={c.purple} />}
       {notificationVenues.map(venue => <View key={venue.username} style={{ flexDirection: 'row', alignItems: 'center', gap: 16, minHeight: 56 }}><T style={{ flex: 1, fontSize: 17 }}>{venue.name}</T><Switch accessibilityLabel={`Notifications from ${venue.name}`} disabled={busy || !prefs} value={venues.includes(venue.username)} trackColor={{ true: c.purple }} onValueChange={value => setVenues(current => value ? [...current, venue.username] : current.filter(item => item !== venue.username))} /></View>)}
       <T muted style={{ fontSize: 14, lineHeight: 22 }}>Up to 6 alerts per device each day. No sound or badges. Your choices and a device notification token are saved to deliver alerts. Turning alerts off removes registered devices.</T>

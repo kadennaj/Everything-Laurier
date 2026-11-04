@@ -3,7 +3,7 @@ import type { Session } from '@supabase/supabase-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { AppState, Platform } from 'react-native';
-import { AUTH_UNAVAILABLE, authErrorMessage, normalizeEmail, requestEmailCode, RESEND_DELAY_MS, restorePendingEmailDraft, verifyEmailCode } from './auth-flow';
+import { AUTH_UNAVAILABLE, signInReviewAccount, authErrorMessage, normalizeEmail, requestEmailCode, RESEND_DELAY_MS, restorePendingEmailDraft, verifyEmailCode } from './auth-flow';
 import { emailLoginEnabled, removeStoredSession, supabase } from './supabase';
 import { useLocal } from './state';
 
@@ -21,6 +21,7 @@ type AuthState = {
   busy: boolean;
   sendCode: (email: string, captchaToken: string) => Promise<void>;
   verifyCode: (code: string) => Promise<void>;
+  reviewSignIn: (email: string, password: string, captchaToken: string) => Promise<void>;
   changeEmail: () => void;
   signOut: () => Promise<void>;
   deleteAccount: () => Promise<void>;
@@ -123,6 +124,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     clearPendingEmail();
   });
 
+  const reviewSignIn = (email: string, password: string, captchaToken: string) => perform(async () => {
+    if (!supabase || !emailLoginEnabled) throw Error(AUTH_UNAVAILABLE);
+    setSession(await signInReviewAccount(supabase.auth, email, password, captchaToken));
+    setPendingEmail(''); clearPendingEmail();
+  });
+
   const signOut = () => perform(async () => {
     if (!supabase) return;
     try {
@@ -160,7 +167,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   });
 
   return <AuthContext.Provider value={{ session, ready, configured: !!supabase && emailLoginEnabled, recoveryError, pendingEmail,
-    cooldownEmail, resendAvailableAt, busy, sendCode, verifyCode, signOut, deleteAccount,
+    cooldownEmail, resendAvailableAt, busy, sendCode, verifyCode, reviewSignIn, signOut, deleteAccount,
     changeEmail: () => {
       if (!inFlight.current) {
         setPendingEmail('');

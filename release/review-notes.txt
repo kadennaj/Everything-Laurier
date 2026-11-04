@@ -1,0 +1,9 @@
+Enter the exact review email on Sign in to reveal the review-password field. Use the password supplied only in Apple's private Review Information, complete the security check, and sign in. Ordinary users use requested email codes. This account has no operator privileges.
+
+Guest browsing is available from the welcome screen. Account features require a 16+ declaration and consent; nightlife requires 19+. Profiles are private by default. Shared student profiles, tutor applications and venue posts require manual operator approval.
+
+Location is optional. GPS cannot reliably identify an indoor room or floor. Users choose a confirmed starting point. Floor-change estimates require calibration and are approximate. Push alerts are optional and follow periodic imports plus approval.
+
+Tutoring is an external peer service with no payment in this app. Transcript images are private to the applicant and designated operator. Account export and permanent deletion are in Profile. Community rules, reporting, blocking and local venue/post hiding are available in the relevant sections.
+
+Everything Laurier is independently operated and is not an official university app.

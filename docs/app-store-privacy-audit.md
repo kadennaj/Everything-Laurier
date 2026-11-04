@@ -1,3 +1,5 @@
+> Current release update (November 3, 2026): this is a historical audit. The initial release now includes optional foreground location, on-device floor-change estimation, private transcript uploads, the supplied Everything Laurier logo and opt-in venue push alerts. All new/edited venue posts require manual owner approval; the former automatic-publication paragraph below is superseded. The owner confirmed Canadian distribution rights on November 3. The dedicated Apple reviewer account uses a private password plus CAPTCHA through normal Supabase authentication; ordinary users retain email codes. See app-store-submission-pack.md for current verification and remaining release steps.
+
 # App Store Section 5 audit — October 9, 2026
 
 Scope: app source, Expo configuration, generated iOS configuration, installed dependencies, connected Supabase schema, and the new deletion endpoint. This is a technical audit, not a guarantee of App Review acceptance or an audit of every vendor's internal practices.

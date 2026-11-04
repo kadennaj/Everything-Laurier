@@ -45,3 +45,6 @@ yarn-error.*
 
 # Local Supabase CLI state
 supabase/.temp/
+
+# Private App Store review contact and credentials
+/.release-private/

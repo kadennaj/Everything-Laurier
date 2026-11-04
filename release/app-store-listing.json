@@ -1,0 +1,18 @@
+{
+  "appStoreId": "6830356811",
+  "name": "Everything Laurier",
+  "version": "1.0.0",
+  "locale": "en-CA",
+  "subtitle": "Maps, clubs and campus life",
+  "primaryCategory": "LIFESTYLE",
+  "secondaryCategory": "EDUCATION",
+  "price": "Free",
+  "territories": ["Canada"],
+  "promotionalText": "Find campus rooms, discover clubs and plan your next stop around Laurier Waterloo.",
+  "description": "Everything Laurier brings maps, clubs and campus life together for Laurier’s Waterloo campus.\n\n• Explore campus buildings and indoor floor plans for selected buildings\n• Search mapped rooms and use floor selectors, entrances, stairs and elevators to plan a route\n• Discover student clubs and campus events\n• Find approved peer-tutor listings and submit tutor applications\n• Save places and plans on your device\n• Browse reviewed venue posts and choose optional alerts in the 19+ nightlife section\n\nBrowse public campus information as a guest. Account features are for people aged 16 or older; nightlife is for people aged 19 or older. Shared student profiles, tutor listings and venue posts require owner review. Venue alerts follow periodic imports and review, so updates may take several hours.\n\nLocation is optional. GPS does not reliably identify an indoor room or floor. Choose a confirmed indoor starting point; floor-change estimates require calibration and may be inaccurate. Routes and accessibility details are estimates. Confirm important details with the university or venue.\n\nEverything Laurier is independently operated by Kaden Najarali. It is not an official Wilfrid Laurier University app and is not affiliated with or endorsed by the university.",
+  "keywords": "waterloo,university,student,indoor,directions,rooms,events,tutoring,nightlife",
+  "supportUrl": "https://everythinglaurier.ca/support/",
+  "marketingUrl": "https://everythinglaurier.ca/",
+  "privacyPolicyUrl": "https://everythinglaurier.ca/privacy/",
+  "copyright": "2026 Kaden Najarali"
+}
