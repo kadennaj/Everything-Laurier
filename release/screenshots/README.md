@@ -16,5 +16,7 @@ No public profile was created. Live quota transaction repair 20261104044708
 preserves quotas/session checks; endpoint security assertions passed with all
 synthetic records rolled back.
 
-At the final validation check, Apple was still processing screenshot assets.
-The app has not yet been submitted to App Review or released.
+Apple finished screenshot processing. Version 1.0.0 (3) was submitted on
+November 4, 2026 at 12:16 AM Eastern and is Waiting for Review.
+Submission ID: 10895564-3c9b-4423-a9dc-571944fc76d1.
+Canada-only, free, automatically releases after Apple approval. Not live yet.
