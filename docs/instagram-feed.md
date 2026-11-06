@@ -24,8 +24,14 @@ Apify uses scraping to obtain public posts. Check the provider's reliability and
 
 ## Automatic publication and personal controls — October 10, 2026
 
-Run `supabase/schema/automatic_venue_posts.sql` after `content_moderation.sql`. Valid imports from the four selected venues publish automatically; no human preapproval, AI call or new API fee is used. Source and URL validation is not content classification and does not establish guideline 1.2 compliance. Removed posts remain rejected across scraper upserts, including edits. Profiles keep their separate operator review.
+Current production migration: `automatic_venue_publication` (November 6, 2026), which also retains revision checks and prevents historical-alert bursts. The older `supabase/schema/automatic_venue_posts.sql` is historical setup. Valid imports from the four selected venues publish automatically; no human preapproval, AI call or new API fee is used. Source and URL validation is not content classification and does not establish guideline 1.2 compliance. Removed posts remain rejected across scraper upserts, including edits. Profiles keep their separate operator review.
 
 Readers fetch the past 14 days from the shared table; the scraper requests at most four posts per venue from the past seven days every eight hours. Client refreshes only read cached database rows. A three-dot button beside the venue name opens Hide post, Hide venue and Report post in one modal; choosing Report switches that same modal to the report form, without opening Instagram or stacking native modals. Users restore personal feed choices from Community. Hides persist locally across refresh/relaunch and are cleared on account deletion on that device. Operators use `private.review_post(id, 'rejected')` to remove a post for everyone.
 
 Verification: `tests/automatic-venue-posts.sql` and `tests/moderation-rls.sql` use synthetic rolled-back records to check automatic publication, invalid URL holds, persistent operator removals, RLS, reports, blocks and deletion. `tests/feed-visibility.test.mjs` checks personal filters before display limits.
+
+## November 6, 2026 verification
+
+Applied `20261106204832_automatic_venue_publication.sql` to production at the operator's request. All 80 held, valid imports were published; 24 fall within the app's 14-day feed window. Anonymous REST read returned HTTP 200 across all four venues, and the latest preview image returned HTTP 200/image/jpeg. Backfill queued no old alerts. Synthetic rollback tests passed for publication, invalid links/future posts, RLS, persistent removals, report/block controls, notification opt-in and delivery caps. The 8-hour import schedule remains enabled. No App Store build or OTA update was published.
+
+Public privacy policy version 2026-11-06 is deployed through Sites version 19. Existing installed text/store metadata may still describe owner approval; corrected release metadata is prepared in source for the next editable store revision. Automatic source/link checks do not screen captions or media.

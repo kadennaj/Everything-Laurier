@@ -1,3 +1,5 @@
+> November 6, 2026: At the operator’s request, selected venue posts now publish automatically after source/link checks. This supersedes the November 3 prepublication workflow below for venue posts only. These checks do not screen captions or images. Reports, hiding and owner removal remain; removed posts stay removed. Student-profile and tutor approval are unchanged. Existing posts were released without historical push alerts.
+
 # Everything Laurier moderation operations
 
 Owner confirmed October 9, 2026 that they will monitor everythinglaurier@gmail.com and regularly review content. Check the private queue at least daily; prioritize threats, exploitation and exposed private information immediately when seen. This is an operating procedure, not evidence that a response has already occurred. Keep the contact functioning and test it before submission.

@@ -1,3 +1,5 @@
+> November 6, 2026: Server-side venue publication is now automatic at the owner’s request. The submitted build remains unchanged; its embedded approval wording and previously submitted store description may still describe the November 3 behavior. Updated source listing/review text is prepared for the next metadata revision. Public privacy policy now describes automatic publication.
+
 # App Store submission — November 3, 2026
 
 Status: preparation in App Store Connect; not submitted or live. Apple Developer membership and agreements are active. App ID 6830356811, bundle ca.everythinglaurier.preview, version 1.0.0, Apple team JRCUQ9JQW6. The initial release is free, Canada first, iPhone and iPad. Public listing text is in release/app-store-listing.json. Private contact details and credentials must never be committed.
