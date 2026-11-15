@@ -1,10 +1,19 @@
+import userCampusEntrances from "./data/user-campus-entrances.json";
+import { mergeCampusAccess } from "./campus-access";
+import type { UserEntrance, CampusAccess } from "./campus-access";
+import exitAnnotations from "./data/exit-annotations.json";
+import { addIndoorExits } from "./indoor-exits";
+import type { ExitAnnotation, ExitRoomUpdate } from "./indoor-exits";
+import { indoorAccessLabel } from "./map-access";
 import rawIndoor from "./data/indoors.json";
 import rawCampus from "./data/campus.json";
 import newIndoor from "./data/new-indoors.json";
 import rawConnections from "./data/indoor-connections.json";
 import { foodLocations } from "./food-locations";
 import type { CampusData, IndoorBuilding, IndoorConnection, Point, RoomKind } from "./types";
-export const indoors = [...rawIndoor, ...newIndoor] as unknown as IndoorBuilding[];
+export const indoors = addIndoorExits([...rawIndoor, ...newIndoor] as unknown as IndoorBuilding[], exitAnnotations.placed as ExitAnnotation[], exitAnnotations.updates as ExitRoomUpdate[]).map(b => ({
+  ...b, floors: b.floors.map(f => ({ ...f, rooms: f.rooms.map(r => ({ ...r, name: indoorAccessLabel({...r, name: (exitAnnotations.renames as Record<string,string>)[r.id] ?? r.name}, rawConnections as IndoorConnection[]) })) })),
+}));
 export const indoorConnections = rawConnections as IndoorConnection[];
 export function connectedBuildings(building: IndoorBuilding) {
   const ids = new Set([building.id]);
@@ -23,14 +32,14 @@ export function connectedBuildings(building: IndoorBuilding) {
 export function indoorForPlace(id: string) {
   return indoors.find(b => b.id === id || b.campusIds?.includes(id));
 }
-export const campus = { ...rawCampus, places: rawCampus.places.map(p => {
+export const campus = { ...rawCampus, entrances: mergeCampusAccess(rawCampus.entrances as unknown as Record<string, CampusAccess[]>, userCampusEntrances.reports as unknown as UserEntrance[]), places: rawCampus.places.map(p => {
   const indoor = indoorForPlace(p.id);
   const food = foodLocations[p.id];
   if (food) return { ...p, ...food, description: food.locationNote };
   if (p.id === "DH" || p.id === "JAC") return { ...p, description: "Connected indoors with Concourse, Dining Hall and Music through the Solarium passage. Detailed indoor floor plans for Dining Hall and Music are not available yet." };
   return indoor ? { ...p, indoor: true, indoorId: indoor.id, description: indoor.coverage ?? p.description } : p;
 }) } as unknown as CampusData & {
-  entrances: Record<string, { point: Point; source: string; main: boolean }[]>;
+  entrances: Record<string, CampusAccess[]>;
   field: Point[];
   walkNodes: Record<string, Point>;
   walkEdges: {

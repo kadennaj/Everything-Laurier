@@ -1,0 +1,324 @@
+{
+  "positionNote": "Approximate hand traces in the existing indoor drawing frame, not surveyed coordinates. Exterior access, steps and current door use remain unverified.",
+  "placed": [
+    {
+      "buildingId": "LH",
+      "floor": 1,
+      "source": "/blueprints/lazaridis-1.webp",
+      "evidence": "Exterior double doorway at the right end of the upper highlighted corridor, beside LH1011 and the northeast stairwell.",
+      "room": {
+        "id": "LH-exit-1011",
+        "name": "Exit beside LH1011 stairwell",
+        "kind": "entrance",
+        "access": "exterior",
+        "polygon": [
+          [
+            52,
+            -14
+          ],
+          [
+            54,
+            -14
+          ],
+          [
+            54,
+            -12
+          ],
+          [
+            52,
+            -12
+          ]
+        ],
+        "center": [
+          53,
+          -13
+        ],
+        "door": [
+          54,
+          -13
+        ],
+        "details": "Source-shown exterior exit on the supplied Floor 1 plan. Approximate hand trace; current access and steps require checking."
+      },
+      "corridor": [
+        [
+          49,
+          -13
+        ],
+        [
+          54,
+          -13
+        ]
+      ]
+    },
+    {
+      "buildingId": "LH",
+      "floor": 1,
+      "source": "/blueprints/lazaridis-1.webp",
+      "evidence": "Exterior doorway at the right end of the lower highlighted corridor, beside the southeast stairwell and Byte 75 lobby.",
+      "room": {
+        "id": "LH-exit-byte75",
+        "name": "Exit beside Byte 75 stairwell",
+        "kind": "entrance",
+        "access": "exterior",
+        "polygon": [
+          [
+            52,
+            18
+          ],
+          [
+            54,
+            18
+          ],
+          [
+            54,
+            20
+          ],
+          [
+            52,
+            20
+          ]
+        ],
+        "center": [
+          53,
+          19
+        ],
+        "door": [
+          54,
+          19
+        ],
+        "details": "Source-shown exterior exit on the supplied Floor 1 plan. Approximate hand trace; current access and steps require checking."
+      },
+      "corridor": [
+        [
+          49,
+          19
+        ],
+        [
+          54,
+          19
+        ]
+      ]
+    },
+    {
+      "buildingId": "P",
+      "floor": 1,
+      "source": "/blueprints/new-floorplans/p-1.webp",
+      "evidence": "Double doors above the north stairwell beside P120 in the supplied Peters Floor 1 photo; also reported by the user on 2026-11-07.",
+      "room": {
+        "id": "P1-exit-p120",
+        "name": "Exit by P120 \u00b7 north stairwell",
+        "kind": "entrance",
+        "access": "exterior",
+        "polygon": [
+          [
+            -24.5,
+            -73.6
+          ],
+          [
+            -22.9,
+            -73.6
+          ],
+          [
+            -22.9,
+            -72.96
+          ],
+          [
+            -24.5,
+            -72.96
+          ]
+        ],
+        "center": [
+          -23.7,
+          -73.28
+        ],
+        "door": [
+          -23.68,
+          -72.96
+        ],
+        "routeable": false,
+        "details": "Source-shown exterior exit, confirmed as a missing marker by the user. Stairwell approach and exterior level need confirmation before using it as a routing endpoint."
+      }
+    },
+    {
+      "buildingId": "P",
+      "floor": 1,
+      "source": "/blueprints/new-floorplans/p-1.webp",
+      "evidence": "User confirms a first-floor exterior door across from Service Laurier near the Schlegel junction; exit arrow/vestibule visible on Peters source photo. Marker is approximate and distinct from the indoor passage.",
+      "room": {
+        "id": "P1-exit-service",
+        "name": "Peters entrance \u00b7 facing Schlegel / Service Laurier",
+        "kind": "entrance",
+        "access": "exterior",
+        "polygon": [
+          [
+            -21,
+            -3.5
+          ],
+          [
+            -19.8,
+            -3.5
+          ],
+          [
+            -19.8,
+            -2.4
+          ],
+          [
+            -21,
+            -2.4
+          ]
+        ],
+        "center": [
+          -20.4,
+          -2.95
+        ],
+        "door": [
+          -21,
+          -2.96
+        ],
+        "details": "User-confirmed exterior entrance, 2026-11-07. Approximate source-photo trace; present-day access is unverified. User clarified in two marked screenshots that this faces the Schlegel Floor 1 exterior door, 2026-11-07."
+      },
+      "corridor": [
+        [
+          -20.72,
+          -1.76
+        ],
+        [
+          -21,
+          -2.96
+        ]
+      ]
+    },
+    {
+      "buildingId": "ARTS",
+      "floor": 2,
+      "source": "/blueprints/new-floorplans/arts-2.webp",
+      "evidence": "Opposing exterior doors shown in the Arts 2C201 hallway on the source photo; confirmed by the user in the marked satellite image and description.",
+      "room": {
+        "id": "ARTS2-exit-peters-north",
+        "name": "Arts\u2013Peters hallway \u00b7 north-side entrance",
+        "kind": "entrance",
+        "access": "exterior",
+        "polygon": [
+          [
+            66.78,
+            -15.39
+          ],
+          [
+            68.58000000000001,
+            -15.39
+          ],
+          [
+            68.58000000000001,
+            -14.49
+          ],
+          [
+            66.78,
+            -14.49
+          ]
+        ],
+        "center": [
+          67.68,
+          -14.940000000000001
+        ],
+        "door": [
+          67.68,
+          -15.39
+        ],
+        "details": "User-confirmed exterior entrance at the Arts\u2013Peters hallway. Approximate source-photo trace. Exterior steps and current door access need checking."
+      },
+      "corridor": [
+        [
+          67.99771,
+          -10.29327
+        ],
+        [
+          67.68,
+          -15.39
+        ]
+      ]
+    },
+    {
+      "buildingId": "ARTS",
+      "floor": 2,
+      "source": "/blueprints/new-floorplans/arts-2.webp",
+      "evidence": "Opposing exterior doors shown in the Arts 2C201 hallway on the source photo; confirmed by the user in the marked satellite image and description.",
+      "room": {
+        "id": "ARTS2-exit-peters-south",
+        "name": "Arts\u2013Peters hallway \u00b7 south-side entrance",
+        "kind": "entrance",
+        "access": "exterior",
+        "polygon": [
+          [
+            66.78,
+            -9.450000000000001
+          ],
+          [
+            68.58000000000001,
+            -9.450000000000001
+          ],
+          [
+            68.58000000000001,
+            -8.55
+          ],
+          [
+            66.78,
+            -8.55
+          ]
+        ],
+        "center": [
+          67.68,
+          -9.0
+        ],
+        "door": [
+          67.68,
+          -8.55
+        ],
+        "details": "User-confirmed exterior entrance at the Arts\u2013Peters hallway. Approximate source-photo trace. Exterior steps and current door access need checking."
+      },
+      "corridor": [
+        [
+          67.57298,
+          -10.26679
+        ],
+        [
+          67.68,
+          -8.55
+        ]
+      ]
+    }
+  ],
+  "pending": [],
+  "renames": {
+    "LH-entrance": "Main entrance \u00b7 lower-left lobby",
+    "LH-north-entrance": "Rear entrance \u00b7 parking-lot side",
+    "LH-exit-1011": "Rear stairwell entrance \u00b7 beside LH1011",
+    "LH-exit-byte75": "Entrance beside Byte 75",
+    "P1-entrance": "Peters south lobby entrance",
+    "SCI1-entrance-a": "Atrium entrance \u00b7 upper vestibule",
+    "SCI1-entrance-b": "Atrium entrance \u00b7 lower vestibule"
+  },
+  "updates": [
+    {
+      "buildingId": "SC",
+      "floor": 1,
+      "roomId": "SC1-entrance",
+      "access": "exterior",
+      "name": "Schlegel entrance \u00b7 facing Peters",
+      "details": "User confirmed from paired satellite/indoor screenshots on 2026-11-07: Floor 1 exterior entrance facing the Peters entrance across the gap. Uses the existing source-plan doorway trace; current door access and exterior steps are unverified.",
+      "source": "User-marked Peters–Schlegel indoor view, 2026-11-07",
+      "evidence": "The lower circled door is on the Schlegel side opposite the Peters/Service Laurier door, both explicitly confirmed as Floor 1 exterior entrances."
+    }
+  ],
+  "pairs": [
+    {
+      "id": "peters-schlegel-exterior-pair",
+      "fromBuilding": "P",
+      "fromRoom": "P1-exit-service",
+      "toBuilding": "SC",
+      "toRoom": "SC1-entrance",
+      "floor": 1,
+      "source": "User-marked Peters–Schlegel satellite image, 2026-11-07",
+      "note": "Opposing exterior entrances confirmed by user; separate from the indoor connecting passage. Does not create a new outdoor walking edge."
+    }
+  ]
+}

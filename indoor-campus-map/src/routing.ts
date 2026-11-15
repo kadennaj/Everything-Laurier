@@ -267,6 +267,7 @@ export function routeCampus(
   from: Point,
   to: Point,
   stepFree: boolean,
+  anchors: { fromNodeId?: string; toNodeId?: string } = {},
 ): Route | null {
   const nodes = new Map<string, RouteNode>(
     Object.entries(data.walkNodes).map(([id, point]) => [
@@ -281,8 +282,12 @@ export function routeCampus(
     return a && b ? [{...e,a:a.point,b:b.point,points:[{id:e.fromId,t:0},{id:e.toId,t:1}]}] : [];
   });
   const accessEdges: RouteEdge[]=[];
-  const attach=(p:Point,id:string)=>{
-    const projections=segments.map((segment,i)=>({...projectToSegment(p,segment.a,segment.b),i})).sort((a,b)=>a.distance-b.distance);
+  const attach=(p:Point,id:string,nodeId?:string)=>{
+    // A mapped door/path junction belongs to its OSM component. Do not snap
+    // it onto a nearby but disconnected path on another side or level.
+    const projections=segments.map((segment,i)=>({...projectToSegment(p,segment.a,segment.b),i}))
+      .filter(q => !nodeId || segments[q.i].fromId === nodeId || segments[q.i].toId === nodeId)
+      .sort((a,b)=>a.distance-b.distance);
     const nearest=projections[0];
     if (!nearest || nearest.distance>25) return false;
     nodes.set(id,{id,point:p,floor:0});
@@ -297,7 +302,7 @@ export function routeCampus(
     }
     return true;
   };
-  if (!attach(from,"route-start") || !attach(to,"route-end")) return null;
+  if (!attach(from,"route-start",anchors.fromNodeId) || !attach(to,"route-end",anchors.toNodeId)) return null;
   const edges:RouteEdge[]=[];
   for (const segment of segments) {
     segment.points.sort((a,b)=>a.t-b.t);

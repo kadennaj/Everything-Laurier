@@ -37,6 +37,7 @@ export function useLiveLocation(enabled: boolean) {
   useEffect(() => {
     const live = new LiveLocationController(injectedEnvironment ?? nativeLocationEnvironment() ?? browserEnvironment(), setState);
     controller.current = live;
+    if (enabled) live.start("center", false);
     let resume: TrackingMode | null = null;
     const visibility = () => {
       if (document.hidden && live.state.active) {
@@ -45,7 +46,7 @@ export function useLiveLocation(enabled: boolean) {
       } else if (!document.hidden && resume !== null) {
         const mode = resume;
         resume = null;
-        live.start(mode);
+        live.start(mode, false);
       }
     };
     document.addEventListener("visibilitychange", visibility);
@@ -68,7 +69,7 @@ export function useLiveLocation(enabled: boolean) {
     compass: compassFresh ? state.compass : null,
     message: state.message || (state.active && state.fix && !fixFresh ? "GPS location is stale. Waiting for a fresh fix…" : ""),
     compassMessage: state.compassMessage || (state.compass && !compassFresh ? "Compass signal paused. Waiting for a fresh heading…" : ""),
-    start: (mode: TrackingMode = "follow") => { if (enabled) controller.current?.start(mode); },
+    start: (mode: TrackingMode = "follow") => { if (enabled) controller.current?.start(mode, mode === "heading"); },
     browse: () => controller.current?.browse(),
     stop: () => controller.current?.stop(),
   };

@@ -1,4 +1,11 @@
+import { indoorAccessKind, indoorExitTitle } from "./map-access";
+import { accessLabel } from "./campus-access";
+import { MapGesture } from "./map-gesture";
+import { clampMapPan, inside, mapBounds, nearFloor } from "./map-bounds";
 import * as THREE from "three";
+import { Line2 } from "three/addons/lines/Line2.js";
+import { LineGeometry } from "three/addons/lines/LineGeometry.js";
+import { LineMaterial } from "three/addons/lines/LineMaterial.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { campus, colors, connectedBuildings, indoorConnections } from "./data";
 import type { IndoorBuilding, Point, Route, RouteNode, RoomKind, Floor } from "./types";
@@ -13,6 +20,7 @@ export interface MapState {
   stacked: boolean;
   flat: boolean;
   selected: string | null;
+  accessPlaceId?: string;
   route: Route | null;
   location: { point: Point; accuracy: number } | null;
   heading?: number | null;
@@ -27,7 +35,7 @@ interface Label {
   position: THREE.Vector3;
   priority: number;
   leader?: SVGLineElement;
-  roadSegments?: { a: Point; b: Point }[];
+  roadSegments?: { a: Point; b: Point; point?: Point }[];
 }
 const stairsSvg =
   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20h6v-6h6V8h6V3M3 8l5-5m-5 0h5v5"/></svg>';
@@ -44,19 +52,7 @@ const icons: Partial<Record<RoomKind, string>> = {
   washroom: washroomSvg,
 };
 const vec = (p: Point, y = 0) => new THREE.Vector3(p[0], y, p[1]);
-const inside = (p: Point, poly: Point[]) => {
-  let c = false;
-  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
-    const a = poly[i],
-      b = poly[j];
-    if (
-      a[1] > p[1] !== b[1] > p[1] &&
-      p[0] < ((b[0] - a[0]) * (p[1] - a[1])) / (b[1] - a[1]) + a[0]
-    )
-      c = !c;
-  }
-  return c;
-};
+const campusBounds = mapBounds(campus.places.flatMap(place => place.polygon), 12);
 
 export class MapScene {
   private renderer: THREE.WebGLRenderer;
@@ -67,6 +63,8 @@ export class MapScene {
   private labels: Label[] = [];
   private pickables: THREE.Object3D[] = [];
   private state: MapState | null = null;
+  private panBounds = campusBounds;
+  private floorOutlines: Point[][] = [];
   private observer: ResizeObserver;
   private frame = 0;
   private disposed = false;
@@ -81,7 +79,9 @@ export class MapScene {
   } | null = null;
   private labelLayer: HTMLDivElement;
   private northNeedle: HTMLElement | null = null;
-  private pointerStart: { x: number; y: number } | null = null;
+  private gesture = new MapGesture();
+  private pointerMapId: string | undefined;
+  private pointerOnLabel = false;
   private reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   private liveOverlay = new THREE.Group();
   private liveLabel: Label | null = null;
@@ -104,7 +104,7 @@ export class MapScene {
     this.renderer.toneMappingExposure = 0.92;
     this.renderer.domElement.setAttribute(
       "aria-label",
-      "Interactive 3D map. Use the place list for keyboard navigation.",
+      "Interactive map. Use the place list for keyboard navigation.",
     );
     this.renderer.domElement.setAttribute("role", "img");
     this.container.append(this.renderer.domElement);
@@ -112,18 +112,21 @@ export class MapScene {
     this.labelLayer = document.createElement("div");
     this.labelLayer.className = "map-labels";
     this.container.append(this.labelLayer);
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls = new OrbitControls(this.camera, this.container);
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.12;
+    this.controls.zoomSpeed = 0.55;
+    this.controls.enableRotate = false;
     this.controls.maxPolarAngle = Math.PI * 0.46;
-    this.controls.minPolarAngle = 0.02;
+    this.controls.minPolarAngle = 0.0001;
     this.controls.minDistance = 18;
     this.controls.maxDistance = 1800;
+    // Keep panning parallel to the ground, including in tilted 3D views.
     this.controls.screenSpacePanning = false;
     this.controls.mouseButtons.LEFT = THREE.MOUSE.PAN;
     this.controls.mouseButtons.RIGHT = THREE.MOUSE.ROTATE;
     this.controls.touches.ONE = THREE.TOUCH.PAN;
-    this.controls.touches.TWO = THREE.TOUCH.DOLLY_ROTATE;
+    this.controls.touches.TWO = THREE.TOUCH.DOLLY_PAN;
     this.controls.listenToKeyEvents(this.renderer.domElement);
     this.controls.addEventListener("start", () => {
       this.onBrowse();
@@ -160,8 +163,10 @@ export class MapScene {
     this.scene.add(this.liveOverlay);
     this.observer = new ResizeObserver(() => this.resize());
     this.observer.observe(container);
-    this.renderer.domElement.addEventListener("pointerdown", this.pointerDown);
-    this.renderer.domElement.addEventListener("pointerup", this.pointerUp);
+    this.container.addEventListener("pointerdown", this.pointerDown);
+    this.container.addEventListener("pointerup", this.pointerUp);
+    this.container.addEventListener("pointercancel", this.pointerCancel);
+    this.container.addEventListener("pointermove", this.pointerMove);
     this.resize();
     this.camera.position.set(80, 155, 160);
     this.controls.target.set(-15, 0, -10);
@@ -170,25 +175,27 @@ export class MapScene {
   }
   private resize() {
     const { width, height } = this.container.getBoundingClientRect();
-    const previous = this.camera.aspect;
     this.camera.aspect = width / Math.max(height, 1);
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(width, height);
-    if (this.state && Math.abs(previous - this.camera.aspect) > 0.05)
-      this.reset();
+    this.updateZoomLimit();
+    // Resizing (including Safari toolbars and panel changes) must preserve
+    // the camera target, zoom and bearing instead of flying back to the preset.
   }
   private pointerDown = (e: PointerEvent) => {
-    this.pointerStart = { x: e.clientX, y: e.clientY };
+    this.gesture.down(e.pointerId, e.clientX, e.clientY);
+    const label = e.target instanceof Element ? e.target.closest<HTMLElement>(".scene-label") : null;
+    this.pointerOnLabel = !!label;
+    this.pointerMapId = label?.dataset.mapId;
   };
+  private pointerMove = (e: PointerEvent) => { this.gesture.move(e.pointerId, e.clientX, e.clientY); };
+  private pointerCancel = (e: PointerEvent) => { this.gesture.cancel(e.pointerId); };
   private pointerUp = (e: PointerEvent) => {
-    if (
-      !this.pointerStart ||
-      Math.hypot(
-        e.clientX - this.pointerStart.x,
-        e.clientY - this.pointerStart.y,
-      ) > 6
-    )
+    if (!this.gesture.up(e.pointerId, e.clientX, e.clientY)) return;
+    if (this.pointerOnLabel) {
+      if (this.pointerMapId) this.pick(this.pointerMapId);
       return;
+    }
     const r = this.renderer.domElement.getBoundingClientRect();
     const mouse = new THREE.Vector2(
       ((e.clientX - r.left) / r.width) * 2 - 1,
@@ -199,24 +206,16 @@ export class MapScene {
     const hit = ray.intersectObjects(this.pickables)[0];
     if (hit) {
       const id = hit.object.userData.id as string;
-      if (this.state?.building) this.onSelect(id);
-      else this.enterBuilding(id);
+      this.pick(id);
     }
   };
+  private pick(id: string) {
+    if (this.state?.building) this.onSelect(id);
+    else this.enterBuilding(id);
+  }
   enterBuilding(id: string) {
-    const place = campus.places.find((p) => p.id === id || p.indoorId === id);
-    if (!place) return;
-    if (!place.indoor) {
-      this.onBuilding(id);
-      return;
-    }
-    const target = vec(place.center, 2);
-    this.fly(
-      target.clone().add(new THREE.Vector3(16, 25, 30)),
-      target,
-      400,
-      () => this.onBuilding(place.indoorId ?? id),
-    );
+    const place = campus.places.find(p => p.id === id || p.indoorId === id);
+    if (place) this.onBuilding(place.id);
   }
   private fly(
     to: THREE.Vector3,
@@ -224,6 +223,9 @@ export class MapScene {
     duration = 350,
     after?: () => void,
   ) {
+    to.sub(target).clampLength(this.controls.minDistance, this.controls.maxDistance).add(target);
+    this.clampPan(this.camera.position, this.controls.target);
+    this.clampPan(to, target);
     if (this.reducedMotion.matches) {
       this.camera.position.copy(to);
       this.controls.target.copy(target);
@@ -250,7 +252,10 @@ export class MapScene {
       ) {
         o.geometry.dispose();
         const mats = Array.isArray(o.material) ? o.material : [o.material];
-        mats.forEach((m) => m.dispose());
+        mats.forEach((m) => {
+          if (m instanceof THREE.MeshBasicMaterial) m.map?.dispose();
+          m.dispose();
+        });
       }
     });
     this.content.clear();
@@ -317,6 +322,28 @@ export class MapScene {
     mesh.castShadow = height > 0.4;
     this.content.add(mesh);
   }
+  private printedRoomLabel(room: import("./types").Room, y: number) {
+    const canvas = document.createElement("canvas");
+    const text = room.name.replace(/ · .*$/, "").replace(/^LH /, "");
+    canvas.width = Math.max(256, Math.min(768, text.length * 32)); canvas.height = 128;
+    const context = canvas.getContext("2d");
+    if (!context) return;
+    context.font = "650 80px sans-serif";
+    context.textAlign = "center"; context.textBaseline = "middle";
+    context.lineWidth = 7; context.strokeStyle = "#ffffffdd";
+    context.strokeText(text, canvas.width / 2, 64, canvas.width - 24);
+    context.fillStyle = "#332b40"; context.fillText(text, canvas.width / 2, 64, canvas.width - 24);
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    const xs = room.polygon.map(p => p[0]), zs = room.polygon.map(p => p[1]);
+    const width = Math.min(18, Math.max(1.5, (Math.max(...xs) - Math.min(...xs)) * .8));
+    const height = Math.min(width * 128 / canvas.width, Math.max(.6, (Math.max(...zs) - Math.min(...zs)) * .6));
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(width, height), new THREE.MeshBasicMaterial({map:texture, transparent:true, depthWrite:false, toneMapped:false, side:THREE.DoubleSide}));
+    mesh.rotation.x = -Math.PI / 2;
+    mesh.position.copy(vec(room.center, y + .63));
+    mesh.renderOrder = 5;
+    this.content.add(mesh);
+  }
   private path(
     points: Point[],
     width: number,
@@ -349,11 +376,12 @@ export class MapScene {
     const span = document.createElement("span");
     span.textContent = text;
     element.append(span);
-    if (id)
-      element.addEventListener("click", () => {
-        if (this.state?.building) this.onSelect(id);
-        else this.enterBuilding(id);
-      });
+    if (id) {
+      element.dataset.mapId = id;
+      // Pointer taps are handled with the map gesture, including when a touch
+      // starts over a label. Keyboard activation still uses the native button.
+      element.addEventListener("click", event => { if (event.detail === 0) this.pick(id); });
+    }
     else element.tabIndex = -1;
     let leader: SVGLineElement | undefined;
     if (className.includes("route-building-label")) {
@@ -376,18 +404,26 @@ export class MapScene {
     const old = this.state;
     this.state = next;
     // Sensor updates move a small overlay, not thousands of campus meshes.
-    if (old && !old.building && !next.building && old.route === next.route && old.flat === next.flat && old.stacked === next.stacked && old.selected === next.selected && old.showAmenities === next.showAmenities && old.connectedView === next.connectedView) {
+    if (old && !old.building && !next.building && old.route === next.route && old.flat === next.flat && old.stacked === next.stacked && old.selected === next.selected && old.accessPlaceId === next.accessPlaceId && old.showAmenities === next.showAmenities && old.connectedView === next.connectedView) {
       this.updateLiveOverlay(next);
       this.trackCamera(old, next);
       return;
     }
     this.clear();
     const modeChanged = old?.connectedView !== next.connectedView || (next.connectedView ? !sameIndoorView(old?.building?.id, next.building?.id) : old?.building?.id !== next.building?.id);
+    if (modeChanged || old?.floor !== next.floor || old?.stacked !== next.stacked || !next.building && old?.route !== next.route) {
+      this.floorOutlines = next.building ? this.indoorViewOutlines(next.building, next) : [];
+      this.panBounds = this.floorOutlines.length
+        ? mapBounds(this.floorOutlines.flat(), 8)
+        : mapBounds(next.route?.nodes.filter(node => !node.buildingId).map(node => node.point) ?? [], 12, campusBounds);
+      this.updateZoomLimit();
+    }
     if (next.building) this.buildIndoor(next);
     else this.buildCampus(next);
     if (modeChanged || !old) this.reset();
     else if (old.flat !== next.flat || old.stacked !== next.stacked || (next.connectedView && isSharedBuilding(next.building?.id) && sharedLevel(old.building?.id ?? "",old.floor) !== sharedLevel(next.building?.id ?? "",next.floor)))
       this.reset();
+    if (next.route && old?.route !== next.route && (!old?.route || !next.location)) this.frameRoute();
     this.updateLiveOverlay(next);
     this.trackCamera(old, next);
   }
@@ -592,7 +628,7 @@ export class MapScene {
       canopy.castShadow = true;
       this.content.add(canopy);
     }
-    const mainStreets = ["University Avenue West", "King Street North", "Bricker Avenue", "Ezra Avenue", "Albert Street", "Hazel Street"];
+    const mainStreets = ["University Avenue West", "King Street North", "Bricker Avenue", "Albert Street", "Hazel Street"];
     const otherStreets = [...new Set(campus.roads.map(road => road.name).filter(name => name && !name.includes("/") && !mainStreets.includes(name)))].sort();
     const streetNames = [...mainStreets, ...otherStreets];
     for (const name of streetNames) {
@@ -602,16 +638,24 @@ export class MapScene {
         road.points.slice(1).map((b, i) => ({ a: road.points[i], b })),
       );
       if (!segments.length) continue;
+      // Anchor once to one campus road segment. Never choose another segment
+      // as the camera moves: labels then move only with their physical street.
+      const anchor = segments.map(segment => ({ ...segment, ...projectToSegment([-15, -10], segment.a, segment.b) }))
+        .sort((a,b) => a.distance - b.distance)[0];
       const label = this.label(
         name,
-        segments[0].a,
+        anchor.a,
         0.3,
-        "road-label",
+        `road-label ${mainStreets.includes(name) ? "road-main" : "road-secondary"}`,
         undefined,
         undefined,
         mainStreets.includes(name) ? 5 : 2,
       );
-      label.roadSegments = segments;
+      label.roadSegments = [anchor];
+    }
+    const accessPlace = campus.places.find(p => p.id === s.accessPlaceId);
+    if (accessPlace) for (const door of campus.entrances[accessPlace.id] ?? []) {
+      this.label(accessLabel(accessPlace, door), door.point, .7, "campus-access-label", undefined, undefined, 7);
     }
     this.drawRoute(s.route, false);
   }
@@ -642,7 +686,7 @@ export class MapScene {
       const reference = exact ?? floorAtLevel(member, level, true)!;
       const floors = (s.stacked ? member.floors : [reference]).map(f => shared ? displayFloor(member.id, f) : f);
       this.buildWing({ ...s, floor: level }, { ...member, floors }, floors, !s.stacked && !exact);
-      {
+      if (shared || s.stacked) {
         const floor = shared ? displayFloor(member.id, reference) : reference;
         const xs = floor.outline.map(p => p[0]), zs = floor.outline.map(p => p[1]);
         const position: Point = member.id === "P" ? [Math.min(...xs)-10,(Math.min(...zs)+Math.max(...zs))/2] : [(Math.min(...xs)+Math.max(...xs))/2, Math.max(...zs)+8];
@@ -819,30 +863,25 @@ export class MapScene {
         }
         if (!active) continue;
         const amenity = icons[room.kind];
-        if (amenity && s.showAmenities)
-          this.label(
-            room.name,
-            room.center,
-            y + (room.kind === "elevator" ? 2.1 : 1.4),
+        const accessKind = indoorAccessKind(room, indoorConnections);
+        if (room.kind === "entrance" && (accessKind?.startsWith("Exterior") || accessKind === "Indoor passage")) {
+          const label = this.label(accessKind?.startsWith("Exterior") ? indoorExitTitle(room) : `PASSAGE · ${room.name}`, room.door, y + 1.2,
+            `indoor-exit-label route-building-label ${room.routeable === false ? "exit-unverified-label" : ""} ${accessKind === "Indoor passage" ? "indoor-passage-label" : ""}`, room.id, undefined, 8);
+          label.element.title = `${room.name}. ${room.details ?? "Current access is unverified."}`;
+          label.element.setAttribute("aria-label", `${accessKind?.startsWith("Exterior") ? "EXIT" : "PASSAGE"} · ${room.name}`);
+        } else if (room.kind === "entrance" && room.routeable === false && /\bexit\b/i.test(room.name)) {
+          const label = this.label("EXIT REFERENCE · Unverified", room.door, y + 1.2, "indoor-exit-label exit-unverified-label route-building-label", room.id, undefined, 8);
+          label.element.title = `${room.name}. Exterior connection is not established; this reference is excluded from routing.`;
+          label.element.setAttribute("aria-label", `Unverified exit reference · ${room.name}`);
+        } else if (amenity && s.showAmenities) {
+          this.label(room.name, room.center, y + (room.kind === "elevator" ? 2.1 : 1.4),
             `amenity-label amenity-${room.kind} ${selected ? "is-selected route-building-label" : ""}`,
-            room.id,
-            amenity,
-            selected ? 7 : 3,
-          );
-        else if (!amenity && (room.name !== "Office" || selected))
-          this.label(
-            room.name === "Unverified room label" ? "?" : building.id === "LH" && !selected && /^LH \d{4}$/.test(room.name) ? room.name.slice(3) : building.id === "LIB" && !selected && /^[1-7]-/.test(room.name) ? room.name.split(" · ")[0] : room.name,
-            room.center,
-            y + 1,
-            `room-label ${selected ? "is-selected route-building-label" : building.id === "LH" && /^LH \d{4}$/.test(room.name) ? "room-number-label route-building-label" : ""}`,
-            room.id,
-            undefined,
-            selected ? 7 : room.id === "P107" ? 6 : room.kind === "food" ? 5 : building.id === "LH" && /^LH \d{4}$/.test(room.name) ? 2 : 1,
-          );
-        if (this.labels.at(-1)?.element.classList.contains("room-label")) {
-          this.labels.at(-1)!.element.title = room.name;
-          this.labels.at(-1)!.element.setAttribute("aria-label", room.name);
+            room.id, amenity, selected ? 7 : 3);
+        } else if (!amenity && room.name !== "Office" && room.name !== "Unverified room label") {
+          this.printedRoomLabel(room, y);
+          if (selected) this.label(room.name, room.center, y + 1, "room-label is-selected", room.id, undefined, 7);
         }
+
       }
       if (active) {
         for (const item of floor.furniture ?? []) {
@@ -902,58 +941,113 @@ export class MapScene {
     ring.rotation.x = -Math.PI / 2;
     this.content.add(ring);
   }
-  private drawRoute(route: Route | null, indoor: boolean, state = this.state!) {
-    if (!route) return;
-    const allowed = indoor && this.state?.building ? new Set((state.building?.id === "connected-complex" ? connectedBuildings(this.state.building) : [this.state.building]).map(b => b.id)) : null;
-    for (let i = 1; i < route.nodes.length; i++) {
-      const a = route.nodes[i - 1],
-        b = route.nodes[i];
-      if (route.edges[i - 1].kind === "transfer" || (!indoor && (a.buildingId || b.buildingId))) continue;
-      if (!indoor && route.edges[i - 1].kind === "indoor") {
-        const height = (node: RouteNode) => (campus.places.find(p => p.id === node.placeId)?.height ?? 0) + .5;
-        const length = Math.hypot(a.point[0] - b.point[0], a.point[1] - b.point[1]);
-        const point = (t: number): Point => [a.point[0] + (b.point[0] - a.point[0]) * t, a.point[1] + (b.point[1] - a.point[1]) * t];
-        // Thick dashed overview links stay legible above the campus roofs.
-        for (let d = 0; d < length; d += 3) {
-          this.path([point(d / length), point(Math.min(d + 1.8, length) / length)], .85, "#367b98", Math.max(height(a), height(b)));
-        }
-        continue;
-      }
-      if (indoor && (!allowed?.has(a.buildingId ?? "") || !allowed.has(b.buildingId ?? ""))) continue;
-      if (
-        indoor &&
-        !state.stacked &&
-        (a.floor !== state.floor || b.floor !== state.floor)
-      )
-        continue;
-      if (a.floor === b.floor)
-        this.path(
-          [a.point, b.point],
-          indoor ? state.building?.id === "connected-complex" ? 0.9 : 0.42 : 0.6,
-          "#7849b0",
-          indoor ? this.routeY(a.floor) : 0.4,
-        );
-      else if (state.stacked) {
-        const points = [
-          vec(a.point, this.routeY(a.floor)),
-          vec(b.point, this.routeY(b.floor)),
-        ];
-        this.content.add(
-          new THREE.Line(
-            new THREE.BufferGeometry().setFromPoints(points),
-            new THREE.LineBasicMaterial({
-              color:
-                route.edges[i - 1].kind === "elevator" ? "#367b98" : "#bf873d",
-            }),
-          ),
-        );
-      }
+  // Screen-space strokes retain their width at every camera distance and tilt.
+  private routeStroke(points: THREE.Vector3[], color: string, dashed = false) {
+    for (const [width, stroke, order] of [[12, "#ffffff", 30], [8, color, 31]] as const) {
+      const geometry = new LineGeometry();
+      geometry.setPositions(points.flatMap(p => [p.x, p.y, p.z]));
+      const material = new LineMaterial({ color: stroke, linewidth: width, dashed, dashSize: 2, gapSize: 1.2, depthTest: false, depthWrite: false, toneMapped: false });
+      const line = new Line2(geometry, material);
+      line.computeLineDistances();
+      line.renderOrder = order;
+      line.frustumCulled = false;
+      this.content.add(line);
     }
   }
+  private drawRoute(route: Route | null, indoor: boolean, state = this.state!) {
+    if (!route) return;
+    const visibleBuildings = indoor && this.state?.building
+      ? new Set((state.building?.id === "connected-complex" ? connectedBuildings(this.state.building) : [this.state.building]).map(building => building.id))
+      : null;
+    let run: THREE.Vector3[] = [], runColor = "", runDashed = false;
+    const flush = () => { if (run.length > 1) this.routeStroke(run, runColor, runDashed); run = []; };
+    for (let i = 1; i < route.nodes.length; i++) {
+      const a = route.nodes[i - 1], b = route.nodes[i], edge = route.edges[i - 1];
+      if (edge.kind === "transfer" || (!indoor && (a.buildingId || b.buildingId)) ||
+          (indoor && (!visibleBuildings?.has(a.buildingId ?? "") || !visibleBuildings.has(b.buildingId ?? "") ||
+            (!state.stacked && (a.floor !== state.floor || b.floor !== state.floor))))) { flush(); continue; }
+      if (a.floor !== b.floor && !state.stacked) { flush(); continue; }
+      const dashed = !indoor && edge.kind === "indoor";
+      const color = dashed || edge.kind === "elevator" ? "#176b91" : edge.kind === "stairs" ? "#a65a0c" : "#6528b5";
+      const y = (n: RouteNode) => indoor ? this.routeY(n.floor) : dashed ? (campus.places.find(p => p.id === n.placeId)?.height ?? 0) + .5 : .4;
+      const start = vec(a.point, y(a)), end = vec(b.point, y(b));
+      if (color !== runColor || dashed !== runDashed || (run.length && run.at(-1)!.distanceTo(start) > .001)) flush();
+      if (!run.length) { run.push(start); runColor = color; runDashed = dashed; }
+      run.push(end);
+    }
+    flush();
+    if (!indoor) {
+      const start = route.nodes[0], destination = route.nodes.at(-1);
+      if (start && !start.buildingId) this.label("Start", start.point, 1, "route-endpoint route-start", undefined, undefined, 12);
+      if (destination && !destination.buildingId) this.label("Destination", destination.point, 1, "route-endpoint route-destination", undefined, undefined, 12);
+    }
+  }
+  frameRoute() {
+    const s = this.state;
+    if (!s?.route) return;
+    const shared = s.connectedView && isSharedBuilding(s.building?.id);
+    const visibleBuildings = shared && s.building ? connectedBuildings(s.building).map(b => b.id) : [s.building?.id];
+    const points = s.route.nodes.filter(n => !s.building ? !n.buildingId :
+      !!n.buildingId && visibleBuildings.includes(n.buildingId) && (s.stacked || (shared ? sharedLevel(n.buildingId ?? "", n.floor) === sharedLevel(s.building.id, s.floor) : n.floor === s.floor)))
+      .map(n => {
+        const displayed = shared ? displayNode(n) : n;
+        return vec(displayed.point, s.building ? this.routeY(displayed.floor) : .5);
+      });
+    if (!points.length) return;
+    const center = new THREE.Box3().setFromPoints(points).getCenter(new THREE.Vector3());
+    const offset = this.animation ? this.animation.to.clone().sub(this.animation.targetTo) : this.camera.position.clone().sub(this.controls.target);
+    const direction = offset.normalize();
+    const right = new THREE.Vector3(direction.z, 0, -direction.x).normalize();
+    const up = direction.clone().cross(right).normalize();
+    const tangent = Math.tan(THREE.MathUtils.degToRad(this.camera.fov / 2));
+    const distance = Math.max(24, ...points.map(p => {
+      const relative = p.clone().sub(center);
+      return Math.max(Math.abs(relative.dot(right)) / (tangent * this.camera.aspect * .68), Math.abs(relative.dot(up)) / (tangent * .55)) + relative.dot(direction);
+    }));
+    this.fly(center.clone().add(direction.multiplyScalar(distance * 1.12)), center, 300);
+  }
+  focusRoutePoint(point: Point) {
+    this.onBrowse();
+    const target = vec(point);
+    const offset = this.camera.position.clone().sub(this.controls.target);
+    this.fly(target.clone().add(offset), target, 240);
+  }
+
+  private clampPan(position: THREE.Vector3, target: THREE.Vector3) {
+    clampMapPan(this.panBounds, position, target);
+    if (!this.floorOutlines.length) return;
+    // Leave room just outside a wall, scaled to what fits on the screen.
+    const margin = position.distanceTo(target) * Math.min(1, this.camera.aspect) * 0.18;
+    const [x, z] = nearFloor([target.x, target.z], this.floorOutlines, margin);
+    position.x += x - target.x;
+    position.z += z - target.z;
+    target.x = x;
+    target.z = z;
+  }
+
+  private updateZoomLimit() {
+    const { minX, maxX, minZ, maxZ } = this.panBounds;
+    const tangent = Math.tan(THREE.MathUtils.degToRad(this.camera.fov / 2));
+    const span = Math.max((maxX - minX) / Math.max(this.camera.aspect, 0.1), maxZ - minZ);
+    this.controls.maxDistance = span / (2 * tangent * 0.55);
+  }
+
+  private indoorViewOutlines(building: IndoorBuilding, state: MapState) {
+    const shared = state.connectedView && isSharedBuilding(building.id);
+    const members = shared ? connectedBuildings(building) : [building];
+    const level = shared ? sharedLevel(building.id, state.floor) : state.floor;
+    return members.flatMap(member => {
+      const visible = shared ? floorAtLevel(member, level, true) : member.floors.find(floor => floor.level === level);
+      const floors = state.stacked ? member.floors : visible ? [visible] : member.floors;
+      return floors.map(floor => (shared ? displayFloor(member.id, floor) : floor).outline);
+    });
+  }
+
   reset() {
     const indoor = !!this.state?.building,
       flat = this.state?.flat,
       stack = this.state?.stacked;
+    this.controls.minDistance = flat && indoor ? 6 : 18;
     const { width, height } = this.container.getBoundingClientRect();
     // Leave room for the existing floor selector and map tools on wider traces.
     const usableAspect = indoor ? Math.max(180, width - (width > 600 ? 145 : 90)) / Math.max(height, 1) : this.camera.aspect;
@@ -961,7 +1055,7 @@ export class MapScene {
     const building = this.state?.building;
     const shared = !!this.state?.connectedView && isSharedBuilding(building?.id);
     const floorCount = building && shared ? Math.max(...connectedBuildings(building).flatMap(b => b.floors.map(f => sharedLevel(b.id,f.level)))) : building?.floors.length ?? 3;
-    const points = building ? (shared ? connectedBuildings(building) : [building]).flatMap(b => (stack ? b.floors : [shared ? floorAtLevel(b,sharedLevel(building.id,this.state!.floor),true)! : b.floors.find(f => f.level === this.state!.floor)!]).flatMap(f => shared ? displayFloor(b.id,f).outline : f.outline)) : [];
+    const points = this.floorOutlines.flat();
     const bounds = points.length ? new THREE.Box3().setFromPoints(points.map(p => vec(p))) : null;
     const center = bounds?.getCenter(new THREE.Vector3()) ?? new THREE.Vector3();
     const size = bounds?.getSize(new THREE.Vector3()) ?? new THREE.Vector3(110,0,70);
@@ -1002,15 +1096,15 @@ export class MapScene {
       offset.copy(direction.multiplyScalar(distance*1.08));
     } else offset.multiplyScalar(fit * (indoor ? scale : 1));
     this.fly(target.clone().add(offset), target, 350);
-    this.controls.enableRotate = !flat;
+    this.controls.enableRotate = false;
   }
   zoom(amount: number) {
-    const target = this.controls.target.clone();
-    const offset = this.camera.position
-      .clone()
+    this.onBrowse();
+    const target = this.animation?.targetTo.clone() ?? this.controls.target.clone();
+    const offset = (this.animation?.to.clone() ?? this.camera.position.clone())
       .sub(target)
       .multiplyScalar(amount);
-    offset.clampLength(18, 1800);
+    offset.clampLength(this.controls.minDistance, this.controls.maxDistance);
     this.fly(target.clone().add(offset), target, 180);
   }
   rotate() {
@@ -1022,8 +1116,16 @@ export class MapScene {
     this.fly(target.clone().add(offset), target, 240);
   }
   locate(point: Point) {
-    const target = vec(this.state?.building && this.state.connectedView && isSharedBuilding(this.state.building.id) ? displayPoint(this.state.building.id,point,this.state.floor) : point);
-    this.fly(target.clone().add(new THREE.Vector3(20, 65, 65)), target, 300);
+    this.onBrowse();
+    const s = this.state;
+    const pointOnMap = s?.building && s.connectedView && isSharedBuilding(s.building.id) ? displayPoint(s.building.id,point,s.floor) : point;
+    const target = vec(pointOnMap, s?.building ? this.routeY(s.connectedView && isSharedBuilding(s.building.id) ? sharedLevel(s.building.id,s.floor) : s.floor) : 0);
+    // Focus must translate the current view, preserving overhead/3D tilt,
+    // bearing and zoom. The old fixed offset silently tilted a 2D floor map.
+    const previousTarget = this.animation?.targetTo ?? this.controls.target;
+    const previousPosition = this.animation?.to ?? this.camera.position;
+    const offset = previousPosition.clone().sub(previousTarget);
+    this.fly(target.clone().add(offset), target, 240);
   }
   private tick = () => {
     if (this.disposed) return;
@@ -1040,6 +1142,7 @@ export class MapScene {
       }
     }
     this.controls.update();
+    this.clampPan(this.camera.position, this.controls.target);
     this.renderer.render(this.scene, this.camera);
     if (this.northNeedle) {
       const angle=(this.state?.connectedView && isSharedBuilding(this.state?.building?.id) ? sharedNorthAngle : this.state?.building?.northAngle ?? 0)*Math.PI/180;
@@ -1050,7 +1153,7 @@ export class MapScene {
     }
     const { width, height } = this.container.getBoundingClientRect();
     const containerRect=this.container.getBoundingClientRect();
-    const occupied: { x: number; y: number; w: number; h: number }[] = [...this.container.parentElement!.querySelectorAll<HTMLElement>(".map-top,.floor-controls,.map-tools,.map-bottom,.indoor-caption,.live-tracking")].map(el=>{
+    const occupied: { x: number; y: number; w: number; h: number }[] = [...this.container.parentElement!.querySelectorAll<HTMLElement>(".map-top,.map-back-button,.map-exits-button,.map-exits-panel,.floor-controls,.map-tools,.map-bottom,.indoor-caption")].map(el=>{
       const r=el.getBoundingClientRect();return {x:r.left-containerRect.left+r.width/2,y:r.top-containerRect.top+r.height/2,w:r.width,h:r.height};
     });
     for (const label of [...this.labels].sort(
@@ -1058,9 +1161,9 @@ export class MapScene {
     )) {
       if (label.roadSegments) {
         const textWidth = label.element.offsetWidth || 100, textHeight = label.element.offsetHeight || 16;
-        const candidates = label.roadSegments.map(({a,b}) => {
+        const candidates = label.roadSegments.map(({a,b,point: fixedPoint}) => {
           const start = vec(a, .3).project(this.camera), end = vec(b, .3).project(this.camera);
-          const point = vec([(a[0]+b[0])/2, (a[1]+b[1])/2], .3).project(this.camera);
+          const point = vec(fixedPoint ?? [(a[0]+b[0])/2, (a[1]+b[1])/2], .3).project(this.camera);
           let angle = Math.atan2(-(end.y-start.y)*height, (end.x-start.x)*width);
           // Keep text upright while following the street's projected direction.
           if (angle > Math.PI/2) angle -= Math.PI;
@@ -1126,6 +1229,10 @@ export class MapScene {
     cancelAnimationFrame(this.frame);
     this.observer.disconnect();
     this.controls.dispose();
+    this.container.removeEventListener("pointerdown", this.pointerDown);
+    this.container.removeEventListener("pointermove", this.pointerMove);
+    this.container.removeEventListener("pointerup", this.pointerUp);
+    this.container.removeEventListener("pointercancel", this.pointerCancel);
     this.clear();
     for (const mesh of [this.liveHalo, this.liveCone]) { mesh.geometry.dispose(); (mesh.material as THREE.Material).dispose(); }
     this.renderer.dispose();

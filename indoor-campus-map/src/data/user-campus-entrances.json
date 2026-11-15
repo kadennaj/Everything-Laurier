@@ -1,0 +1,219 @@
+{
+  "source": "User-marked campus satellite image, 2026-11-07",
+  "note": "All black circles identified as entrances by the user. Matched nodes retain OSM positions. Other points are approximate registration snapped to the local footprint boundary and are display-only; building assignment, door position and walking connection require confirmation. These are not surveyed positions or current access checks. The detailed paired screenshots correct report 5 to Schlegel; its campus association remains approximate and excluded from outdoor routing.",
+  "registration": {
+    "campusToPixel": [
+      [
+        34.70057127271045,
+        -2.261491887769985,
+        3636.4457270797047
+      ],
+      [
+        -6.2332817445406175,
+        32.017554472947836,
+        885.9179255571075
+      ]
+    ],
+    "controls": [
+      2,
+      3,
+      4
+    ]
+  },
+  "reports": [
+    {
+      "id": "user-door-1",
+      "buildingId": "P",
+      "pixel": [
+        845,
+        1160
+      ],
+      "nodeId": "5931335332",
+      "point": [
+        -80.14,
+        -3.821
+      ],
+      "label": "P120 / north stairwell entrance",
+      "main": false,
+      "confirmed": true,
+      "routing": true,
+      "source": "User-marked entrance, 2026-11-07; existing OSM access node"
+    },
+    {
+      "id": "user-door-2",
+      "buildingId": "ARTS-C",
+      "pixel": [
+        1552,
+        1085
+      ],
+      "nodeId": "5931335372",
+      "point": [
+        -60.431,
+        -5.547
+      ],
+      "label": "Arts\u2013Peters hallway \u00b7 north entrance",
+      "main": false,
+      "confirmed": true,
+      "routing": true,
+      "source": "User-marked entrance, 2026-11-07; existing OSM access node"
+    },
+    {
+      "id": "user-door-3",
+      "buildingId": "ARTS-C",
+      "pixel": [
+        1570,
+        1176
+      ],
+      "nodeId": "5931335359",
+      "point": [
+        -59.718,
+        -2.566
+      ],
+      "label": "Arts\u2013Peters hallway \u00b7 south entrance",
+      "main": false,
+      "confirmed": true,
+      "routing": true,
+      "source": "User-marked entrance, 2026-11-07; existing OSM access node"
+    },
+    {
+      "id": "user-door-4",
+      "buildingId": "P",
+      "pixel": [
+        1328,
+        1315
+      ],
+      "nodeId": "5931335344",
+      "point": [
+        -66.495,
+        0.456
+      ],
+      "label": "Peters entrance \u00b7 facing Schlegel / Service Laurier",
+      "main": false,
+      "confirmed": true,
+      "routing": true,
+      "source": "User-marked entrance, 2026-11-07; existing OSM access node"
+    },
+    {
+      "id": "user-door-5",
+      "buildingId": "SC",
+      "pixel": [
+        1438,
+        1311
+      ],
+      "nodeId": "1787991438",
+      "point": [
+        -64.431,
+        0.423
+      ],
+      "label": "Schlegel entrance \u00b7 facing Peters",
+      "main": false,
+      "confirmed": true,
+      "routing": false,
+      "source": "User-confirmed Schlegel Floor 1 exterior entrance, 2026-11-07; approximate association with nearby OSM node originally assigned to Peters; outdoor approach requires checking",
+      "reassignFrom": "P"
+    },
+    {
+      "id": "user-door-6",
+      "buildingId": "ARTS-E",
+      "pixel": [
+        2017,
+        1250
+      ],
+      "point": [
+        -45.837,
+        -0.754
+      ],
+      "label": "Concourse \u00b7 Arts hallway side entrance",
+      "main": false,
+      "confirmed": true,
+      "routing": false,
+      "source": "User-marked entrance, 2026-11-07; approximate screenshot registration, route connection unverified"
+    },
+    {
+      "id": "user-door-7",
+      "buildingId": "ARTS-E",
+      "pixel": [
+        2252,
+        1001
+      ],
+      "nodeId": "5934471543",
+      "point": [
+        -38.845,
+        -5.619
+      ],
+      "label": "Concourse courtyard entrance",
+      "main": false,
+      "confirmed": true,
+      "routing": true,
+      "source": "User-marked entrance, 2026-11-07; existing OSM access node"
+    },
+    {
+      "id": "user-door-8",
+      "buildingId": "FNCC",
+      "pixel": [
+        2296,
+        1070
+      ],
+      "point": [
+        -38.85,
+        -1.992
+      ],
+      "label": "Fred Nichols \u00b7 courtyard-side entrance",
+      "main": false,
+      "confirmed": true,
+      "routing": false,
+      "source": "User-marked entrance, 2026-11-07; approximate screenshot registration, route connection unverified"
+    },
+    {
+      "id": "user-door-9",
+      "buildingId": "ARTS-E",
+      "pixel": [
+        2224,
+        750
+      ],
+      "point": [
+        -41.93,
+        -12.125
+      ],
+      "label": "Solarium-side entrance",
+      "main": false,
+      "confirmed": true,
+      "routing": false,
+      "source": "User-marked entrance, 2026-11-07; approximate screenshot registration, route connection unverified"
+    },
+    {
+      "id": "user-door-10",
+      "buildingId": "DH",
+      "pixel": [
+        2360,
+        740
+      ],
+      "point": [
+        -36.625,
+        -14.591
+      ],
+      "label": "Dining Hall / Solarium-side entrance",
+      "main": false,
+      "confirmed": true,
+      "routing": false,
+      "source": "User-marked entrance, 2026-11-07; approximate screenshot registration, route connection unverified"
+    },
+    {
+      "id": "user-door-11",
+      "buildingId": "JAC",
+      "pixel": [
+        2767,
+        615
+      ],
+      "point": [
+        -27.626,
+        -18.256
+      ],
+      "label": "Music / Paul Martin Centre-side entrance",
+      "main": false,
+      "confirmed": true,
+      "routing": false,
+      "source": "User-marked entrance, 2026-11-07; approximate screenshot registration, route connection unverified"
+    }
+  ]
+}

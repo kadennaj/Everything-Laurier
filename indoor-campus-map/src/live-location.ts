@@ -68,7 +68,7 @@ export class LiveLocationController {
     this.state = { ...this.state, ...patch };
     this.changed(this.state);
   }
-  start(mode: TrackingMode = "follow") {
+  start(mode: TrackingMode = "follow", withCompass = true) {
     if (!this.env.geolocation) {
       this.publish({ message: "GPS is unavailable in this browser. Choose a campus starting point.", loading: false });
       return;
@@ -97,7 +97,7 @@ export class LiveLocationController {
         this.publish({ message: "GPS could not start. Use HTTPS or localhost and enable location access." });
       }
     }
-    if (this.state.active) void this.enableCompass();
+    if (this.state.active && withCompass) void this.enableCompass();
   }
   async enableCompass() {
     if (this.removeCompass || this.compassPending || !this.state.active) return;

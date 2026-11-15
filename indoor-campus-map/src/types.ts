@@ -19,6 +19,7 @@ export interface Room {
   door: Point;
   connector?: string;
   routeable?: boolean;
+  access?: "exterior" | "passage" | "landing" | "unverified";
   open?: boolean;
   holes?: Point[][];
   details?: string;

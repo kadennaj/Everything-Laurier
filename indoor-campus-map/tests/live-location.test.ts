@@ -103,3 +103,21 @@ test("Physical compass readings handle screen rotation and north wrap without ac
   assert.equal(headingDifference(1, 359), 2);
   assert.equal(headingDifference(359, 1), -2);
 });
+
+test("Automatic location starts GPS without requesting compass or rotating with heading", async () => {
+  const s = sensors();
+  let compassRequests = 0;
+  s.environment.requestCompass = async () => { compassRequests++; return "granted"; };
+  s.live.start("center", false);
+  await Promise.resolve();
+  s.move();
+  assert.equal(s.calls.watches, 1);
+  assert.equal(compassRequests, 0);
+  assert.equal(s.live.state.fix?.accuracy, 6);
+  assert.equal(s.live.state.mode, "center");
+  assert.equal(s.live.state.compass, null);
+  s.live.browse();
+  s.advance(1000); s.move(43.476);
+  assert.equal(s.live.state.mode, "free");
+  assert.equal(s.live.state.fix?.latitude, 43.476);
+});

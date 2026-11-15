@@ -1,3 +1,4 @@
+import { indoorAccessKind } from './map-access.ts';
 import { routeConnectedIndoors } from './routing.ts';
 import { routeCampusJourney } from './sheltered-routing.ts';
 import type { IndoorCampusNetwork } from './sheltered-routing.ts';
@@ -15,7 +16,7 @@ export function routeJourney(data: DirectionsCampus, network: IndoorCampusNetwor
  }
  const campusId = (building: IndoorBuilding) => data.places.find(p => p.id === building.id)?.id ?? data.places.find(p => building.campusIds?.includes(p.id))?.id;
  const accessLeg = (building: IndoorBuilding, room: string, departing: boolean) => {
-  const candidates = building.floors.flatMap(f => f.rooms).filter(r => r.kind === 'entrance' && r.routeable !== false)
+  const candidates = building.floors.flatMap(f => f.rooms).filter(r => indoorAccessKind(r, connections) === 'Exterior entrance' && r.routeable !== false)
    .map(r => routeConnectedIndoors([building],[],departing ? room : r.id,departing ? r.id : room,avoidStairs)).filter((r): r is Route => !!r);
   return candidates.sort((a,b) => (a.estimatedSeconds ?? Infinity)-(b.estimatedSeconds ?? Infinity))[0] ?? null;
  };

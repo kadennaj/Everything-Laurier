@@ -67,7 +67,10 @@ export function routeCampusJourney(
   const cached = outdoorCache.get(data) ?? new Map<string, Route | null>();
   outdoorCache.set(data, cached);
   const accessOrigins = Object.fromEntries([...inside].filter(id => id !== from && id !== to).map(id => [id, place(id)!.center]));
-  const cacheContext = JSON.stringify([network.exits, avoidStairs, preferIndoors]);
+  // Footprint boundary points and centres do not establish an exterior door
+  // for an intermediate indoor/outdoor transfer.
+  const requireEntrancesFor = Object.keys(accessOrigins).filter(id => place(id)?.polygon?.length);
+  const cacheContext = JSON.stringify([network.exits, avoidStairs, preferIndoors, requireEntrancesFor]);
   const exitInstruction = (id: string, point: Point | undefined, entering: boolean) => {
     const exit = network.exits[id];
     const match = exit && (data.entrances[id] as ({ point: Point; nodeId?: string }[] | undefined))?.find(d => d.nodeId === exit.nodeId);
@@ -97,7 +100,7 @@ export function routeCampusJourney(
     const cacheKey = `${cacheContext}:${a}:${b}:${JSON.stringify([accessOrigins[a], accessOrigins[b], a === YOUR_LOCATION || b === YOUR_LOCATION ? location : null])}`;
     let core = cached.get(cacheKey);
     if (core === undefined) {
-      core = routeCampusPlaces(exitData, a, b, location, avoidStairs, { accessOrigins, preferDistance: preferIndoors });
+      core = routeCampusPlaces(exitData, a, b, location, avoidStairs, { accessOrigins, preferDistance: preferIndoors, requireEntrancesFor });
       cached.set(cacheKey, core);
     }
     if (!core) continue;
